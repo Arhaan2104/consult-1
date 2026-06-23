@@ -1,0 +1,288 @@
+@import "tailwindcss";
+
+/* ============================================================
+   AVA FINANCE — Precision Fintech design system
+   Crisp white · near-black ink · one deep-blue accent
+   Sharp corners everywhere · blueprint grid · framing rails
+   Inspired by the rigor of Stripe and bonfiredb.
+   ============================================================ */
+
+@theme inline {
+  --color-canvas: #ffffff;       /* crisp white base            */
+  --color-canvas-2: #f6f7f9;     /* cool light panel            */
+  --color-canvas-3: #eceef2;     /* raised tint                 */
+  --color-ink: #0a0b0d;          /* near-black — primary ink    */
+  --color-ink-soft: #454b54;     /* body copy                   */
+  --color-ink-faint: #717784;    /* captions / meta             */
+  --color-deep: #0a0b0d;         /* dark canvas (near-black)     */
+  --color-deep-2: #131419;       /* dark panel raise            */
+  --color-accent: #1d4ed8;       /* deep blue — used sparingly  */
+  --color-accent-2: #60a5fa;     /* lit blue (on dark)          */
+  --color-accent-3: #dbe4fe;     /* blue wash                   */
+  --color-on-dark: #e9eaed;      /* text on dark                */
+  --color-on-dark-soft: #989aa3; /* muted text on dark          */
+  --color-line: rgba(10, 11, 13, 0.10);
+  --color-line-strong: rgba(10, 11, 13, 0.16);
+  --color-line-dark: rgba(233, 234, 237, 0.12);
+
+  --font-display: var(--font-sora);
+  --font-sans: var(--font-jakarta);
+  --font-mono: var(--font-geist-mono);
+
+  /* Sharp corners — zero the entire radius scale */
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-4xl: 0;
+}
+
+:root {
+  --shell: 78rem;
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: auto;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  letter-spacing: -0.012em;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* ---------- Typography helpers ---------- */
+.font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 600;
+}
+
+.display-xl {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.6rem, 6.2vw, 5.1rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.display-lg {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 4.2vw, 3.3rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+
+.display-md {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.measure {
+  max-width: 42ch;
+}
+.measure-wide {
+  max-width: 56ch;
+}
+
+/* ---------- Layout shell ---------- */
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Vertical framing rails — Stripe/bonfire architectural device.
+   Two hairlines bounding the content column, full section height. */
+.rails {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.rails::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100% - 2 * var(--gutter) + 2px, var(--shell));
+  border-inline: 1px solid var(--color-line);
+}
+
+/* ============================================================
+   Background textures — engineered, minimal, masked (never flat)
+   ============================================================ */
+
+/* Blueprint grid, fades from the top */
+.tx-grid {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--color-canvas);
+}
+.tx-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(115% 80% at 50% 0%, #000 22%, transparent 80%);
+  mask-image: radial-gradient(115% 80% at 50% 0%, #000 22%, transparent 80%);
+}
+
+/* Dot matrix, softly vignetted */
+.tx-dots {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--color-canvas-2);
+}
+.tx-dots::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(var(--color-line-strong) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 50%, #000 35%, transparent 88%);
+  mask-image: radial-gradient(120% 100% at 50% 50%, #000 35%, transparent 88%);
+}
+
+/* Fine grain — kills the flat-digital look */
+.tx-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* Hero surface — grid (::before) + grain (::after) + faint neutral top light */
+.hero-ava {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--color-canvas);
+  background-image: radial-gradient(
+    70% 55% at 50% -8%,
+    rgba(10, 11, 13, 0.04),
+    transparent 62%
+  );
+}
+.hero-ava::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(110% 75% at 50% 0%, #000 20%, transparent 78%);
+  mask-image: radial-gradient(110% 75% at 50% 0%, #000 20%, transparent 78%);
+}
+.hero-ava::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* Dark surface — crisp near-black with a faint light grid, no glow */
+.panel-dark {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--color-deep);
+  color: var(--color-on-dark);
+}
+.panel-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 18%, transparent 82%);
+  mask-image: radial-gradient(120% 90% at 50% 0%, #000 18%, transparent 82%);
+}
+.panel-dark *::selection {
+  background: var(--color-accent-2);
+  color: var(--color-deep);
+}
+
+/* ---------- Rules & dividers ---------- */
+.rule {
+  height: 1px;
+  background: var(--color-line);
+  border: 0;
+}
+.rule-gradient {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-line-strong) 18%,
+    var(--color-line-strong) 82%,
+    transparent
+  );
+}
+
+/* ---------- Marquee ---------- */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

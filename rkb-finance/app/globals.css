@@ -1,0 +1,263 @@
+@import "tailwindcss";
+
+/* ============================================================
+   R.K. BANSAL FINANCE — Heritage Institutional design system
+   Warm ivory · deep navy ink · restrained bronze
+   Serif display (Fraunces) over grotesk body (Geist)
+   ============================================================ */
+
+@theme inline {
+  --color-canvas: #fbf8f2;       /* warm ivory base            */
+  --color-canvas-2: #f4eee2;     /* deeper paper panel         */
+  --color-canvas-3: #efe7d6;     /* warmest panel / cards      */
+  --color-ink: #0e2a3b;          /* deep navy — primary ink    */
+  --color-ink-soft: #3a525e;     /* body copy on ivory         */
+  --color-ink-faint: #6b7d86;    /* captions / meta            */
+  --color-deep: #0a2230;         /* inverted navy surface      */
+  --color-deep-2: #0d2a3a;       /* inverted panel raise       */
+  --color-accent: #9a6b3f;       /* bronze                     */
+  --color-accent-2: #b58455;     /* lit bronze                 */
+  --color-on-dark: #efe7d6;      /* text on navy               */
+  --color-on-dark-soft: #9fb0b8; /* muted text on navy         */
+  --color-line: rgba(14, 42, 59, 0.14);
+  --color-line-strong: rgba(14, 42, 59, 0.26);
+  --color-line-dark: rgba(239, 231, 214, 0.16);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --ease-rkb: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --shell: 76rem;            /* max content width */
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: auto; /* Lenis handles smoothing */
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv01";
+  letter-spacing: -0.011em;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-canvas);
+}
+
+/* ---------- Typography helpers ---------- */
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+.display-xl {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 340;
+  font-size: clamp(2.7rem, 6.4vw, 5.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
+.display-lg {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 360;
+  font-size: clamp(2.1rem, 4.3vw, 3.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+
+.display-md {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 380;
+  font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.measure {
+  max-width: 42ch;
+}
+.measure-wide {
+  max-width: 58ch;
+}
+
+/* ---------- Layout shell ---------- */
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ============================================================
+   Background textures — distinct, cohesive, lightweight
+   ============================================================ */
+
+/* Fine paper grain via inline SVG turbulence */
+.tx-grain {
+  position: relative;
+  isolation: isolate;
+}
+.tx-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+/* Engraved hairline grid — ultra faint */
+.tx-grid {
+  background-image:
+    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+  background-size: 4.5rem 4.5rem;
+  background-position: center;
+}
+.tx-grid-soft {
+  background-image:
+    linear-gradient(to right, rgba(14, 42, 59, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14, 42, 59, 0.05) 1px, transparent 1px);
+  background-size: 5.5rem 5.5rem;
+  background-position: center;
+}
+
+/* Soft warm vignette */
+.tx-vignette {
+  background:
+    radial-gradient(120% 90% at 50% -10%, rgba(154, 107, 63, 0.07), transparent 55%),
+    var(--color-canvas);
+}
+
+/* Inverted navy surface with subtle warmth */
+.panel-dark {
+  background-color: var(--color-deep);
+  color: var(--color-on-dark);
+  background-image:
+    radial-gradient(90% 120% at 85% 0%, rgba(154, 107, 63, 0.16), transparent 55%),
+    radial-gradient(60% 90% at 0% 100%, rgba(14, 42, 59, 0.6), transparent 60%);
+}
+.panel-dark *::selection {
+  background: var(--color-accent);
+  color: var(--color-deep);
+}
+
+/* ---------- Rules & dividers ---------- */
+.rule {
+  height: 1px;
+  background: var(--color-line);
+  border: 0;
+}
+.rule-strong {
+  height: 1px;
+  background: var(--color-line-strong);
+  border: 0;
+}
+
+/* Engraved double rule for heritage feel */
+.rule-engraved {
+  height: 3px;
+  border: 0;
+  background:
+    linear-gradient(var(--color-line-strong), var(--color-line-strong)) top/100% 1px no-repeat,
+    linear-gradient(var(--color-line), var(--color-line)) bottom/100% 1px no-repeat;
+}
+
+/* ============================================================
+   Hero surface — layered, editorial, classy
+   warm vignette + faint ledger rules + paper grain + bronze rails
+   ============================================================ */
+.hero-rkb {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(125% 90% at 50% -12%, rgba(154, 107, 63, 0.09), transparent 55%),
+    var(--color-canvas);
+}
+.hero-rkb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2.4rem,
+    rgba(14, 42, 59, 0.06) 2.4rem,
+    rgba(14, 42, 59, 0.06) calc(2.4rem + 1px)
+  );
+  -webkit-mask-image: radial-gradient(120% 95% at 50% 12%, #000 28%, transparent 86%);
+  mask-image: radial-gradient(120% 95% at 50% 12%, #000 28%, transparent 86%);
+}
+.hero-rkb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Bronze framing rails bounding the content column */
+.rails {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.rails::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100% - 2 * var(--gutter) + 2px, var(--shell));
+  border-inline: 1px solid rgba(154, 107, 63, 0.22);
+}
+
+/* ---------- Marquee ---------- */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
