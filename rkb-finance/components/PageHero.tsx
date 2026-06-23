@@ -14,7 +14,7 @@ export default function PageHero({
   return (
     <section className="relative hero-rkb">
       <div className="rails" aria-hidden />
-      <div className="relative z-10 shell pt-40 pb-16 sm:pt-44 lg:pt-48 lg:pb-20">
+      <div className="relative z-10 shell pt-32 pb-16 sm:pt-44 lg:pt-48 lg:pb-20">
         <Reveal>
           <p className="eyebrow text-accent">{kicker}</p>
         </Reveal>

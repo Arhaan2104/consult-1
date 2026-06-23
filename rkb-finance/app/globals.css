@@ -112,7 +112,10 @@ body {
 }
 
 /* ============================================================
-   Background textures — distinct, cohesive, lightweight
+   Background textures — heritage editorial family
+   Warm paper · navy engraving · a bronze banknote hatch.
+   All masked so they fade (never flat), composable over any base
+   (the base tone comes from a bg-* utility on the same element).
    ============================================================ */
 
 /* Fine paper grain via inline SVG turbulence */
@@ -131,36 +134,98 @@ body {
   mix-blend-mode: multiply;
 }
 
-/* Engraved hairline grid — ultra faint */
-.tx-grid {
-  background-image:
-    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
-  background-size: 4.5rem 4.5rem;
-  background-position: center;
+.tx-weave,
+.tx-ledger,
+.tx-laid,
+.tx-engrave {
+  position: relative;
+  isolation: isolate;
 }
-.tx-grid-soft {
+.tx-weave::before,
+.tx-ledger::before,
+.tx-laid::before,
+.tx-engrave::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Engraved square grid — fine, navy hairlines */
+.tx-weave::before {
   background-image:
     linear-gradient(to right, rgba(14, 42, 59, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(14, 42, 59, 0.05) 1px, transparent 1px);
-  background-size: 5.5rem 5.5rem;
-  background-position: center;
+  background-size: 2.6rem 2.6rem;
+  -webkit-mask-image: radial-gradient(115% 85% at 50% 0%, #000 22%, transparent 82%);
+  mask-image: radial-gradient(115% 85% at 50% 0%, #000 22%, transparent 82%);
 }
 
-/* Soft warm vignette */
+/* Ledger paper — faint horizontal rules */
+.tx-ledger::before {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2.4rem,
+    rgba(14, 42, 59, 0.05) 2.4rem,
+    rgba(14, 42, 59, 0.05) calc(2.4rem + 1px)
+  );
+  -webkit-mask-image: radial-gradient(120% 95% at 50% 12%, #000 25%, transparent 86%);
+  mask-image: radial-gradient(120% 95% at 50% 12%, #000 25%, transparent 86%);
+}
+
+/* Laid paper — fine vertical lines */
+.tx-laid::before {
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent 1.05rem,
+    rgba(14, 42, 59, 0.04) 1.05rem,
+    rgba(14, 42, 59, 0.04) calc(1.05rem + 1px)
+  );
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 40%, #000 28%, transparent 88%);
+  mask-image: radial-gradient(120% 100% at 50% 40%, #000 28%, transparent 88%);
+}
+
+/* Banknote engraving — bronze diagonal crosshatch */
+.tx-engrave::before {
+  background-image:
+    repeating-linear-gradient(45deg, rgba(154, 107, 63, 0.05) 0, rgba(154, 107, 63, 0.05) 1px, transparent 1px, transparent 10px),
+    repeating-linear-gradient(-45deg, rgba(154, 107, 63, 0.045) 0, rgba(154, 107, 63, 0.045) 1px, transparent 1px, transparent 10px);
+  -webkit-mask-image: radial-gradient(125% 95% at 50% 35%, #000 22%, transparent 86%);
+  mask-image: radial-gradient(125% 95% at 50% 35%, #000 22%, transparent 86%);
+}
+
+/* Soft warm vignette (ingredient) */
 .tx-vignette {
   background:
     radial-gradient(120% 90% at 50% -10%, rgba(154, 107, 63, 0.07), transparent 55%),
     var(--color-canvas);
 }
 
-/* Inverted navy surface with subtle warmth */
+/* Inverted navy surface — warmth + a faint ivory engraving */
 .panel-dark {
+  position: relative;
+  isolation: isolate;
   background-color: var(--color-deep);
   color: var(--color-on-dark);
   background-image:
     radial-gradient(90% 120% at 85% 0%, rgba(154, 107, 63, 0.16), transparent 55%),
     radial-gradient(60% 90% at 0% 100%, rgba(14, 42, 59, 0.6), transparent 60%);
+}
+.panel-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(239, 231, 214, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(239, 231, 214, 0.045) 1px, transparent 1px);
+  background-size: 2.6rem 2.6rem;
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 16%, transparent 82%);
+  mask-image: radial-gradient(120% 90% at 50% 0%, #000 16%, transparent 82%);
 }
 .panel-dark *::selection {
   background: var(--color-accent);

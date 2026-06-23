@@ -1,8 +1,8 @@
 import { Button } from "@/components/Button";
+import Icon from "@/components/Icon";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import Marquee from "@/components/Marquee";
 import { Section, SectionDivider, SectionHeader } from "@/components/Section";
-import StatCounter from "@/components/StatCounter";
 import {
   advantages,
   cities,
@@ -15,49 +15,13 @@ import {
   testimonials,
 } from "@/content/site";
 
-function PillarIcon({ name }: { name: string }) {
-  const common = {
-    width: 20,
-    height: 20,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.6,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-  };
-  if (name === "Speed") {
-    return (
-      <svg {...common} aria-hidden>
-        <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />
-      </svg>
-    );
-  }
-  if (name === "Secure") {
-    return (
-      <svg {...common} aria-hidden>
-        <path d="M12 3 5 6v5c0 4 3 7 7 8 4-1 7-4 7-8V6l-7-3Z" />
-        <path d="m9 12 2 2 4-4" />
-      </svg>
-    );
-  }
-  // Flexibility — sliders
-  return (
-    <svg {...common} aria-hidden>
-      <path d="M4 7h10M18 7h2M4 17h2M10 17h10" />
-      <circle cx="16" cy="7" r="2" />
-      <circle cx="8" cy="17" r="2" />
-    </svg>
-  );
-}
-
 export default function Home() {
   return (
     <>
       {/* ───────────────────────── Hero ───────────────────────── */}
       <section className="relative hero-ava overflow-hidden">
         <div className="rails" aria-hidden />
-        <div className="relative z-10 shell pt-40 pb-16 sm:pt-44 lg:pt-52 lg:pb-24">
+        <div className="relative z-10 shell pt-32 pb-16 sm:pt-44 lg:pt-52 lg:pb-24">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-none border border-line bg-canvas/60 px-3.5 py-1.5 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-none bg-accent" />
@@ -67,8 +31,20 @@ export default function Home() {
             </span>
           </Reveal>
           <Reveal delay={0.08}>
-            <h1 className="display-xl mt-7 max-w-[17ch] text-balance text-ink">
-              Achieve your goals with tailored, smart, fast financing.
+            <h1 className="display-xl mt-7 max-w-[18ch] text-balance text-ink">
+              Achieve your goals with{" "}
+              <span className="text-accent underline decoration-accent/30 decoration-2 underline-offset-[0.16em]">
+                tailored
+              </span>
+              ,{" "}
+              <span className="text-accent underline decoration-accent/30 decoration-2 underline-offset-[0.16em]">
+                smart
+              </span>
+              ,{" "}
+              <span className="text-accent underline decoration-accent/30 decoration-2 underline-offset-[0.16em]">
+                fast
+              </span>{" "}
+              financing.
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
@@ -105,7 +81,7 @@ export default function Home() {
                   }`}
                 >
                   <span className="font-display text-3xl text-ink sm:text-4xl">
-                    <StatCounter value={s.value} />
+                    {s.value}
                   </span>
                   <span className="eyebrow text-accent">{s.label}</span>
                 </div>
@@ -118,7 +94,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* ───────────────────────── Pillars ───────────────────────── */}
-      <Section texture="plain">
+      <Section texture="cross">
         <SectionHeader
           kicker="Why AVA"
           title={<>Three things we never compromise on.</>}
@@ -129,8 +105,8 @@ export default function Home() {
               key={p.title}
               className="group flex flex-col gap-4 border border-line bg-canvas-2 p-8 transition-colors duration-300 hover:border-ink/25 hover:bg-canvas-3"
             >
-              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-accent/10 text-accent">
-                <PillarIcon name={p.title} />
+              <span className="grid h-11 w-11 place-items-center bg-accent/10 text-accent">
+                <Icon name={p.icon} />
               </span>
               <h3 className="font-display text-xl text-ink">{p.title}</h3>
               <p className="text-sm leading-relaxed text-ink-soft">{p.body}</p>
@@ -191,7 +167,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* ───────────────────────── Advantages ───────────────────────── */}
-      <Section texture="panel">
+      <Section texture="hatch">
         <SectionHeader
           kicker="What you get"
           title={<>The benefits, with none of the friction.</>}
@@ -200,8 +176,11 @@ export default function Home() {
           {advantages.map((a) => (
             <StaggerItem
               key={a.title}
-              className="flex flex-col gap-3 border border-line bg-canvas p-7 transition-colors duration-300 hover:border-ink/25 hover:bg-canvas-3"
+              className="flex flex-col gap-4 border border-line bg-canvas p-7 transition-colors duration-300 hover:border-ink/25 hover:bg-canvas-3"
             >
+              <span className="grid h-10 w-10 place-items-center bg-accent/10 text-accent">
+                <Icon name={a.icon} />
+              </span>
               <span className="font-display text-lg text-ink">{a.title}</span>
               <p className="text-sm leading-relaxed text-ink-soft">{a.body}</p>
             </StaggerItem>
@@ -212,7 +191,7 @@ export default function Home() {
       <SectionDivider variant="node" />
 
       {/* ───────────────────────── Process ───────────────────────── */}
-      <Section texture="plain">
+      <Section texture="grid">
         <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionHeader
             kicker="How it works"

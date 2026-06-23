@@ -74,26 +74,32 @@ export const product = {
     {
       title: "Instant approval",
       body: "Apply online or through our app and get approved right away.",
+      icon: "check",
     },
     {
       title: "Flexible borrowing",
       body: "Loan amounts adapt to your individual requirements and approval.",
+      icon: "sliders",
     },
     {
       title: "Partial payments",
       body: "Can't pay in full? Make partial payments — interest first, then principal, then charges.",
+      icon: "coins",
     },
     {
       title: "Transparent terms",
       body: "Interest, fees and your repayment schedule are shared with you upfront.",
+      icon: "eye",
     },
     {
       title: "Easy repayment",
       body: "Repay through multiple channels — website or app, whatever suits you.",
+      icon: "wallet",
     },
     {
       title: "Always supported",
       body: "Customer support is available throughout the entire loan lifecycle.",
+      icon: "support",
     },
   ],
 } as const;
@@ -103,25 +109,28 @@ export const pillars = [
   {
     title: "Speed",
     body: "Swift approvals, so your lifestyle stays at the forefront. Processing within 30 minutes.",
+    icon: "bolt",
   },
   {
-    title: "Secure",
+    title: "Security",
     body: "Strong security measures to protect you from financial fraud, at every step.",
+    icon: "shield",
   },
   {
     title: "Flexibility",
     body: "Solutions tailored to you and you alone — for a perfect fit.",
+    icon: "sliders",
   },
 ] as const;
 
 /** What you get — from the AVA Finance homepage feature list. */
 export const advantages = [
-  { title: "No service fees", body: "We don't charge service fees on our loans." },
-  { title: "Low interest rates", body: "Affordable, transparent pricing — with no compounding." },
-  { title: "One-click renewal", body: "Renew an existing loan in a single tap." },
-  { title: "No pre-approval or closure fees", body: "No charge to apply, no penalty to close early." },
-  { title: "Fast approvals & payouts", body: "A technology-driven platform built for instant access." },
-  { title: "Open to more borrowers", body: "Accessible even without a high income or a strong credit score." },
+  { title: "No service fees", body: "We don't charge service fees on our loans.", icon: "no-fee" },
+  { title: "Low interest rates", body: "Affordable, transparent pricing — with no compounding.", icon: "trending-down" },
+  { title: "One-click renewal", body: "Renew an existing loan in a single tap.", icon: "refresh" },
+  { title: "No pre-approval or closure fees", body: "No charge to apply, no penalty to close early.", icon: "unlock" },
+  { title: "Fast approvals & payouts", body: "A technology-driven platform built for instant access.", icon: "gauge" },
+  { title: "Open to more borrowers", body: "Accessible even without a high income or a strong credit score.", icon: "users" },
 ] as const;
 
 export const process = [

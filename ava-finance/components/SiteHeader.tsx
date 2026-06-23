@@ -26,22 +26,17 @@ export default function SiteHeader() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "border-b border-line bg-canvas/80 backdrop-blur-xl"
+          ? "border-b border-line bg-canvas/85 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
       }`}
     >
       <div className="shell flex h-[4.5rem] items-center justify-between">
         <Link
           href="/"
-          className="flex items-center gap-2"
+          className="font-display text-lg font-semibold tracking-tight text-ink"
           onClick={() => setOpen(false)}
         >
-          <span className="grid h-7 w-7 place-items-center rounded-lg bg-accent text-[0.8rem] font-bold text-white">
-            A
-          </span>
-          <span className="font-display text-lg font-semibold tracking-tight text-ink">
-            AVA Finance
-          </span>
+          AVA Finance
         </Link>
 
         <nav className="hidden items-center gap-9 md:flex">

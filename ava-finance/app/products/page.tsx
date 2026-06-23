@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Accordion, { type QA } from "@/components/Accordion";
 import { Button } from "@/components/Button";
+import Icon from "@/components/Icon";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import PageHero from "@/components/PageHero";
 import { Section, SectionDivider, SectionHeader } from "@/components/Section";
@@ -79,7 +80,7 @@ export default function ProductsPage() {
       <SectionDivider variant="node" />
 
       {/* Features */}
-      <Section texture="panel">
+      <Section texture="hatch">
         <SectionHeader
           kicker="What you get"
           title={<>Designed for speed, flexibility and clarity.</>}
@@ -88,8 +89,11 @@ export default function ProductsPage() {
           {product.features.map((f) => (
             <StaggerItem
               key={f.title}
-              className="flex flex-col gap-3 border border-line bg-canvas p-7 transition-colors duration-300 hover:border-ink/25 hover:bg-canvas-3"
+              className="flex flex-col gap-4 border border-line bg-canvas p-7 transition-colors duration-300 hover:border-ink/25 hover:bg-canvas-3"
             >
+              <span className="grid h-10 w-10 place-items-center bg-accent/10 text-accent">
+                <Icon name={f.icon} />
+              </span>
               <span className="font-display text-lg text-ink">{f.title}</span>
               <p className="text-sm leading-relaxed text-ink-soft">{f.body}</p>
             </StaggerItem>
@@ -100,7 +104,7 @@ export default function ProductsPage() {
       <SectionDivider />
 
       {/* Process + documents */}
-      <Section texture="plain">
+      <Section texture="grid">
         <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionHeader
             kicker="Applying"
@@ -192,7 +196,7 @@ export default function ProductsPage() {
       <SectionDivider />
 
       {/* FAQ */}
-      <Section texture="plain">
+      <Section texture="cross">
         <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionHeader kicker="Questions" title={<>Good to know.</>} />
           <Reveal delay={0.1}>

@@ -19,7 +19,7 @@ export default function Home() {
       {/* ───────────────────────── Hero ───────────────────────── */}
       <section className="relative hero-rkb overflow-hidden">
         <div className="rails" aria-hidden />
-        <div className="relative z-10 shell pt-40 pb-20 sm:pt-44 lg:pt-52 lg:pb-28">
+        <div className="relative z-10 shell pt-32 pb-20 sm:pt-44 lg:pt-52 lg:pb-28">
           <Reveal>
             <p className="eyebrow text-accent">
               Est. {site.since} · RBI-Registered NBFC
@@ -71,7 +71,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* ─────────────────────── Product ─────────────────────── */}
-      <Section texture="grid">
+      <Section texture="weave">
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <SectionHeader
             index="01"
@@ -115,7 +115,7 @@ export default function Home() {
       <SectionDivider variant="accent" />
 
       {/* ─────────────────────── Advantages ─────────────────────── */}
-      <Section texture="grain">
+      <Section texture="engrave">
         <SectionHeader
           index="02"
           kicker="Why borrowers choose us"
@@ -138,7 +138,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* ─────────────────────── Process ─────────────────────── */}
-      <Section texture="plain">
+      <Section texture="laid">
         <SectionHeader
           index="03"
           kicker="How it works"
@@ -181,7 +181,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* ─────────────────────── Heritage timeline ─────────────────────── */}
-      <Section texture="grid">
+      <Section texture="ledger">
         <SectionHeader
           index="05"
           kicker="Our story"
@@ -228,7 +228,7 @@ export default function Home() {
       <SectionDivider variant="accent" />
 
       {/* ─────────────────────── Compliance / trust ─────────────────────── */}
-      <Section texture="grain">
+      <Section texture="weave">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
           <SectionHeader
             index="06"

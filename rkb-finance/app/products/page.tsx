@@ -47,7 +47,7 @@ export default function ProductsPage() {
       <SectionDivider />
 
       {/* Headline facts */}
-      <Section texture="grid">
+      <Section texture="weave">
         <Stagger className="grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-4">
           {[
             ["Loan amount", `${product.amount.min} – ${product.amount.max}`],
@@ -66,7 +66,7 @@ export default function ProductsPage() {
       <SectionDivider variant="accent" />
 
       {/* Features */}
-      <Section texture="grain">
+      <Section texture="engrave">
         <SectionHeader
           index="01"
           kicker="What you get"
@@ -89,7 +89,7 @@ export default function ProductsPage() {
       <SectionDivider />
 
       {/* Process */}
-      <Section texture="plain">
+      <Section texture="laid">
         <SectionHeader
           index="02"
           kicker="Applying"
@@ -166,7 +166,7 @@ export default function ProductsPage() {
       <SectionDivider />
 
       {/* FAQ */}
-      <Section texture="grain">
+      <Section texture="ledger">
         <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionHeader index="04" kicker="Questions" title={<>Good to know.</>} />
           <Reveal delay={0.1}>

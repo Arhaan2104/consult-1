@@ -1,25 +1,30 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { animate, useInView } from "motion/react";
 
 /**
  * Animates the first numeric run inside a value string on scroll-in.
- * "₹200cr+" -> counts the 200; "B-14.00700" -> static (no leading number).
- * Respects prefers-reduced-motion (animate resolves instantly).
+ * "61" -> counts up; "B-14.00700" -> static (multiple digit-runs).
+ * Respects prefers-reduced-motion.
  */
 export default function StatCounter({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-15%" });
-  // Only animate values with exactly one digit-run (e.g. "1984", "61", "₹200cr+").
-  // Codes like "B-14.00700" have multiple runs and stay static.
-  const runs = value.match(/[\d,]+/g);
-  const match = runs && runs.length === 1 ? value.match(/[\d,]+/) : null;
-  const target = match ? parseInt(match[0].replace(/,/g, ""), 10) : null;
-  const [display, setDisplay] = useState(target ? "0" : value);
+
+  // Derived once per value — stable across renders (no animation restart loop).
+  const { target, prefix, suffix } = useMemo(() => {
+    const runs = value.match(/[\d,]+/g);
+    const m = runs && runs.length === 1 ? value.match(/[\d,]+/) : null;
+    if (!m) return { target: null as number | null, prefix: "", suffix: "" };
+    const [p, s] = value.split(m[0]);
+    return { target: parseInt(m[0].replace(/,/g, ""), 10), prefix: p, suffix: s };
+  }, [value]);
+
+  const [display, setDisplay] = useState(target === null ? value : "0");
 
   useEffect(() => {
-    if (!inView || target === null || !match) return;
+    if (!inView || target === null) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const controls = animate(0, target, {
       duration: reduced ? 0 : 1.4,
@@ -27,13 +32,12 @@ export default function StatCounter({ value }: { value: string }) {
       onUpdate: (v) => setDisplay(Math.round(v).toLocaleString("en-IN")),
     });
     return () => controls.stop();
-  }, [inView, target, match]);
+  }, [inView, target]);
 
-  if (target === null || !match) {
+  if (target === null) {
     return <span ref={ref}>{value}</span>;
   }
 
-  const [prefix, suffix] = value.split(match[0]);
   return (
     <span ref={ref}>
       {prefix}

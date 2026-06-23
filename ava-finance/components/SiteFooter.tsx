@@ -13,13 +13,11 @@ export default function SiteFooter() {
         <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div className="flex flex-col gap-5">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="grid h-7 w-7 place-items-center rounded-lg bg-accent text-[0.8rem] font-bold text-white">
-                A
-              </span>
-              <span className="font-display text-lg font-semibold text-on-dark">
-                AVA Finance
-              </span>
+            <Link
+              href="/"
+              className="font-display text-lg font-semibold text-on-dark"
+            >
+              AVA Finance
             </Link>
             <p className="measure text-sm leading-relaxed text-on-dark-soft">
               A technology-driven lending platform simplifying access to funds.

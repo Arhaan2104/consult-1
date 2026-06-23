@@ -1,12 +1,24 @@
 import type { ReactNode } from "react";
 import { Reveal } from "./Motion";
 
-type Texture = "plain" | "grain" | "grid" | "vignette" | "dark" | "panel";
+type Texture =
+  | "plain"
+  | "grain"
+  | "weave"
+  | "ledger"
+  | "laid"
+  | "engrave"
+  | "vignette"
+  | "dark"
+  | "panel";
 
 const textureClass: Record<Texture, string> = {
   plain: "bg-canvas",
   grain: "bg-canvas tx-grain",
-  grid: "bg-canvas-2 tx-grid-soft",
+  weave: "bg-canvas-2 tx-weave",
+  ledger: "bg-canvas tx-ledger",
+  laid: "bg-canvas-2 tx-laid",
+  engrave: "bg-canvas tx-engrave",
   vignette: "tx-vignette",
   panel: "bg-canvas-3",
   dark: "panel-dark text-on-dark",

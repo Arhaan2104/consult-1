@@ -22,7 +22,7 @@ export default function ContactPage() {
 
       <SectionDivider />
 
-      <Section texture="grid">
+      <Section texture="weave">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr]">
           {/* Details */}
           <div className="flex flex-col gap-10">
@@ -89,7 +89,7 @@ export default function ContactPage() {
       <SectionDivider variant="accent" />
 
       {/* Grievance */}
-      <Section texture="grain">
+      <Section texture="engrave">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <Reveal className="flex flex-col gap-4">
             <span className="eyebrow text-accent">Grievance redressal</span>

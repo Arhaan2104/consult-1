@@ -1,12 +1,14 @@
 import type { ReactNode } from "react";
 import { Reveal } from "./Motion";
 
-type Texture = "plain" | "grid" | "dots" | "panel" | "dark";
+type Texture = "plain" | "grid" | "dots" | "cross" | "hatch" | "panel" | "dark";
 
 const textureClass: Record<Texture, string> = {
   plain: "bg-canvas",
-  grid: "tx-grid",
-  dots: "tx-dots",
+  grid: "bg-canvas tx-grid",
+  dots: "bg-canvas-2 tx-dots",
+  cross: "bg-canvas tx-cross",
+  hatch: "bg-canvas-2 tx-hatch",
   panel: "bg-canvas-2",
   dark: "panel-dark text-on-dark",
 };
@@ -47,8 +49,8 @@ export function SectionHeader({
   return (
     <Reveal
       className={`flex flex-col gap-5 ${
-        align === "center" ? "mx-auto items-center text-center" : ""
-      } ${align === "center" ? "max-w-2xl" : "max-w-3xl"}`}
+        align === "center" ? "mx-auto max-w-2xl items-center text-center" : ""
+      }`}
     >
       {kicker && (
         <span

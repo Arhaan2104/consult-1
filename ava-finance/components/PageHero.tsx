@@ -14,7 +14,7 @@ export default function PageHero({
   return (
     <section className="relative hero-ava">
       <div className="rails" aria-hidden />
-      <div className="relative z-10 shell pt-40 pb-16 sm:pt-44 lg:pt-48 lg:pb-20">
+      <div className="relative z-10 shell pt-32 pb-16 sm:pt-44 lg:pt-48 lg:pb-20">
         <Reveal>
           <span className="inline-flex items-center gap-2 rounded-none border border-line px-3.5 py-1.5">
             <span className="h-1.5 w-1.5 rounded-none bg-accent" />

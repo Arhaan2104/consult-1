@@ -51,7 +51,7 @@ export default function AboutPage() {
       <SectionDivider />
 
       {/* Mission */}
-      <Section texture="grid">
+      <Section texture="weave">
         <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionHeader index="01" kicker="Our mission" title={<>Why we exist.</>} />
           <Reveal delay={0.1}>
@@ -71,7 +71,7 @@ export default function AboutPage() {
       <SectionDivider variant="accent" />
 
       {/* Values */}
-      <Section texture="grain">
+      <Section texture="engrave">
         <SectionHeader
           index="02"
           kicker="What guides us"
@@ -91,7 +91,7 @@ export default function AboutPage() {
       <SectionDivider />
 
       {/* Timeline */}
-      <Section texture="plain">
+      <Section texture="ledger">
         <SectionHeader
           index="03"
           kicker="Our story"
@@ -129,7 +129,7 @@ export default function AboutPage() {
       </Section>
 
       {/* CTA */}
-      <Section texture="grain">
+      <Section texture="laid">
         <Reveal className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
           <h2 className="display-md max-w-[18ch] text-balance text-ink">
             Have a question for our team?

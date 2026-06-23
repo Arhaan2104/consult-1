@@ -34,7 +34,7 @@ export default async function LegalPage({
       {/* Header */}
       <section className="relative hero-rkb">
         <div className="rails" aria-hidden />
-        <div className="relative z-10 shell pt-40 pb-14 sm:pt-44 lg:pt-48">
+        <div className="relative z-10 shell pt-32 pb-14 sm:pt-44 lg:pt-48">
           <Reveal>
             <Link
               href="/"
@@ -64,7 +64,7 @@ export default async function LegalPage({
       <SectionDivider />
 
       {/* Body */}
-      <section className="bg-canvas-2 tx-grid-soft">
+      <section className="bg-canvas-2 tx-weave">
         <div className="shell grid gap-14 py-20 lg:grid-cols-[0.32fr_0.68fr] lg:py-28">
           {/* TOC */}
           <aside className="hidden lg:block lg:sticky lg:top-28 lg:self-start">

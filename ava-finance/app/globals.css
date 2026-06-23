@@ -84,7 +84,7 @@ body {
 .display-lg {
   font-family: var(--font-display), system-ui, sans-serif;
   font-weight: 600;
-  font-size: clamp(2rem, 4.2vw, 3.3rem);
+  font-size: clamp(1.9rem, 3.7vw, 3rem);
   line-height: 1.06;
   letter-spacing: -0.035em;
 }
@@ -142,18 +142,32 @@ body {
    Background textures — engineered, minimal, masked (never flat)
    ============================================================ */
 
-/* Blueprint grid, fades from the top */
-.tx-grid {
+/* ---- Cohesive texture family ----------------------------------
+   All share the same DNA: thin monochrome marks, very low opacity,
+   masked so they fade (never flat wallpaper). Pattern-only — the
+   base colour comes from a bg-* utility on the same element, so any
+   texture can sit on white (canvas) or light-grey (canvas-2). ---- */
+
+.tx-grid,
+.tx-dots,
+.tx-cross,
+.tx-hatch {
   position: relative;
   isolation: isolate;
-  background-color: var(--color-canvas);
 }
-.tx-grid::before {
+.tx-grid::before,
+.tx-dots::before,
+.tx-cross::before,
+.tx-hatch::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
+}
+
+/* Blueprint grid — fades from the top */
+.tx-grid::before {
   background-image:
     linear-gradient(to right, var(--color-line) 1px, transparent 1px),
     linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
@@ -162,22 +176,33 @@ body {
   mask-image: radial-gradient(115% 80% at 50% 0%, #000 22%, transparent 80%);
 }
 
-/* Dot matrix, softly vignetted */
-.tx-dots {
-  position: relative;
-  isolation: isolate;
-  background-color: var(--color-canvas-2);
-}
+/* Dot matrix — softly vignetted from the centre */
 .tx-dots::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
   background-image: radial-gradient(var(--color-line-strong) 1px, transparent 1.5px);
   background-size: 22px 22px;
   -webkit-mask-image: radial-gradient(120% 100% at 50% 50%, #000 35%, transparent 88%);
   mask-image: radial-gradient(120% 100% at 50% 50%, #000 35%, transparent 88%);
+}
+
+/* Crosshair marks — a precise blueprint plus-grid */
+.tx-cross::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Cpath d='M22 16.5v11M16.5 22h11' stroke='%230a0b0d' stroke-opacity='0.16' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 12%, #000 20%, transparent 82%);
+  mask-image: radial-gradient(120% 90% at 50% 12%, #000 20%, transparent 82%);
+}
+
+/* Diagonal hairline hatch — fine engraving */
+.tx-hatch::before {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-line) 0,
+    var(--color-line) 1px,
+    transparent 1px,
+    transparent 11px
+  );
+  -webkit-mask-image: radial-gradient(125% 95% at 50% 35%, #000 22%, transparent 86%);
+  mask-image: radial-gradient(125% 95% at 50% 35%, #000 22%, transparent 86%);
 }
 
 /* Fine grain — kills the flat-digital look */

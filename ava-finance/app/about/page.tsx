@@ -3,7 +3,6 @@ import { Button } from "@/components/Button";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import PageHero from "@/components/PageHero";
 import { Section, SectionDivider, SectionHeader } from "@/components/Section";
-import StatCounter from "@/components/StatCounter";
 import { site, stats } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -68,16 +67,14 @@ export default function AboutPage() {
       <SectionDivider variant="node" />
 
       {/* Stats */}
-      <Section texture="plain">
+      <Section texture="grid">
         <Stagger className="grid gap-6 sm:grid-cols-3">
           {stats.map((s) => (
             <StaggerItem
               key={s.label}
               className="flex flex-col gap-2 rounded-3xl border border-line bg-canvas-2 p-8"
             >
-              <span className="font-display text-4xl text-ink">
-                <StatCounter value={s.value} />
-              </span>
+              <span className="font-display text-4xl text-ink">{s.value}</span>
               <span className="eyebrow text-accent">{s.label}</span>
               <p className="text-sm text-ink-soft">{s.sub}</p>
             </StaggerItem>
@@ -88,7 +85,7 @@ export default function AboutPage() {
       <SectionDivider />
 
       {/* Services */}
-      <Section texture="panel">
+      <Section texture="hatch">
         <SectionHeader
           kicker="What we do"
           title={<>Built around three core services.</>}
