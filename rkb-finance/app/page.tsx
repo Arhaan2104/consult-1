@@ -1,16 +1,18 @@
 import { Button } from "@/components/Button";
+import HeroSeal from "@/components/HeroSeal";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import Marquee from "@/components/Marquee";
 import { Section, SectionDivider, SectionHeader } from "@/components/Section";
 import StatCounter from "@/components/StatCounter";
 import {
   advantages,
-  credibility,
+  heroTrust,
   process,
   product,
   site,
   stats,
   timeline,
+  trustSignals,
 } from "@/content/site";
 
 export default function Home() {
@@ -19,7 +21,8 @@ export default function Home() {
       {/* ───────────────────────── Hero ───────────────────────── */}
       <section className="relative hero-rkb overflow-hidden">
         <div className="rails" aria-hidden />
-        <div className="relative z-10 shell pt-32 pb-20 sm:pt-44 lg:pt-52 lg:pb-28">
+        <HeroSeal />
+        <div className="relative z-10 shell flex flex-col items-center text-center pt-32 pb-20 sm:pt-44 lg:pt-52 lg:pb-28">
           <Reveal>
             <p className="eyebrow text-accent">
               Est. {site.since} · RBI-Registered NBFC
@@ -31,16 +34,16 @@ export default function Home() {
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mt-8 measure-wide text-lg leading-relaxed text-ink-soft">
+            <p className="mt-8 measure-wide mx-auto text-lg leading-relaxed text-ink-soft">
               A unique lending platform that makes it simple to access funds —
               transparent terms, competitive rates, and a fully digital process
               built on more than four decades of trust.
             </p>
           </Reveal>
           <Reveal delay={0.24}>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
               <Button href="/products" className="w-full justify-center sm:w-auto">
-                Explore the loan
+                Explore Products
               </Button>
               <Button
                 href="/contact"
@@ -53,14 +56,22 @@ export default function Home() {
             </div>
           </Reveal>
 
-          {/* Credibility strip woven into hero base */}
-          <div className="mt-20 lg:mt-28">
+          {/* Trust band — prominent proof woven into the hero base */}
+          <div className="w-full mt-20 lg:mt-28">
             <hr className="rule" />
-            <Stagger className="grid grid-cols-2 gap-y-8 pt-8 lg:grid-cols-4">
-              {credibility.map((c) => (
-                <StaggerItem key={c.k} className="flex flex-col gap-1.5">
-                  <span className="eyebrow text-ink-faint">{c.k}</span>
-                  <span className="font-display text-lg text-ink">{c.v}</span>
+            <Stagger className="grid grid-cols-1 divide-y divide-line pt-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+              {heroTrust.map((s) => (
+                <StaggerItem
+                  key={s.label}
+                  className="flex flex-col items-center gap-2.5 px-4 py-7 text-center sm:py-3"
+                >
+                  <span className="eyebrow text-accent">{s.prefix}</span>
+                  <span className="font-display leading-[0.95] text-ink text-5xl sm:text-[3.25rem] lg:text-6xl">
+                    {s.value}
+                  </span>
+                  <span className="text-sm font-medium tracking-wide text-ink-soft">
+                    {s.label}
+                  </span>
                 </StaggerItem>
               ))}
             </Stagger>
@@ -80,7 +91,7 @@ export default function Home() {
             intro={product.blurb}
           />
           <Reveal delay={0.1} className="lg:pb-2">
-            <div className="rounded-2xl border border-line-strong bg-canvas p-8 shadow-[0_1px_0_rgba(14,42,59,0.04)] sm:p-10">
+            <div className="rounded-2xl border border-line-strong bg-canvas p-8 shadow-[0_1px_0_rgba(17,47,91,0.04)] sm:p-10">
               <div className="flex items-baseline justify-between gap-4 border-b border-line pb-6">
                 <span className="eyebrow text-ink-faint">Loan amount</span>
                 <span className="font-display text-2xl text-ink sm:text-3xl">
@@ -262,6 +273,29 @@ export default function Home() {
             ))}
           </Stagger>
         </div>
+      </Section>
+
+      <SectionDivider />
+
+      {/* ─────────────────── Trust-signal proof band ─────────────────── */}
+      <Section texture="vignette">
+        <Reveal className="text-center">
+          <p className="eyebrow text-accent">A lender you can rely on</p>
+        </Reveal>
+        <Stagger className="mt-12 grid grid-cols-1 divide-y divide-line sm:grid-cols-2 sm:divide-x lg:grid-cols-4 lg:divide-y-0">
+          {trustSignals.map((s) => (
+            <StaggerItem
+              key={s.value}
+              className="flex flex-col items-center gap-2 px-6 py-8 text-center sm:py-4"
+            >
+              <span className="font-display text-3xl leading-none text-ink sm:text-4xl">
+                {s.value}
+              </span>
+              <span className="eyebrow text-accent">{s.label}</span>
+              <span className="text-sm leading-relaxed text-ink-soft">{s.sub}</span>
+            </StaggerItem>
+          ))}
+        </Stagger>
       </Section>
 
       {/* ─────────────────────── Final CTA ─────────────────────── */}

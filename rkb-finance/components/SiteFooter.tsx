@@ -1,11 +1,26 @@
 import Link from "next/link";
-import { legalNav } from "@/content/legal";
 import { nav, site } from "@/content/site";
+
+/** Key policies surfaced in the footer — full set lives on /regulatory-disclosures. */
+const footerPolicies = [
+  { title: "Regulatory Disclosures", href: "/regulatory-disclosures" },
+  { title: "Privacy Policy", href: "/legal/privacy-policy" },
+  { title: "Terms & Conditions", href: "/legal/terms-conditions" },
+  { title: "Fair Practice Code", href: "/legal/fair-practice-code" },
+  { title: "Interest Rate & Charges Policy", href: "/legal/interest-rate-policy" },
+  { title: "Grievance Redressal", href: "/legal/grievance-redressal" },
+  { title: "RBI Integrated Ombudsman Scheme", href: "/legal/rbi-ombudsman-scheme" },
+];
+
+/** External complaint portals — official RBI channels. */
+const complaintPortals = [
+  { title: "Sachet Portal (RBI)", href: "https://sachet.rbi.org.in/" },
+  { title: "RBI CMS Portal", href: "https://cms.rbi.org.in/" },
+  { title: "Grievance Escalation Matrix", href: "/legal/grievance-escalation-matrix" },
+];
 
 export default function SiteFooter() {
   const year = 2026;
-  const half = Math.ceil(legalNav.length / 2);
-  const legalCols = [legalNav.slice(0, half), legalNav.slice(half)];
 
   return (
     <footer className="panel-dark text-on-dark">
@@ -16,7 +31,7 @@ export default function SiteFooter() {
             <Link href="/" className="font-display text-2xl text-on-dark">
               R.K. Bansal<span className="text-accent-2">.</span>
             </Link>
-            <p className="measure text-sm leading-relaxed text-on-dark-soft">
+            <p className="measure text-base leading-relaxed text-on-dark-soft">
               {site.tagline}. A Non-Banking Financial Company registered with the
               Reserve Bank of India since {site.since}.
             </p>
@@ -27,7 +42,7 @@ export default function SiteFooter() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs uppercase tracking-widest text-on-dark-soft transition-colors hover:text-accent-2"
+                  className="text-sm uppercase tracking-widest text-on-dark-soft transition-colors hover:text-accent-2"
                 >
                   {s.label}
                 </a>
@@ -38,7 +53,7 @@ export default function SiteFooter() {
           {/* Explore */}
           <div className="flex flex-col gap-4">
             <p className="eyebrow text-on-dark-soft">Explore</p>
-            <nav className="flex flex-col gap-3 text-sm">
+            <nav className="flex flex-col gap-3 text-base">
               <Link href="/" className="text-on-dark transition-colors hover:text-accent-2">
                 Home
               </Link>
@@ -54,26 +69,50 @@ export default function SiteFooter() {
             </nav>
           </div>
 
-          {/* Legal — two columns merged on small screens */}
-          <div className="flex flex-col gap-4 lg:col-span-1">
+          {/* Policies & Regulatory Disclosures */}
+          <div className="flex flex-col gap-4">
             <p className="eyebrow text-on-dark-soft">Policies</p>
-            <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2 lg:grid-cols-1">
-              {legalCols[0].map((d) => (
+            <nav className="flex flex-col gap-3 text-base">
+              {footerPolicies.map((p) => (
                 <Link
-                  key={d.slug}
-                  href={`/legal/${d.slug}`}
+                  key={p.href}
+                  href={p.href}
                   className="text-on-dark transition-colors hover:text-accent-2"
                 >
-                  {d.title}
+                  {p.title}
                 </Link>
               ))}
-            </div>
+            </nav>
           </div>
 
-          {/* Contact */}
+          {/* Complaints + Contact */}
           <div className="flex flex-col gap-4">
-            <p className="eyebrow text-on-dark-soft">Contact</p>
-            <address className="flex flex-col gap-3 text-sm not-italic text-on-dark">
+            <p className="eyebrow text-on-dark-soft">Complaints</p>
+            <nav className="flex flex-col gap-3 text-base">
+              {complaintPortals.map((p) =>
+                p.href.startsWith("http") ? (
+                  <a
+                    key={p.href}
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-on-dark transition-colors hover:text-accent-2"
+                  >
+                    {p.title} ↗
+                  </a>
+                ) : (
+                  <Link
+                    key={p.href}
+                    href={p.href}
+                    className="text-on-dark transition-colors hover:text-accent-2"
+                  >
+                    {p.title}
+                  </Link>
+                )
+              )}
+            </nav>
+            <p className="eyebrow mt-6 text-on-dark-soft">Connect With Us</p>
+            <address className="flex flex-col gap-3 text-base not-italic text-on-dark">
               <span className="text-on-dark-soft">{site.contact.address}</span>
               {site.contact.phones.slice(0, 2).map((p) => (
                 <a key={p} href={`tel:${p.replace(/\s/g, "")}`} className="hover:text-accent-2">
@@ -84,23 +123,12 @@ export default function SiteFooter() {
                 {site.contact.email}
               </a>
             </address>
-            <div className="mt-2 flex flex-col gap-3 text-sm">
-              {legalCols[1].map((d) => (
-                <Link
-                  key={d.slug}
-                  href={`/legal/${d.slug}`}
-                  className="text-on-dark-soft transition-colors hover:text-accent-2"
-                >
-                  {d.title}
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
 
         <hr className="my-10 h-px border-0 bg-[var(--color-line-dark)]" />
 
-        <div className="flex flex-col gap-6 text-xs leading-relaxed text-on-dark-soft lg:flex-row lg:items-start lg:justify-between">
+        <div className="flex flex-col gap-6 text-sm leading-relaxed text-on-dark-soft lg:flex-row lg:items-start lg:justify-between">
           <p className="max-w-3xl">
             {site.legalName} · RBI Registration {site.rbiReg} · CIN {site.cin}.
             {" "}We do not charge any upfront fees against our loans. Beware of

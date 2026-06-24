@@ -1,39 +1,25 @@
 import type { Metadata } from "next";
-import Accordion, { type QA } from "@/components/Accordion";
+import Accordion from "@/components/Accordion";
 import { Button } from "@/components/Button";
+import LoanCalculator from "@/components/LoanCalculator";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import PageHero from "@/components/PageHero";
 import { Section, SectionDivider, SectionHeader } from "@/components/Section";
-import { charges, interestTable, process, product } from "@/content/site";
+import {
+  documents,
+  eligibility,
+  faqGroups,
+  kfs,
+  process,
+  product,
+  productCharges,
+} from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Products",
   description:
     "The R.K. Bansal Finance Short Term Loan — ₹4,000 to ₹1,00,000, instant approval, funds within 24 hours, transparent fixed rates and no service fees.",
 };
-
-const faqs: QA[] = [
-  {
-    q: "How much can I borrow?",
-    a: "The Short Term Loan ranges from ₹4,000 to ₹1,00,000, determined by your individual needs and approval.",
-  },
-  {
-    q: "How quickly are funds disbursed?",
-    a: "Once your application is approved by our automated system, funds are disbursed directly to your bank account within 24 hours.",
-  },
-  {
-    q: "Are there any upfront or service fees?",
-    a: "No. We do not charge service fees, and there are no pre-approval or closure penalties. We never charge any upfront fee before disbursing a loan.",
-  },
-  {
-    q: "Can I repay in parts?",
-    a: "Yes. You can make partial payments through the app or website. Partial payments settle outstanding interest first, then principal, then any applicable charges.",
-  },
-  {
-    q: "Can I apply with a limited credit history?",
-    a: "Yes. The Short Term Loan has no income threshold and is accessible to applicants with limited or poor credit history.",
-  },
-];
 
 export default function ProductsPage() {
   return (
@@ -51,9 +37,9 @@ export default function ProductsPage() {
         <Stagger className="grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-4">
           {[
             ["Loan amount", `${product.amount.min} – ${product.amount.max}`],
+            ["Tenure", `${product.tenure.min} – ${product.tenure.max}`],
             ["Interest rate", product.rate],
             ["Disbursal", product.disbursal],
-            ["Interest type", "Fixed · no compounding"],
           ].map(([k, v]) => (
             <StaggerItem key={k} className="flex flex-col gap-2 bg-canvas p-8">
               <span className="eyebrow text-ink-faint">{k}</span>
@@ -88,10 +74,86 @@ export default function ProductsPage() {
 
       <SectionDivider />
 
-      {/* Process */}
+      {/* Calculator */}
+      <Section texture="grain">
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <SectionHeader
+            index="02"
+            kicker="Estimate your loan"
+            title={<>See what you&rsquo;ll repay, before you apply.</>}
+            intro="Move the sliders to estimate the interest and total repayment on a Short Term Loan. Interest is simple daily interest on the principal — never compounded."
+          />
+          <Reveal delay={0.1}>
+            <LoanCalculator />
+          </Reveal>
+        </div>
+      </Section>
+
+      <SectionDivider variant="accent" />
+
+      {/* Eligibility */}
       <Section texture="laid">
         <SectionHeader
-          index="02"
+          index="03"
+          kicker="Eligibility"
+          title={<>Open to more borrowers, by design.</>}
+          intro="No minimum income, and limited or poor credit history is welcome. A few basic criteria apply."
+        />
+        <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-3">
+          {eligibility.map((e) => (
+            <StaggerItem key={e.label} className="flex flex-col gap-2 bg-canvas p-8">
+              <span className="eyebrow text-ink-faint">{e.label}</span>
+              <span className="font-display text-xl leading-snug text-ink">
+                {e.value}
+              </span>
+              {e.placeholder && (
+                <span className="text-xs italic text-ink-faint">
+                  Indicative — to be confirmed
+                </span>
+              )}
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </Section>
+
+      <SectionDivider />
+
+      {/* Documents */}
+      <Section texture="weave">
+        <SectionHeader
+          index="04"
+          kicker="What you&rsquo;ll need"
+          title={<>A short, paperless document checklist.</>}
+        />
+        <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2">
+          {documents.map((d, i) => (
+            <StaggerItem
+              key={d.title}
+              className="flex items-start gap-5 bg-canvas p-8"
+            >
+              <span className="font-display text-2xl text-accent/50">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="flex flex-col gap-1.5">
+                <span className="font-display text-lg text-ink">{d.title}</span>
+                <span className="text-sm leading-relaxed text-ink-soft">{d.body}</span>
+              </span>
+            </StaggerItem>
+          ))}
+        </Stagger>
+        <Reveal>
+          <p className="mt-6 text-xs italic text-ink-faint">
+            Exact documents are confirmed during application and may vary by applicant.
+          </p>
+        </Reveal>
+      </Section>
+
+      <SectionDivider variant="accent" />
+
+      {/* Process */}
+      <Section texture="engrave">
+        <SectionHeader
+          index="05"
           kicker="Applying"
           title={<>From application to funds in three steps.</>}
         />
@@ -106,38 +168,43 @@ export default function ProductsPage() {
         </Stagger>
       </Section>
 
-      {/* Rates & charges (dark) */}
+      {/* Key facts & charges (dark) */}
       <Section texture="dark">
         <SectionHeader
-          index="03"
-          kicker="Rates & charges"
-          title={<>Disclosed in full, upfront.</>}
-          intro="Interest rates across our products, and the charges that may apply. All loans currently carry fixed interest rates."
+          index="06"
+          kicker="The fine print"
+          title={<>Key facts &amp; charges, disclosed in full.</>}
+          intro="A Key Fact Statement summarises the loan's terms in the RBI-standardised format, alongside every charge that may apply. Nothing hidden, nothing in the footnotes."
           dark
         />
-        <div className="mt-14 grid gap-12 lg:grid-cols-2">
+        <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:items-start">
           <Reveal>
-            <p className="eyebrow mb-5 text-accent-2">Interest rates by product</p>
+            <p className="eyebrow mb-5 text-accent-2">Key Fact Statement</p>
             <dl className="overflow-hidden rounded-2xl border border-[var(--color-line-dark)]">
-              {interestTable.map((r, i) => (
+              {kfs.map((row, i) => (
                 <div
-                  key={r.product}
+                  key={row.k}
                   className={`flex flex-col gap-1 p-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6 ${
                     i % 2 ? "bg-deep" : "bg-deep-2"
                   }`}
                 >
-                  <dt className="text-sm text-on-dark">{r.product}</dt>
-                  <dd className="text-sm font-medium text-on-dark-soft sm:text-right">
-                    {r.rate}
+                  <dt className="text-sm text-on-dark">{row.k}</dt>
+                  <dd className="text-sm font-medium text-on-dark-soft sm:max-w-[60%] sm:text-right">
+                    {row.v}
+                    {"placeholder" in row && row.placeholder && (
+                      <span className="ml-2 align-middle text-xs italic text-accent-2">
+                        to confirm
+                      </span>
+                    )}
                   </dd>
                 </div>
               ))}
             </dl>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="eyebrow mb-5 text-accent-2">Fees & penal charges</p>
+            <p className="eyebrow mb-5 text-accent-2">Charges that may apply</p>
             <dl className="overflow-hidden rounded-2xl border border-[var(--color-line-dark)]">
-              {charges.map((c, i) => (
+              {productCharges.map((c, i) => (
                 <div
                   key={c.item}
                   className={`flex flex-col gap-1 p-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6 ${
@@ -151,27 +218,36 @@ export default function ProductsPage() {
                 </div>
               ))}
             </dl>
+            <p className="mt-6 text-xs leading-relaxed text-on-dark-soft">
+              Rates vary by borrower based on credit scores, risk profiles and loan
+              tenor. A 3-day cooling-off period allows exit with only principal and
+              proportionate APR. All fees and charges are subject to applicable GST and
+              government levies. The full interest-rate policy across products is
+              published under{" "}
+              <a
+                href="/legal/interest-rate-policy"
+                className="text-on-dark underline decoration-accent-2/50 underline-offset-2 hover:decoration-accent-2"
+              >
+                Interest Rate &amp; Charges Policy
+              </a>
+              .
+            </p>
           </Reveal>
         </div>
-        <Reveal>
-          <p className="mt-8 max-w-3xl text-xs leading-relaxed text-on-dark-soft">
-            Rates vary by borrower based on credit scores, risk profiles and loan
-            tenor. A 3-day cooling-off period allows exit with only principal and
-            proportionate APR. All fees and charges are subject to applicable GST
-            and government levies.
-          </p>
-        </Reveal>
       </Section>
 
       <SectionDivider />
 
       {/* FAQ */}
       <Section texture="ledger">
-        <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <SectionHeader index="04" kicker="Questions" title={<>Good to know.</>} />
-          <Reveal delay={0.1}>
-            <Accordion items={faqs} />
-          </Reveal>
+        <SectionHeader index="07" kicker="Questions" title={<>Good to know.</>} />
+        <div className="mt-14 grid gap-12 lg:grid-cols-2">
+          {faqGroups.map((group) => (
+            <Reveal key={group.heading}>
+              <p className="eyebrow mb-5 text-ink-faint">{group.heading}</p>
+              <Accordion items={[...group.items]} />
+            </Reveal>
+          ))}
         </div>
       </Section>
 

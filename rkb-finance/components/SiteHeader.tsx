@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { nav, site } from "@/content/site";
@@ -33,11 +34,18 @@ export default function SiteHeader() {
       <div className="shell flex h-[4.5rem] items-center justify-between">
         <Link
           href="/"
-          className="font-display text-xl tracking-tight text-ink"
+          aria-label="R.K. Bansal Finance — home"
+          className="flex items-center"
           onClick={() => setOpen(false)}
         >
-          R.K. Bansal
-          <span className="text-accent">.</span>
+          <Image
+            src="/R.K.-BANSAL.jpg"
+            alt="R.K. Bansal Finance Pvt. Ltd."
+            width={152}
+            height={36}
+            priority
+            className="h-8 w-auto mix-blend-multiply sm:h-9"
+          />
         </Link>
 
         <nav className="hidden items-center gap-9 md:flex">

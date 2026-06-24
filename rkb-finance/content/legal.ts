@@ -38,6 +38,8 @@ export const legalDocs: LegalDoc[] = [
         ],
       },
       {
+        // CONSULTANT: app-shaped language (device permissions). RKB is currently
+        // web-only — confirm whether this section should remain or be reworded.
         heading: "Device permissions",
         body: [
           "Access to your camera, location, SMS and storage is requested only with explicit consent, and is limited to specific purposes such as document uploads and fraud prevention.",
@@ -277,6 +279,8 @@ export const legalDocs: LegalDoc[] = [
         ],
       },
       {
+        // CONSULTANT: references a 'My Account' / subscription flow. Confirm this
+        // refund/subscription policy applies to the current web-only single-loan product.
         heading: "Cancellation & refunds",
         body: [
           "Subscription cancellation can be completed through the 'My Account' section of the site. It may take a few days for a payment made to R.K. Bansal Finance Private Limited to be reflected in your bank account.",
@@ -383,3 +387,67 @@ export const legalNav = legalDocs.map((d) => ({ slug: d.slug, title: d.title }))
 export function getLegalDoc(slug: string) {
   return legalDocs.find((d) => d.slug === slug);
 }
+
+/**
+ * Regulatory Disclosures hub — topic structure mirrors the standard NBFC
+ * disclosure layout. Every link points to a policy published by
+ * R.K. Bansal Finance (rkbfinance.in) or an official RBI portal.
+ * Topics not currently published by the company are listed honestly under
+ * "available on request" rather than fabricated.
+ */
+export type DisclosureItem = { label: string; href: string; external?: boolean };
+export type DisclosureGroup = { heading: string; items: DisclosureItem[] };
+
+export const disclosureGroups: DisclosureGroup[] = [
+  {
+    heading: "Codes & Policies",
+    items: [
+      { label: "Fair Practice Code", href: "/legal/fair-practice-code" },
+      { label: "Interest Rate & Penal Charges Policy", href: "/legal/interest-rate-policy" },
+      { label: "Our Lending Policy", href: "/legal/lending-policy" },
+      { label: "Comprehensive Policy on Settlements & Write-Offs", href: "/legal/written-off-policy" },
+    ],
+  },
+  {
+    heading: "Grievance Redressal",
+    items: [
+      { label: "Customer Grievance Redressal Policy", href: "/legal/grievance-redressal" },
+      { label: "Grievance Escalation Matrix", href: "/legal/grievance-escalation-matrix" },
+      { label: "RBI Integrated Ombudsman Scheme", href: "/legal/rbi-ombudsman-scheme" },
+    ],
+  },
+  {
+    heading: "Complaint Portals",
+    items: [
+      { label: "Sachet Portal (RBI)", href: "https://sachet.rbi.org.in/", external: true },
+      { label: "RBI CMS Portal", href: "https://cms.rbi.org.in/", external: true },
+    ],
+  },
+  {
+    heading: "Customer Protection",
+    items: [
+      { label: "Privacy Policy", href: "/legal/privacy-policy" },
+      { label: "Terms & Conditions", href: "/legal/terms-conditions" },
+      { label: "Disclaimer & Disclosure", href: "/legal/disclaimer-and-disclosure" },
+      { label: "Refund & Cancellation Policy", href: "/legal/refund-cancellation" },
+    ],
+  },
+  {
+    heading: "Partners",
+    items: [
+      { label: "Our Sourcing Partners", href: "/legal/sourcing-partners" },
+    ],
+  },
+];
+
+/**
+ * Standard NBFC disclosure topics R.K. Bansal Finance does not currently
+ * publish online. Surfaced honestly rather than invented.
+ */
+export const disclosuresOnRequest = [
+  "Liquidity Coverage Ratio Disclosure",
+  "Liquidity Risk Management Disclosures",
+  "Customer Education Literature",
+  "Notice of Annual General Meeting",
+  "Vernacular Disclosures",
+];

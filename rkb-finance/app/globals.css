@@ -2,7 +2,7 @@
 
 /* ============================================================
    R.K. BANSAL FINANCE — Heritage Institutional design system
-   Warm ivory · deep navy ink · restrained bronze
+   Warm ivory · R.K. Bansal brand blue (from the logo)
    Serif display (Fraunces) over grotesk body (Geist)
    ============================================================ */
 
@@ -10,18 +10,18 @@
   --color-canvas: #fbf8f2;       /* warm ivory base            */
   --color-canvas-2: #f4eee2;     /* deeper paper panel         */
   --color-canvas-3: #efe7d6;     /* warmest panel / cards      */
-  --color-ink: #0e2a3b;          /* deep navy — primary ink    */
-  --color-ink-soft: #3a525e;     /* body copy on ivory         */
-  --color-ink-faint: #6b7d86;    /* captions / meta            */
-  --color-deep: #0a2230;         /* inverted navy surface      */
-  --color-deep-2: #0d2a3a;       /* inverted panel raise       */
-  --color-accent: #9a6b3f;       /* bronze                     */
-  --color-accent-2: #b58455;     /* lit bronze                 */
-  --color-on-dark: #efe7d6;      /* text on navy               */
-  --color-on-dark-soft: #9fb0b8; /* muted text on navy         */
-  --color-line: rgba(14, 42, 59, 0.14);
-  --color-line-strong: rgba(14, 42, 59, 0.26);
-  --color-line-dark: rgba(239, 231, 214, 0.16);
+  --color-ink: #112f5b;          /* deep brand blue — primary ink */
+  --color-ink-soft: #41557a;     /* body copy on ivory         */
+  --color-ink-faint: #76859e;    /* captions / meta            */
+  --color-deep: #0b2447;         /* inverted brand-blue surface */
+  --color-deep-2: #0f2c54;       /* inverted panel raise       */
+  --color-accent: #205aa8;       /* R.K. Bansal brand blue     */
+  --color-accent-2: #4f86cf;     /* lit brand blue             */
+  --color-on-dark: #e8eef7;      /* text on deep blue          */
+  --color-on-dark-soft: #9fb2cd; /* muted text on deep blue    */
+  --color-line: rgba(17, 47, 91, 0.14);
+  --color-line-strong: rgba(17, 47, 91, 0.26);
+  --color-line-dark: rgba(221, 231, 245, 0.16);
 
   --font-display: var(--font-fraunces);
   --font-sans: var(--font-geist-sans);
@@ -155,8 +155,8 @@ body {
 /* Engraved square grid — fine, navy hairlines */
 .tx-weave::before {
   background-image:
-    linear-gradient(to right, rgba(14, 42, 59, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(14, 42, 59, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(17, 47, 91, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 47, 91, 0.05) 1px, transparent 1px);
   background-size: 2.6rem 2.6rem;
   -webkit-mask-image: radial-gradient(115% 85% at 50% 0%, #000 22%, transparent 82%);
   mask-image: radial-gradient(115% 85% at 50% 0%, #000 22%, transparent 82%);
@@ -168,8 +168,8 @@ body {
     to bottom,
     transparent 0,
     transparent 2.4rem,
-    rgba(14, 42, 59, 0.05) 2.4rem,
-    rgba(14, 42, 59, 0.05) calc(2.4rem + 1px)
+    rgba(17, 47, 91, 0.05) 2.4rem,
+    rgba(17, 47, 91, 0.05) calc(2.4rem + 1px)
   );
   -webkit-mask-image: radial-gradient(120% 95% at 50% 12%, #000 25%, transparent 86%);
   mask-image: radial-gradient(120% 95% at 50% 12%, #000 25%, transparent 86%);
@@ -181,8 +181,8 @@ body {
     to right,
     transparent 0,
     transparent 1.05rem,
-    rgba(14, 42, 59, 0.04) 1.05rem,
-    rgba(14, 42, 59, 0.04) calc(1.05rem + 1px)
+    rgba(17, 47, 91, 0.04) 1.05rem,
+    rgba(17, 47, 91, 0.04) calc(1.05rem + 1px)
   );
   -webkit-mask-image: radial-gradient(120% 100% at 50% 40%, #000 28%, transparent 88%);
   mask-image: radial-gradient(120% 100% at 50% 40%, #000 28%, transparent 88%);
@@ -191,8 +191,8 @@ body {
 /* Banknote engraving — bronze diagonal crosshatch */
 .tx-engrave::before {
   background-image:
-    repeating-linear-gradient(45deg, rgba(154, 107, 63, 0.05) 0, rgba(154, 107, 63, 0.05) 1px, transparent 1px, transparent 10px),
-    repeating-linear-gradient(-45deg, rgba(154, 107, 63, 0.045) 0, rgba(154, 107, 63, 0.045) 1px, transparent 1px, transparent 10px);
+    repeating-linear-gradient(45deg, rgba(32, 90, 168, 0.05) 0, rgba(32, 90, 168, 0.05) 1px, transparent 1px, transparent 10px),
+    repeating-linear-gradient(-45deg, rgba(32, 90, 168, 0.045) 0, rgba(32, 90, 168, 0.045) 1px, transparent 1px, transparent 10px);
   -webkit-mask-image: radial-gradient(125% 95% at 50% 35%, #000 22%, transparent 86%);
   mask-image: radial-gradient(125% 95% at 50% 35%, #000 22%, transparent 86%);
 }
@@ -200,7 +200,7 @@ body {
 /* Soft warm vignette (ingredient) */
 .tx-vignette {
   background:
-    radial-gradient(120% 90% at 50% -10%, rgba(154, 107, 63, 0.07), transparent 55%),
+    radial-gradient(120% 90% at 50% -10%, rgba(32, 90, 168, 0.07), transparent 55%),
     var(--color-canvas);
 }
 
@@ -211,8 +211,8 @@ body {
   background-color: var(--color-deep);
   color: var(--color-on-dark);
   background-image:
-    radial-gradient(90% 120% at 85% 0%, rgba(154, 107, 63, 0.16), transparent 55%),
-    radial-gradient(60% 90% at 0% 100%, rgba(14, 42, 59, 0.6), transparent 60%);
+    radial-gradient(90% 120% at 85% 0%, rgba(32, 90, 168, 0.16), transparent 55%),
+    radial-gradient(60% 90% at 0% 100%, rgba(17, 47, 91, 0.6), transparent 60%);
 }
 .panel-dark::before {
   content: "";
@@ -221,8 +221,8 @@ body {
   z-index: -1;
   pointer-events: none;
   background-image:
-    linear-gradient(to right, rgba(239, 231, 214, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(239, 231, 214, 0.045) 1px, transparent 1px);
+    linear-gradient(to right, rgba(221, 231, 245, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(221, 231, 245, 0.05) 1px, transparent 1px);
   background-size: 2.6rem 2.6rem;
   -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 16%, transparent 82%);
   mask-image: radial-gradient(120% 90% at 50% 0%, #000 16%, transparent 82%);
@@ -261,7 +261,7 @@ body {
   position: relative;
   isolation: isolate;
   background:
-    radial-gradient(125% 90% at 50% -12%, rgba(154, 107, 63, 0.09), transparent 55%),
+    radial-gradient(125% 90% at 50% -12%, rgba(32, 90, 168, 0.09), transparent 55%),
     var(--color-canvas);
 }
 .hero-rkb::before {
@@ -274,8 +274,8 @@ body {
     to bottom,
     transparent 0,
     transparent 2.4rem,
-    rgba(14, 42, 59, 0.06) 2.4rem,
-    rgba(14, 42, 59, 0.06) calc(2.4rem + 1px)
+    rgba(17, 47, 91, 0.06) 2.4rem,
+    rgba(17, 47, 91, 0.06) calc(2.4rem + 1px)
   );
   -webkit-mask-image: radial-gradient(120% 95% at 50% 12%, #000 28%, transparent 86%);
   mask-image: radial-gradient(120% 95% at 50% 12%, #000 28%, transparent 86%);
@@ -305,7 +305,79 @@ body {
   left: 50%;
   transform: translateX(-50%);
   width: min(100% - 2 * var(--gutter) + 2px, var(--shell));
-  border-inline: 1px solid rgba(154, 107, 63, 0.22);
+  border-inline: 1px solid rgba(32, 90, 168, 0.22);
+}
+
+/* ============================================================
+   Hero seal — engraved guilloché medallion (banknote line-art)
+   Faint bronze watermark behind the centered hero content.
+   ============================================================ */
+.hero-seal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 0;
+  width: clamp(390px, 64vw, 780px);
+  aspect-ratio: 1;
+  translate: -50% -52%;
+  pointer-events: none;
+  color: var(--color-accent);
+  opacity: 0;
+  /* keep the outer ring + lettering readable, dissolve just past it */
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 82%, transparent 97%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 82%, transparent 97%);
+  animation: seal-emerge 1.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+.hero-seal svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+@keyframes seal-emerge {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 0.26;
+    transform: scale(1);
+  }
+}
+
+/* Inner mechanism turns within the fixed bezel — opposite directions */
+.seal-spin,
+.seal-spin-rev {
+  transform-box: view-box;
+  transform-origin: 0px 0px;
+}
+.seal-spin {
+  animation: seal-rotate 210s linear infinite;
+}
+.seal-spin-rev {
+  animation: seal-rotate 260s linear infinite reverse;
+}
+@keyframes seal-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* One-time engrave reveal — lines ink themselves on */
+.seal-draw {
+  stroke-dasharray: 9000;
+  stroke-dashoffset: 9000;
+  animation: seal-engrave 2.8s ease-out forwards;
+}
+@keyframes seal-engrave {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.seal-edge-text {
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
 }
 
 /* ---------- Marquee ---------- */
