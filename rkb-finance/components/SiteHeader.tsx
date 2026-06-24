@@ -39,12 +39,12 @@ export default function SiteHeader() {
           onClick={() => setOpen(false)}
         >
           <Image
-            src="/R.K.-BANSAL.jpg"
+            src="/R.K.-BANSAL.png"
             alt="R.K. Bansal Finance Pvt. Ltd."
             width={152}
             height={36}
             priority
-            className="h-8 w-auto mix-blend-multiply sm:h-9"
+            className="h-8 w-auto sm:h-9"
           />
         </Link>
 
