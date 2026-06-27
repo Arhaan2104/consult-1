@@ -25,19 +25,20 @@ export default function Home() {
         <div className="relative z-10 shell flex flex-col items-center text-center pt-32 pb-20 sm:pt-44 lg:pt-52 lg:pb-28">
           <Reveal>
             <p className="eyebrow text-accent">
-              Est. {site.since} · RBI-Registered NBFC
+              RBI-Registered NBFC · Direct lender since {site.since}
             </p>
           </Reveal>
           <Reveal delay={0.08}>
-            <h1 className="display-xl mt-7 max-w-[16ch] text-balance text-ink">
-              Empowering borrowers to meet all their financial needs.
+            <h1 className="display-xl mt-7 max-w-[17ch] text-balance text-ink">
+              Up to ₹1 lakh,{" "}
+              <span className="text-accent">in your account within 24 hours.</span>
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-8 measure-wide mx-auto text-lg leading-relaxed text-ink-soft">
-              A unique lending platform that makes it simple to access funds —
-              transparent terms, competitive rates, and a fully digital process
-              built on more than four decades of trust.
+              From R.K. Bansal Finance — the RBI-registered NBFC lending in its own
+              name since {site.since}. Fixed rates, shown upfront. No agents, no
+              upfront fees, ever.
             </p>
           </Reveal>
           <Reveal delay={0.24}>
@@ -69,7 +70,7 @@ export default function Home() {
                   <span className="font-display leading-[0.95] text-ink text-5xl sm:text-[3.25rem] lg:text-6xl">
                     {s.value}
                   </span>
-                  <span className="text-sm font-medium tracking-wide text-ink-soft">
+                  <span className="text-base font-medium tracking-wide text-ink-soft">
                     {s.label}
                   </span>
                 </StaggerItem>
@@ -78,6 +79,25 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <SectionDivider />
+
+      {/* ───────────────────── Positioning statement ───────────────────── */}
+      <Section texture="grain">
+        <Reveal className="mx-auto max-w-4xl text-center">
+          <p className="eyebrow text-accent">Why R.K. Bansal</p>
+          <h2 className="display-lg mt-6 text-balance text-ink">
+            Other apps <span className="text-ink-faint">arrange</span> your loan.{" "}
+            We&rsquo;re the NBFC that <span className="text-accent">funds</span> it.
+          </h2>
+          <p className="mx-auto mt-7 measure-wide text-lg leading-relaxed text-ink-soft">
+            R.K. Bansal Finance is the RBI-registered lender behind the loan — not a
+            broker, not a lead generator. You borrow from the institution itself:
+            regulated by the Reserve Bank of India, lending in our own name since{" "}
+            {site.since}, and answerable to you directly.
+          </p>
+        </Reveal>
+      </Section>
 
       <SectionDivider />
 
@@ -108,8 +128,8 @@ export default function Home() {
                     key={k}
                     className="flex items-center justify-between gap-6 border-b border-line py-4"
                   >
-                    <dt className="text-sm text-ink-soft">{k}</dt>
-                    <dd className="text-right text-sm font-medium text-ink">{v}</dd>
+                    <dt className="text-base text-ink-soft">{k}</dt>
+                    <dd className="text-right text-base font-medium text-ink">{v}</dd>
                   </div>
                 ))}
               </dl>
@@ -140,10 +160,72 @@ export default function Home() {
             >
               <span className="font-display text-xl text-ink">{a.title}</span>
               <span className="h-px w-8 bg-accent transition-all duration-300 group-hover:w-14" />
-              <p className="text-sm leading-relaxed text-ink-soft">{a.body}</p>
+              <p className="text-base leading-relaxed text-ink-soft">{a.body}</p>
             </StaggerItem>
           ))}
         </Stagger>
+      </Section>
+
+      <SectionDivider />
+
+      {/* ─────────────── Direct NBFC vs loan app comparison ─────────────── */}
+      <Section texture="weave">
+        <SectionHeader
+          kicker="The difference"
+          title={<>Borrow from the lender — not through a middleman.</>}
+          intro="Most loan apps are lead generators that hand you to whichever lender bids for you. With R.K. Bansal, the company you apply to is the company that lends."
+        />
+        <Reveal className="mt-16">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-line-strong bg-[var(--color-line)] md:grid-cols-2">
+            {/* Direct from the NBFC */}
+            <div className="flex flex-col gap-7 bg-deep p-8 text-on-dark sm:p-10">
+              <div className="flex flex-col gap-1.5">
+                <span className="eyebrow text-accent-2">R.K. Bansal Finance</span>
+                <span className="font-display text-3xl">Direct from the NBFC</span>
+              </div>
+              <ul className="flex flex-col gap-4">
+                {[
+                  "The RBI-registered NBFC lends to you directly",
+                  "Fixed rates, disclosed in writing before you commit",
+                  "No upfront fees — ever",
+                  "Grievances answered directly, under the RBI Ombudsman Scheme",
+                  "Lending in its own name since 1984",
+                ].map((t) => (
+                  <li key={t} className="flex gap-3 text-lg leading-relaxed">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-accent-2" />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* Through a middleman */}
+            <div className="flex flex-col gap-7 bg-canvas p-8 sm:p-10">
+              <div className="flex flex-col gap-1.5">
+                <span className="eyebrow text-ink-faint">A typical loan app</span>
+                <span className="font-display text-3xl text-ink-soft">
+                  Through a middleman
+                </span>
+              </div>
+              <ul className="flex flex-col gap-4">
+                {[
+                  "A service provider forwards you to a third-party lender",
+                  "“Low rates” advertised; the actual rate shown late",
+                  "Processing or convenience fees, sometimes upfront",
+                  "Accountability depends on the partner lender",
+                  "Often only a few years in the market",
+                ].map((t) => (
+                  <li
+                    key={t}
+                    className="flex gap-3 text-lg leading-relaxed text-ink-soft"
+                  >
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-line-strong" />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Reveal>
       </Section>
 
       <SectionDivider />
@@ -160,7 +242,7 @@ export default function Home() {
             <StaggerItem key={p.step} className="relative flex flex-col gap-4">
               <span className="font-display text-5xl text-accent/40">{p.step}</span>
               <h3 className="font-display text-2xl text-ink">{p.title}</h3>
-              <p className="measure text-sm leading-relaxed text-ink-soft">{p.body}</p>
+              <p className="measure text-base leading-relaxed text-ink-soft">{p.body}</p>
             </StaggerItem>
           ))}
         </Stagger>
@@ -181,7 +263,7 @@ export default function Home() {
                 {s.animate ? <StatCounter value={s.value} /> : s.value}
               </span>
               <span className="eyebrow text-accent-2">{s.label}</span>
-              <p className="measure text-sm leading-relaxed text-on-dark-soft">
+              <p className="measure text-base leading-relaxed text-on-dark-soft">
                 {s.sub}
               </p>
             </StaggerItem>
@@ -206,7 +288,7 @@ export default function Home() {
             >
               <span className="font-display text-3xl text-accent">{t.year}</span>
               <h3 className="font-display text-xl text-ink">{t.title}</h3>
-              <p className="text-sm leading-relaxed text-ink-soft">{t.body}</p>
+              <p className="text-base leading-relaxed text-ink-soft">{t.body}</p>
             </StaggerItem>
           ))}
         </Stagger>
@@ -268,7 +350,7 @@ export default function Home() {
             ].map(([t, d]) => (
               <StaggerItem key={t} className="flex flex-col gap-2 bg-canvas p-7">
                 <span className="font-display text-lg text-ink">{t}</span>
-                <p className="text-sm leading-relaxed text-ink-soft">{d}</p>
+                <p className="text-base leading-relaxed text-ink-soft">{d}</p>
               </StaggerItem>
             ))}
           </Stagger>
@@ -292,7 +374,7 @@ export default function Home() {
                 {s.value}
               </span>
               <span className="eyebrow text-accent">{s.label}</span>
-              <span className="text-sm leading-relaxed text-ink-soft">{s.sub}</span>
+              <span className="text-base leading-relaxed text-ink-soft">{s.sub}</span>
             </StaggerItem>
           ))}
         </Stagger>

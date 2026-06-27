@@ -43,11 +43,19 @@ html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   scroll-behavior: auto; /* Lenis handles smoothing */
+  /* Paint the root in paper tone so mobile overscroll never flashes white */
+  background-color: var(--color-canvas);
+  /* No rubber-band bounce revealing white above / behind the page */
+  overscroll-behavior-y: none;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   background-color: var(--color-canvas);
   color: var(--color-ink);
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
   font-family: var(--font-sans), system-ui, sans-serif;
   font-feature-settings: "ss01", "cv01";
   letter-spacing: -0.011em;

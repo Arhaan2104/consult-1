@@ -65,13 +65,13 @@ export const credibility = [
 
 /**
  * Hero trust band — prominent proof figures.
- * NOTE: disbursal & customer figures are PLACEHOLDERS pending client
- * verification; the "40+ years" figure is grounded in the 1984 incorporation.
+ * NOTE: disbursal, customer, and pin-code figures are PLACEHOLDERS pending
+ * client verification. (India has ~19,100 pin codes — confirm RKB's actual reach.)
  */
 export const heroTrust = [
   { prefix: "Over", value: "₹6.1 Crore", label: "Loan Disbursed" },
   { prefix: "Over", value: "1.8 Crore", label: "Loan Customers" },
-  { prefix: "Over", value: "40 Years", label: "of Trusted Lending" },
+  { prefix: "Over", value: "19,000", label: "Pin Codes Serviced" },
 ] as const;
 
 export const product = {

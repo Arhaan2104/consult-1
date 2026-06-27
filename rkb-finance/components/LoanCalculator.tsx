@@ -36,8 +36,10 @@ export default function LoanCalculator() {
   const totalRepayable = amount + totalInterest;
   const impliedAPR = ratePct * 365; // simple, non-compounded annualisation
 
+  // touch-none → dragging the slider adjusts it instead of scrolling the page;
+  // py-2.5 + a 20px thumb give a ~24px touch target while the track stays 4px.
   const slider =
-    "w-full appearance-none bg-transparent [&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-line-strong [&::-webkit-slider-thumb]:-mt-1.5 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-accent [&::-moz-range-track]:h-1 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-line-strong [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-accent focus:outline-none";
+    "w-full cursor-pointer touch-none appearance-none bg-transparent py-2.5 [&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-line-strong [&::-webkit-slider-thumb]:-mt-2 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-accent [&::-webkit-slider-thumb]:shadow-[0_1px_4px_rgba(17,47,91,0.35)] [&::-moz-range-track]:h-1 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-line-strong [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-accent focus:outline-none";
 
   return (
     <div className="grid gap-px overflow-hidden rounded-2xl border border-line-strong bg-[var(--color-line)] lg:grid-cols-[1.1fr_0.9fr]">
@@ -46,7 +48,7 @@ export default function LoanCalculator() {
         <label className="flex flex-col gap-3">
           <span className="flex items-baseline justify-between">
             <span className="eyebrow text-ink-faint">Loan amount</span>
-            <span className="font-display text-2xl text-ink">{inr(amount)}</span>
+            <span className="font-display text-3xl text-ink">{inr(amount)}</span>
           </span>
           <input
             type="range"
@@ -58,7 +60,7 @@ export default function LoanCalculator() {
             className={slider}
             aria-label="Loan amount"
           />
-          <span className="flex justify-between text-xs text-ink-faint">
+          <span className="flex justify-between text-sm text-ink-faint">
             <span>{product.amount.min}</span>
             <span>{product.amount.max}</span>
           </span>
@@ -67,7 +69,7 @@ export default function LoanCalculator() {
         <label className="flex flex-col gap-3">
           <span className="flex items-baseline justify-between">
             <span className="eyebrow text-ink-faint">Tenure</span>
-            <span className="font-display text-2xl text-ink">{days} days</span>
+            <span className="font-display text-3xl text-ink">{days} days</span>
           </span>
           <input
             type="range"
@@ -79,7 +81,7 @@ export default function LoanCalculator() {
             className={slider}
             aria-label="Tenure in days"
           />
-          <span className="flex justify-between text-xs text-ink-faint">
+          <span className="flex justify-between text-sm text-ink-faint">
             <span>{product.tenure.min}</span>
             <span>{product.tenure.max}</span>
           </span>
@@ -96,7 +98,7 @@ export default function LoanCalculator() {
                   type="button"
                   onClick={() => setRatePct(r.pct)}
                   aria-pressed={active}
-                  className={`rounded-full border py-2.5 text-sm font-medium transition-colors ${
+                  className={`rounded-full border py-3 text-base font-medium transition-colors ${
                     active
                       ? "border-accent bg-accent text-canvas"
                       : "border-line-strong text-ink-soft hover:border-accent hover:text-ink"
@@ -115,12 +117,12 @@ export default function LoanCalculator() {
       <div className="flex flex-col justify-between gap-8 bg-canvas-3 p-8 sm:p-10">
         <div className="flex flex-col gap-6">
           <div className="flex items-baseline justify-between gap-4 border-b border-line pb-4">
-            <span className="text-sm text-ink-soft">Daily interest</span>
-            <span className="font-display text-lg text-ink">{inr(dailyInterest)}</span>
+            <span className="text-base text-ink-soft">Daily interest</span>
+            <span className="font-display text-xl text-ink">{inr(dailyInterest)}</span>
           </div>
           <div className="flex items-baseline justify-between gap-4 border-b border-line pb-4">
-            <span className="text-sm text-ink-soft">Total interest</span>
-            <span className="font-display text-lg text-ink">{inr(totalInterest)}</span>
+            <span className="text-base text-ink-soft">Total interest</span>
+            <span className="font-display text-xl text-ink">{inr(totalInterest)}</span>
           </div>
           <div className="flex flex-col gap-1.5 pt-1">
             <span className="eyebrow text-ink-faint">Total repayable</span>
@@ -130,7 +132,7 @@ export default function LoanCalculator() {
           </div>
         </div>
 
-        <p className="text-xs leading-relaxed text-ink-faint">
+        <p className="text-sm leading-relaxed text-ink-faint">
           Implied APR ≈ {impliedAPR.toLocaleString("en-IN")}% — simple daily interest
           on the principal, with no compounding. Illustrative only; final terms are set
           out in your sanction letter and Key Fact Statement.
