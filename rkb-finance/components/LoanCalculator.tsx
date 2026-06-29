@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { product } from "@/content/site";
 
 /**
@@ -36,19 +36,25 @@ export default function LoanCalculator() {
   const totalRepayable = amount + totalInterest;
   const impliedAPR = ratePct * 365; // simple, non-compounded annualisation
 
+  // Filled-track percentage drives a hard-stop gradient (accent up to --pct).
+  const amountPct = ((amount - minVal) / (maxVal - minVal)) * 100;
+  const daysPct = ((days - minDays) / (maxDays - minDays)) * 100;
+
   // touch-none → dragging the slider adjusts it instead of scrolling the page;
   // py-2.5 + a 20px thumb give a ~24px touch target while the track stays 4px.
+  // Track is an accent→line-strong gradient stopping at --pct (set per input).
+  // NB: kept as ONE literal string so Tailwind's static extractor sees it.
   const slider =
-    "w-full cursor-pointer touch-none appearance-none bg-transparent py-2.5 [&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-line-strong [&::-webkit-slider-thumb]:-mt-2 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-accent [&::-webkit-slider-thumb]:shadow-[0_1px_4px_rgba(17,47,91,0.35)] [&::-moz-range-track]:h-1 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-line-strong [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-accent focus:outline-none";
+    "w-full cursor-pointer touch-none appearance-none bg-transparent py-2.5 [&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--color-accent)_0,var(--color-accent)_var(--pct),var(--color-line-strong)_var(--pct))] [&::-webkit-slider-thumb]:-mt-2 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-accent [&::-webkit-slider-thumb]:shadow-[0_1px_4px_rgba(17,47,91,0.35)] [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:duration-200 hover:[&::-webkit-slider-thumb]:scale-110 active:[&::-webkit-slider-thumb]:scale-95 [&::-moz-range-track]:h-1 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-[linear-gradient(to_right,var(--color-accent)_0,var(--color-accent)_var(--pct),var(--color-line-strong)_var(--pct))] [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-accent hover:[&::-moz-range-thumb]:scale-110 focus-visible:outline-none focus-visible:[&::-webkit-slider-thumb]:ring-2 focus-visible:[&::-webkit-slider-thumb]:ring-accent focus-visible:[&::-webkit-slider-thumb]:ring-offset-2 focus-visible:[&::-webkit-slider-thumb]:ring-offset-canvas";
 
   return (
-    <div className="grid gap-px overflow-hidden rounded-2xl border border-line-strong bg-[var(--color-line)] lg:grid-cols-[1.1fr_0.9fr]">
+    <div className="card-raised grid gap-px overflow-hidden rounded-2xl border border-line-strong bg-[var(--color-line)] lg:grid-cols-[1.1fr_0.9fr]">
       {/* Controls */}
       <div className="flex flex-col gap-9 bg-canvas p-8 sm:p-10">
         <label className="flex flex-col gap-3">
           <span className="flex items-baseline justify-between">
             <span className="eyebrow text-ink-faint">Loan amount</span>
-            <span className="font-display text-3xl text-ink">{inr(amount)}</span>
+            <span className="font-display text-3xl text-ink tabular-nums">{inr(amount)}</span>
           </span>
           <input
             type="range"
@@ -58,6 +64,7 @@ export default function LoanCalculator() {
             value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
             className={slider}
+            style={{ "--pct": `${amountPct}%` } as CSSProperties}
             aria-label="Loan amount"
           />
           <span className="flex justify-between text-sm text-ink-faint">
@@ -69,7 +76,7 @@ export default function LoanCalculator() {
         <label className="flex flex-col gap-3">
           <span className="flex items-baseline justify-between">
             <span className="eyebrow text-ink-faint">Tenure</span>
-            <span className="font-display text-3xl text-ink">{days} days</span>
+            <span className="font-display text-3xl text-ink tabular-nums">{days} days</span>
           </span>
           <input
             type="range"
@@ -79,6 +86,7 @@ export default function LoanCalculator() {
             value={days}
             onChange={(e) => setDays(Number(e.target.value))}
             className={slider}
+            style={{ "--pct": `${daysPct}%` } as CSSProperties}
             aria-label="Tenure in days"
           />
           <span className="flex justify-between text-sm text-ink-faint">
@@ -98,7 +106,7 @@ export default function LoanCalculator() {
                   type="button"
                   onClick={() => setRatePct(r.pct)}
                   aria-pressed={active}
-                  className={`rounded-full border py-3 text-base font-medium transition-colors ${
+                  className={`rounded-full border py-3 text-base font-medium transition-[colors,transform] duration-200 ease-[var(--ease-rkb)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
                     active
                       ? "border-accent bg-accent text-canvas"
                       : "border-line-strong text-ink-soft hover:border-accent hover:text-ink"
@@ -118,15 +126,15 @@ export default function LoanCalculator() {
         <div className="flex flex-col gap-6">
           <div className="flex items-baseline justify-between gap-4 border-b border-line pb-4">
             <span className="text-base text-ink-soft">Daily interest</span>
-            <span className="font-display text-xl text-ink">{inr(dailyInterest)}</span>
+            <span className="font-display text-xl text-ink tabular-nums">{inr(dailyInterest)}</span>
           </div>
           <div className="flex items-baseline justify-between gap-4 border-b border-line pb-4">
             <span className="text-base text-ink-soft">Total interest</span>
-            <span className="font-display text-xl text-ink">{inr(totalInterest)}</span>
+            <span className="font-display text-xl text-ink tabular-nums">{inr(totalInterest)}</span>
           </div>
           <div className="flex flex-col gap-1.5 pt-1">
             <span className="eyebrow text-ink-faint">Total repayable</span>
-            <span className="font-display text-4xl leading-none text-ink sm:text-5xl">
+            <span className="font-display text-4xl leading-none text-ink tabular-nums sm:text-5xl">
               {inr(totalRepayable)}
             </span>
           </div>

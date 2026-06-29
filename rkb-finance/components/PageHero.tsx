@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Reveal } from "./Motion";
+import { Parallax } from "./ScrollFX";
 
 /** Consistent inner-page header that clears the fixed nav. */
 export default function PageHero({
@@ -12,9 +13,12 @@ export default function PageHero({
   intro?: ReactNode;
 }) {
   return (
-    <section className="relative hero-rkb">
+    <section className="relative hero-rkb overflow-hidden">
       <div className="rails" aria-hidden />
-      <div className="relative z-10 shell pt-32 pb-16 sm:pt-44 lg:pt-48 lg:pb-20">
+      <Parallax
+        speed={0.08}
+        className="relative z-10 shell pt-32 pb-16 sm:pt-44 lg:pt-48 lg:pb-20"
+      >
         <Reveal>
           <p className="eyebrow text-accent">{kicker}</p>
         </Reveal>
@@ -30,7 +34,7 @@ export default function PageHero({
             </p>
           </Reveal>
         )}
-      </div>
+      </Parallax>
     </section>
   );
 }

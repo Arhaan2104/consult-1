@@ -1,9 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { buttonClasses } from "./Button";
 
+// Underline grows to 2px accent on focus (via box-shadow, no layout shift);
+// turns danger-red only after invalid interaction (:user-invalid).
 const field =
-  "w-full border-b border-line bg-transparent py-3 text-ink placeholder:text-ink-faint focus:border-accent focus:outline-none transition-colors";
+  "w-full border-b border-line bg-transparent py-3 text-ink placeholder:text-ink-faint outline-none transition-[border-color,box-shadow] duration-300 ease-[var(--ease-rkb)] focus:border-accent focus:shadow-[0_1px_0_0_var(--color-accent)] [&:user-invalid]:border-[var(--color-danger)]";
+
+// label wrapper: eyebrow shifts to accent while the field is focused.
+const labelCls = "group flex flex-col gap-2";
+const labelText =
+  "eyebrow text-ink-faint transition-colors group-focus-within:text-accent";
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -29,12 +37,12 @@ export default function ContactForm() {
       }}
     >
       <div className="grid gap-6 sm:grid-cols-2">
-        <label className="flex flex-col gap-2">
-          <span className="eyebrow text-ink-faint">Name</span>
+        <label className={labelCls}>
+          <span className={labelText}>Name</span>
           <input required name="name" className={field} placeholder="Your full name" />
         </label>
-        <label className="flex flex-col gap-2">
-          <span className="eyebrow text-ink-faint">Mobile</span>
+        <label className={labelCls}>
+          <span className={labelText}>Mobile</span>
           <input
             required
             name="phone"
@@ -44,8 +52,8 @@ export default function ContactForm() {
           />
         </label>
       </div>
-      <label className="flex flex-col gap-2">
-        <span className="eyebrow text-ink-faint">Email</span>
+      <label className={labelCls}>
+        <span className={labelText}>Email</span>
         <input
           required
           type="email"
@@ -54,8 +62,8 @@ export default function ContactForm() {
           placeholder="you@example.com"
         />
       </label>
-      <label className="flex flex-col gap-2">
-        <span className="eyebrow text-ink-faint">How can we help?</span>
+      <label className={labelCls}>
+        <span className={labelText}>How can we help?</span>
         <textarea
           required
           name="message"
@@ -64,12 +72,12 @@ export default function ContactForm() {
           placeholder="Tell us a little about your query"
         />
       </label>
-      <button
-        type="submit"
-        className="group inline-flex items-center gap-2.5 self-start rounded-full bg-ink px-6 py-3 text-sm font-medium text-canvas transition-colors hover:bg-deep-2"
-      >
+      <button type="submit" className={`${buttonClasses("primary")} self-start`}>
         Send message
-        <span className="transition-transform duration-300 group-hover:translate-x-1">
+        <span
+          aria-hidden
+          className="transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+        >
           →
         </span>
       </button>

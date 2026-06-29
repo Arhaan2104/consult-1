@@ -79,10 +79,10 @@ export default function AboutPage() {
         />
         <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2">
           {values.map((v) => (
-            <StaggerItem key={v.title} className="flex flex-col gap-3 bg-canvas p-8 sm:p-10">
+            <StaggerItem key={v.title} className="card-cell flex flex-col gap-3 bg-canvas p-8 sm:p-10">
               <span className="font-display text-2xl text-ink">{v.title}</span>
-              <span className="h-px w-8 bg-accent" />
-              <p className="text-sm leading-relaxed text-ink-soft">{v.body}</p>
+              <span className="h-px w-8 bg-accent/50" />
+              <p className="text-base leading-relaxed text-ink-soft">{v.body}</p>
             </StaggerItem>
           ))}
         </Stagger>

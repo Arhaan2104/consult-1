@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { animate, useInView } from "motion/react";
+import { EASE, DUR } from "./motion/tokens";
 
 /**
  * Animates the first numeric run inside a value string on scroll-in.
@@ -27,8 +28,8 @@ export default function StatCounter({ value }: { value: string }) {
     if (!inView || target === null) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const controls = animate(0, target, {
-      duration: reduced ? 0 : 1.4,
-      ease: [0.22, 1, 0.36, 1],
+      duration: reduced ? 0 : DUR.slow,
+      ease: EASE,
       onUpdate: (v) => setDisplay(Math.round(v).toLocaleString("en-IN")),
     });
     return () => controls.stop();
@@ -39,7 +40,7 @@ export default function StatCounter({ value }: { value: string }) {
   }
 
   return (
-    <span ref={ref}>
+    <span ref={ref} className="tabular-nums">
       {prefix}
       {display}
       {suffix}

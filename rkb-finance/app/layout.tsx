@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "@/components/SmoothScroll";
+import LenisProvider from "@/components/LenisProvider";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 import MotionProvider from "@/components/MotionProvider";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -67,18 +68,20 @@ export default function RootLayout({
       className={`${fraunces.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-canvas">
-        <SmoothScroll />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-canvas"
         >
           Skip to content
         </a>
-        <MotionProvider>
-          <SiteHeader />
-          <main id="main">{children}</main>
-          <SiteFooter />
-        </MotionProvider>
+        <LenisProvider>
+          <ScrollProgressBar />
+          <MotionProvider>
+            <SiteHeader />
+            <main id="main">{children}</main>
+            <SiteFooter />
+          </MotionProvider>
+        </LenisProvider>
       </body>
     </html>
   );

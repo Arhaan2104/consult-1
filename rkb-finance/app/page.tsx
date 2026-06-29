@@ -1,12 +1,13 @@
 import { Button } from "@/components/Button";
-import HeroSeal from "@/components/HeroSeal";
+import Hero from "@/components/Hero";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
+import { Parallax, TextReveal } from "@/components/ScrollFX";
+import ProcessScene from "@/components/ProcessScene";
 import Marquee from "@/components/Marquee";
 import { Section, SectionDivider, SectionHeader } from "@/components/Section";
 import StatCounter from "@/components/StatCounter";
 import {
   advantages,
-  heroTrust,
   process,
   product,
   site,
@@ -19,66 +20,7 @@ export default function Home() {
   return (
     <>
       {/* ───────────────────────── Hero ───────────────────────── */}
-      <section className="relative hero-rkb overflow-hidden">
-        <div className="rails" aria-hidden />
-        <HeroSeal />
-        <div className="relative z-10 shell flex flex-col items-center text-center pt-32 pb-20 sm:pt-44 lg:pt-52 lg:pb-28">
-          <Reveal>
-            <p className="eyebrow text-accent">
-              RBI-Registered NBFC · Direct lender since {site.since}
-            </p>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <h1 className="display-xl mt-7 max-w-[17ch] text-balance text-ink">
-              Up to ₹1 lakh,{" "}
-              <span className="text-accent">in your account within 24 hours.</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={0.16}>
-            <p className="mt-8 measure-wide mx-auto text-lg leading-relaxed text-ink-soft">
-              From R.K. Bansal Finance — the RBI-registered NBFC lending in its own
-              name since {site.since}. Fixed rates, shown upfront. No agents, no
-              upfront fees, ever.
-            </p>
-          </Reveal>
-          <Reveal delay={0.24}>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
-              <Button href="/products" className="w-full justify-center sm:w-auto">
-                Explore Products
-              </Button>
-              <Button
-                href="/contact"
-                variant="ghost"
-                arrow={false}
-                className="w-full justify-center sm:w-auto"
-              >
-                Speak with our team
-              </Button>
-            </div>
-          </Reveal>
-
-          {/* Trust band — prominent proof woven into the hero base */}
-          <div className="w-full mt-20 lg:mt-28">
-            <hr className="rule" />
-            <Stagger className="grid grid-cols-1 divide-y divide-line pt-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-              {heroTrust.map((s) => (
-                <StaggerItem
-                  key={s.label}
-                  className="flex flex-col items-center gap-2.5 px-4 py-7 text-center sm:py-3"
-                >
-                  <span className="eyebrow text-accent">{s.prefix}</span>
-                  <span className="font-display leading-[0.95] text-ink text-5xl sm:text-[3.25rem] lg:text-6xl">
-                    {s.value}
-                  </span>
-                  <span className="text-base font-medium tracking-wide text-ink-soft">
-                    {s.label}
-                  </span>
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </div>
-        </div>
-      </section>
+      <Hero />
 
       <SectionDivider />
 
@@ -110,8 +52,9 @@ export default function Home() {
             title={<>A short-term loan, when you need it most.</>}
             intro={product.blurb}
           />
-          <Reveal delay={0.1} className="lg:pb-2">
-            <div className="rounded-2xl border border-line-strong bg-canvas p-8 shadow-[0_1px_0_rgba(17,47,91,0.04)] sm:p-10">
+          <Parallax speed={0.06} className="lg:pb-2">
+            <Reveal delay={0.1}>
+            <div className="card-raised rounded-2xl border border-line-strong bg-canvas p-8 shadow-[0_1px_0_rgba(17,47,91,0.04)] sm:p-10">
               <div className="flex items-baseline justify-between gap-4 border-b border-line pb-6">
                 <span className="eyebrow text-ink-faint">Loan amount</span>
                 <span className="font-display text-2xl text-ink sm:text-3xl">
@@ -139,7 +82,8 @@ export default function Home() {
                 </Button>
               </div>
             </div>
-          </Reveal>
+            </Reveal>
+          </Parallax>
         </div>
       </Section>
 
@@ -156,10 +100,10 @@ export default function Home() {
           {advantages.map((a) => (
             <StaggerItem
               key={a.title}
-              className="group flex flex-col gap-3 bg-canvas p-8 transition-colors duration-300 hover:bg-canvas-3"
+              className="card-cell group flex flex-col gap-3 bg-canvas p-8"
             >
               <span className="font-display text-xl text-ink">{a.title}</span>
-              <span className="h-px w-8 bg-accent transition-all duration-300 group-hover:w-14" />
+              <span className="h-px w-8 bg-accent/50" />
               <p className="text-base leading-relaxed text-ink-soft">{a.body}</p>
             </StaggerItem>
           ))}
@@ -237,15 +181,7 @@ export default function Home() {
           kicker="How it works"
           title={<>Three steps from application to funds.</>}
         />
-        <Stagger className="mt-16 grid gap-12 md:grid-cols-3">
-          {process.map((p) => (
-            <StaggerItem key={p.step} className="relative flex flex-col gap-4">
-              <span className="font-display text-5xl text-accent/40">{p.step}</span>
-              <h3 className="font-display text-2xl text-ink">{p.title}</h3>
-              <p className="measure text-base leading-relaxed text-ink-soft">{p.body}</p>
-            </StaggerItem>
-          ))}
-        </Stagger>
+        <ProcessScene steps={process} />
       </Section>
 
       {/* ─────────────────────── Stats (dark) ─────────────────────── */}
@@ -284,7 +220,7 @@ export default function Home() {
           {timeline.map((t) => (
             <StaggerItem
               key={t.title}
-              className="flex flex-col gap-4 bg-canvas p-8 sm:p-10"
+              className="card-cell flex flex-col gap-4 bg-canvas p-8 sm:p-10"
             >
               <span className="font-display text-3xl text-accent">{t.year}</span>
               <h3 className="font-display text-xl text-ink">{t.title}</h3>
@@ -348,7 +284,7 @@ export default function Home() {
                 "A registered NBFC, covered by the Reserve Bank Integrated Ombudsman Scheme.",
               ],
             ].map(([t, d]) => (
-              <StaggerItem key={t} className="flex flex-col gap-2 bg-canvas p-7">
+              <StaggerItem key={t} className="card-cell flex flex-col gap-2 bg-canvas p-7">
                 <span className="font-display text-lg text-ink">{t}</span>
                 <p className="text-base leading-relaxed text-ink-soft">{d}</p>
               </StaggerItem>
@@ -386,11 +322,10 @@ export default function Home() {
           <Reveal>
             <p className="eyebrow text-accent-2">Ready when you are</p>
           </Reveal>
-          <Reveal delay={0.08}>
-            <h2 className="display-lg mx-auto mt-6 max-w-[20ch] text-balance text-on-dark">
-              Let&rsquo;s find the right loan for your needs.
-            </h2>
-          </Reveal>
+          <TextReveal
+            text="Let’s find the right loan for your needs."
+            className="display-lg mx-auto mt-6 max-w-[20ch] text-balance text-on-dark"
+          />
           <Reveal delay={0.16}>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Button href="/contact" variant="light">

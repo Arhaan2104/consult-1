@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Accordion from "@/components/Accordion";
 import { Button } from "@/components/Button";
 import LoanCalculator from "@/components/LoanCalculator";
@@ -41,7 +42,7 @@ export default function ProductsPage() {
             ["Interest rate", product.rate],
             ["Disbursal", product.disbursal],
           ].map(([k, v]) => (
-            <StaggerItem key={k} className="flex flex-col gap-2 bg-canvas p-8">
+            <StaggerItem key={k} className="card-cell flex flex-col gap-2 bg-canvas p-8">
               <span className="eyebrow text-ink-faint">{k}</span>
               <span className="font-display text-2xl leading-tight text-ink">{v}</span>
             </StaggerItem>
@@ -62,11 +63,11 @@ export default function ProductsPage() {
           {product.features.map((f) => (
             <StaggerItem
               key={f.title}
-              className="group flex flex-col gap-3 bg-canvas p-8 transition-colors duration-300 hover:bg-canvas-3"
+              className="card-cell group flex flex-col gap-3 bg-canvas p-8"
             >
               <span className="font-display text-xl text-ink">{f.title}</span>
-              <span className="h-px w-8 bg-accent transition-all duration-300 group-hover:w-14" />
-              <p className="text-sm leading-relaxed text-ink-soft">{f.body}</p>
+              <span className="h-px w-8 bg-accent/50" />
+              <p className="text-base leading-relaxed text-ink-soft">{f.body}</p>
             </StaggerItem>
           ))}
         </Stagger>
@@ -101,7 +102,7 @@ export default function ProductsPage() {
         />
         <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-3">
           {eligibility.map((e) => (
-            <StaggerItem key={e.label} className="flex flex-col gap-2 bg-canvas p-8">
+            <StaggerItem key={e.label} className="card-cell flex flex-col gap-2 bg-canvas p-8">
               <span className="eyebrow text-ink-faint">{e.label}</span>
               <span className="font-display text-xl leading-snug text-ink">
                 {e.value}
@@ -129,7 +130,7 @@ export default function ProductsPage() {
           {documents.map((d, i) => (
             <StaggerItem
               key={d.title}
-              className="flex items-start gap-5 bg-canvas p-8"
+              className="card-cell flex items-start gap-5 bg-canvas p-8"
             >
               <span className="font-display text-2xl text-accent/50">
                 {String(i + 1).padStart(2, "0")}
@@ -224,12 +225,12 @@ export default function ProductsPage() {
               proportionate APR. All fees and charges are subject to applicable GST and
               government levies. The full interest-rate policy across products is
               published under{" "}
-              <a
+              <Link
                 href="/legal/interest-rate-policy"
-                className="text-on-dark underline decoration-accent-2/50 underline-offset-2 hover:decoration-accent-2"
+                className="text-on-dark underline decoration-accent-2/50 underline-offset-[3px] hover:decoration-accent-2"
               >
                 Interest Rate &amp; Charges Policy
-              </a>
+              </Link>
               .
             </p>
           </Reveal>

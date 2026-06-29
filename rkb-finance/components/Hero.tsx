@@ -1,0 +1,109 @@
+"use client";
+
+import { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useReducedMotion,
+} from "motion/react";
+import { Button } from "@/components/Button";
+import HeroSeal from "@/components/HeroSeal";
+import HeroSealMotion from "@/components/HeroSealMotion";
+import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
+import { SPRING } from "@/components/motion/tokens";
+import { heroTrust, site } from "@/content/site";
+
+/**
+ * Homepage hero. Client component so it can drive scroll-linked motion:
+ * the seal scales/rotates/fades and the content column lifts + fades as the
+ * hero scrolls out. Initial load-in still uses the Reveal/Stagger family.
+ */
+export default function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const contentYRaw = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const contentY = useSpring(contentYRaw, SPRING.soft);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
+
+  const contentStyle = reduce ? undefined : { y: contentY, opacity: contentOpacity };
+
+  return (
+    <section ref={heroRef} className="relative hero-rkb overflow-hidden">
+      <div className="rails" aria-hidden />
+      <HeroSealMotion progress={scrollYProgress}>
+        <HeroSeal />
+      </HeroSealMotion>
+      <motion.div
+        style={contentStyle}
+        className="relative z-10 shell flex flex-col items-center text-center pt-32 pb-20 sm:pt-44 lg:pt-52 lg:pb-28"
+      >
+        <Reveal>
+          <p className="eyebrow text-accent">
+            RBI-Registered NBFC · Direct lender since {site.since}
+          </p>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <h1 className="display-xl mt-6 max-w-[17ch] text-balance text-ink">
+            Up to ₹1 lakh,{" "}
+            <span className="text-accent">in your account within 24 hours.</span>
+          </h1>
+        </Reveal>
+        <Reveal delay={0.16}>
+          <p className="mt-6 measure-wide mx-auto text-lg leading-relaxed text-ink-soft">
+            From R.K. Bansal Finance — the RBI-registered NBFC lending in its own
+            name since {site.since}. Fixed rates, shown upfront. No agents, no
+            upfront fees, ever.
+          </p>
+        </Reveal>
+        <Reveal delay={0.24}>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
+            <Button
+              href="/products"
+              magnetic
+              className="w-full justify-center sm:w-auto"
+            >
+              Explore Products
+            </Button>
+            <Button
+              href="/contact"
+              variant="ghost"
+              arrow={false}
+              className="w-full justify-center sm:w-auto"
+            >
+              Speak with our team
+            </Button>
+          </div>
+        </Reveal>
+
+        {/* Trust band — prominent proof woven into the hero base */}
+        <div className="w-full mt-20 lg:mt-28">
+          <hr className="rule" />
+          <Stagger className="grid grid-cols-1 divide-y divide-line pt-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {heroTrust.map((s) => (
+              <StaggerItem
+                key={s.label}
+                className="flex flex-col items-center gap-2.5 px-4 py-7 text-center sm:py-3"
+              >
+                <span className="eyebrow text-accent">{s.prefix}</span>
+                <span className="font-display leading-[0.95] text-ink text-5xl sm:text-[3.25rem] lg:text-6xl tabular-nums">
+                  {s.value}
+                </span>
+                <span className="text-base font-medium tracking-wide text-ink-soft">
+                  {s.label}
+                </span>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </motion.div>
+    </section>
+  );
+}

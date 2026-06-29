@@ -54,14 +54,14 @@ export default function SiteFooter() {
           <div className="flex flex-col gap-4">
             <p className="eyebrow text-on-dark-soft">Explore</p>
             <nav className="flex flex-col gap-3 text-base">
-              <Link href="/" className="text-on-dark transition-colors hover:text-accent-2">
+              <Link href="/" className="link-underline w-fit text-on-dark transition-colors hover:text-accent-2">
                 Home
               </Link>
               {nav.map((n) => (
                 <Link
                   key={n.href}
                   href={n.href}
-                  className="text-on-dark transition-colors hover:text-accent-2"
+                  className="link-underline w-fit text-on-dark transition-colors hover:text-accent-2"
                 >
                   {n.label}
                 </Link>
@@ -77,7 +77,7 @@ export default function SiteFooter() {
                 <Link
                   key={p.href}
                   href={p.href}
-                  className="text-on-dark transition-colors hover:text-accent-2"
+                  className="link-underline w-fit text-on-dark transition-colors hover:text-accent-2"
                 >
                   {p.title}
                 </Link>
@@ -96,7 +96,7 @@ export default function SiteFooter() {
                     href={p.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-on-dark transition-colors hover:text-accent-2"
+                    className="link-underline w-fit text-on-dark transition-colors hover:text-accent-2"
                   >
                     {p.title} ↗
                   </a>
@@ -104,7 +104,7 @@ export default function SiteFooter() {
                   <Link
                     key={p.href}
                     href={p.href}
-                    className="text-on-dark transition-colors hover:text-accent-2"
+                    className="link-underline w-fit text-on-dark transition-colors hover:text-accent-2"
                   >
                     {p.title}
                   </Link>
