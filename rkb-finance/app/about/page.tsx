@@ -55,7 +55,10 @@ export default function AboutPage() {
         <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionHeader index="01" kicker="Our mission" title={<>Why we exist.</>} />
           <Reveal delay={0.1}>
-            <p className="font-display text-2xl leading-snug text-ink sm:text-3xl">
+            <p
+              className="font-display text-2xl leading-snug text-ink sm:text-3xl"
+              style={{ hangingPunctuation: "first last", textIndent: "-0.45em" }}
+            >
               &ldquo;{site.mission}&rdquo;
             </p>
             <p className="mt-8 measure-wide leading-relaxed text-ink-soft">

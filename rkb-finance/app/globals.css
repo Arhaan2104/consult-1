@@ -499,3 +499,72 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Custom scrollbar (desktop, fine pointers) ---------- */
+@media (pointer: fine) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line-strong) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(17, 47, 91, 0.22);
+    border: 3px solid var(--color-canvas);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-accent);
+  }
+}
+
+/* ---------- Print: clean legal/policy documents ---------- */
+@media print {
+  /* Hide chrome that has no place on paper */
+  header,
+  footer,
+  .hero-seal,
+  .rails,
+  [aria-hidden="true"] {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .panel-dark,
+  [class*="bg-deep"],
+  [class*="bg-canvas"] {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  main {
+    padding-top: 0 !important;
+  }
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+  /* Show the destination of meaningful links */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #444;
+  }
+  h1,
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+}

@@ -52,15 +52,18 @@ export default function Hero() {
         </Reveal>
         <Reveal delay={0.08}>
           <h1 className="display-xl mt-6 max-w-[17ch] text-balance text-ink">
-            Up to ₹1 lakh,{" "}
-            <span className="text-accent">in your account within 24 hours.</span>
+            Up to <span className="whitespace-nowrap">₹1 lakh</span>,{" "}
+            <span className="text-accent">
+              in your account within{" "}
+              <span className="whitespace-nowrap">24 hours.</span>
+            </span>
           </h1>
         </Reveal>
         <Reveal delay={0.16}>
           <p className="mt-6 measure-wide mx-auto text-lg leading-relaxed text-ink-soft">
-            From R.K. Bansal Finance — the RBI-registered NBFC lending in its own
-            name since {site.since}. Fixed rates, shown upfront. No agents, no
-            upfront fees, ever.
+            From <span className="whitespace-nowrap">R.K. Bansal Finance</span> —
+            the RBI-registered NBFC lending in its own name since {site.since}.
+            Fixed rates, shown upfront. No agents, no upfront fees, ever.
           </p>
         </Reveal>
         <Reveal delay={0.24}>
