@@ -41,7 +41,7 @@ export default function SiteHeader() {
         <Link
           href="/"
           aria-label="R.K. Bansal Finance — home"
-          className="flex items-center"
+          className="relative z-50 flex items-center"
           onClick={() => setOpen(false)}
         >
           <Image
@@ -106,9 +106,10 @@ export default function SiteHeader() {
         </button>
       </div>
 
-      {/* Mobile sheet */}
+      {/* Mobile sheet — note: do NOT add a tx-* texture class here; those set
+          position:relative and would override `fixed`, breaking the overlay. */}
       <div
-        className={`fixed inset-0 top-0 z-40 bg-canvas tx-grain transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 top-0 z-40 bg-canvas transition-opacity duration-300 md:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >

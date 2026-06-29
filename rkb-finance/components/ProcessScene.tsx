@@ -9,6 +9,7 @@ import {
   type MotionValue,
 } from "motion/react";
 import { Stagger, StaggerItem } from "@/components/Motion";
+import StepGraphic from "@/components/StepGraphic";
 
 type Step = { step: string; title: string; body: string };
 
@@ -42,11 +43,12 @@ export default function ProcessScene({ steps }: { steps: readonly Step[] }) {
 function StaticProcess({ steps }: { steps: readonly Step[] }) {
   return (
     <Stagger className="mt-16 grid gap-12 md:grid-cols-3">
-      {steps.map((p) => (
+      {steps.map((p, i) => (
         <StaggerItem key={p.step} className="relative flex flex-col gap-4">
           <span className="font-display text-5xl text-accent/40">{p.step}</span>
           <h3 className="font-display text-2xl text-ink">{p.title}</h3>
           <p className="measure text-base leading-relaxed text-ink-soft">{p.body}</p>
+          <StepGraphic index={i} className="mt-3 w-[clamp(5.5rem,22vw,7.5rem)]" />
         </StaggerItem>
       ))}
     </Stagger>
@@ -62,8 +64,9 @@ function PinnedProcess({ steps }: { steps: readonly Step[] }) {
   });
 
   return (
-    // Track height ≈ one viewport per step. svh avoids iOS address-bar jumps.
-    <div ref={trackRef} className="relative mt-8 h-[300svh]">
+    // ~0.7 viewport of scroll per step — brisk but readable. svh avoids
+    // iOS address-bar jumps. Step 1 is full at progress 0 (no entry gap).
+    <div ref={trackRef} className="relative mt-4 h-[210svh]">
       <div className="sticky top-0 flex h-svh items-center overflow-hidden">
         <div className="grid w-full grid-cols-[auto_1fr] items-center gap-10 lg:gap-16">
           {/* Numeral + ledger line */}
@@ -89,7 +92,7 @@ function PinnedProcess({ steps }: { steps: readonly Step[] }) {
           </div>
 
           {/* Step copy */}
-          <div className="relative min-h-[14rem]">
+          <div className="relative min-h-[22rem]">
             {steps.map((p, i) => (
               <StepCopy
                 key={p.step}
@@ -108,27 +111,31 @@ function PinnedProcess({ steps }: { steps: readonly Step[] }) {
 }
 
 /**
- * Opacity window for step `index` of `total`. Motion requires useTransform
- * input stops within [0,1] and strictly increasing, so the first step is full
- * from p=0 and the last stays full to p=1 (variable-length stop arrays).
+ * Opacity window for step `index` of `total`. All stops stay within [0,1]
+ * and strictly increasing (motion requires both). The FIRST step is full at
+ * progress 0 (no entry gap) and the LAST stays full to progress 1.
  */
 function useStepOpacity(
   progress: MotionValue<number>,
   index: number,
   total: number
 ) {
-  const c = (index + 0.5) / total;
-  // Uniform 4-point triangular window, clamped into [0,1] and nudged so the
-  // stops stay strictly increasing (motion requires both).
-  const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
-  const a = clamp01(c - 0.22);
-  let b = clamp01(c - 0.08);
-  let d = clamp01(c + 0.08);
-  let e = clamp01(c + 0.22);
-  if (b <= a) b = a + 0.0001;
-  if (d <= b) d = b + 0.0001;
-  if (e <= d) e = d + 0.0001;
-  return useTransform(progress, [a, b, d, e], [0, 1, 1, 0]);
+  const w = 1 / total;
+  const fade = Math.min(0.06, w * 0.35);
+  const isFirst = index === 0;
+  const isLast = index === total - 1;
+  const segStart = index * w;
+  const segEnd = (index + 1) * w;
+  // 4-point window: hold the outer edges for the first / last steps.
+  const a = isFirst ? 0 : segStart - fade;
+  const b = isFirst ? 0.0001 : segStart + fade;
+  const d = isLast ? 0.9999 : segEnd - fade;
+  const e = isLast ? 1 : segEnd + fade;
+  return useTransform(
+    progress,
+    [a, b, d, e],
+    [isFirst ? 1 : 0, 1, 1, isLast ? 1 : 0]
+  );
 }
 
 /** Subtle rise/exit for a step, clamped to [0,1] input. */
@@ -186,6 +193,7 @@ function StepCopy({
     <motion.div style={{ opacity, y }} className="absolute inset-0 flex flex-col gap-5">
       <h3 className="display-md text-ink">{title}</h3>
       <p className="measure-wide text-xl leading-relaxed text-ink-soft">{body}</p>
+      <StepGraphic index={index} className="mt-2 w-[clamp(6.5rem,9vw,9rem)]" />
     </motion.div>
   );
 }

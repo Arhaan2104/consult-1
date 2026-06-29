@@ -5,13 +5,11 @@ import { Parallax, TextReveal } from "@/components/ScrollFX";
 import ProcessScene from "@/components/ProcessScene";
 import Marquee from "@/components/Marquee";
 import { Section, SectionDivider, SectionHeader } from "@/components/Section";
-import StatCounter from "@/components/StatCounter";
 import {
   advantages,
   process,
   product,
   site,
-  stats,
   timeline,
   trustSignals,
 } from "@/content/site";
@@ -21,6 +19,53 @@ export default function Home() {
     <>
       {/* ───────────────────────── Hero ───────────────────────── */}
       <Hero />
+
+      <SectionDivider />
+
+      {/* ─────────────────── Our Story (heritage) — leads the page ─────────────────── */}
+      <Section texture="ledger">
+        <SectionHeader
+          index="01"
+          kicker="Our story"
+          title={<>From a 1984 incorporation to a modern lending platform.</>}
+        />
+        <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] md:grid-cols-3">
+          {timeline.map((t) => (
+            <StaggerItem
+              key={t.title}
+              className="card-cell flex flex-col gap-4 bg-canvas p-8 sm:p-10"
+            >
+              <span className="font-display text-3xl text-accent">{t.year}</span>
+              <h3 className="font-display text-xl text-ink">{t.title}</h3>
+              <p className="text-base leading-relaxed text-ink-soft">{t.body}</p>
+            </StaggerItem>
+          ))}
+        </Stagger>
+
+        <Reveal className="mt-14">
+          <p className="eyebrow mb-6 text-ink-faint">
+            A fully digital sourcing network
+          </p>
+          <Marquee>
+            {[
+              "Ramfincorp",
+              "Anq Digital Finserv",
+              "CredMantra",
+              "DigitMoney",
+              "CASHe",
+              "GroMo",
+              "GoCredit",
+              "Buddy Loan",
+              "MobiKwik",
+              "Bajaj Finserv",
+            ].map((n) => (
+              <span key={n} className="font-display text-2xl text-ink/40 sm:text-3xl">
+                {n}
+              </span>
+            ))}
+          </Marquee>
+        </Reveal>
+      </Section>
 
       <SectionDivider />
 
@@ -47,7 +92,7 @@ export default function Home() {
       <Section texture="weave">
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <SectionHeader
-            index="01"
+            index="02"
             kicker="The Product"
             title={<>A short-term loan, when you need it most.</>}
             intro={product.blurb}
@@ -92,7 +137,7 @@ export default function Home() {
       {/* ─────────────────────── Advantages ─────────────────────── */}
       <Section texture="engrave">
         <SectionHeader
-          index="02"
+          index="03"
           kicker="Why borrowers choose us"
           title={<>The terms are simple, and they stay that way.</>}
         />
@@ -177,90 +222,20 @@ export default function Home() {
       {/* ─────────────────────── Process ─────────────────────── */}
       <Section texture="laid">
         <SectionHeader
-          index="03"
+          index="04"
           kicker="How it works"
           title={<>Three steps from application to funds.</>}
         />
         <ProcessScene steps={process} />
       </Section>
 
-      {/* ─────────────────────── Stats (dark) ─────────────────────── */}
-      <Section texture="dark">
-        <SectionHeader
-          index="04"
-          kicker="A foundation of trust"
-          title={<>Four decades of regulated, responsible lending.</>}
-          dark
-        />
-        <Stagger className="mt-16 grid gap-12 sm:grid-cols-3">
-          {stats.map((s) => (
-            <StaggerItem key={s.label} className="flex flex-col gap-3">
-              <span className="font-display text-4xl text-on-dark sm:text-5xl">
-                {s.animate ? <StatCounter value={s.value} /> : s.value}
-              </span>
-              <span className="eyebrow text-accent-2">{s.label}</span>
-              <p className="measure text-base leading-relaxed text-on-dark-soft">
-                {s.sub}
-              </p>
-            </StaggerItem>
-          ))}
-        </Stagger>
-      </Section>
-
       <SectionDivider />
-
-      {/* ─────────────────────── Heritage timeline ─────────────────────── */}
-      <Section texture="ledger">
-        <SectionHeader
-          index="05"
-          kicker="Our story"
-          title={<>From a 1984 incorporation to a modern lending platform.</>}
-        />
-        <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] md:grid-cols-3">
-          {timeline.map((t) => (
-            <StaggerItem
-              key={t.title}
-              className="card-cell flex flex-col gap-4 bg-canvas p-8 sm:p-10"
-            >
-              <span className="font-display text-3xl text-accent">{t.year}</span>
-              <h3 className="font-display text-xl text-ink">{t.title}</h3>
-              <p className="text-base leading-relaxed text-ink-soft">{t.body}</p>
-            </StaggerItem>
-          ))}
-        </Stagger>
-
-        <Reveal className="mt-14">
-          <p className="eyebrow mb-6 text-ink-faint">
-            A fully digital sourcing network
-          </p>
-          <Marquee>
-            {[
-              "Ramfincorp",
-              "Anq Digital Finserv",
-              "CredMantra",
-              "DigitMoney",
-              "CASHe",
-              "GroMo",
-              "GoCredit",
-              "Buddy Loan",
-              "MobiKwik",
-              "Bajaj Finserv",
-            ].map((n) => (
-              <span key={n} className="font-display text-2xl text-ink/40 sm:text-3xl">
-                {n}
-              </span>
-            ))}
-          </Marquee>
-        </Reveal>
-      </Section>
-
-      <SectionDivider variant="accent" />
 
       {/* ─────────────────────── Compliance / trust ─────────────────────── */}
       <Section texture="weave">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
           <SectionHeader
-            index="06"
+            index="05"
             kicker="Fair practice"
             title={<>Transparent by policy, not just by promise.</>}
             intro="We treat every customer consistently and fairly. Loan terms, interest rates and penal charges are disclosed in writing, upfront — and grievances are resolved within 30 days."
