@@ -41,7 +41,7 @@ export default function SiteHeader() {
         <Link
           href="/"
           aria-label="R.K. Bansal Finance — home"
-          className="relative z-50 flex items-center"
+          className="group relative z-50 flex items-center"
           onClick={() => setOpen(false)}
         >
           <Image
@@ -50,13 +50,13 @@ export default function SiteHeader() {
             width={152}
             height={36}
             priority
-            className={`h-8 w-auto origin-left transition-transform duration-500 ease-[var(--ease-rkb)] sm:h-9 ${
+            className={`h-8 w-auto origin-left opacity-100 transition-[transform,opacity] duration-500 ease-[var(--ease-rkb)] group-hover:opacity-80 sm:h-9 ${
               scrolled ? "scale-[0.9]" : "scale-100"
             }`}
           />
         </Link>
 
-        <nav className="hidden items-center gap-9 md:flex">
+        <nav className="hidden items-center gap-7 md:flex lg:gap-8">
           {nav.map((item) => {
             const active =
               pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -65,24 +65,35 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`group relative text-sm transition-colors ${
+                className={`group relative py-1 text-sm tracking-tight transition-colors duration-300 ${
                   active ? "text-ink" : "text-ink-soft hover:text-ink"
                 }`}
               >
                 {item.label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-px w-full origin-left bg-accent transition-transform duration-300 ${
+                  aria-hidden
+                  className={`pointer-events-none absolute -bottom-0.5 left-0 h-px w-full origin-left bg-accent transition-transform duration-300 ease-[var(--ease-rkb)] ${
                     active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                   }`}
                 />
               </Link>
             );
           })}
+
+          {/* Ledger-hairline divider separates navigation from the action */}
+          <span className="h-5 w-px bg-line-strong" aria-hidden />
+
           <Link
             href="/contact"
-            className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-canvas shadow-[0_1px_2px_rgba(11,36,71,0.10)] transition-[transform,background-color,box-shadow] duration-300 ease-[var(--ease-rkb)] hover:-translate-y-0.5 hover:bg-deep-2 hover:shadow-[0_8px_24px_-8px_rgba(11,36,71,0.35)] active:translate-y-px active:scale-[0.985]"
+            className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-canvas shadow-[0_1px_2px_rgba(11,36,71,0.10)] transition-[transform,background-color,box-shadow] duration-300 ease-[var(--ease-rkb)] hover:-translate-y-0.5 hover:bg-deep-2 hover:shadow-[0_8px_24px_-8px_rgba(11,36,71,0.35)] active:translate-y-px active:scale-[0.985]"
           >
             Apply now
+            <span
+              aria-hidden
+              className="text-accent-2 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+            >
+              →
+            </span>
           </Link>
         </nav>
 

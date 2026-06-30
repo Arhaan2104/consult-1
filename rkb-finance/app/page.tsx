@@ -23,7 +23,26 @@ export default function Home() {
 
       <SectionDivider />
 
-      {/* ─────────────────── Our Story (heritage) — leads the page ─────────────────── */}
+      {/* ───────────────────── Positioning statement — leads the page ───────────────────── */}
+      <Section texture="grain">
+        <Reveal className="mx-auto max-w-4xl text-center">
+          <p className="eyebrow text-accent">Why R.K. Bansal</p>
+          <h2 className="display-lg mt-6 text-balance text-ink">
+            Other apps <span className="text-ink-faint">arrange</span> your loan.{" "}
+            We&rsquo;re the NBFC that <span className="text-accent">funds</span> it.
+          </h2>
+          <p className="mx-auto mt-7 measure-wide text-lg leading-relaxed text-ink-soft">
+            R.K. Bansal Finance is the RBI-registered lender behind the loan — not a
+            broker, not a lead generator. You borrow from the institution itself:
+            regulated by the Reserve Bank of India, lending in our own name since{" "}
+            {site.since}, and answerable to you directly.
+          </p>
+        </Reveal>
+      </Section>
+
+      <SectionDivider />
+
+      {/* ─────────────────── Our Story (heritage) ─────────────────── */}
       <Section texture="ledger">
         <SectionHeader
           index="01"
@@ -65,25 +84,6 @@ export default function Home() {
               </span>
             ))}
           </Marquee>
-        </Reveal>
-      </Section>
-
-      <SectionDivider />
-
-      {/* ───────────────────── Positioning statement ───────────────────── */}
-      <Section texture="grain">
-        <Reveal className="mx-auto max-w-4xl text-center">
-          <p className="eyebrow text-accent">Why R.K. Bansal</p>
-          <h2 className="display-lg mt-6 text-balance text-ink">
-            Other apps <span className="text-ink-faint">arrange</span> your loan.{" "}
-            We&rsquo;re the NBFC that <span className="text-accent">funds</span> it.
-          </h2>
-          <p className="mx-auto mt-7 measure-wide text-lg leading-relaxed text-ink-soft">
-            R.K. Bansal Finance is the RBI-registered lender behind the loan — not a
-            broker, not a lead generator. You borrow from the institution itself:
-            regulated by the Reserve Bank of India, lending in our own name since{" "}
-            {site.since}, and answerable to you directly.
-          </p>
         </Reveal>
       </Section>
 

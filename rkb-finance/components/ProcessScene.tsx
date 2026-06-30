@@ -73,8 +73,9 @@ function PinnedProcess({ steps, index, kicker, title }: Props) {
   return (
     // Tall track = more scroll per step (slower). svh avoids iOS jumps.
     <div ref={trackRef} className="relative h-[280svh]">
-      <div className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden">
-        {/* Header pins with the steps — both live in one viewport. */}
+      {/* Top-aligned (not centered) so the header sits at the same spot as
+          every other section — pt clears the fixed nav with consistent rhythm. */}
+      <div className="sticky top-0 flex h-svh flex-col justify-start overflow-hidden pt-28 lg:pt-32">
         <SectionHeader index={index} kicker={kicker} title={title} />
 
         {/* Persistent ledger line beside cross-faded step blocks. Each block
