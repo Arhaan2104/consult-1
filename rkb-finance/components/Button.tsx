@@ -12,11 +12,11 @@ export const buttonSizes = "px-6 py-3";
 
 export const buttonVariants: Record<Variant, string> = {
   primary:
-    "bg-ink text-canvas hover:bg-deep-2 shadow-[0_1px_2px_rgba(11,36,71,0.10)] hover:shadow-[0_8px_24px_-8px_rgba(11,36,71,0.35)] focus-visible:ring-offset-canvas",
+    "bg-ink text-canvas hover:bg-deep-2 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] focus-visible:ring-offset-canvas",
   ghost:
-    "border border-line-strong text-ink hover:border-ink hover:bg-ink hover:text-canvas hover:shadow-[0_6px_20px_-8px_rgba(11,36,71,0.30)]",
+    "border border-line-strong text-ink hover:border-ink hover:bg-ink hover:text-canvas hover:shadow-[var(--shadow-md)]",
   light:
-    "bg-canvas text-ink hover:bg-accent hover:text-canvas shadow-[0_1px_2px_rgba(11,36,71,0.18)] hover:shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] focus-visible:ring-offset-deep",
+    "bg-canvas text-ink hover:bg-accent hover:text-canvas shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] focus-visible:ring-offset-deep",
 };
 
 export function buttonClasses(variant: Variant = "primary", className = "") {

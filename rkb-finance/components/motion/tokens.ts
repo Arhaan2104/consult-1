@@ -3,7 +3,7 @@
  * Mirrors the CSS tokens in app/globals.css (--ease-rkb, --ease-out-rkb, --dur-*).
  *
  * Rule of thumb:
- *  - `EASE` curves for discrete entrance animations (Reveal, StatCounter, route).
+ *  - `EASE` curves for discrete entrance animations (Reveal, route transitions).
  *  - `SPRING` for anything bound to a continuously-changing scroll value
  *    (parallax, progress bar, hero) so velocity changes feel physical.
  */

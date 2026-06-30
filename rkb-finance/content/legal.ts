@@ -70,7 +70,7 @@ export const legalDocs: LegalDoc[] = [
       {
         heading: "Grievance contact",
         body: [
-          "Mr. Samir Sethi · samir@ramfincorp.com · +91 93114 17272 · Monday–Friday, 11:30 a.m.–5:30 p.m. Response target: 30 days.",
+          "Mr. Samir Sethi · samir@ramfincorp.com · +91 93114 17272 · Response target: 30 days.",
         ],
       },
     ],
@@ -198,7 +198,7 @@ export const legalDocs: LegalDoc[] = [
         body: [
           "Level 1 — Customer Relationship Manager (10 AM–6 PM weekdays), response within 3 working days.",
           "Level 2 — Customer Service Help Desk: +91 87969 24488 / +91 99101 93884, response within 3 working days.",
-          "Level 3 — Grievance Redressal Officer: Mr. Samir Sethi, +91 93114 17272, pno@ramfincorp.com — response within 5 working days.",
+          "Level 3 — Grievance Redressal Officer: Mr. Samir Sethi, +91 93114 17272, samir@ramfincorp.com — response within 5 working days.",
         ],
       },
       {
@@ -375,7 +375,7 @@ export const legalDocs: LegalDoc[] = [
         bullets: [
           "Level 1 — Customer Relationship Manager (10 AM–6 PM weekdays)",
           "Level 2 — Customer Service Helpdesk: +91 87969 24488 / +91 99101 93884 (9 AM–6 PM weekdays)",
-          "Level 3 — Grievance Redressal Officer: Mr. Samir Sethi, +91 93114 17272, pno@ramfincorp.com (within 5 working days)",
+          "Level 3 — Grievance Redressal Officer: Mr. Samir Sethi, +91 93114 17272, samir@ramfincorp.com (within 5 working days)",
           "Level 4 — RBI Department of Non-Banking Supervision, via Sachet RBI / RBI CMS Portal",
         ],
       },
@@ -405,7 +405,7 @@ export const disclosureGroups: DisclosureGroup[] = [
       { label: "Fair Practice Code", href: "/legal/fair-practice-code" },
       { label: "Interest Rate & Penal Charges Policy", href: "/legal/interest-rate-policy" },
       { label: "Our Lending Policy", href: "/legal/lending-policy" },
-      { label: "Comprehensive Policy on Settlements & Write-Offs", href: "/legal/written-off-policy" },
+      { label: "Settlements & Write-Offs Policy", href: "/legal/written-off-policy" },
     ],
   },
   {

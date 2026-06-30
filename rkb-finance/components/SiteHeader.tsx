@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { buttonClasses } from "@/components/Button";
 import { nav, site } from "@/content/site";
 
 export default function SiteHeader() {
@@ -50,7 +51,8 @@ export default function SiteHeader() {
             width={152}
             height={36}
             priority
-            className={`h-8 w-auto origin-left opacity-100 transition-[transform,opacity] duration-500 ease-[var(--ease-rkb)] group-hover:opacity-80 sm:h-9 ${
+            style={{ width: "auto" }}
+            className={`h-8 origin-left opacity-100 transition-[transform,opacity] duration-500 ease-[var(--ease-rkb)] group-hover:opacity-80 sm:h-9 ${
               scrolled ? "scale-[0.9]" : "scale-100"
             }`}
           />
@@ -83,10 +85,7 @@ export default function SiteHeader() {
           {/* Ledger-hairline divider separates navigation from the action */}
           <span className="h-5 w-px bg-line-strong" aria-hidden />
 
-          <Link
-            href="/contact"
-            className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-canvas shadow-[0_1px_2px_rgba(11,36,71,0.10)] transition-[transform,background-color,box-shadow] duration-300 ease-[var(--ease-rkb)] hover:-translate-y-0.5 hover:bg-deep-2 hover:shadow-[0_8px_24px_-8px_rgba(11,36,71,0.35)] active:translate-y-px active:scale-[0.985]"
-          >
+          <Link href="/contact" className={buttonClasses("primary", "px-5 py-2.5")}>
             Apply now
             <span
               aria-hidden

@@ -111,6 +111,9 @@ export default function Hero() {
               </StaggerItem>
             ))}
           </Stagger>
+          <p className="mt-6 text-center text-xs italic text-ink-faint">
+            Indicative figures, pending final confirmation.
+          </p>
         </div>
       </motion.div>
     </section>

@@ -29,7 +29,7 @@ export const site = {
     address: "8/9, Pusa Rd, Block 8, WEA, Karol Bagh, New Delhi, Delhi 110005",
     phones: ["+91 87969 24488", "+91 99101 93884", "+91 98999 85495"],
     email: "info@ramfincorp.com",
-    hours: "Monday – Friday, 9:00 AM to 6:00 PM",
+    hours: "Monday – Saturday, 10:00 AM to 6:00 PM",
   },
 
   grievance: {
@@ -53,14 +53,6 @@ export const nav = [
   { label: "About", href: "/about" },
   { label: "Products", href: "/products" },
   { label: "Contact", href: "/contact" },
-] as const;
-
-/** Credibility strip — woven from registration facts. */
-export const credibility = [
-  { k: "Established", v: "1984" },
-  { k: "Registration", v: "RBI NBFC · B-14.00700" },
-  { k: "Network", v: "61 Sourcing Partners" },
-  { k: "Headquarters", v: "Karol Bagh, New Delhi" },
 ] as const;
 
 /**
@@ -154,13 +146,6 @@ export const process = [
   },
 ] as const;
 
-/** Stats band — heritage proof, not invented figures. */
-export const stats = [
-  { value: "1984", label: "Lending since", sub: "Over four decades of operation", animate: false },
-  { value: "B-14.00700", label: "RBI registration", sub: "Registered NBFC with the Reserve Bank of India", animate: false },
-  { value: "61", label: "Sourcing partners", sub: "A trusted, fully digital sourcing network", animate: true },
-] as const;
-
 /** Heritage timeline — drawn from registration & positioning facts. */
 export const timeline = [
   {
@@ -180,23 +165,7 @@ export const timeline = [
   },
 ] as const;
 
-export const interestTable = [
-  { product: "Pay Day Loan", rate: "0.10% – 1.00% per day" },
-  { product: "Business Loan", rate: "8% – 25% per annum" },
-  { product: "Loan Against Property", rate: "12% – 15% per annum" },
-  { product: "EMI Loan", rate: "24% – 365% per annum (tenure up to 6 months)" },
-] as const;
-
-export const charges = [
-  { item: "Late payment penalty", value: "0.1% per day of outstanding principal" },
-  { item: "EMI bounce charges", value: "Up to ₹590 per bounce" },
-  { item: "Processing fees", value: "2% – 10%" },
-  { item: "Foreclosure (EMI loans, after 3 months)", value: "3% of outstanding principal" },
-  { item: "No-Dues Certificate (digital)", value: "Nil" },
-  { item: "Cooling-off period", value: "3 days — exit with principal & proportionate APR only" },
-] as const;
-
-/** Charges that genuinely apply to the single Short Term Loan (subset of `charges`). */
+/** Charges that genuinely apply to the single Short Term Loan. */
 export const productCharges = [
   { item: "Service fee", value: "Nil — no service fees" }, // grounded: advantages
   { item: "Pre-approval / processing fee", value: "Nil before approval" }, // grounded: advantages

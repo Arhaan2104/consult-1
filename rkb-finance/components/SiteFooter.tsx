@@ -20,7 +20,7 @@ const complaintPortals = [
 ];
 
 export default function SiteFooter() {
-  const year = 2026;
+  const year = new Date().getFullYear();
 
   return (
     <footer className="panel-dark text-on-dark">

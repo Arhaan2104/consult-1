@@ -167,7 +167,7 @@ export default function ProductsPage() {
             <StaggerItem key={p.step} className="flex flex-col gap-4">
               <span className="font-display text-5xl text-accent/40">{p.step}</span>
               <h3 className="font-display text-2xl text-ink">{p.title}</h3>
-              <p className="measure text-sm leading-relaxed text-ink-soft">{p.body}</p>
+              <p className="measure text-base leading-relaxed text-ink-soft">{p.body}</p>
             </StaggerItem>
           ))}
         </Stagger>
@@ -258,7 +258,7 @@ export default function ProductsPage() {
 
       {/* CTA */}
       <section className="panel-dark">
-        <div className="shell py-24 text-center lg:py-28">
+        <div className="shell py-24 text-center lg:py-32">
           <Reveal>
             <h2 className="display-lg mx-auto max-w-[20ch] text-balance text-on-dark">
               Ready to apply? We&rsquo;re here to help.

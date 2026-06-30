@@ -91,43 +91,55 @@ export default function Home() {
 
       {/* ─────────────────────── Product ─────────────────────── */}
       <Section texture="weave">
-        <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <SectionHeader
             index="02"
             kicker="The Product"
             title={<>A short-term loan, when you need it most.</>}
             intro={product.blurb}
           />
-          <Parallax speed={0.06} className="lg:pb-2">
+          <Parallax speed={0.06}>
             <Reveal delay={0.1}>
-            <div className="card-raised rounded-2xl border border-line-strong bg-canvas p-8 shadow-[0_1px_0_rgba(17,47,91,0.04)] sm:p-10">
-              <div className="flex items-baseline justify-between gap-4 border-b border-line pb-6">
-                <span className="eyebrow text-ink-faint">Loan amount</span>
-                <span className="font-display text-2xl text-ink sm:text-3xl">
-                  {product.amount.min} – {product.amount.max}
-                </span>
-              </div>
-              <dl>
-                {[
-                  ["Interest rate", product.rate],
-                  ["Disbursal", product.disbursal],
-                  ["Interest type", product.rateNote],
-                ].map(([k, v]) => (
-                  <div
-                    key={k}
-                    className="flex items-center justify-between gap-6 border-b border-line py-4"
-                  >
-                    <dt className="text-base text-ink-soft">{k}</dt>
-                    <dd className="text-right text-base font-medium text-ink">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-              <div className="pt-6">
-                <Button href="/products" className="w-full justify-center">
+              {/* Term-sheet card — engraved heading, hero figure, ledger rows */}
+              <div className="card-raised rounded-2xl border border-line-strong bg-canvas p-8 shadow-[0_1px_0_rgba(17,47,91,0.04)] sm:p-10">
+                <div className="flex items-center gap-3">
+                  <span className="h-1.5 w-1.5 shrink-0 rotate-45 bg-accent" aria-hidden />
+                  <span className="eyebrow text-ink-faint">{product.name} · Key facts</span>
+                </div>
+
+                <div className="mt-8 flex flex-col gap-2">
+                  <span className="eyebrow text-accent">Loan amount</span>
+                  <span className="font-display text-[2.5rem] leading-[0.95] text-ink tabular-nums sm:text-5xl">
+                    {product.amount.min}
+                    <span className="px-1.5 font-normal text-ink-faint">–</span>
+                    {product.amount.max}
+                  </span>
+                </div>
+
+                <dl className="mt-9 border-y border-line">
+                  {[
+                    ["Interest rate", product.rate],
+                    ["Disbursal", product.disbursal],
+                    ["Interest type", product.rateNote],
+                  ].map(([k, v], i) => (
+                    <div
+                      key={k}
+                      className={`flex items-baseline justify-between gap-6 py-4 ${
+                        i > 0 ? "border-t border-line" : ""
+                      }`}
+                    >
+                      <dt className="text-sm text-ink-soft">{k}</dt>
+                      <dd className="text-right text-sm font-medium text-ink tabular-nums">
+                        {v}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <Button href="/products" className="mt-9 w-full justify-center">
                   View full details
                 </Button>
               </div>
-            </div>
             </Reveal>
           </Parallax>
         </div>
@@ -263,7 +275,7 @@ export default function Home() {
                 "A registered NBFC, covered by the Reserve Bank Integrated Ombudsman Scheme.",
               ],
             ].map(([t, d]) => (
-              <StaggerItem key={t} className="card-cell flex flex-col gap-2 bg-canvas p-7">
+              <StaggerItem key={t} className="card-cell flex flex-col gap-2 bg-canvas p-8">
                 <span className="font-display text-lg text-ink">{t}</span>
                 <p className="text-base leading-relaxed text-ink-soft">{d}</p>
               </StaggerItem>
@@ -279,7 +291,7 @@ export default function Home() {
         <Reveal className="text-center">
           <p className="eyebrow text-accent">A lender you can rely on</p>
         </Reveal>
-        <Stagger className="mt-14 grid grid-cols-1 divide-y divide-line sm:grid-cols-2 sm:divide-x lg:grid-cols-4 lg:divide-y-0">
+        <Stagger className="mt-16 grid grid-cols-1 divide-y divide-line sm:grid-cols-2 sm:divide-x lg:grid-cols-4 lg:divide-y-0">
           {trustSignals.map((s) => (
             <StaggerItem
               key={s.value}

@@ -105,7 +105,7 @@ export default function AboutPage() {
             <StaggerItem key={t.title} className="flex flex-col gap-4 border-t border-line-strong pt-6">
               <span className="font-display text-3xl text-accent">{t.year}</span>
               <h3 className="font-display text-xl text-ink">{t.title}</h3>
-              <p className="text-sm leading-relaxed text-ink-soft">{t.body}</p>
+              <p className="text-base leading-relaxed text-ink-soft">{t.body}</p>
             </StaggerItem>
           ))}
         </Stagger>
