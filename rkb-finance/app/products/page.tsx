@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Accordion from "@/components/Accordion";
+import LineIcon from "@/components/LineIcon";
 import { Button } from "@/components/Button";
 import LoanCalculator from "@/components/LoanCalculator";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
@@ -63,10 +64,13 @@ export default function ProductsPage() {
           {product.features.map((f) => (
             <StaggerItem
               key={f.title}
-              className="card-cell group flex flex-col gap-3 bg-canvas p-8"
+              className="card-cell group flex flex-col gap-4 bg-canvas p-8"
             >
+              <LineIcon
+                name={f.icon}
+                className="w-7 text-accent transition-transform duration-300 ease-[var(--ease-rkb)] group-hover:-translate-y-0.5"
+              />
               <span className="font-display text-xl text-ink">{f.title}</span>
-              <span className="h-px w-8 bg-accent/50" />
               <p className="text-base leading-relaxed text-ink-soft">{f.body}</p>
             </StaggerItem>
           ))}

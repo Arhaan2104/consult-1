@@ -86,8 +86,14 @@ export default function Hero() {
           </div>
         </Reveal>
 
+        {/* Subtle scroll cue */}
+        <Reveal delay={0.34} className="mt-14 hidden flex-col items-center gap-3 sm:flex">
+          <span className="eyebrow text-ink-faint">Scroll</span>
+          <span className="scroll-cue" aria-hidden />
+        </Reveal>
+
         {/* Trust band — prominent proof woven into the hero base */}
-        <div className="w-full mt-20 lg:mt-28">
+        <div className="w-full mt-16 lg:mt-20">
           <hr className="rule" />
           <Stagger className="grid grid-cols-1 divide-y divide-line pt-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
             {heroTrust.map((s) => (

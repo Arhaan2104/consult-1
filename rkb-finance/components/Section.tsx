@@ -70,10 +70,13 @@ export function SectionHeader({
       } ${align === "center" ? "max-w-2xl" : "max-w-3xl"}`}
     >
       {(index || kicker) && (
-        <div className={`eyebrow flex items-center gap-3 ${accent}`}>
-          {index && <span>{index}</span>}
+        <div className={`eyebrow flex items-center gap-3.5 ${accent}`}>
+          {index && <span className="tabular-nums">{index}</span>}
           {index && kicker && (
-            <span className={dark ? "text-on-dark-soft" : "text-ink-faint"}>—</span>
+            <span
+              className={`h-px w-7 ${dark ? "bg-accent-2/50" : "bg-accent/40"}`}
+              aria-hidden
+            />
           )}
           {kicker && (
             <span className={dark ? "text-on-dark-soft" : "text-ink-faint"}>

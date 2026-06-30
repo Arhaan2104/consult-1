@@ -94,26 +94,32 @@ export const product = {
     "Repaid as a single payment on the due date, or in partial repayments beforehand.", // PLACEHOLDER
   features: [
     {
+      icon: "check-circle",
       title: "Instant approval",
       body: "An automated system reviews your application and approves eligible borrowers right away.",
     },
     {
+      icon: "clock",
       title: "Funds within 24 hours",
       body: "Once approved, money is disbursed directly to your bank account within a day.",
     },
     {
+      icon: "refresh",
       title: "One-click renewal",
       body: "Renew an existing loan in a single step, without repeating the full application.",
     },
     {
+      icon: "calendar",
       title: "Flexible & partial repayment",
       body: "Repay online through your account. Partial payments settle interest first, then principal, then charges.",
     },
     {
+      icon: "document",
       title: "Transparent terms",
       body: "Rates, fees and the repayment schedule are disclosed in writing, upfront.",
     },
     {
+      icon: "people",
       title: "Open to more borrowers",
       body: "No income threshold and accessible to applicants with limited or poor credit history.",
     },
@@ -122,12 +128,12 @@ export const product = {
 
 /** Why borrowers choose RKB — from the homepage feature list. */
 export const advantages = [
-  { title: "No service fees", body: "We do not charge service fees on our loans." },
-  { title: "Among the lowest rates", body: "Competitive interest rates, kept low by a minimal-risk profile." },
-  { title: "No pre-approval penalties", body: "No charge to apply and no penalty before approval." },
-  { title: "No closure penalties", body: "Close your loan early without a foreclosure penalty." },
-  { title: "No income threshold", body: "Eligibility is not gated behind a minimum income requirement." },
-  { title: "Fast approvals & payouts", body: "Digital, end-to-end processing removes the traditional wait." },
+  { icon: "coin-slash", title: "No service fees", body: "We do not charge service fees on our loans." },
+  { icon: "trend-down", title: "Among the lowest rates", body: "Competitive interest rates, kept low by a minimal-risk profile." },
+  { icon: "tag", title: "No pre-approval penalties", body: "No charge to apply and no penalty before approval." },
+  { icon: "unlock", title: "No closure penalties", body: "Close your loan early without a foreclosure penalty." },
+  { icon: "people", title: "No income threshold", body: "Eligibility is not gated behind a minimum income requirement." },
+  { icon: "bolt", title: "Fast approvals & payouts", body: "Digital, end-to-end processing removes the traditional wait." },
 ] as const;
 
 export const process = [
@@ -247,10 +253,10 @@ export const documents = [
  * No invented people or quotes. Reuses figures already published elsewhere on the site.
  */
 export const trustSignals = [
-  { value: "RBI-Registered", label: "NBFC", sub: `Registration ${site.rbiReg}` },
-  { value: "Since 1984", label: "Four decades", sub: "Incorporated 21 November 1984" },
-  { value: "61 Partners", label: "Sourcing network", sub: "A fully digital sourcing network" },
-  { value: "Fair Practice", label: "Code-bound", sub: "Written terms · 30-day grievance redressal" },
+  { icon: "shield", value: "RBI-Registered", label: "NBFC", sub: `Registration ${site.rbiReg}` },
+  { icon: "heritage", value: "Since 1984", label: "Four decades", sub: "Incorporated 21 November 1984" },
+  { icon: "network", value: "61 Partners", label: "Sourcing network", sub: "A fully digital sourcing network" },
+  { icon: "ledger", value: "Fair Practice", label: "Code-bound", sub: "Written terms · 30-day grievance redressal" },
 ] as const;
 
 /**

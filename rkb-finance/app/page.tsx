@@ -1,5 +1,6 @@
 import { Button } from "@/components/Button";
 import Hero from "@/components/Hero";
+import LineIcon from "@/components/LineIcon";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { Parallax, TextReveal } from "@/components/ScrollFX";
 import ProcessScene from "@/components/ProcessScene";
@@ -145,10 +146,13 @@ export default function Home() {
           {advantages.map((a) => (
             <StaggerItem
               key={a.title}
-              className="card-cell group flex flex-col gap-3 bg-canvas p-8"
+              className="card-cell group flex flex-col gap-4 bg-canvas p-8"
             >
+              <LineIcon
+                name={a.icon}
+                className="w-7 text-accent transition-transform duration-300 ease-[var(--ease-rkb)] group-hover:-translate-y-0.5"
+              />
               <span className="font-display text-xl text-ink">{a.title}</span>
-              <span className="h-px w-8 bg-accent/50" />
               <p className="text-base leading-relaxed text-ink-soft">{a.body}</p>
             </StaggerItem>
           ))}
@@ -221,12 +225,12 @@ export default function Home() {
 
       {/* ─────────────────────── Process ─────────────────────── */}
       <Section texture="laid">
-        <SectionHeader
+        <ProcessScene
+          steps={process}
           index="04"
           kicker="How it works"
           title={<>Three steps from application to funds.</>}
         />
-        <ProcessScene steps={process} />
       </Section>
 
       <SectionDivider />
@@ -275,17 +279,18 @@ export default function Home() {
         <Reveal className="text-center">
           <p className="eyebrow text-accent">A lender you can rely on</p>
         </Reveal>
-        <Stagger className="mt-12 grid grid-cols-1 divide-y divide-line sm:grid-cols-2 sm:divide-x lg:grid-cols-4 lg:divide-y-0">
+        <Stagger className="mt-14 grid grid-cols-1 divide-y divide-line sm:grid-cols-2 sm:divide-x lg:grid-cols-4 lg:divide-y-0">
           {trustSignals.map((s) => (
             <StaggerItem
               key={s.value}
-              className="flex flex-col items-center gap-2 px-6 py-8 text-center sm:py-4"
+              className="flex flex-col items-center gap-3 px-6 py-10 text-center sm:py-6"
             >
-              <span className="font-display text-3xl leading-none text-ink sm:text-4xl">
+              <LineIcon name={s.icon} className="w-9 text-accent" />
+              <span className="font-display text-2xl leading-none text-ink sm:text-3xl">
                 {s.value}
               </span>
               <span className="eyebrow text-accent">{s.label}</span>
-              <span className="text-base leading-relaxed text-ink-soft">{s.sub}</span>
+              <span className="measure text-sm leading-relaxed text-ink-soft">{s.sub}</span>
             </StaggerItem>
           ))}
         </Stagger>
