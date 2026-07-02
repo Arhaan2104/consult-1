@@ -37,7 +37,6 @@ export default function Hero() {
 
   return (
     <section ref={heroRef} className="relative hero-rkb overflow-hidden">
-      <div className="rails" aria-hidden />
       <HeroSealMotion progress={scrollYProgress}>
         <HeroSeal />
       </HeroSealMotion>

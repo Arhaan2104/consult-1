@@ -33,7 +33,6 @@ export default async function LegalPage({
     <>
       {/* Header */}
       <section className="relative hero-rkb">
-        <div className="rails" aria-hidden />
         <div className="relative z-10 shell pt-32 pb-14 sm:pt-44 lg:pt-48">
           <Reveal>
             <Link

@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <section className="relative hero-rkb overflow-hidden">
-      <div className="rails" aria-hidden />
       <HeroSeal />
       <div className="relative z-10 shell flex min-h-[80svh] flex-col items-center justify-center text-center">
         <Reveal>

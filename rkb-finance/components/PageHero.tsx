@@ -14,7 +14,6 @@ export default function PageHero({
 }) {
   return (
     <section className="relative hero-rkb overflow-hidden">
-      <div className="rails" aria-hidden />
       <Parallax
         speed={0.08}
         className="relative z-10 shell pt-32 pb-16 sm:pt-44 lg:pt-48 lg:pb-20"
