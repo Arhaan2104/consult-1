@@ -64,7 +64,8 @@ export default function Hero() {
             <Button
               href="/products"
               magnetic
-              className="w-full justify-center sm:w-auto"
+              size="px-7 py-3.5"
+              className="w-full justify-center text-[0.95rem] sm:w-auto"
             >
               Explore Products
             </Button>
@@ -72,7 +73,8 @@ export default function Hero() {
               href="/contact"
               variant="ghost"
               arrow={false}
-              className="w-full justify-center sm:w-auto"
+              size="px-7 py-3.5"
+              className="w-full justify-center text-[0.95rem] sm:w-auto"
             >
               Speak with our team
             </Button>
@@ -101,9 +103,6 @@ export default function Hero() {
               </StaggerItem>
             ))}
           </Stagger>
-          <p className="mt-6 text-center text-xs italic text-ink-faint">
-            Indicative figures, pending final confirmation.
-          </p>
         </div>
       </motion.div>
     </section>

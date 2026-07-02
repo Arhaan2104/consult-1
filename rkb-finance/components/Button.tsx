@@ -33,6 +33,7 @@ export function Button({
   variant = "primary",
   arrow = true,
   magnetic = false,
+  size,
   className = "",
 }: {
   children: ReactNode;
@@ -41,6 +42,8 @@ export function Button({
   arrow?: boolean;
   /** Subtle cursor-attraction on fine-pointer devices. Use sparingly (hero/CTA). */
   magnetic?: boolean;
+  /** Override the default padding size (e.g. a larger hero CTA). */
+  size?: string;
   className?: string;
 }) {
   const external = href.startsWith("http");
@@ -58,7 +61,7 @@ export function Button({
     </>
   );
 
-  const cls = buttonClasses(variant, className);
+  const cls = buttonClasses(variant, className, size);
 
   if (magnetic) {
     return (
