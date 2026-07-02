@@ -84,26 +84,13 @@ export const product = {
   tenure: { min: "15 days", max: "90 days", minDays: 15, maxDays: 90 },
   tenureNote:
     "Repaid as a single payment on the due date, or in partial repayments beforehand.", // PLACEHOLDER
+  // Curated to what the dedicated sections (facts / eligibility / process) do
+  // NOT already say — speed, approval and accessibility live in those sections.
   features: [
     {
-      icon: "check-circle",
-      title: "Instant approval",
-      body: "An automated system reviews your application and approves eligible borrowers right away.",
-    },
-    {
-      icon: "clock",
-      title: "Funds within 24 hours",
-      body: "Once approved, money is disbursed directly to your bank account within a day.",
-    },
-    {
-      icon: "refresh",
-      title: "One-click renewal",
-      body: "Renew an existing loan in a single step, without repeating the full application.",
-    },
-    {
-      icon: "calendar",
-      title: "Flexible & partial repayment",
-      body: "Repay online through your account. Partial payments settle interest first, then principal, then charges.",
+      icon: "ledger",
+      title: "Simple daily interest",
+      body: "Interest is simple daily interest on the principal, at a fixed rate — never compounded.",
     },
     {
       icon: "document",
@@ -111,9 +98,14 @@ export const product = {
       body: "Rates, fees and the repayment schedule are disclosed in writing, upfront.",
     },
     {
-      icon: "people",
-      title: "Open to more borrowers",
-      body: "No income threshold and accessible to applicants with limited or poor credit history.",
+      icon: "calendar",
+      title: "Flexible & partial repayment",
+      body: "Repay online through your account. Partial payments settle interest first, then principal, then charges.",
+    },
+    {
+      icon: "refresh",
+      title: "One-click renewal",
+      body: "Renew an existing loan in a single step, without repeating the full application.",
     },
   ],
 } as const;

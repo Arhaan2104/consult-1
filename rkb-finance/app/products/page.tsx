@@ -55,9 +55,9 @@ export default function ProductsPage() {
         <SectionHeader
           index="01"
           kicker="What you get"
-          title={<>Built around speed, flexibility and clarity.</>}
+          title={<>Built around clarity and flexibility.</>}
         />
-        <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-4">
           {product.features.map((f) => (
             <StaggerItem
               key={f.title}
