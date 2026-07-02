@@ -43,7 +43,7 @@ export default function Hero() {
       </HeroSealMotion>
       <motion.div
         style={contentStyle}
-        className="relative z-10 shell flex flex-col items-center text-center pt-32 pb-20 sm:pt-44 lg:pt-52 lg:pb-28"
+        className="relative z-10 shell flex flex-col items-center text-center pt-28 pb-20 sm:pt-36 lg:pt-40 lg:pb-28"
       >
         <Reveal>
           <p className="eyebrow text-accent">
@@ -53,15 +53,10 @@ export default function Hero() {
         <Reveal delay={0.08}>
           <h1 className="display-xl mt-6 max-w-[18ch] text-balance text-ink">
             Empowering borrowers to meet{" "}
-            <span className="text-accent">all their financial needs.</span>
+            <span className="block whitespace-nowrap text-accent">
+              all their financial needs.
+            </span>
           </h1>
-        </Reveal>
-        <Reveal delay={0.16}>
-          <p className="mt-6 measure-wide mx-auto text-lg leading-relaxed text-ink-soft">
-            From <span className="whitespace-nowrap">R.K. Bansal Finance</span> —
-            the RBI-registered NBFC lending in its own name since {site.since}.
-            Fixed rates, shown upfront. No agents, no upfront fees, ever.
-          </p>
         </Reveal>
         <Reveal delay={0.24}>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
@@ -83,14 +78,8 @@ export default function Hero() {
           </div>
         </Reveal>
 
-        {/* Subtle scroll cue */}
-        <Reveal delay={0.34} className="mt-14 hidden flex-col items-center gap-3 sm:flex">
-          <span className="eyebrow text-ink-faint">Scroll</span>
-          <span className="scroll-cue" aria-hidden />
-        </Reveal>
-
         {/* Trust band — prominent proof woven into the hero base */}
-        <div className="w-full mt-16 lg:mt-20">
+        <div className="w-full mt-12 lg:mt-14">
           <hr className="rule" />
           <Stagger className="grid grid-cols-1 divide-y divide-line pt-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
             {heroTrust.map((s) => (
