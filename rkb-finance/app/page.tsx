@@ -5,6 +5,7 @@ import LineIcon from "@/components/LineIcon";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { Parallax, TextReveal } from "@/components/ScrollFX";
 import ProcessScene from "@/components/ProcessScene";
+import { ProductInstrument, FairBalance } from "@/components/SectionArt";
 import { Section, SectionDivider, SectionHeader } from "@/components/Section";
 import {
   advantages,
@@ -25,12 +26,17 @@ export default function Home() {
       {/* ─────────────────────── Product — 01 ─────────────────────── */}
       <Section texture="weave">
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <SectionHeader
-            index="01"
-            kicker="The Product"
-            title={<>A short-term loan, when you need it most.</>}
-            intro={product.blurb}
-          />
+          <div className="flex flex-col gap-12">
+            <SectionHeader
+              index="01"
+              kicker="The Product"
+              title={<>A short-term loan, when you need it most.</>}
+              intro={product.blurb}
+            />
+            <Reveal delay={0.2} className="hidden lg:block">
+              <ProductInstrument className="w-full max-w-[23rem] text-accent" />
+            </Reveal>
+          </div>
           <Parallax speed={0.06}>
             <Reveal delay={0.1}>
               {/* Term-sheet card — engraved heading, hero figure, ledger rows */}
@@ -153,12 +159,17 @@ export default function Home() {
       {/* ─────────────────────── Compliance / trust ─────────────────────── */}
       <Section texture="weave">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
-          <SectionHeader
-            index="04"
-            kicker="Fair practice"
-            title={<>Transparent by policy, not just by promise.</>}
-            intro="We treat every customer consistently and fairly. Loan terms, interest rates and penal charges are disclosed in writing, upfront — and grievances are resolved within 30 days."
-          />
+          <div className="flex flex-col gap-12">
+            <SectionHeader
+              index="04"
+              kicker="Fair practice"
+              title={<>Transparent by policy, not just by promise.</>}
+              intro="We treat every customer consistently and fairly. Loan terms, interest rates and penal charges are disclosed in writing, upfront — and grievances are resolved within 30 days."
+            />
+            <Reveal delay={0.2} className="hidden lg:block">
+              <FairBalance className="w-full max-w-[23rem] text-accent" />
+            </Reveal>
+          </div>
           <Stagger className="flex flex-col gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)]">
             {[
               [
