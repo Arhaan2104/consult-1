@@ -33,8 +33,8 @@ export default function SiteHeader() {
         <nav
           className={`relative z-50 flex h-14 items-center justify-between gap-3 rounded-full border pl-5 pr-2.5 backdrop-blur-xl transition-[background-color,box-shadow,border-color] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[3.5px] before:rounded-full before:border before:border-ink/[0.16] before:content-[''] ${
             scrolled
-              ? "border-line bg-canvas-3/92 shadow-[0_14px_36px_-14px_rgba(11,36,71,0.42)]"
-              : "border-line/70 bg-canvas-3/72 shadow-[0_8px_26px_-16px_rgba(11,36,71,0.30)]"
+              ? "border-accent/30 bg-canvas-3/92 shadow-[0_14px_36px_-14px_rgba(11,36,71,0.42)]"
+              : "border-accent/20 bg-canvas-3/72 shadow-[0_8px_26px_-16px_rgba(11,36,71,0.30)]"
           }`}
         >
           <Link
