@@ -10,7 +10,6 @@ import {
   advantages,
   process,
   product,
-  site,
   sourcingPartnerCount,
   trustSignals,
 } from "@/content/site";
@@ -81,10 +80,22 @@ export default function Home() {
 
       <SectionDivider variant="accent" />
 
-      {/* ─────────────────────── Advantages ─────────────────────── */}
+      {/* ─────────────────────── Process — 02 ─────────────────────── */}
+      <Section texture="laid">
+        <ProcessScene
+          steps={process}
+          index="02"
+          kicker="How it works"
+          title={<>Three steps from application to funds.</>}
+        />
+      </Section>
+
+      <SectionDivider />
+
+      {/* ─────────────────────── Advantages — 03 ─────────────────────── */}
       <Section texture="engrave">
         <SectionHeader
-          index="02"
+          index="03"
           kicker="Why borrowers choose us"
           title={<>The terms are simple, and they stay that way.</>}
         />
@@ -105,18 +116,6 @@ export default function Home() {
         </Stagger>
       </Section>
 
-      <SectionDivider />
-
-      {/* ─────────────────────── Process — 03 ─────────────────────── */}
-      <Section texture="laid">
-        <ProcessScene
-          steps={process}
-          index="03"
-          kicker="How it works"
-          title={<>Three steps from application to funds.</>}
-        />
-      </Section>
-
       <SectionDivider variant="accent" />
 
       {/* ───────── Why R.K. Bansal — the lender behind the network ───────── */}
@@ -128,9 +127,7 @@ export default function Home() {
             We&rsquo;re the NBFC that <span className="text-accent">funds</span> it.
           </h2>
           <p className="mx-auto mt-7 measure-wide text-lg leading-relaxed text-ink-soft">
-            R.K. Bansal Finance has lent in its own name since {site.since} — a
-            Non-Banking Financial Company registered with the Reserve Bank of India
-            (B-14.00700). Behind a network of digital apps, we&rsquo;re the institution
+            Behind a network of digital apps, we&rsquo;re the institution
             that actually underwrites and funds the loan: fixed rates in writing, no
             upfront fees, and answerable to you directly.
           </p>
