@@ -89,7 +89,10 @@ export default function Hero() {
                 className="flex flex-col items-center gap-2.5 px-4 py-7 text-center sm:py-3"
               >
                 <span className="eyebrow text-accent">{s.prefix}</span>
-                <span className="font-display leading-[0.95] text-ink text-5xl sm:text-[3.25rem] lg:text-6xl tabular-nums">
+                {/* Ramp sized so the longest value ("₹6.1 Crore") stays on one
+                    line inside its column at every 3-col width — keeps the three
+                    labels on a common baseline. Full size returns at xl. */}
+                <span className="font-display leading-[0.95] text-ink tabular-nums whitespace-nowrap text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
                   {s.value}
                 </span>
                 <span className="text-base font-medium tracking-wide text-ink-soft">
