@@ -31,7 +31,7 @@ export default function SiteHeader() {
       <div className="shell">
         {/* Floating frosted-glass pill */}
         <nav
-          className={`flex h-14 items-center justify-between gap-3 rounded-full border pl-5 pr-2.5 backdrop-blur-xl transition-[background-color,box-shadow,border-color] duration-500 ease-[var(--ease-rkb)] ${
+          className={`relative z-50 flex h-14 items-center justify-between gap-3 rounded-full border pl-5 pr-2.5 backdrop-blur-xl transition-[background-color,box-shadow,border-color] duration-500 ease-[var(--ease-rkb)] ${
             scrolled
               ? "border-line bg-canvas/85 shadow-[0_14px_36px_-14px_rgba(11,36,71,0.42)]"
               : "border-line/70 bg-canvas/60 shadow-[0_8px_26px_-16px_rgba(11,36,71,0.30)]"
