@@ -123,18 +123,36 @@ export const advantages = [
 export const process = [
   {
     step: "01",
+    label: "Application",
     title: "Apply online",
     body: "Submit a short application on our website with minimal documentation.",
+    details: [
+      "Entirely online, on our website",
+      "Minimal documentation — KYC only",
+      "No agents, no branch visit",
+    ],
   },
   {
     step: "02",
+    label: "Underwriting",
     title: "Instant automated review",
     body: "Our system assesses your application and returns an approval decision right away.",
+    details: [
+      "Automated underwriting",
+      "Approval decision right away",
+      "No manual back-and-forth",
+    ],
   },
   {
     step: "03",
+    label: "Disbursal",
     title: "Funds in your account",
     body: "On approval, the amount is disbursed directly to your bank account within 24 hours.",
+    details: [
+      "Disbursed within 24 hours",
+      "Direct to your bank account",
+      "For loans of ₹4,000 – ₹1,00,000",
+    ],
   },
 ] as const;
 
