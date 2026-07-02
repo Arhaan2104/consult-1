@@ -146,6 +146,23 @@ export const process = [
   },
 ] as const;
 
+/**
+ * Digital sourcing partners — consumer apps that route borrowers to the
+ * R.K. Bansal balance sheet. Array order is tuned for the radial diagram so
+ * the longest labels land on the left/right (where there is horizontal room).
+ */
+export const sourcingPartners = [
+  "Ramfincorp", // top
+  "CASHe", // top-right
+  "Bajaj Finserv", // right
+  "MobiKwik", // bottom-right
+  "Buddy Loan", // bottom
+  "CredMantra", // bottom-left
+  "Anq Digital Finserv", // left
+  "DigitMoney", // top-left
+] as const;
+export const sourcingPartnerCount = 61;
+
 /** Heritage timeline — drawn from registration & positioning facts. */
 export const timeline = [
   {
@@ -163,35 +180,6 @@ export const timeline = [
     title: "A digital lending platform",
     body: "The personal-loan process is fully digitised — removing extensive physical interactions and long waiting periods.",
   },
-] as const;
-
-/** Charges that genuinely apply to the single Short Term Loan. */
-export const productCharges = [
-  { item: "Service fee", value: "Nil — no service fees" }, // grounded: advantages
-  { item: "Pre-approval / processing fee", value: "Nil before approval" }, // grounded: advantages
-  { item: "Late payment penalty", value: "0.1% per day of outstanding principal" }, // grounded: charges
-  { item: "Foreclosure / closure penalty", value: "Nil" }, // grounded: advantages
-  { item: "No-Dues Certificate (digital)", value: "Nil" }, // grounded: charges
-  { item: "Cooling-off period", value: "3 days — exit with principal & proportionate APR only" }, // grounded: charges
-] as const;
-
-/**
- * Key Fact Statement (KFS) — the RBI-standardised summary of a loan's key terms.
- * Grounded rows reuse `product` / `site` / `charges` verbatim. Rows tagged PLACEHOLDER
- * await the consultant: tenure (see product.tenure), the product-specific processing
- * fee, and the APR (shown as a simple, non-compounded annualisation of the daily rate).
- */
-export const kfs = [
-  { k: "Loan product", v: product.name }, // grounded
-  { k: "Sanctioned amount", v: `${product.amount.min} – ${product.amount.max}` }, // grounded
-  { k: "Interest rate", v: product.rate }, // grounded
-  { k: "Interest type", v: product.rateNote }, // grounded
-  { k: "Tenure", v: `${product.tenure.min} – ${product.tenure.max}`, placeholder: true }, // PLACEHOLDER
-  { k: "Processing fee", v: "To be confirmed for this product", placeholder: true }, // PLACEHOLDER
-  { k: "Annual Percentage Rate (APR)", v: "73% – 365% p.a. (illustrative — daily rate × 365, no compounding)", placeholder: true }, // derived/PLACEHOLDER
-  { k: "Cooling-off period", v: "3 days — exit with principal & proportionate APR only" }, // grounded: charges
-  { k: "Foreclosure charges", v: "Nil — no closure penalty" }, // grounded: advantages
-  { k: "Grievance officer", v: `${site.grievance.officer} · ${site.grievance.phone}` }, // grounded
 ] as const;
 
 /**

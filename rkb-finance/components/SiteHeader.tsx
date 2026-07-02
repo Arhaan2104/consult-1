@@ -27,93 +27,86 @@ export default function SiteHeader() {
   }, [open]);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "border-b border-line bg-canvas/80 backdrop-blur-md shadow-[0_1px_0_rgba(17,47,91,0.06),0_8px_24px_-16px_rgba(11,36,71,0.25)]"
-          : "border-b border-transparent bg-transparent"
-      }`}
-    >
-      <div
-        className={`shell flex items-center justify-between transition-[height] duration-500 ease-[var(--ease-rkb)] ${
-          scrolled ? "h-16" : "h-[4.5rem]"
-        }`}
-      >
-        <Link
-          href="/"
-          aria-label="R.K. Bansal Finance — home"
-          className="group relative z-50 flex items-center"
-          onClick={() => setOpen(false)}
+    <header className="fixed inset-x-0 top-2.5 z-50 sm:top-4">
+      <div className="shell">
+        {/* Floating frosted-glass pill */}
+        <nav
+          className={`flex h-14 items-center justify-between gap-3 rounded-full border pl-5 pr-2.5 backdrop-blur-xl transition-[background-color,box-shadow,border-color] duration-500 ease-[var(--ease-rkb)] ${
+            scrolled
+              ? "border-line bg-canvas/85 shadow-[0_14px_36px_-14px_rgba(11,36,71,0.42)]"
+              : "border-line/70 bg-canvas/60 shadow-[0_8px_26px_-16px_rgba(11,36,71,0.30)]"
+          }`}
         >
-          <Image
-            src="/R.K.-BANSAL.png"
-            alt="R.K. Bansal Finance Pvt. Ltd."
-            width={152}
-            height={36}
-            priority
-            style={{ width: "auto" }}
-            className={`h-8 origin-left opacity-100 transition-[transform,opacity] duration-500 ease-[var(--ease-rkb)] group-hover:opacity-80 sm:h-9 ${
-              scrolled ? "scale-[0.9]" : "scale-100"
-            }`}
-          />
-        </Link>
-
-        <nav className="hidden items-center gap-7 md:flex lg:gap-8">
-          {nav.map((item) => {
-            const active =
-              pathname === item.href || pathname.startsWith(`${item.href}/`);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className={`group relative py-1 text-sm tracking-tight transition-colors duration-300 ${
-                  active ? "text-ink" : "text-ink-soft hover:text-ink"
-                }`}
-              >
-                {item.label}
-                <span
-                  aria-hidden
-                  className={`pointer-events-none absolute -bottom-0.5 left-0 h-px w-full origin-left bg-accent transition-transform duration-300 ease-[var(--ease-rkb)] ${
-                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                  }`}
-                />
-              </Link>
-            );
-          })}
-
-          {/* Ledger-hairline divider separates navigation from the action */}
-          <span className="h-5 w-px bg-line-strong" aria-hidden />
-
-          <Link href="/contact" className={buttonClasses("primary", "px-5 py-2.5")}>
-            Apply now
-            <span
-              aria-hidden
-              className="text-accent-2 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
-            >
-              →
-            </span>
+          <Link
+            href="/"
+            aria-label="R.K. Bansal Finance — home"
+            className="group relative z-50 flex items-center"
+            onClick={() => setOpen(false)}
+          >
+            <Image
+              src="/R.K.-BANSAL.png"
+              alt="R.K. Bansal Finance Pvt. Ltd."
+              width={152}
+              height={36}
+              priority
+              style={{ width: "auto" }}
+              className="h-8 opacity-100 transition-opacity duration-300 group-hover:opacity-80"
+            />
           </Link>
-        </nav>
 
-        <button
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
-        >
-          <span
-            className={`h-px w-6 bg-ink transition-all duration-300 ${
-              open ? "translate-y-[3.5px] rotate-45" : ""
-            }`}
-          />
-          <span
-            className={`h-px w-6 bg-ink transition-all duration-300 ${
-              open ? "-translate-y-[3.5px] -rotate-45" : ""
-            }`}
-          />
-        </button>
+          {/* Desktop: pill nav items + action */}
+          <div className="hidden items-center gap-1 md:flex">
+            {nav.map((item) => {
+              const active =
+                pathname === item.href || pathname.startsWith(`${item.href}/`);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`rounded-full px-3.5 py-2 text-sm tracking-tight transition-colors duration-300 ${
+                    active
+                      ? "bg-ink/[0.07] text-ink"
+                      : "text-ink-soft hover:bg-ink/[0.05] hover:text-ink"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+
+            <span className="mx-1.5 h-5 w-px bg-line-strong" aria-hidden />
+
+            <Link href="/contact" className={buttonClasses("primary", "px-4 py-2")}>
+              Apply now
+              <span
+                aria-hidden
+                className="text-accent-2 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+              >
+                →
+              </span>
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="relative z-50 -mr-1 flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
+          >
+            <span
+              className={`h-px w-6 bg-ink transition-all duration-300 ${
+                open ? "translate-y-[3.5px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`h-px w-6 bg-ink transition-all duration-300 ${
+                open ? "-translate-y-[3.5px] -rotate-45" : ""
+              }`}
+            />
+          </button>
+        </nav>
       </div>
 
       {/* Mobile sheet — note: do NOT add a tx-* texture class here; those set

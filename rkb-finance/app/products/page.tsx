@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Accordion from "@/components/Accordion";
 import LineIcon from "@/components/LineIcon";
 import { Button } from "@/components/Button";
@@ -11,10 +10,8 @@ import {
   documents,
   eligibility,
   faqGroups,
-  kfs,
   process,
   product,
-  productCharges,
 } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -173,79 +170,11 @@ export default function ProductsPage() {
         </Stagger>
       </Section>
 
-      {/* Key facts & charges (dark) */}
-      <Section texture="dark">
-        <SectionHeader
-          index="06"
-          kicker="The fine print"
-          title={<>Key facts &amp; charges, disclosed in full.</>}
-          intro="A Key Fact Statement summarises the loan's terms in the RBI-standardised format, alongside every charge that may apply. Nothing hidden, nothing in the footnotes."
-          dark
-        />
-        <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:items-start">
-          <Reveal>
-            <p className="eyebrow mb-5 text-accent-2">Key Fact Statement</p>
-            <dl className="overflow-hidden rounded-2xl border border-[var(--color-line-dark)]">
-              {kfs.map((row, i) => (
-                <div
-                  key={row.k}
-                  className={`flex flex-col gap-1 p-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6 ${
-                    i % 2 ? "bg-deep" : "bg-deep-2"
-                  }`}
-                >
-                  <dt className="text-sm text-on-dark">{row.k}</dt>
-                  <dd className="text-sm font-medium text-on-dark-soft sm:max-w-[60%] sm:text-right">
-                    {row.v}
-                    {"placeholder" in row && row.placeholder && (
-                      <span className="ml-2 align-middle text-xs italic text-accent-2">
-                        to confirm
-                      </span>
-                    )}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="eyebrow mb-5 text-accent-2">Charges that may apply</p>
-            <dl className="overflow-hidden rounded-2xl border border-[var(--color-line-dark)]">
-              {productCharges.map((c, i) => (
-                <div
-                  key={c.item}
-                  className={`flex flex-col gap-1 p-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6 ${
-                    i % 2 ? "bg-deep" : "bg-deep-2"
-                  }`}
-                >
-                  <dt className="text-sm text-on-dark">{c.item}</dt>
-                  <dd className="text-sm font-medium text-on-dark-soft sm:text-right">
-                    {c.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <p className="mt-6 text-xs leading-relaxed text-on-dark-soft">
-              Rates vary by borrower based on credit scores, risk profiles and loan
-              tenor. A 3-day cooling-off period allows exit with only principal and
-              proportionate APR. All fees and charges are subject to applicable GST and
-              government levies. The full interest-rate policy across products is
-              published under{" "}
-              <Link
-                href="/legal/interest-rate-policy"
-                className="text-on-dark underline decoration-accent-2/50 underline-offset-[3px] hover:decoration-accent-2"
-              >
-                Interest Rate &amp; Charges Policy
-              </Link>
-              .
-            </p>
-          </Reveal>
-        </div>
-      </Section>
-
       <SectionDivider />
 
       {/* FAQ */}
       <Section texture="ledger">
-        <SectionHeader index="07" kicker="Questions" title={<>Good to know.</>} />
+        <SectionHeader index="06" kicker="Questions" title={<>Good to know.</>} />
         <div className="mt-14 grid gap-12 lg:grid-cols-2">
           {faqGroups.map((group) => (
             <Reveal key={group.heading}>

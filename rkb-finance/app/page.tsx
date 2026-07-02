@@ -1,17 +1,17 @@
 import { Button } from "@/components/Button";
 import Hero from "@/components/Hero";
+import LenderNetwork from "@/components/LenderNetwork";
 import LineIcon from "@/components/LineIcon";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { Parallax, TextReveal } from "@/components/ScrollFX";
 import ProcessScene from "@/components/ProcessScene";
-import Marquee from "@/components/Marquee";
 import { Section, SectionDivider, SectionHeader } from "@/components/Section";
 import {
   advantages,
   process,
   product,
   site,
-  timeline,
+  sourcingPartnerCount,
   trustSignals,
 } from "@/content/site";
 
@@ -23,77 +23,11 @@ export default function Home() {
 
       <SectionDivider />
 
-      {/* ───────────────────── Positioning statement — leads the page ───────────────────── */}
-      <Section texture="grain">
-        <Reveal className="mx-auto max-w-4xl text-center">
-          <p className="eyebrow text-accent">Why R.K. Bansal</p>
-          <h2 className="display-lg mt-6 text-balance text-ink">
-            Other apps <span className="text-ink-faint">arrange</span> your loan.{" "}
-            We&rsquo;re the NBFC that <span className="text-accent">funds</span> it.
-          </h2>
-          <p className="mx-auto mt-7 measure-wide text-lg leading-relaxed text-ink-soft">
-            R.K. Bansal Finance is the RBI-registered lender behind the loan — not a
-            broker, not a lead generator. You borrow from the institution itself:
-            regulated by the Reserve Bank of India, lending in our own name since{" "}
-            {site.since}, and answerable to you directly.
-          </p>
-        </Reveal>
-      </Section>
-
-      <SectionDivider />
-
-      {/* ─────────────────── Our Story (heritage) ─────────────────── */}
-      <Section texture="ledger">
-        <SectionHeader
-          index="01"
-          kicker="Our story"
-          title={<>From a 1984 incorporation to a modern lending platform.</>}
-        />
-        <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] md:grid-cols-3">
-          {timeline.map((t) => (
-            <StaggerItem
-              key={t.title}
-              className="card-cell flex flex-col gap-4 bg-canvas p-8 sm:p-10"
-            >
-              <span className="font-display text-3xl text-accent">{t.year}</span>
-              <h3 className="font-display text-xl text-ink">{t.title}</h3>
-              <p className="text-base leading-relaxed text-ink-soft">{t.body}</p>
-            </StaggerItem>
-          ))}
-        </Stagger>
-
-        <Reveal className="mt-14">
-          <p className="eyebrow mb-6 text-ink-faint">
-            A fully digital sourcing network
-          </p>
-          <Marquee>
-            {[
-              "Ramfincorp",
-              "Anq Digital Finserv",
-              "CredMantra",
-              "DigitMoney",
-              "CASHe",
-              "GroMo",
-              "GoCredit",
-              "Buddy Loan",
-              "MobiKwik",
-              "Bajaj Finserv",
-            ].map((n) => (
-              <span key={n} className="font-display text-2xl text-ink/40 sm:text-3xl">
-                {n}
-              </span>
-            ))}
-          </Marquee>
-        </Reveal>
-      </Section>
-
-      <SectionDivider />
-
-      {/* ─────────────────────── Product ─────────────────────── */}
+      {/* ─────────────────────── Product — 01 ─────────────────────── */}
       <Section texture="weave">
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <SectionHeader
-            index="02"
+            index="01"
             kicker="The Product"
             title={<>A short-term loan, when you need it most.</>}
             intro={product.blurb}
@@ -104,7 +38,7 @@ export default function Home() {
               <div className="card-raised rounded-2xl border border-line-strong bg-canvas p-8 shadow-[0_1px_0_rgba(17,47,91,0.04)] sm:p-10">
                 <div className="flex items-center gap-3">
                   <span className="h-1.5 w-1.5 shrink-0 rotate-45 bg-accent" aria-hidden />
-                  <span className="eyebrow text-ink-faint">{product.name} · Key facts</span>
+                  <span className="eyebrow text-ink-faint">{product.name}</span>
                 </div>
 
                 <div className="mt-8 flex flex-col gap-2">
@@ -150,7 +84,7 @@ export default function Home() {
       {/* ─────────────────────── Advantages ─────────────────────── */}
       <Section texture="engrave">
         <SectionHeader
-          index="03"
+          index="02"
           kicker="Why borrowers choose us"
           title={<>The terms are simple, and they stay that way.</>}
         />
@@ -173,76 +107,48 @@ export default function Home() {
 
       <SectionDivider />
 
-      {/* ─────────────── Direct NBFC vs loan app comparison ─────────────── */}
-      <Section texture="weave">
-        <SectionHeader
-          kicker="The difference"
-          title={<>Borrow from the lender — not through a middleman.</>}
-          intro="Most loan apps are lead generators that hand you to whichever lender bids for you. With R.K. Bansal, the company you apply to is the company that lends."
-        />
-        <Reveal className="mt-16">
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-line-strong bg-[var(--color-line)] md:grid-cols-2">
-            {/* Direct from the NBFC */}
-            <div className="flex flex-col gap-7 bg-deep p-8 text-on-dark sm:p-10">
-              <div className="flex flex-col gap-1.5">
-                <span className="eyebrow text-accent-2">R.K. Bansal Finance</span>
-                <span className="font-display text-3xl">Direct from the NBFC</span>
-              </div>
-              <ul className="flex flex-col gap-4">
-                {[
-                  "The RBI-registered NBFC lends to you directly",
-                  "Fixed rates, disclosed in writing before you commit",
-                  "No upfront fees — ever",
-                  "Grievances answered directly, under the RBI Ombudsman Scheme",
-                  "Lending in its own name since 1984",
-                ].map((t) => (
-                  <li key={t} className="flex gap-3 text-lg leading-relaxed">
-                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-accent-2" />
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* Through a middleman */}
-            <div className="flex flex-col gap-7 bg-canvas p-8 sm:p-10">
-              <div className="flex flex-col gap-1.5">
-                <span className="eyebrow text-ink-faint">A typical loan app</span>
-                <span className="font-display text-3xl text-ink-soft">
-                  Through a middleman
-                </span>
-              </div>
-              <ul className="flex flex-col gap-4">
-                {[
-                  "A service provider forwards you to a third-party lender",
-                  "“Low rates” advertised; the actual rate shown late",
-                  "Processing or convenience fees, sometimes upfront",
-                  "Accountability depends on the partner lender",
-                  "Often only a few years in the market",
-                ].map((t) => (
-                  <li
-                    key={t}
-                    className="flex gap-3 text-lg leading-relaxed text-ink-soft"
-                  >
-                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-line-strong" />
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </Reveal>
-      </Section>
-
-      <SectionDivider />
-
-      {/* ─────────────────────── Process ─────────────────────── */}
+      {/* ─────────────────────── Process — 03 ─────────────────────── */}
       <Section texture="laid">
         <ProcessScene
           steps={process}
-          index="04"
+          index="03"
           kicker="How it works"
           title={<>Three steps from application to funds.</>}
         />
+      </Section>
+
+      <SectionDivider variant="accent" />
+
+      {/* ───────── Why R.K. Bansal — the lender behind the network ───────── */}
+      <Section texture="grain">
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <p className="eyebrow text-accent">Why R.K. Bansal</p>
+          <h2 className="display-lg mt-6 text-balance text-ink">
+            Other apps <span className="text-ink-faint">arrange</span> your loan.{" "}
+            We&rsquo;re the NBFC that <span className="text-accent">funds</span> it.
+          </h2>
+          <p className="mx-auto mt-7 measure-wide text-lg leading-relaxed text-ink-soft">
+            R.K. Bansal Finance has lent in its own name since {site.since} — a
+            Non-Banking Financial Company registered with the Reserve Bank of India
+            (B-14.00700). Behind a network of digital apps, we&rsquo;re the institution
+            that actually underwrites and funds the loan: fixed rates in writing, no
+            upfront fees, and answerable to you directly.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.1} className="mt-14 sm:mt-16">
+          <LenderNetwork />
+        </Reveal>
+
+        <Reveal className="mt-12 text-center">
+          <p className="measure-wide mx-auto text-base leading-relaxed text-ink-soft">
+            You apply through a partner app. R.K. Bansal underwrites and funds the loan —
+            directly, in its own name.{" "}
+            <span className="text-ink-faint">
+              Showing 8 of {sourcingPartnerCount} sourcing partners.
+            </span>
+          </p>
+        </Reveal>
       </Section>
 
       <SectionDivider />
@@ -251,7 +157,7 @@ export default function Home() {
       <Section texture="weave">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
           <SectionHeader
-            index="05"
+            index="04"
             kicker="Fair practice"
             title={<>Transparent by policy, not just by promise.</>}
             intro="We treat every customer consistently and fairly. Loan terms, interest rates and penal charges are disclosed in writing, upfront — and grievances are resolved within 30 days."

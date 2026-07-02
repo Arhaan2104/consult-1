@@ -484,6 +484,29 @@ body {
   letter-spacing: 0.04em;
 }
 
+/* ---------- Lender network diagram ---------- */
+.net-connector {
+  stroke-dasharray: 3 7;
+}
+.net-flow {
+  animation: net-flow 3s linear infinite;
+}
+@keyframes net-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.net-spin {
+  transform-box: view-box;
+  transform-origin: center;
+  animation: net-spin 220s linear infinite;
+}
+@keyframes net-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* ---------- Hero scroll cue ---------- */
 .scroll-cue {
   position: relative;
@@ -514,13 +537,6 @@ body {
   100% {
     transform: translateY(2.75rem);
     opacity: 0;
-  }
-}
-
-/* ---------- Marquee ---------- */
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
   }
 }
 
