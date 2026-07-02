@@ -40,13 +40,29 @@ function lobed(cx: number, cy: number, R: number, amp: number, lobes: number, st
   return d + "Z";
 }
 
-/** Shared coin-edge double frame — ties the two plates into a matched set. */
+/** Shared coin-edge double frame — ties the plates into a matched set. */
 function Cartouche() {
   return (
     <>
       <rect x="6" y="6" width="328" height="228" rx="16" strokeWidth="1" opacity="0.3" />
       <rect x="11" y="11" width="318" height="218" rx="11" strokeWidth="1" opacity="0.1" />
     </>
+  );
+}
+
+/**
+ * Faint guilloché rosette centred on the plate (viewBox centre 170,120), turning
+ * imperceptibly slowly — the "whisper of motion" shared across every plate. Uses
+ * the site-wide .net-spin (220s, frozen under reduced motion).
+ */
+function SpinRosette({ r = 88, amp = 4, lobes = 44, opacity = 0.06 }) {
+  return (
+    <path
+      className="net-spin"
+      d={lobed(170, 120, r, amp, lobes)}
+      strokeWidth="1"
+      opacity={opacity}
+    />
   );
 }
 
@@ -69,6 +85,7 @@ export function ProductInstrument({ className = "" }: { className?: string }) {
       aria-hidden
     >
       <Cartouche />
+      <SpinRosette r={92} opacity={0.05} />
 
       {/* Faint ledger grid inside the plot */}
       <g strokeWidth="1" opacity="0.08">
@@ -150,8 +167,8 @@ export function FairBalance({ className = "" }: { className?: string }) {
     >
       <Cartouche />
 
-      {/* Faint guilloché rosette behind the scale */}
-      <path d={lobed(cx, 120, 78, 4, 44)} strokeWidth="1" opacity="0.1" />
+      {/* Faint guilloché rosette behind the scale — slowly turning */}
+      <SpinRosette r={78} opacity={0.1} />
       <circle cx={cx} cy="120" r="90" strokeWidth="1" opacity="0.06" />
 
       {/* Base plinth + ground */}
@@ -201,6 +218,135 @@ export function FairBalance({ className = "" }: { className?: string }) {
         stroke="none"
       >
         FAIR PRACTICE CODE · RBI OVERSIGHT
+      </text>
+    </svg>
+  );
+}
+
+/* ───────────── Products calculator — repayment composition ring ───────────── */
+export function RepaymentRing({ className = "" }: { className?: string }) {
+  const cx = 170;
+  const cy = 112;
+  const R = 56;
+  const ticks = Array.from({ length: 24 }, (_, k) => {
+    const a = (k / 24) * Math.PI * 2 - Math.PI / 2;
+    const major = k % 6 === 0;
+    const ro = 64;
+    const ri = major ? 58 : 60.5;
+    return {
+      x1: (cx + ro * Math.cos(a)).toFixed(1),
+      y1: (cy + ro * Math.sin(a)).toFixed(1),
+      x2: (cx + ri * Math.cos(a)).toFixed(1),
+      y2: (cy + ri * Math.sin(a)).toFixed(1),
+      major,
+    };
+  });
+
+  return (
+    <svg viewBox="0 0 340 240" className={`block ${className}`} {...SVG} aria-hidden>
+      <Cartouche />
+      <SpinRosette r={94} opacity={0.05} />
+
+      {/* Tick ring */}
+      {ticks.map((t, i) => (
+        <path key={i} d={`M${t.x1} ${t.y1} L${t.x2} ${t.y2}`} strokeWidth="1" opacity={t.major ? 0.4 : 0.2} />
+      ))}
+
+      {/* Donut: full track = total repayable, accent arc = the interest share */}
+      <circle cx={cx} cy={cy} r={R} strokeWidth="5.5" opacity="0.2" />
+      <circle
+        cx={cx}
+        cy={cy}
+        r={R}
+        strokeWidth="5.5"
+        pathLength={100}
+        strokeDasharray="27 73"
+        transform={`rotate(-90 ${cx} ${cy})`}
+        opacity="0.9"
+      />
+      <circle cx={cx} cy={cy} r="42" strokeWidth="1" opacity="0.12" />
+
+      {/* Centre — total repayable */}
+      <text x={cx} y={cy - 3} fontSize="26" textAnchor="middle" {...SERIF}>
+        &#8377;
+      </text>
+      <text
+        x={cx}
+        y={cy + 20}
+        textAnchor="middle"
+        className="font-mono"
+        fontSize="6.5"
+        letterSpacing="2.2"
+        fill="var(--color-ink-faint)"
+        stroke="none"
+      >
+        REPAYABLE
+      </text>
+
+      {/* Coin-edge caption */}
+      <text
+        x={cx}
+        y="220"
+        textAnchor="middle"
+        className="font-mono"
+        fontSize="8"
+        letterSpacing="2.4"
+        fill="var(--color-ink-faint)"
+        stroke="none"
+      >
+        PRINCIPAL + SIMPLE DAILY INTEREST
+      </text>
+    </svg>
+  );
+}
+
+/* ─────────────── About mission — engraved institution facade ─────────────── */
+export function InstitutionMark({ className = "" }: { className?: string }) {
+  const cols = [108, 139, 170, 201, 232];
+
+  return (
+    <svg viewBox="0 0 340 240" className={`block ${className}`} {...SVG} aria-hidden>
+      <Cartouche />
+      <SpinRosette r={96} opacity={0.045} />
+
+      {/* Pediment */}
+      <path d="M170 52 L96 90 H244 Z" strokeWidth="1.6" opacity="0.85" />
+      <path d="M170 62 L112 90 H228 Z" strokeWidth="1" opacity="0.28" />
+      <text x="170" y="80" fontSize="12.5" textAnchor="middle" opacity="0.75" {...SERIF}>
+        &#8377;
+      </text>
+
+      {/* Entablature */}
+      <path d="M90 90 H250" strokeWidth="1.6" opacity="0.8" />
+      <path d="M96 98 H244" strokeWidth="1.2" opacity="0.5" />
+
+      {/* Colonnade */}
+      {cols.map((x) => (
+        <g key={x} opacity="0.85">
+          <path d={`M${x - 6} 104 H${x + 6}`} strokeWidth="1.3" />
+          <path d={`M${x} 106 V176`} strokeWidth="2.1" />
+          <path d={`M${x} 106 V176`} strokeWidth="1" opacity="0.3" transform="translate(2.4 0)" />
+          <path d={`M${x - 6.5} 178 H${x + 6.5}`} strokeWidth="1.3" />
+        </g>
+      ))}
+
+      {/* Steps */}
+      <path d="M92 180 H248" strokeWidth="1.4" opacity="0.7" />
+      <path d="M82 188 H258" strokeWidth="1.6" opacity="0.6" />
+      <path d="M73 196 H267" strokeWidth="2" opacity="0.5" />
+
+      {/* Coin-edge caption */}
+      <text
+        x="170"
+        y="220"
+        textAnchor="middle"
+        className="font-mono"
+        fontSize="8"
+        letterSpacing="2.4"
+        fill="var(--color-ink-faint)"
+        stroke="none"
+      >
+        A LENDING INSTITUTION · EST. 1984
       </text>
     </svg>
   );

@@ -34,13 +34,13 @@ export default function Home() {
               intro={product.blurb}
             />
             <Reveal delay={0.2} className="hidden lg:block">
-              <ProductInstrument className="w-full max-w-[23rem] text-accent" />
+              <ProductInstrument className="w-full text-accent" />
             </Reveal>
           </div>
           <Parallax speed={0.06}>
             <Reveal delay={0.1}>
               {/* Term-sheet card — engraved heading, hero figure, ledger rows */}
-              <div className="card-raised rounded-2xl border border-line-strong bg-canvas p-8 shadow-[0_1px_0_rgba(17,47,91,0.04)] sm:p-10">
+              <div className="card-gloss rounded-2xl p-8 sm:p-10">
                 <div className="flex items-center gap-3">
                   <span className="h-1.5 w-1.5 shrink-0 rotate-45 bg-accent" aria-hidden />
                   <span className="eyebrow text-ink-faint">{product.name}</span>
@@ -167,7 +167,7 @@ export default function Home() {
               intro="We treat every customer consistently and fairly. Loan terms, interest rates and penal charges are disclosed in writing, upfront — and grievances are resolved within 30 days."
             />
             <Reveal delay={0.2} className="hidden lg:block">
-              <FairBalance className="w-full max-w-[23rem] text-accent" />
+              <FairBalance className="w-full text-accent" />
             </Reveal>
           </div>
           <Stagger className="flex flex-col gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)]">

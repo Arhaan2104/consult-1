@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Button } from "@/components/Button";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import PageHero from "@/components/PageHero";
+import { InstitutionMark } from "@/components/SectionArt";
 import { Section, SectionDivider, SectionHeader } from "@/components/Section";
 import { site, timeline } from "@/content/site";
 
@@ -53,7 +54,12 @@ export default function AboutPage() {
       {/* Mission */}
       <Section texture="weave">
         <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <SectionHeader index="01" kicker="Our mission" title={<>Why we exist.</>} />
+          <div className="flex flex-col gap-12">
+            <SectionHeader index="01" kicker="Our mission" title={<>Why we exist.</>} />
+            <Reveal delay={0.2} className="hidden lg:block">
+              <InstitutionMark className="w-full text-accent" />
+            </Reveal>
+          </div>
           <Reveal delay={0.1}>
             <p
               className="font-display text-2xl leading-snug text-ink sm:text-3xl"
