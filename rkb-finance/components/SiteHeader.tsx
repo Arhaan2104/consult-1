@@ -77,7 +77,7 @@ export default function SiteHeader() {
 
             <span className="mx-1.5 h-5 w-px bg-line-strong" aria-hidden />
 
-            <Link href="/contact" className={buttonClasses("primary", "px-4 py-2")}>
+            <Link href="/contact" className={buttonClasses("primary", "", "px-5 py-2.5")}>
               Apply now
               <span
                 aria-hidden

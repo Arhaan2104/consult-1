@@ -19,8 +19,12 @@ export const buttonVariants: Record<Variant, string> = {
     "bg-canvas text-ink hover:bg-accent hover:text-canvas shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] focus-visible:ring-offset-deep",
 };
 
-export function buttonClasses(variant: Variant = "primary", className = "") {
-  return `${buttonBase} ${buttonSizes} ${buttonVariants[variant]} ${className}`;
+export function buttonClasses(
+  variant: Variant = "primary",
+  className = "",
+  size: string = buttonSizes,
+) {
+  return `${buttonBase} ${size} ${buttonVariants[variant]} ${className}`;
 }
 
 export function Button({
