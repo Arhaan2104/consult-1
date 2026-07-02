@@ -148,7 +148,7 @@ function PinnedProcess({ steps, index, kicker, title }: Props) {
   return (
     <div ref={trackRef} className="relative h-[300svh]">
       <div className="sticky top-0 flex h-svh flex-col justify-start overflow-hidden pt-28 lg:pt-32">
-        <SectionHeader index={index} kicker={kicker} title={title} />
+        <SectionHeader index={index} kicker={kicker} title={title} align="center" />
         <Stepper steps={steps} progress={scrollYProgress} />
 
         {/* One liquid-glass frame holding the cross-fading step */}
@@ -221,7 +221,7 @@ function ArtBlock({
 function StaticProcess({ steps, index, kicker, title }: Props) {
   return (
     <>
-      <SectionHeader index={index} kicker={kicker} title={title} />
+      <SectionHeader index={index} kicker={kicker} title={title} align="center" />
       <div className="mt-14 flex flex-col gap-10 lg:gap-14">
         {steps.map((s, i) => (
           <Reveal key={s.step}>
