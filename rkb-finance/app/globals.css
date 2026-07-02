@@ -24,7 +24,7 @@
   --color-line-dark: rgba(221, 231, 245, 0.16);
 
   --font-display: var(--font-fraunces);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-manrope);
   --font-mono: var(--font-geist-mono);
 
   --ease-rkb: cubic-bezier(0.22, 1, 0.36, 1);
@@ -67,8 +67,7 @@ body {
   overscroll-behavior-y: none;
   -webkit-tap-highlight-color: transparent;
   font-family: var(--font-sans), system-ui, sans-serif;
-  font-feature-settings: "ss01", "cv01";
-  letter-spacing: -0.011em;
+  letter-spacing: -0.014em;
 }
 
 ::selection {
