@@ -51,12 +51,9 @@ export default function Hero() {
           </p>
         </Reveal>
         <Reveal delay={0.08}>
-          <h1 className="display-xl mt-6 max-w-[17ch] text-balance text-ink">
-            Up to <span className="whitespace-nowrap">₹1 lakh</span>,{" "}
-            <span className="text-accent">
-              in your account within{" "}
-              <span className="whitespace-nowrap">24 hours.</span>
-            </span>
+          <h1 className="display-xl mt-6 max-w-[18ch] text-balance text-ink">
+            Empowering borrowers to meet{" "}
+            <span className="text-accent">all their financial needs.</span>
           </h1>
         </Reveal>
         <Reveal delay={0.16}>
