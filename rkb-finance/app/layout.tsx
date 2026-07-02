@@ -68,6 +68,8 @@ export default function RootLayout({
       className={`${fraunces.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-canvas">
+        {/* Brand-blue frame hugging all four viewport edges (see .site-frame). */}
+        <div className="site-frame" aria-hidden />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-canvas"
