@@ -40,7 +40,7 @@ export default function ProductsPage() {
             ["Interest rate", product.rate],
             ["Disbursal", product.disbursal],
           ].map(([k, v]) => (
-            <StaggerItem key={k} className="card-cell flex flex-col gap-2 bg-canvas p-8">
+            <StaggerItem key={k} className="card-cell flex flex-col gap-2 bg-canvas p-6 sm:p-8">
               <span className="eyebrow text-ink-faint">{k}</span>
               <span className="font-display text-2xl leading-tight text-ink">{v}</span>
             </StaggerItem>
@@ -57,11 +57,11 @@ export default function ProductsPage() {
           kicker="What you get"
           title={<>Built around clarity and flexibility.</>}
         />
-        <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-4">
+        <Stagger className="mt-12 grid gap-px sm:mt-16 overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-4">
           {product.features.map((f) => (
             <StaggerItem
               key={f.title}
-              className="card-cell group flex flex-col gap-4 bg-canvas p-8"
+              className="card-cell group flex flex-col gap-4 bg-canvas p-6 sm:p-8"
             >
               <LineIcon
                 name={f.icon}
@@ -101,9 +101,9 @@ export default function ProductsPage() {
           title={<>Open to more borrowers, by design.</>}
           intro="No minimum income, and limited or poor credit history is welcome. A few basic criteria apply."
         />
-        <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger className="mt-12 grid gap-px sm:mt-16 overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-3">
           {eligibility.map((e) => (
-            <StaggerItem key={e.label} className="card-cell flex flex-col gap-2 bg-canvas p-8">
+            <StaggerItem key={e.label} className="card-cell flex flex-col gap-2 bg-canvas p-6 sm:p-8">
               <span className="eyebrow text-ink-faint">{e.label}</span>
               <span className="font-display text-xl leading-snug text-ink">
                 {e.value}
@@ -127,11 +127,11 @@ export default function ProductsPage() {
           kicker="What you&rsquo;ll need"
           title={<>A short, paperless document checklist.</>}
         />
-        <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2">
+        <Stagger className="mt-12 grid gap-px sm:mt-16 overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2">
           {documents.map((d, i) => (
             <StaggerItem
               key={d.title}
-              className="card-cell flex items-start gap-5 bg-canvas p-8"
+              className="card-cell flex items-start gap-5 bg-canvas p-6 sm:p-8"
             >
               <span className="font-display text-2xl text-accent/50">
                 {String(i + 1).padStart(2, "0")}
@@ -159,7 +159,7 @@ export default function ProductsPage() {
           kicker="Applying"
           title={<>From application to funds in three steps.</>}
         />
-        <Stagger className="mt-16 grid gap-12 md:grid-cols-3">
+        <Stagger className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-3">
           {process.map((p) => (
             <StaggerItem key={p.step} className="flex flex-col gap-4">
               <span className="font-display text-5xl text-accent/40">{p.step}</span>

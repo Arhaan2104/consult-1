@@ -50,7 +50,7 @@ export default function LoanCalculator() {
   return (
     <div className="card-raised grid gap-px overflow-hidden rounded-2xl border border-line-strong bg-[var(--color-line)] lg:grid-cols-[1.1fr_0.9fr]">
       {/* Controls */}
-      <div className="flex flex-col gap-9 bg-canvas p-8 sm:p-10">
+      <div className="flex flex-col gap-9 bg-canvas p-6 sm:p-10">
         <label className="flex flex-col gap-3">
           <span className="flex items-baseline justify-between">
             <span className="eyebrow text-ink-faint">Loan amount</span>
@@ -106,7 +106,7 @@ export default function LoanCalculator() {
                   type="button"
                   onClick={() => setRatePct(r.pct)}
                   aria-pressed={active}
-                  className={`rounded-full border py-3 text-base font-medium transition-[colors,transform] duration-200 ease-[var(--ease-rkb)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
+                  className={`rounded-full border py-3 text-sm font-medium transition-[colors,transform] sm:text-base duration-200 ease-[var(--ease-rkb)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
                     active
                       ? "border-accent bg-accent text-canvas"
                       : "border-line-strong text-ink-soft hover:border-accent hover:text-ink"
@@ -122,7 +122,7 @@ export default function LoanCalculator() {
       </div>
 
       {/* Results */}
-      <div className="flex flex-col justify-between gap-8 bg-canvas-3 p-8 sm:p-10">
+      <div className="flex flex-col justify-between gap-8 bg-canvas-3 p-6 sm:p-10">
         <div className="flex flex-col gap-6">
           <div className="flex items-baseline justify-between gap-4 border-b border-line pb-4">
             <span className="text-base text-ink-soft">Daily interest</span>

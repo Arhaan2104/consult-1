@@ -87,7 +87,9 @@ export function SectionHeader({
       )}
       <h2 className="display-lg text-balance">{title}</h2>
       {intro && (
-        <p className={`measure-wide text-xl leading-relaxed ${muted}`}>{intro}</p>
+        <p className={`measure-wide text-lg leading-relaxed sm:text-xl ${muted}`}>
+          {intro}
+        </p>
       )}
     </Reveal>
   );

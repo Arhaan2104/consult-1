@@ -79,7 +79,7 @@ export default function ContactPage() {
 
           {/* Form */}
           <Reveal delay={0.1}>
-            <div className="rounded-2xl border border-line-strong bg-canvas p-8 sm:p-10">
+            <div className="rounded-2xl border border-line-strong bg-canvas p-6 sm:p-10">
               <ContactForm />
             </div>
           </Reveal>
@@ -102,7 +102,7 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="rounded-2xl border border-line bg-canvas-3 p-8">
+            <div className="rounded-2xl border border-line bg-canvas-3 p-6 sm:p-8">
               <p className="eyebrow text-ink-faint">{site.grievance.title}</p>
               <p className="mt-3 font-display text-2xl text-ink">
                 {site.grievance.officer}

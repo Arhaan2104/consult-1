@@ -25,7 +25,7 @@ export default function SiteFooter() {
   return (
     <footer className="panel-dark text-on-dark">
       <div className="shell pt-20 pb-10">
-        <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-14">
           {/* Brand */}
           <div className="flex flex-col gap-5">
             <Link href="/" className="font-display text-2xl text-on-dark">
@@ -54,14 +54,14 @@ export default function SiteFooter() {
           <div className="flex flex-col gap-4">
             <p className="eyebrow text-on-dark-soft">Explore</p>
             <nav className="flex flex-col gap-3 text-base">
-              <Link href="/" className="link-underline w-fit text-on-dark transition-colors hover:text-accent-2">
+              <Link href="/" className="link-underline w-fit py-0.5 text-on-dark transition-colors hover:text-accent-2">
                 Home
               </Link>
               {nav.map((n) => (
                 <Link
                   key={n.href}
                   href={n.href}
-                  className="link-underline w-fit text-on-dark transition-colors hover:text-accent-2"
+                  className="link-underline w-fit py-0.5 text-on-dark transition-colors hover:text-accent-2"
                 >
                   {n.label}
                 </Link>
@@ -77,7 +77,7 @@ export default function SiteFooter() {
                 <Link
                   key={p.href}
                   href={p.href}
-                  className="link-underline w-fit text-on-dark transition-colors hover:text-accent-2"
+                  className="link-underline w-fit py-0.5 text-on-dark transition-colors hover:text-accent-2"
                 >
                   {p.title}
                 </Link>
@@ -96,7 +96,7 @@ export default function SiteFooter() {
                     href={p.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="link-underline w-fit text-on-dark transition-colors hover:text-accent-2"
+                    className="link-underline w-fit py-0.5 text-on-dark transition-colors hover:text-accent-2"
                   >
                     {p.title} ↗
                   </a>
@@ -104,7 +104,7 @@ export default function SiteFooter() {
                   <Link
                     key={p.href}
                     href={p.href}
-                    className="link-underline w-fit text-on-dark transition-colors hover:text-accent-2"
+                    className="link-underline w-fit py-0.5 text-on-dark transition-colors hover:text-accent-2"
                   >
                     {p.title}
                   </Link>

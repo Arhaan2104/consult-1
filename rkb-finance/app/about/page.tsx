@@ -80,9 +80,9 @@ export default function AboutPage() {
           kicker="What guides us"
           title={<>Four principles, applied consistently.</>}
         />
-        <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2">
+        <Stagger className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:mt-16 sm:grid-cols-2">
           {values.map((v) => (
-            <StaggerItem key={v.title} className="card-cell flex flex-col gap-3 bg-canvas p-8 sm:p-10">
+            <StaggerItem key={v.title} className="card-cell flex flex-col gap-3 bg-canvas p-6 sm:p-10">
               <span className="font-display text-2xl text-ink">{v.title}</span>
               <span className="h-px w-8 bg-accent/50" />
               <p className="text-base leading-relaxed text-ink-soft">{v.body}</p>
@@ -100,7 +100,7 @@ export default function AboutPage() {
           kicker="Our story"
           title={<>Forty years, in three chapters.</>}
         />
-        <Stagger className="mt-16 grid gap-12 md:grid-cols-3">
+        <Stagger className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-3">
           {timeline.map((t) => (
             <StaggerItem key={t.title} className="flex flex-col gap-4 border-t border-line-strong pt-6">
               <span className="font-display text-3xl text-accent">{t.year}</span>

@@ -116,22 +116,36 @@ export default function SiteHeader() {
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <div className="shell flex h-full flex-col justify-center gap-2 pt-16">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="font-display text-4xl text-ink"
-            >
-              {item.label}
-            </Link>
-          ))}
+        <div className="shell flex h-full flex-col justify-center gap-1 pt-16">
+          {nav.map((item) => {
+            const active =
+              pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                onClick={() => setOpen(false)}
+                className={`flex items-center gap-3 py-1.5 font-display text-4xl transition-colors ${
+                  active ? "text-accent" : "text-ink"
+                }`}
+              >
+                <span
+                  className={`h-1.5 w-1.5 rotate-45 bg-accent transition-opacity ${
+                    active ? "opacity-100" : "opacity-0"
+                  }`}
+                  aria-hidden
+                />
+                {item.label}
+              </Link>
+            );
+          })}
           <Link
             href="/contact"
             onClick={() => setOpen(false)}
-            className="font-display text-4xl text-accent"
+            className="flex items-center gap-3 py-1.5 font-display text-4xl text-accent"
           >
+            <span className="h-1.5 w-1.5 rotate-45 bg-accent" aria-hidden />
             Apply now
           </Link>
           <p className="eyebrow mt-10 text-ink-faint">

@@ -99,11 +99,11 @@ export default function Home() {
           kicker="Why borrowers choose us"
           title={<>The terms are simple, and they stay that way.</>}
         />
-        <Stagger className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
           {advantages.map((a) => (
             <StaggerItem
               key={a.title}
-              className="card-cell group flex flex-col gap-4 bg-canvas p-8"
+              className="card-cell group flex flex-col gap-4 bg-canvas p-6 sm:p-8"
             >
               <LineIcon
                 name={a.icon}
@@ -178,7 +178,7 @@ export default function Home() {
                 "A registered NBFC, covered by the Reserve Bank Integrated Ombudsman Scheme.",
               ],
             ].map(([t, d]) => (
-              <StaggerItem key={t} className="card-cell flex flex-col gap-2 bg-canvas p-8">
+              <StaggerItem key={t} className="card-cell flex flex-col gap-2 bg-canvas p-6 sm:p-8">
                 <span className="font-display text-lg text-ink">{t}</span>
                 <p className="text-base leading-relaxed text-ink-soft">{d}</p>
               </StaggerItem>
