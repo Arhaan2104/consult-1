@@ -51,11 +51,10 @@ export default function Hero() {
           </p>
         </Reveal>
         <Reveal delay={0.08}>
-          <h1 className="display-xl mt-6 max-w-[18ch] text-balance text-ink">
-            Empowering borrowers to meet{" "}
-            <span className="block whitespace-nowrap text-accent">
-              all their financial needs.
-            </span>
+          <h1 className="display-xl mt-6 max-w-[26ch] text-pretty text-ink">
+            Empowering borrowers
+            <br className="hidden sm:block" /> to meet{" "}
+            <span className="block text-accent">all their financial needs.</span>
           </h1>
         </Reveal>
         <Reveal delay={0.24}>
