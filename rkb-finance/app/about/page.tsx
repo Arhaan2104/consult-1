@@ -31,6 +31,13 @@ const values = [
   },
 ];
 
+/** Grounded institutional credentials — anchor the mission, balance the column. */
+const missionFacts = [
+  { value: "Since 1984", label: "Four decades" },
+  { value: "RBI-registered", label: "NBFC" },
+  { value: "Fully digital", label: "End-to-end" },
+];
+
 const registration = [
   ["Legal name", site.legalName],
   ["Registered as", "Non-Banking Financial Company (NBFC)"],
@@ -53,26 +60,36 @@ export default function AboutPage() {
 
       {/* Mission */}
       <Section texture="weave">
-        <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <div className="flex flex-col gap-12">
+        <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+          <div className="flex flex-col gap-10">
             <SectionHeader index="01" kicker="Our mission" title={<>Why we exist.</>} />
             <Reveal delay={0.2} className="hidden lg:block">
-              <InstitutionMark className="w-full text-accent" />
+              <InstitutionMark className="w-full max-w-md text-accent" />
             </Reveal>
           </div>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} className="flex flex-col gap-8">
             <p
               className="font-display text-2xl leading-snug text-ink sm:text-3xl"
               style={{ hangingPunctuation: "first last", textIndent: "-0.45em" }}
             >
               &ldquo;{site.mission}&rdquo;
             </p>
-            <p className="mt-8 measure-wide leading-relaxed text-ink-soft">
-              We specialise in personal credit products for salaried
-              professionals, with affordable interest rates supported by a
-              minimal-risk profile. Streamlining access to funds through digital
+            <p className="measure-wide leading-relaxed text-ink-soft">
+              We offer a single, transparent short-term loan — kept affordable by
+              a minimal-risk profile, and open to applicants with no minimum
+              income threshold. Streamlining access to funds through digital
               innovation is at the heart of everything we do.
             </p>
+            <dl className="mt-1 grid grid-cols-3 gap-6 border-t border-line pt-8">
+              {missionFacts.map((f) => (
+                <div key={f.label} className="flex flex-col gap-1.5">
+                  <dt className="font-display text-xl leading-none text-ink sm:text-2xl">
+                    {f.value}
+                  </dt>
+                  <dd className="eyebrow text-ink-faint">{f.label}</dd>
+                </div>
+              ))}
+            </dl>
           </Reveal>
         </div>
       </Section>
