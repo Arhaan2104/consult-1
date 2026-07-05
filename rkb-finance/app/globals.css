@@ -12,7 +12,7 @@
   --color-canvas-3: #efe7d6;     /* warmest panel / cards      */
   --color-ink: #112f5b;          /* deep brand blue — primary ink */
   --color-ink-soft: #41557a;     /* body copy on ivory         */
-  --color-ink-faint: #76859e;    /* captions / meta            */
+  --color-ink-faint: #5f6d8a;    /* captions / meta — WCAG AA 4.9:1 on ivory */
   --color-deep: #0b2447;         /* inverted brand-blue surface */
   --color-deep-2: #0f2c54;       /* inverted panel raise       */
   --color-accent: #205aa8;       /* R.K. Bansal brand blue     */
