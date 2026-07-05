@@ -39,14 +39,16 @@ export default function ContactForm() {
       <div className="grid gap-6 sm:grid-cols-2">
         <label className={labelCls}>
           <span className={labelText}>Name</span>
-          <input required name="name" className={field} placeholder="Your full name" />
+          <input required name="name" autoComplete="name" className={field} placeholder="Your full name" />
         </label>
         <label className={labelCls}>
           <span className={labelText}>Mobile</span>
           <input
             required
+            type="tel"
             name="phone"
             inputMode="tel"
+            autoComplete="tel"
             className={field}
             placeholder="Registered mobile number"
           />
@@ -58,6 +60,7 @@ export default function ContactForm() {
           required
           type="email"
           name="email"
+          autoComplete="email"
           className={field}
           placeholder="you@example.com"
         />
