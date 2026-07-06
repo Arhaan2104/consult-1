@@ -201,6 +201,7 @@ export const eligibility = [
   { label: "Residency", value: "Resident of India", placeholder: true }, // PLACEHOLDER
   { label: "Income", value: "No minimum income threshold", placeholder: false }, // grounded: advantages
   { label: "Credit history", value: "Limited or poor credit accepted", placeholder: false }, // grounded: product.features
+  { label: "Bank account", value: "Active account required", placeholder: false }, // grounded: documents / privacy policy — needed for disbursal & repayment
   { label: "Documentation", value: "Minimal — KYC only", placeholder: false }, // grounded: process
 ] as const;
 

@@ -258,7 +258,11 @@ function stepSpec(index: number, total: number) {
       return { in: [0.27, 0.39, 1], op: [1, 0, 0], rise: [0, -1, -1] };
     if (index === 1)
       return { in: [0.27, 0.42, 0.58, 0.7], op: [0, 1, 1, 0], rise: [1, 0, 0, -1] };
-    return { in: [0.64, 0.86], op: [0, 1], rise: [1, 0] };
+    // Explicit tail stop at 1 so the final step HOLDS full opacity through the
+    // end of the pinned range. Without it, this motion build does not clamp a
+    // 2-stop range past its last input — the step decays back to 0 and leaves
+    // the glass frame empty as the scene releases.
+    return { in: [0.64, 0.86, 1], op: [0, 1, 1], rise: [1, 0, 0] };
   }
   const c = (index + 0.5) / total;
   return {
