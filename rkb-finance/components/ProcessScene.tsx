@@ -212,7 +212,7 @@ function ArtBlock({
       style={{ opacity, scale }}
       className="[grid-area:1/1] grid h-full w-full place-items-center"
     >
-      <ProcessArt index={index} className="w-[86%] text-accent" />
+      <ProcessArt index={index} className="w-[94%] text-accent" />
     </motion.div>
   );
 }
@@ -228,7 +228,7 @@ function StaticProcess({ steps, index, kicker, title }: Props) {
             <div className="glass-frame p-6 sm:p-9 lg:p-11">
               <div className="grid items-center gap-8 sm:grid-cols-2 sm:gap-10 lg:gap-14">
                 <ArtWell className={`max-w-[15rem] sm:max-w-[17rem] ${i % 2 === 1 ? "sm:order-2" : ""}`}>
-                  <ProcessArt index={i} className="w-[86%] text-accent" />
+                  <ProcessArt index={i} className="w-[94%] text-accent" />
                 </ArtWell>
                 <div>
                   <div className="mb-5 flex items-center gap-3.5">

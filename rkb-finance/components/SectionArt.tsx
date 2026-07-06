@@ -146,7 +146,15 @@ export function ProductInstrument({ className = "" }: { className?: string }) {
 }
 
 /* ─────────────────────── Fair practice — balance scale ─────────────────────── */
-export function FairBalance({ className = "" }: { className?: string }) {
+export function FairBalance({
+  className = "",
+  frame = true,
+}: {
+  className?: string;
+  /** Draw the coin-edge cartouche border. Off when the plate sits beside an
+      already-bordered card/stack, so it reads as airy line-art, not a box. */
+  frame?: boolean;
+}) {
   const cx = 170;
   const beamY = 84;
   const beamHalf = 84; // beam reaches cx ± beamHalf
@@ -165,7 +173,7 @@ export function FairBalance({ className = "" }: { className?: string }) {
       {...SVG}
       aria-hidden
     >
-      <Cartouche />
+      {frame && <Cartouche />}
 
       {/* Faint guilloché rosette behind the scale — slowly turning */}
       <SpinRosette r={78} opacity={0.1} />

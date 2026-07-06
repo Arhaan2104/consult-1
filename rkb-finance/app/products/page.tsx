@@ -5,7 +5,6 @@ import { Button } from "@/components/Button";
 import LoanCalculator from "@/components/LoanCalculator";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import PageHero from "@/components/PageHero";
-import { RepaymentRing } from "@/components/SectionArt";
 import { Section, SectionDivider, SectionHeader } from "@/components/Section";
 import {
   documents,
@@ -80,17 +79,12 @@ export default function ProductsPage() {
       {/* Calculator */}
       <Section texture="grain">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <div className="flex flex-col gap-12">
-            <SectionHeader
-              index="02"
-              kicker="Estimate your loan"
-              title={<>See what you&rsquo;ll repay, before you apply.</>}
-              intro="Move the sliders to estimate the interest and total repayment on a Short Term Loan. Interest is simple daily interest on the principal — never compounded."
-            />
-            <Reveal delay={0.2} className="hidden lg:block">
-              <RepaymentRing className="w-full text-accent" />
-            </Reveal>
-          </div>
+          <SectionHeader
+            index="02"
+            kicker="Estimate your loan"
+            title={<>See what you&rsquo;ll repay, before you apply.</>}
+            intro="Move the sliders to estimate the interest and total repayment on a Short Term Loan. Interest is simple daily interest on the principal — never compounded."
+          />
           <Reveal delay={0.1}>
             <LoanCalculator />
           </Reveal>

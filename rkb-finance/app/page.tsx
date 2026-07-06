@@ -5,7 +5,7 @@ import LineIcon from "@/components/LineIcon";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { Parallax, TextReveal } from "@/components/ScrollFX";
 import ProcessScene from "@/components/ProcessScene";
-import { ProductInstrument, FairBalance } from "@/components/SectionArt";
+import { FairBalance } from "@/components/SectionArt";
 import { Section, SectionDivider, SectionHeader } from "@/components/Section";
 import {
   advantages,
@@ -33,9 +33,6 @@ export default function Home() {
               title={<>A short-term loan, when you need it most.</>}
               intro={product.blurb}
             />
-            <Reveal delay={0.2} className="hidden lg:block">
-              <ProductInstrument className="w-full text-accent" />
-            </Reveal>
           </div>
           <Parallax speed={0.06}>
             <Reveal delay={0.1}>
@@ -159,7 +156,7 @@ export default function Home() {
       {/* ─────────────────────── Compliance / trust ─────────────────────── */}
       <Section texture="weave">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-10">
             <SectionHeader
               index="04"
               kicker="Fair practice"
@@ -167,7 +164,7 @@ export default function Home() {
               intro="We treat every customer consistently and fairly. Loan terms, interest rates and penal charges are disclosed in writing, upfront — and grievances are resolved within 30 days."
             />
             <Reveal delay={0.2} className="hidden lg:block">
-              <FairBalance className="w-full text-accent" />
+              <FairBalance frame={false} className="mx-auto w-full max-w-sm text-accent" />
             </Reveal>
           </div>
           <Stagger className="flex flex-col gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)]">
