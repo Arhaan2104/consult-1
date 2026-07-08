@@ -283,9 +283,11 @@ body {
   isolation: isolate;
   background-color: var(--color-deep);
   color: var(--color-on-dark);
+  /* Ambient depth, not a spotlight — soft lights pushed just off two edges so
+     the surface reads as evenly-lit engraved navy, never a glowing blob. */
   background-image:
-    radial-gradient(90% 120% at 85% 0%, rgba(32, 90, 168, 0.16), transparent 55%),
-    radial-gradient(60% 90% at 0% 100%, rgba(17, 47, 91, 0.6), transparent 60%);
+    radial-gradient(110% 130% at 84% -12%, rgba(32, 90, 168, 0.13), transparent 60%),
+    radial-gradient(80% 105% at 4% 110%, rgba(17, 47, 91, 0.42), transparent 64%);
 }
 .panel-dark::before {
   content: "";
@@ -588,6 +590,51 @@ body {
 @keyframes net-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Capital tokens — small engraved coins streaming from each sourcing partner
+   inward to the regulated lender at the hub. offset-path carries the token
+   along its spoke; the per-token delay staggers the stream. */
+.net-token {
+  offset-rotate: 0deg;
+  animation: net-token 3.4s var(--ease-rkb) infinite;
+}
+@keyframes net-token {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  16% {
+    opacity: 1;
+  }
+  84% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+/* Hub pulse — a ring expands from the core each time capital is received. */
+.net-pulse {
+  transform-box: view-box;
+  transform-origin: center;
+  animation: net-pulse 3.4s var(--ease-rkb) infinite;
+}
+@keyframes net-pulse {
+  0%,
+  58% {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  70% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
   }
 }
 

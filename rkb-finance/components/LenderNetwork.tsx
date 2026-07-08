@@ -113,6 +113,26 @@ export default function LenderNetwork() {
           );
         })}
 
+        {/* Capital tokens — engraved coins streaming inward to the lender */}
+        {sourcingPartners.map((p, i) => {
+          const node = polar(i, n, R - 9);
+          const edge = polar(i, n, HUB + 4);
+          return (
+            <circle
+              key={`t-${p}`}
+              r="3.4"
+              cx="0"
+              cy="0"
+              fill="var(--color-accent)"
+              className="net-token"
+              style={{
+                offsetPath: `path("M ${node.x.toFixed(1)} ${node.y.toFixed(1)} L ${edge.x.toFixed(1)} ${edge.y.toFixed(1)}")`,
+                animationDelay: `${((i * 3.4) / n).toFixed(2)}s`,
+              }}
+            />
+          );
+        })}
+
         {/* Partner nodes + labels */}
         {sourcingPartners.map((p, i) => {
           const node = polar(i, n, R);
@@ -148,6 +168,16 @@ export default function LenderNetwork() {
 
         {/* Core medallion — the regulated lender */}
         <g>
+          {/* Pulse ring — capital received / disbursed */}
+          <circle
+            cx={CX}
+            cy={CY}
+            r={HUB}
+            fill="none"
+            stroke="var(--color-accent)"
+            strokeWidth="1.25"
+            className="net-pulse"
+          />
           <circle cx={CX} cy={CY} r={HUB} fill="var(--color-canvas)" />
           <circle cx={CX} cy={CY} r={HUB} fill="var(--color-accent)" opacity="0.05" />
           <circle cx={CX} cy={CY} r={HUB} stroke="var(--color-line-strong)" strokeWidth="1" />
