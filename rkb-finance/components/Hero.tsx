@@ -6,11 +6,13 @@ import {
   useScroll,
   useTransform,
   useSpring,
+  useMotionValue,
   useReducedMotion,
 } from "motion/react";
 import { Button } from "@/components/Button";
 import HeroSeal from "@/components/HeroSeal";
 import HeroSealMotion from "@/components/HeroSealMotion";
+import HeroBanknote from "@/components/HeroBanknote";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { SPRING } from "@/components/motion/tokens";
 import { heroTrust, site } from "@/content/site";
@@ -35,11 +37,34 @@ export default function Hero() {
 
   const contentStyle = reduce ? undefined : { y: contentY, opacity: contentOpacity };
 
+  // Cursor parallax for the medallion — normalised −0.5…0.5, spring-smoothed.
+  const mvx = useMotionValue(0);
+  const mvy = useMotionValue(0);
+  const pointerX = useSpring(mvx, { stiffness: 90, damping: 20, mass: 0.6 });
+  const pointerY = useSpring(mvy, { stiffness: 90, damping: 20, mass: 0.6 });
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLElement>) => {
+    if (reduce || e.pointerType !== "mouse") return;
+    const r = e.currentTarget.getBoundingClientRect();
+    mvx.set((e.clientX - r.left) / r.width - 0.5);
+    mvy.set((e.clientY - r.top) / r.height - 0.5);
+  };
+  const resetPointer = () => {
+    mvx.set(0);
+    mvy.set(0);
+  };
+
   return (
-    <section ref={heroRef} className="relative hero-rkb overflow-hidden">
-      <HeroSealMotion progress={scrollYProgress}>
+    <section
+      ref={heroRef}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetPointer}
+      className="relative hero-rkb overflow-hidden"
+    >
+      <HeroSealMotion progress={scrollYProgress} pointer={{ x: pointerX, y: pointerY }}>
         <HeroSeal />
       </HeroSealMotion>
+      <HeroBanknote />
       <motion.div
         style={contentStyle}
         className="relative z-10 shell flex flex-col items-center text-center pt-28 pb-20 sm:pt-36 lg:pt-40 lg:pb-28"

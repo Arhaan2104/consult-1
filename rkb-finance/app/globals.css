@@ -505,7 +505,7 @@ body {
   left: 50%;
   top: 50%;
   z-index: 0;
-  width: clamp(390px, 64vw, 780px);
+  width: clamp(400px, 66vw, 820px);
   aspect-ratio: 1;
   translate: -50% -45%;
   pointer-events: none;
@@ -527,7 +527,7 @@ body {
     transform: scale(0.92);
   }
   to {
-    opacity: 0.26;
+    opacity: 0.4;
     transform: scale(1);
   }
 }
