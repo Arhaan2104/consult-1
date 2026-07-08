@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope, Geist_Mono } from "next/font/google";
+import {
+  Libre_Caslon_Display,
+  Libre_Caslon_Text,
+  Manrope,
+  Geist_Mono,
+} from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
@@ -8,9 +13,21 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { site } from "@/content/site";
 
-const fraunces = Fraunces({
+// Libre Caslon — the foundational English book/legal serif. Display cut for
+// large headlines; Text cut (sturdier, lower contrast) for smaller serif set,
+// mirroring the optical-size behaviour we relied on before.
+const caslonDisplay = Libre_Caslon_Display({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  weight: "400",
+  variable: "--font-caslon-display",
+  display: "swap",
+});
+
+const caslonText = Libre_Caslon_Text({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-caslon-text",
   display: "swap",
 });
 
@@ -65,7 +82,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${manrope.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${caslonDisplay.variable} ${caslonText.variable} ${manrope.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-canvas">
         {/* Brand-blue frame hugging all four viewport edges (see .site-frame). */}

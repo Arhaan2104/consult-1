@@ -47,13 +47,14 @@ export function Section({
 
 /** Section header with engraved index + serif title. */
 export function SectionHeader({
-  index,
   kicker,
   title,
   intro,
   dark = false,
   align = "left",
 }: {
+  /** Accepted for call-site compatibility; no longer rendered (the numbered
+      eyebrow was a template tell). Kept optional so existing `index=".."` pass. */
   index?: string;
   kicker?: string;
   title: ReactNode;
@@ -69,19 +70,16 @@ export function SectionHeader({
         align === "center" ? "items-center text-center mx-auto" : ""
       } ${align === "center" ? "max-w-2xl" : "max-w-3xl"}`}
     >
-      {(index || kicker) && (
-        <div className={`eyebrow flex items-center gap-3.5 ${accent}`}>
-          {index && <span className="tabular-nums">{index}</span>}
-          {index && kicker && (
-            <span
-              className={`h-px w-7 ${dark ? "bg-accent-2/50" : "bg-accent/40"}`}
-              aria-hidden
-            />
-          )}
-          {kicker && (
-            <span className={dark ? "text-on-dark-soft" : "text-ink-faint"}>
-              {kicker}
-            </span>
+      {kicker && (
+        <div
+          className={`eyebrow flex items-center gap-3 ${accent} ${
+            align === "center" ? "justify-center" : ""
+          }`}
+        >
+          <span className="h-px w-8 bg-current opacity-50" aria-hidden />
+          <span>{kicker}</span>
+          {align === "center" && (
+            <span className="h-px w-8 bg-current opacity-50" aria-hidden />
           )}
         </div>
       )}

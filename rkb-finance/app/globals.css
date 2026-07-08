@@ -23,7 +23,8 @@
   --color-line-strong: rgba(17, 47, 91, 0.26);
   --color-line-dark: rgba(221, 231, 245, 0.16);
 
-  --font-display: var(--font-fraunces);
+  --font-display: var(--font-caslon-display); /* large headlines */
+  --font-serif: var(--font-caslon-text);      /* smaller serif set — sturdier cut */
   --font-sans: var(--font-manrope);
   --font-mono: var(--font-geist-mono);
 
@@ -120,45 +121,49 @@ body {
   background-size: 100% 1px;
 }
 
-/* ---------- Typography helpers ---------- */
+/* ---------- Typography helpers ----------
+   Libre Caslon — a classical foundational serif. Unlike Fraunces it isn't a
+   variable font, so weights are fixed (400) and it wants far LESS negative
+   tracking and a touch more leading than a grotesque-ish display serif. The
+   large display sizes use the high-contrast Display cut; smaller serif set uses
+   the sturdier Text cut so hairlines never get fragile. */
 .font-display {
-  font-family: var(--font-display), Georgia, serif;
-  font-optical-sizing: auto;
+  font-family: var(--font-serif), Georgia, serif;
 }
 
 .display-xl {
   font-family: var(--font-display), Georgia, serif;
-  font-weight: 340;
+  font-weight: 400;
   font-size: clamp(2.7rem, 6.4vw, 5.6rem);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
-  /* High optical size + no "wonk" → refined, institutional display. */
-  font-variation-settings: "opsz" 144, "WONK" 0;
+  line-height: 1.02;
+  letter-spacing: -0.012em;
 }
 
 .display-lg {
   font-family: var(--font-display), Georgia, serif;
-  font-weight: 360;
-  font-size: clamp(2.1rem, 4.3vw, 3.6rem);
-  line-height: 1.04;
-  letter-spacing: -0.02em;
-  font-variation-settings: "opsz" 144, "WONK" 0;
+  font-weight: 400;
+  font-size: clamp(2.1rem, 4.3vw, 3.55rem);
+  line-height: 1.08;
+  letter-spacing: -0.008em;
 }
 
 .display-md {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 380;
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
   font-size: clamp(1.55rem, 2.6vw, 2.25rem);
-  line-height: 1.1;
-  letter-spacing: -0.015em;
+  line-height: 1.16;
+  letter-spacing: -0.005em;
 }
 
+/* Section kicker — a small-caps engraved label, no number, no mono. Set in the
+   grotesk with wide tracking and a lifted baseline so it reads as a refined
+   overline, not the templated "01 —— LABEL" eyebrow. */
 .eyebrow {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
