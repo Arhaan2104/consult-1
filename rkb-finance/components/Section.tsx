@@ -66,6 +66,7 @@ export function SectionHeader({
   intro,
   dark = false,
   align = "left",
+  titleClassName = "display-lg text-balance",
 }: {
   /** Accepted for call-site compatibility; no longer rendered (the numbered
       eyebrow was a template tell). Kept optional so existing `index=".."` pass. */
@@ -75,6 +76,9 @@ export function SectionHeader({
   intro?: ReactNode;
   dark?: boolean;
   align?: "left" | "center";
+  /** Override the title type for special cases (e.g. a long one-line heading
+      that would wrap at the default display-lg). Defaults to the display cut. */
+  titleClassName?: string;
 }) {
   const accent = dark ? "text-gold-bright" : "text-accent";
   const muted = dark ? "text-on-dark-soft" : "text-ink-soft";
@@ -94,7 +98,7 @@ export function SectionHeader({
           <span>{kicker}</span>
         </div>
       )}
-      <h2 className="display-lg text-balance">{title}</h2>
+      <h2 className={titleClassName}>{title}</h2>
       {intro && (
         <p className={`measure-wide text-lg leading-relaxed sm:text-xl ${muted}`}>
           {intro}

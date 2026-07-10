@@ -146,6 +146,18 @@ body {
   letter-spacing: -0.015em;
 }
 
+/* Fitted display heading for long, single-line section titles ("Frequently
+   Asked Questions") that would wrap at display-lg inside the header column.
+   Sized so the 26-glyph phrase holds ONE line from ~360px up to desktop; blue
+   bold like the other section headers, just tuned to the line length. */
+.display-faq {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 730;
+  font-size: clamp(1.45rem, 4.8vw, 3.3rem);
+  line-height: 1.05;
+  letter-spacing: -0.022em;
+}
+
 /* Homepage-hero cut of display-xl — capped for the split stage so the
    headline holds 2–3 lines beside the medallion at every desktop width. */
 .display-hero {

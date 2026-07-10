@@ -157,20 +157,36 @@ export default function AboutPage() {
         </Reveal>
       </Section>
 
-      {/* CTA — warm gold band */}
+      {/* CTA — warm gold band. Centered ceremonial close, same grammar as the
+          home and products closers: kicker set between symmetric hairlines
+          like a certificate ornament, heading on the centre axis, one CTA. */}
       <Section texture="gold-loud">
-        <Reveal className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-col gap-4">
-            <p className="eyebrow flex items-center gap-3 text-gold">
+        <div className="text-center">
+          <Reveal>
+            <p className="eyebrow flex items-center justify-center gap-3 text-gold">
               <span className="h-px w-8 bg-current opacity-50" aria-hidden />
               Get in touch
+              <span className="h-px w-8 bg-current opacity-50" aria-hidden />
             </p>
-            <h2 className="display-md max-w-[18ch] text-balance text-ink">
+          </Reveal>
+          <Reveal delay={0.08}>
+            <h2 className="display-lg mx-auto mt-5 max-w-[20ch] text-balance text-ink">
               Have a question for our team?
             </h2>
-          </div>
-          <Button href="/contact">Contact us</Button>
-        </Reveal>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <div className="mt-10 flex justify-center">
+              <Button
+                href="/contact"
+                magnetic
+                size="px-8 py-4"
+                className="w-full justify-center sm:w-auto"
+              >
+                Contact us
+              </Button>
+            </div>
+          </Reveal>
+        </div>
       </Section>
     </>
   );

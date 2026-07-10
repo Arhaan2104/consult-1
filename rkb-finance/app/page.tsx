@@ -149,7 +149,10 @@ export default function Home() {
 
       {/* ─────────────── FAQ — good to know (woven-paper band) ─────────────── */}
       <Section texture="weave">
-        <SectionHeader kicker="Questions" title={<>Good to know.</>} />
+        <SectionHeader
+          title={<>Frequently Asked Questions</>}
+          titleClassName="display-faq"
+        />
         <div className="mt-12 grid gap-12 sm:mt-14 lg:grid-cols-2">
           {faqGroups.map((group) => (
             <Reveal key={group.heading}>
@@ -169,10 +172,22 @@ export default function Home() {
           />
           <Reveal delay={0.16}>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <Button href="/contact" variant="gold" magnetic size="px-8 py-4">
+              <Button
+                href="/contact"
+                variant="gold"
+                magnetic
+                size="px-8 py-4"
+                className="w-full justify-center sm:w-auto"
+              >
                 Apply now
               </Button>
-              <Button href="/products" variant="ghost" arrow={false} size="px-8 py-4">
+              <Button
+                href="/products"
+                variant="ghost"
+                arrow={false}
+                size="px-8 py-4"
+                className="w-full justify-center sm:w-auto"
+              >
                 See the product
               </Button>
             </div>

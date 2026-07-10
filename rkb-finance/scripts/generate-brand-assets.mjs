@@ -97,10 +97,6 @@ function textPaths(font, text, size, { letterSpacing = 0, fill = "#000" } = {}) 
   return { svg, width: x - (text.length ? letterSpacing : 0) };
 }
 
-/** Measure-only helper. */
-const textWidth = (font, text, size, letterSpacing = 0) =>
-  textPaths(font, text, size, { letterSpacing }).width;
-
 /**
  * The ₹ coin glyph as a centred path (EB Garamond — the engraved serif of the
  * seal). Centred optically on its ink bounding box around (0,0).
