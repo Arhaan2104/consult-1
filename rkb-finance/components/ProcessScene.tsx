@@ -65,7 +65,7 @@ function StageArt({ index }: { index: number }) {
         uid={index}
         className="pointer-events-none absolute inset-0 m-auto h-full w-full text-gold"
       />
-      <ProcessArt index={index} className="relative w-[88%] text-accent" />
+      <ProcessArt index={index} className="relative w-[78%] text-accent" />
     </div>
   );
 }
