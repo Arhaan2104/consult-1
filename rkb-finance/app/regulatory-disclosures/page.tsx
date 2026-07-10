@@ -89,7 +89,7 @@ export default function RegulatoryDisclosuresPage() {
                       key={d}
                       className="flex gap-3 measure-wide leading-relaxed text-ink-soft"
                     >
-                      <span className="mt-2.5 h-1 w-1 shrink-0 rotate-45 bg-accent" />
+                      <span className="mint-mark mt-2 h-1.5 w-1.5 shrink-0" aria-hidden />
                       <span>{d}</span>
                     </li>
                   ))}

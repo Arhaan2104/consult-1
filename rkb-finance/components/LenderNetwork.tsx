@@ -123,7 +123,7 @@ export default function LenderNetwork() {
               r="3.4"
               cx="0"
               cy="0"
-              fill="var(--color-accent)"
+              fill="var(--color-gold)"
               className="net-token"
               style={{
                 offsetPath: `path("M ${node.x.toFixed(1)} ${node.y.toFixed(1)} L ${edge.x.toFixed(1)} ${edge.y.toFixed(1)}")`,
@@ -174,7 +174,7 @@ export default function LenderNetwork() {
             cy={CY}
             r={HUB}
             fill="none"
-            stroke="var(--color-accent)"
+            stroke="var(--color-gold)"
             strokeWidth="1.25"
             className="net-pulse"
           />
@@ -189,7 +189,7 @@ export default function LenderNetwork() {
             textAnchor="middle"
             className="font-display"
             fontSize="36"
-            fill="var(--color-accent)"
+            fill="var(--color-gold)"
           >
             &#8377;
           </text>
@@ -215,7 +215,7 @@ export default function LenderNetwork() {
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)]">
           {sourcingPartners.map((p) => (
             <div key={p} className="flex items-center gap-2.5 bg-canvas px-4 py-3.5">
-              <span className="h-1.5 w-1.5 shrink-0 rotate-45 bg-accent" aria-hidden />
+              <span className="mint-mark h-1.5 w-1.5 shrink-0" aria-hidden />
               <span className="font-display text-base leading-tight text-ink-soft">{p}</span>
             </div>
           ))}

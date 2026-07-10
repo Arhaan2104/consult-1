@@ -10,7 +10,11 @@ type Texture =
   | "engrave"
   | "vignette"
   | "dark"
-  | "panel";
+  | "panel"
+  | "vault"
+  | "ivory-loud"
+  | "blue-loud"
+  | "gold-loud";
 
 const textureClass: Record<Texture, string> = {
   plain: "bg-canvas",
@@ -22,6 +26,10 @@ const textureClass: Record<Texture, string> = {
   vignette: "tx-vignette",
   panel: "bg-canvas-3",
   dark: "panel-dark text-on-dark",
+  vault: "section-vault text-on-dark",
+  "ivory-loud": "section-ivory-loud",
+  "blue-loud": "section-blue-loud",
+  "gold-loud": "section-gold-loud",
 };
 
 export function Section({
@@ -29,18 +37,24 @@ export function Section({
   id,
   texture = "plain",
   className = "",
+  flush = false,
 }: {
   children: ReactNode;
   id?: string;
   texture?: Texture;
   className?: string;
+  /** Drop the vertical rhythm — for scenes (e.g. the pinned process stage)
+      that manage their own height and would otherwise double-pad. */
+  flush?: boolean;
 }) {
   return (
     <section
       id={id}
       className={`relative ${textureClass[texture]} ${className}`}
     >
-      <div className="shell py-20 sm:py-28 lg:py-32">{children}</div>
+      <div className={`shell ${flush ? "" : "py-20 sm:py-28 lg:py-32"}`}>
+        {children}
+      </div>
     </section>
   );
 }
@@ -62,7 +76,7 @@ export function SectionHeader({
   dark?: boolean;
   align?: "left" | "center";
 }) {
-  const accent = dark ? "text-accent-2" : "text-accent";
+  const accent = dark ? "text-gold-bright" : "text-accent";
   const muted = dark ? "text-on-dark-soft" : "text-ink-soft";
   return (
     <Reveal
@@ -78,9 +92,6 @@ export function SectionHeader({
         >
           <span className="h-px w-8 bg-current opacity-50" aria-hidden />
           <span>{kicker}</span>
-          {align === "center" && (
-            <span className="h-px w-8 bg-current opacity-50" aria-hidden />
-          )}
         </div>
       )}
       <h2 className="display-lg text-balance">{title}</h2>
@@ -105,11 +116,7 @@ export function SectionDivider({
     return (
       <div className={dark ? "panel-dark" : "bg-canvas"}>
         <div className="shell">
-          <div className="flex items-center gap-4 py-px">
-            <span className="h-px flex-1 bg-[var(--color-line)]" />
-            <span className="h-1.5 w-1.5 rotate-45 bg-accent" />
-            <span className="h-px flex-1 bg-[var(--color-line)]" />
-          </div>
+          <hr className="rule-accent" />
         </div>
       </div>
     );

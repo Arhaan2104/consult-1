@@ -90,7 +90,7 @@ export const product = {
     {
       icon: "ledger",
       title: "Simple daily interest",
-      body: "Interest is simple daily interest on the principal, at a fixed rate — never compounded.",
+      body: "Interest is simple daily interest on the principal, at a fixed rate, never compounded.",
     },
     {
       icon: "document",
@@ -128,7 +128,7 @@ export const process = [
     body: "Submit a short application on our website with minimal documentation.",
     details: [
       "Entirely online, on our website",
-      "Minimal documentation — KYC only",
+      "Minimal documentation: KYC only",
       "No agents, no branch visit",
     ],
   },
@@ -188,7 +188,7 @@ export const timeline = [
   {
     year: "Today",
     title: "A digital lending platform",
-    body: "The personal-loan process is fully digitised — removing extensive physical interactions and long waiting periods.",
+    body: "The personal-loan process is fully digitised, removing extensive physical interactions and long waiting periods.",
   },
 ] as const;
 
@@ -202,7 +202,7 @@ export const eligibility = [
   { label: "Income", value: "No minimum income threshold", placeholder: false }, // grounded: advantages
   { label: "Credit history", value: "Limited or poor credit accepted", placeholder: false }, // grounded: product.features
   { label: "Bank account", value: "Active account required", placeholder: false }, // grounded: documents / privacy policy — needed for disbursal & repayment
-  { label: "Documentation", value: "Minimal — KYC only", placeholder: false }, // grounded: process
+  { label: "Documentation", value: "Minimal: KYC only", placeholder: false }, // grounded: process
 ] as const;
 
 /**
@@ -210,7 +210,7 @@ export const eligibility = [
  * (content/legal.ts). Specific document names are an illustrative KYC set (PLACEHOLDER).
  */
 export const documents = [
-  { title: "Identity proof", body: "PAN card and one government photo ID — Aadhaar, Passport, Voter ID or Driving Licence.", placeholder: true }, // PLACEHOLDER specifics
+  { title: "Identity proof", body: "PAN card and one government photo ID: Aadhaar, Passport, Voter ID or Driving Licence.", placeholder: true }, // PLACEHOLDER specifics
   { title: "Address proof", body: "Aadhaar or any other RBI-accepted proof of current address.", placeholder: true }, // PLACEHOLDER specifics
   { title: "Bank details", body: "An active bank account for disbursal and repayment.", placeholder: false }, // grounded: privacy policy
   { title: "Income / employment", body: "A recent salary slip or bank statement, where applicable.", placeholder: true }, // PLACEHOLDER specifics
@@ -239,7 +239,7 @@ export const faqGroups = [
     items: [
       {
         q: "Who is eligible for the Short Term Loan?",
-        a: "Eligibility is open and inclusive — there is no minimum income threshold, and applicants with limited or poor credit history can apply. Typical applicants are resident individuals aged 21–58. (Age and residency criteria are indicative and subject to confirmation.)", // PLACEHOLDER (age/residency)
+        a: "Eligibility is open and inclusive. There is no minimum income threshold, and applicants with limited or poor credit history can apply. Typical applicants are resident individuals aged 21–58. (Age and residency criteria are indicative and subject to confirmation.)", // PLACEHOLDER (age/residency)
       },
       {
         q: "Can I apply with a limited credit history?",
@@ -297,7 +297,7 @@ export const faqGroups = [
       },
       {
         q: "Is there a cooling-off period?",
-        a: "Yes. A 3-day cooling-off period lets you exit the loan with only the principal and proportionate APR — no other charges.",
+        a: "Yes. A 3-day cooling-off period lets you exit the loan with only the principal and proportionate APR, no other charges.",
       },
       {
         q: "Are charges subject to GST?",
@@ -322,7 +322,7 @@ export const faqGroups = [
       },
       {
         q: "Will anyone ask for a fee before disbursing my loan?",
-        a: "Never. We do not charge any fee before disbursing a loan. Anyone demanding an upfront payment in our name is unauthorised — please report it to us.",
+        a: "Never. We do not charge any fee before disbursing a loan. Anyone demanding an upfront payment in our name is unauthorised. Please report it to us.",
       },
     ],
   },

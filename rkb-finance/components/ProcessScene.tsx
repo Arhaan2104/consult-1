@@ -9,6 +9,7 @@ import {
   type MotionValue,
 } from "motion/react";
 import { Reveal } from "@/components/Motion";
+import { useLenis } from "@/components/LenisProvider";
 import { SectionHeader } from "@/components/Section";
 import { ProcessArt, GuillocheRosette } from "@/components/ProcessArt";
 
@@ -27,11 +28,13 @@ type Props = {
 };
 
 /**
- * "How it works" — a pinned scrollytelling scene on desktop. A coin-edge
- * 1–2–3 stepper advances while a single liquid-glass frame holds the step
- * copy (left) and a framed engraved illustration (right) that cross-fade in
- * place; then the section releases. Falls back to a rich static, alternating
- * layout on mobile (<768px) or under reduced motion. Content stays in the DOM.
+ * "How it works" — a pinned scrollytelling scene on the dark vault band.
+ * Left: a clickable vertical index of the three stages beside a gold
+ * progress rail — the active stage rests in a gold-struck glass plate, and
+ * clicking any stage scrolls the pin to it. Right: ONE navy-glass pane
+ * holding both the engraved illustration and the stage copy, cross-fading
+ * in place. Falls back to calm stacked panes on mobile (<768px) or under
+ * reduced motion. All content stays in the DOM.
  */
 export default function ProcessScene(props: Props) {
   const reduce = useReducedMotion();
@@ -48,126 +51,177 @@ export default function ProcessScene(props: Props) {
   return pinned ? <PinnedProcess {...props} /> : <StaticProcess {...props} />;
 }
 
-/* ---------- Centred illustration on the guilloché rosette ---------- */
-function ArtWell({
-  children,
-  className = "",
+/* ---------- Illustration on the rosette — no extra frame, it lives
+   directly inside the shared pane ---------- */
+function StageArt({ index }: { index: number }) {
+  return (
+    <div className="relative mx-auto grid aspect-[6/5] w-full max-w-[13rem] place-items-center sm:max-w-none">
+      <GuillocheRosette className="pointer-events-none absolute inset-0 m-auto h-[112%] w-[112%] text-gold-bright/70" />
+      <ProcessArt index={index} className="relative w-[56%] text-gold-bright" />
+    </div>
+  );
+}
+
+/* ---------- One stage as a single aligned block ----------
+   Title anchored top-left; the engraved illustration beneath it on the
+   left; body + grounded specs to its right. One block, one grid. */
+function StepPanel({
+  step,
+  index,
+  withLabel = false,
 }: {
-  children: ReactNode;
-  className?: string;
+  step: Step;
+  index: number;
+  /** Show the "02 —— UNDERWRITING" micro-label (static cards only — in the
+      pinned scene the left index already carries it). */
+  withLabel?: boolean;
 }) {
   return (
-    <div className={`relative mx-auto grid aspect-square w-full place-items-center ${className}`}>
-      <GuillocheRosette className="pointer-events-none absolute inset-0 h-full w-full text-accent" />
-      <div className="grid h-full w-full place-items-center">{children}</div>
-    </div>
-  );
-}
-
-/* ---------- Grounded spec rows under each step ---------- */
-function StepDetail({ step }: { step: Step }) {
-  return (
-    <div className="flex flex-col gap-5">
-      <h3 className="display-md text-ink">{step.title}</h3>
-      <p className="measure text-xl leading-relaxed text-ink-soft">{step.body}</p>
-      <ul className="mt-1 flex flex-col gap-3.5">
-        {step.details.map((d) => (
-          <li key={d} className="flex items-start gap-3.5 text-[1.05rem] leading-snug text-ink-soft">
-            <span className="mt-[0.5rem] h-1.5 w-1.5 shrink-0 rotate-45 bg-accent" aria-hidden />
-            <span>{d}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-/* ---------- Coin-edge stepper (1–2–3) ---------- */
-function Stepper({
-  steps,
-  progress,
-}: {
-  steps: readonly Step[];
-  progress: MotionValue<number>;
-}) {
-  const fill = useTransform(progress, [0, 0.85], [0, 1]);
-  return (
-    <div className="relative mt-8 lg:mt-9">
-      <div className="absolute left-[16.6%] right-[16.6%] top-[1.375rem] h-px -translate-y-1/2 bg-line-strong/50">
-        <motion.div className="h-full w-full origin-left bg-accent" style={{ scaleX: fill }} />
-      </div>
-      <div className="relative flex">
-        {steps.map((s, i) => (
-          <StepNode key={s.step} step={s} index={i} total={steps.length} progress={progress} />
-        ))}
+    <div>
+      {withLabel && (
+        <div className="mb-3 flex items-center gap-3">
+          <span className="font-mono text-[0.7rem] leading-none tracking-widest text-gold-bright">
+            {step.step}
+          </span>
+          <span className="h-px w-6 bg-[rgba(217,165,63,0.4)]" aria-hidden />
+          <span className="eyebrow text-gold-bright">{step.label}</span>
+        </div>
+      )}
+      <h3 className="display-md text-on-dark">{step.title}</h3>
+      <div className="mt-5 grid gap-5 sm:grid-cols-[0.4fr_0.6fr] sm:items-center sm:gap-8">
+        <StageArt index={index} />
+        <div className="flex flex-col gap-3.5">
+          <p className="text-[1.02rem] leading-relaxed text-on-dark-soft">{step.body}</p>
+          <ul className="flex flex-col gap-2.5">
+            {step.details.map((d) => (
+              <li
+                key={d}
+                className="flex items-start gap-3 text-[0.98rem] leading-snug text-on-dark-soft"
+              >
+                <span className="mint-mark mt-[0.45rem] h-1.5 w-1.5 shrink-0" aria-hidden />
+                <span>{d}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
 }
 
-function StepNode({
+/* ---------- Vertical index — one clickable row per stage ---------- */
+function StepRow({
   step,
   index,
   total,
   progress,
+  onJump,
 }: {
   step: Step;
   index: number;
   total: number;
   progress: MotionValue<number>;
+  onJump: (i: number) => void;
 }) {
-  const t = total > 1 ? (index / (total - 1)) * 0.85 : 0;
-  const active = useTransform(progress, [Math.max(0, t - 0.05), t + 0.001], [0, 1]);
+  const on = useStepActive(progress, index, total);
+  // Single text node per label (no stacked copies), tinted by activation —
+  // keeps selection/copy clean and the DOM honest.
+  const numColor = useTransform(on, [0, 1], ["rgba(159, 178, 205, 0.55)", "#d9a53f"]);
+  const labelColor = useTransform(on, [0, 1], ["rgba(159, 178, 205, 0.5)", "#e8eef7"]);
   return (
-    <div className="flex flex-1 flex-col items-center gap-3 text-center">
-      <div className="relative grid h-11 w-11 place-items-center rounded-full border border-line-strong bg-canvas">
-        <span className="absolute inset-[3px] rounded-full border border-line" aria-hidden />
-        <motion.span className="absolute inset-[2px] rounded-full bg-accent" style={{ opacity: active }} aria-hidden />
-        <span className="relative font-mono text-[0.7rem] leading-none text-ink-faint">{step.step}</span>
+    <button
+      type="button"
+      onClick={() => onJump(index)}
+      className="step-btn"
+      aria-label={`Go to step ${step.step} — ${step.label}`}
+    >
+      <motion.span
+        aria-hidden
+        style={{ opacity: on }}
+        className="step-plate absolute inset-0 rounded-[1.25rem]"
+      />
+      <span className="relative flex items-baseline gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-[1.05rem]">
         <motion.span
-          className="pointer-events-none absolute inset-0 grid place-items-center font-mono text-[0.7rem] leading-none text-canvas"
-          style={{ opacity: active }}
-          aria-hidden
+          style={{ color: numColor }}
+          className="shrink-0 font-mono text-[0.72rem] leading-none tracking-widest"
         >
           {step.step}
         </motion.span>
-      </div>
-      <span className="eyebrow text-ink-faint">{step.label}</span>
-    </div>
+        <motion.span style={{ color: labelColor }} className="display-md">
+          {step.label}
+        </motion.span>
+      </span>
+    </button>
   );
 }
 
 /* ---------- Pinned scene (desktop) ---------- */
+
+/** Scroll-progress targets — the centre of each stage's plateau in
+    stepStops' timing, kept inside the pin so a jump never releases it. */
+const JUMP_TARGETS = [0.1, 0.5, 0.85];
+
 function PinnedProcess({ steps, index, kicker, title }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const lenisRef = useLenis();
   const { scrollYProgress } = useScroll({
     target: trackRef,
     offset: ["start start", "end end"],
   });
+  const railFill = useTransform(scrollYProgress, [0, 0.85], [0, 1]);
+
+  const jumpTo = (i: number) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const top = window.scrollY + el.getBoundingClientRect().top;
+    const scrollable = el.offsetHeight - window.innerHeight;
+    const y = top + JUMP_TARGETS[i] * scrollable;
+    if (lenisRef?.current) {
+      lenisRef.current.scrollTo(y, { duration: 1.1 });
+    } else {
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   return (
-    <div ref={trackRef} className="relative h-[300svh]">
-      <div className="sticky top-0 flex h-svh flex-col justify-start overflow-hidden pt-28 lg:pt-32">
-        <SectionHeader index={index} kicker={kicker} title={title} align="center" />
-        <Stepper steps={steps} progress={scrollYProgress} />
+    <div ref={trackRef} className="relative h-[240svh]">
+      <div className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden pt-20 pb-8 lg:pt-24">
+        <SectionHeader index={index} kicker={kicker} title={title} align="center" dark />
 
-        {/* One liquid-glass frame holding the cross-fading step */}
-        <div className="mt-7 flex flex-1 items-center lg:mt-8">
-          <div className="glass-frame w-full p-7 sm:p-9 lg:p-11">
-            <div className="grid items-center gap-10 md:grid-cols-[1.06fr_0.94fr] md:gap-12 lg:gap-16">
-              {/* Left — cross-fading copy (grid stack sizes to the tallest step) */}
-              <div className="grid">
-                {steps.map((s, i) => (
-                  <CopyBlock key={s.step} step={s} index={i} total={steps.length} progress={scrollYProgress} />
-                ))}
-              </div>
+        <div className="mt-9 grid items-center gap-8 lg:mt-12 lg:grid-cols-[0.74fr_1.26fr] lg:gap-12">
+          {/* Left — clickable index beside the gold progress rail */}
+          <div className="relative pl-5">
+            <span
+              aria-hidden
+              className="absolute inset-y-3 left-0 w-px bg-[rgba(232,238,247,0.14)]"
+            >
+              <motion.span
+                className="absolute inset-0 origin-top bg-[linear-gradient(180deg,#dfb763,#b88624)]"
+                style={{ scaleY: railFill }}
+              />
+            </span>
+            <div className="flex flex-col gap-1.5">
+              {steps.map((s, i) => (
+                <StepRow
+                  key={s.step}
+                  step={s}
+                  index={i}
+                  total={steps.length}
+                  progress={scrollYProgress}
+                  onJump={jumpTo}
+                />
+              ))}
+            </div>
+          </div>
 
-              {/* Right — cross-fading art on a steady rosette */}
-              <ArtWell className="max-w-[17rem]">
-                {steps.map((s, i) => (
-                  <ArtBlock key={s.step} index={i} total={steps.length} progress={scrollYProgress} />
-                ))}
-              </ArtWell>
+          {/* Right — ONE pane: the whole stage block cross-fades as a unit */}
+          <div className="pane-vault p-6 sm:p-7 lg:px-9 lg:py-8">
+            <div className="grid">
+              {steps.map((s, i) => (
+                <FadeBlock key={s.step} index={i} total={steps.length} progress={scrollYProgress} rise>
+                  <StepPanel step={s} index={i} />
+                </FadeBlock>
+              ))}
             </div>
           </div>
         </div>
@@ -176,43 +230,25 @@ function PinnedProcess({ steps, index, kicker, title }: Props) {
   );
 }
 
-function CopyBlock({
-  step,
+function FadeBlock({
   index,
   total,
   progress,
-}: {
-  step: Step;
-  index: number;
-  total: number;
-  progress: MotionValue<number>;
-}) {
-  const opacity = useStepOpacity(progress, index, total);
-  const y = useStepRise(progress, index, total, 34);
-  return (
-    <motion.div style={{ opacity, y }} className="[grid-area:1/1]">
-      <StepDetail step={step} />
-    </motion.div>
-  );
-}
-
-function ArtBlock({
-  index,
-  total,
-  progress,
+  rise = false,
+  children,
 }: {
   index: number;
   total: number;
   progress: MotionValue<number>;
+  rise?: boolean;
+  children: ReactNode;
 }) {
-  const opacity = useStepOpacity(progress, index, total);
-  const scale = useTransform(opacity, [0, 1], [0.965, 1]);
+  const opacity = useStepActive(progress, index, total);
+  const y = useTransform(opacity, [0, 1], [rise ? 20 : 0, 0]);
+  const scale = useTransform(opacity, [0, 1], [rise ? 1 : 0.975, 1]);
   return (
-    <motion.div
-      style={{ opacity, scale }}
-      className="[grid-area:1/1] grid h-full w-full place-items-center"
-    >
-      <ProcessArt index={index} className="w-[94%] text-accent" />
+    <motion.div style={{ opacity, y, scale }} className="[grid-area:1/1]">
+      {children}
     </motion.div>
   );
 }
@@ -220,73 +256,48 @@ function ArtBlock({
 /* ---------- Static fallback (mobile / reduced motion) ---------- */
 function StaticProcess({ steps, index, kicker, title }: Props) {
   return (
-    <>
-      <SectionHeader index={index} kicker={kicker} title={title} align="center" />
-      <div className="mt-14 flex flex-col gap-10 lg:gap-14">
+    <div className="py-16 sm:py-20">
+      <SectionHeader index={index} kicker={kicker} title={title} align="center" dark />
+      <div className="mt-10 flex flex-col gap-5 sm:mt-12">
         {steps.map((s, i) => (
           <Reveal key={s.step}>
-            <div className="glass-frame p-6 sm:p-9 lg:p-11">
-              <div className="grid items-center gap-8 sm:grid-cols-2 sm:gap-10 lg:gap-14">
-                <ArtWell className={`max-w-[15rem] sm:max-w-[17rem] ${i % 2 === 1 ? "sm:order-2" : ""}`}>
-                  <ProcessArt index={i} className="w-[94%] text-accent" />
-                </ArtWell>
-                <div>
-                  <div className="mb-5 flex items-center gap-3.5">
-                    <span className="relative grid h-11 w-11 shrink-0 place-items-center rounded-full border border-line-strong bg-canvas">
-                      <span className="absolute inset-[3px] rounded-full border border-line" aria-hidden />
-                      <span className="font-mono text-[0.7rem] leading-none text-ink-faint">{s.step}</span>
-                    </span>
-                    <span className="eyebrow text-accent">{s.label}</span>
-                  </div>
-                  <StepDetail step={s} />
-                </div>
-              </div>
+            <div className="pane-vault p-6 sm:p-7">
+              <StepPanel step={s} index={i} withLabel />
             </div>
           </Reveal>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
 /* ============================================================
-   Per-step scroll timing (3 steps). See note below on clamping.
+   Per-step scroll timing (default 3 steps). Each stage owns a
+   plateau of the pinned range; the last stage HOLDS to 1 so the
+   panel never empties as the scene releases.
    ============================================================ */
-function stepSpec(index: number, total: number) {
+function stepStops(index: number, total: number) {
+  // Ranges explicitly span the full [0, 1] with FLAT tails at both ends. This
+  // motion build does not clamp a keyframe range past its last input, so a
+  // stage whose range ends early (e.g. [0, 0.3, 0.37]) drifts back up rather
+  // than holding 0 — the terminal 0/1 stops below pin it in place.
   if (total === 3) {
-    if (index === 0)
-      return { in: [0.27, 0.39, 1], op: [1, 0, 0], rise: [0, -1, -1] };
+    if (index === 0) return { in: [0, 0.3, 0.37, 1], op: [1, 1, 0, 0] };
     if (index === 1)
-      return { in: [0.27, 0.42, 0.58, 0.7], op: [0, 1, 1, 0], rise: [1, 0, 0, -1] };
-    // Explicit tail stop at 1 so the final step HOLDS full opacity through the
-    // end of the pinned range. Without it, this motion build does not clamp a
-    // 2-stop range past its last input — the step decays back to 0 and leaves
-    // the glass frame empty as the scene releases.
-    return { in: [0.64, 0.86, 1], op: [0, 1, 1], rise: [1, 0, 0] };
+      return { in: [0, 0.3, 0.37, 0.63, 0.7, 1], op: [0, 0, 1, 1, 0, 0] };
+    return { in: [0, 0.63, 0.7, 1], op: [0, 0, 1, 1] };
   }
   const c = (index + 0.5) / total;
+  const w = 0.5 / total;
+  const a = Math.max(0, c - 3 * w);
+  const b = Math.min(1, c + 3 * w);
   return {
-    in: [Math.max(0, c - 0.18), c - 0.06, c + 0.06, Math.min(1, c + 0.18)],
-    op: [0, 1, 1, 0],
-    rise: [1, 0, 0, -1],
+    in: [0, a, c - w, c + w, b, 1],
+    op: [0, 0, 1, 1, 0, 0],
   };
 }
 
-function useStepOpacity(progress: MotionValue<number>, index: number, total: number) {
-  const s = stepSpec(index, total);
+function useStepActive(progress: MotionValue<number>, index: number, total: number) {
+  const s = stepStops(index, total);
   return useTransform(progress, s.in, s.op);
-}
-
-function useStepRise(
-  progress: MotionValue<number>,
-  index: number,
-  total: number,
-  travel: number
-) {
-  const s = stepSpec(index, total);
-  return useTransform(
-    progress,
-    s.in,
-    s.rise.map((r) => r * travel)
-  );
 }

@@ -2,11 +2,11 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import MagneticButton from "./MagneticButton";
 
-export type Variant = "primary" | "ghost" | "light";
+export type Variant = "primary" | "ghost" | "light" | "gold";
 
 // Exported so MagneticButton (and form submit buttons) reuse the exact same look.
 export const buttonBase =
-  "group relative inline-flex items-center gap-2.5 rounded-full text-sm font-medium tracking-tight will-change-transform transition-[transform,background-color,border-color,box-shadow,color] duration-300 ease-[var(--ease-rkb)] hover:-translate-y-0.5 active:translate-y-px active:scale-[0.985] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas";
+  "group relative inline-flex items-center gap-2.5 rounded-xl text-sm font-semibold tracking-tight will-change-transform transition-[transform,background-color,border-color,box-shadow,color,filter] duration-300 ease-[var(--ease-rkb)] hover:-translate-y-0.5 active:translate-y-px active:scale-[0.985] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas";
 
 export const buttonSizes = "px-6 py-3";
 
@@ -17,6 +17,10 @@ export const buttonVariants: Record<Variant, string> = {
     "border border-line-strong text-ink hover:border-ink hover:bg-ink hover:text-canvas hover:shadow-[var(--shadow-md)]",
   light:
     "bg-canvas text-ink hover:bg-accent hover:text-canvas shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] focus-visible:ring-offset-deep",
+  // Minted gold — the marquee CTA on dark vault surfaces. Matte, not glowy:
+  // the lift comes from a navy shadow, not a gold halo.
+  gold:
+    "sheen bg-[linear-gradient(115deg,#ddb25c,#cfa452_50%,#b88624)] text-vault hover:brightness-[1.05] shadow-[0_12px_28px_-14px_rgba(8,28,56,0.7)] hover:shadow-[0_16px_34px_-14px_rgba(8,28,56,0.8)] focus-visible:ring-gold-bright focus-visible:ring-offset-deep",
 };
 
 export function buttonClasses(

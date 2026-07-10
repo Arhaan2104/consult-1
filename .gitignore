@@ -17,3 +17,7 @@ npm-debug.log*
 # OS
 .DS_Store
 .gstack/
+
+# Dev/QA artifacts (screenshots, browser automation)
+.playwright-mcp/
+/*.png

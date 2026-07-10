@@ -1,10 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Libre_Caslon_Display,
-  Libre_Caslon_Text,
-  Manrope,
-  Geist_Mono,
-} from "next/font/google";
+import { Plus_Jakarta_Sans, Geist_Mono, EB_Garamond } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
@@ -13,27 +8,11 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { site } from "@/content/site";
 
-// Libre Caslon — the foundational English book/legal serif. Display cut for
-// large headlines; Text cut (sturdier, lower contrast) for smaller serif set,
-// mirroring the optical-size behaviour we relied on before.
-const caslonDisplay = Libre_Caslon_Display({
+// Plus Jakarta Sans — the site family, one variable grotesque for display
+// and body. Heavy weights carry the headlines; the geometry stays clean.
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-caslon-display",
-  display: "swap",
-});
-
-const caslonText = Libre_Caslon_Text({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-caslon-text",
-  display: "swap",
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
+  variable: "--font-jakarta",
   display: "swap",
 });
 
@@ -43,14 +22,22 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+// EB Garamond — a classic, high-legibility serif used sparingly as a "engraved"
+// accent (e.g. the term text on the metal loan card), for a premium, classy feel.
+const ebGaramond = EB_Garamond({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://rkbfinance.in"),
   title: {
-    default: "R.K. Bansal Finance — Personal lending since 1984",
+    default: "R.K. Bansal Finance: Personal lending since 1984",
     template: "%s · R.K. Bansal Finance",
   },
   description:
-    "R.K. Bansal Finance Private Limited — an RBI-registered NBFC empowering borrowers to meet all their financial needs. Transparent, fully digital personal lending since 1984.",
+    "R.K. Bansal Finance Private Limited, an RBI-registered NBFC empowering borrowers to meet all their financial needs. Transparent, fully digital personal lending since 1984.",
   keywords: [
     "R.K. Bansal Finance",
     "NBFC",
@@ -61,7 +48,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "website",
-    title: "R.K. Bansal Finance — Personal lending since 1984",
+    title: "R.K. Bansal Finance: Personal lending since 1984",
     description:
       "An RBI-registered NBFC. Transparent, fully digital personal lending since 1984.",
     siteName: site.legalName,
@@ -70,7 +57,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fbf8f2",
+  themeColor: "#081c38",
   colorScheme: "light",
   width: "device-width",
   initialScale: 1,
@@ -82,7 +69,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${caslonDisplay.variable} ${caslonText.variable} ${manrope.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${jakarta.variable} ${geistMono.variable} ${ebGaramond.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-canvas">
         {/* Brand-blue frame hugging all four viewport edges (see .site-frame). */}

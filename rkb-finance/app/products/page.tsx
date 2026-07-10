@@ -17,7 +17,7 @@ import {
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "The R.K. Bansal Finance Short Term Loan — ₹4,000 to ₹1,00,000, instant approval, funds within 24 hours, transparent fixed rates and no service fees.",
+    "The R.K. Bansal Finance Short Term Loan: ₹4,000 to ₹1,00,000, instant approval, funds within 24 hours, transparent fixed rates and no service fees.",
 };
 
 export default function ProductsPage() {
@@ -83,7 +83,7 @@ export default function ProductsPage() {
             index="02"
             kicker="Estimate your loan"
             title={<>See what you&rsquo;ll repay, before you apply.</>}
-            intro="Move the sliders to estimate the interest and total repayment on a Short Term Loan. Interest is simple daily interest on the principal — never compounded."
+            intro="Move the sliders to estimate the interest and total repayment on a Short Term Loan. Interest is simple daily interest on the principal, never compounded."
           />
           <Reveal delay={0.1}>
             <LoanCalculator />
@@ -94,7 +94,7 @@ export default function ProductsPage() {
       <SectionDivider variant="accent" />
 
       {/* Eligibility */}
-      <Section texture="laid">
+      <Section id="eligibility" texture="laid">
         <SectionHeader
           index="03"
           kicker="Eligibility"
@@ -110,7 +110,7 @@ export default function ProductsPage() {
               </span>
               {e.placeholder && (
                 <span className="text-xs italic text-ink-faint">
-                  Indicative — to be confirmed
+                  Indicative, to be confirmed
                 </span>
               )}
             </StaggerItem>

@@ -9,7 +9,7 @@ import { site, timeline } from "@/content/site";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "R.K. Bansal Finance Private Limited — an RBI-registered NBFC incorporated in 1984, building a simple, affordable and fully digital lending platform.",
+    "R.K. Bansal Finance Private Limited, an RBI-registered NBFC incorporated in 1984, building a simple, affordable and fully digital lending platform.",
 };
 
 const values = [
@@ -53,7 +53,7 @@ export default function AboutPage() {
       <PageHero
         kicker="About Us"
         title={<>A lending institution, modernised.</>}
-        intro="R.K. Bansal Finance has digitised the personal-loan process to remove extensive physical interactions and the long waiting periods traditionally associated with banking — while keeping the trust of a four-decade-old institution."
+        intro="R.K. Bansal Finance has digitised the personal-loan process to remove extensive physical interactions and the long waiting periods traditionally associated with banking, while keeping the trust of a four-decade-old institution."
       />
 
       <SectionDivider />
@@ -75,7 +75,7 @@ export default function AboutPage() {
               &ldquo;{site.mission}&rdquo;
             </p>
             <p className="measure-wide leading-relaxed text-ink-soft">
-              We offer a single, transparent short-term loan — kept affordable by
+              We offer a single, transparent short-term loan, kept affordable by
               a minimal-risk profile, and open to applicants with no minimum
               income threshold. Streamlining access to funds through digital
               innovation is at the heart of everything we do.

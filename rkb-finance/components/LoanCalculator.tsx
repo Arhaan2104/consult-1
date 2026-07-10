@@ -141,7 +141,7 @@ export default function LoanCalculator() {
         </div>
 
         <p className="text-sm leading-relaxed text-ink-faint">
-          Implied APR ≈ {impliedAPR.toLocaleString("en-IN")}% — simple daily interest
+          Implied APR ≈ {impliedAPR.toLocaleString("en-IN")}%, simple daily interest
           on the principal, with no compounding. Illustrative only; final terms are set
           out in your sanction letter and Key Fact Statement.
         </p>

@@ -8,7 +8,7 @@ import { site } from "@/content/site";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Reach R.K. Bansal Finance — Karol Bagh, New Delhi. Phone, email, business hours, social channels and our Grievance Redressal Officer.",
+    "Reach R.K. Bansal Finance in Karol Bagh, New Delhi. Phone, email, business hours, social channels and our Grievance Redressal Officer.",
 };
 
 export default function ContactPage() {

@@ -32,27 +32,27 @@ export default async function LegalPage({
   return (
     <>
       {/* Header */}
-      <section className="relative hero-rkb">
+      <section className="relative section-vault">
         <div className="relative z-10 shell pt-32 pb-14 sm:pt-44 lg:pt-48">
           <Reveal>
             <Link
               href="/"
-              className="eyebrow text-ink-faint transition-colors hover:text-accent"
+              className="eyebrow text-on-dark-soft transition-colors hover:text-gold-bright"
             >
               ← Home
             </Link>
           </Reveal>
           <Reveal delay={0.06}>
-            <h1 className="display-lg mt-6 max-w-[20ch] text-balance text-ink">
+            <h1 className="display-lg mt-6 max-w-[20ch] text-balance text-on-dark">
               {doc.title}
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mt-5 measure-wide leading-relaxed text-ink-soft">
+            <p className="mt-5 measure-wide leading-relaxed text-on-dark-soft">
               {doc.summary}
             </p>
             {doc.updated && (
-              <p className="eyebrow mt-5 text-ink-faint">
+              <p className="eyebrow mt-5 text-on-dark-soft">
                 Last updated · {doc.updated}
               </p>
             )}
@@ -105,7 +105,7 @@ export default async function LegalPage({
                           key={j}
                           className="flex gap-3 measure-wide leading-relaxed text-ink-soft"
                         >
-                          <span className="mt-2.5 h-1 w-1 shrink-0 rotate-45 bg-accent" />
+                          <span className="mint-mark mt-2 h-1.5 w-1.5 shrink-0" aria-hidden />
                           <span>{b}</span>
                         </li>
                       ))}

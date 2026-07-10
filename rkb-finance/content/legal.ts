@@ -34,7 +34,7 @@ export const legalDocs: LegalDoc[] = [
       {
         heading: "How we use your data",
         body: [
-          "We collect only such data that is necessary, relevant and proportionate to the stated purpose — loan servicing, fraud detection, customer service and regulatory requirements.",
+          "We collect only such data that is necessary, relevant and proportionate to the stated purpose: loan servicing, fraud detection, customer service and regulatory requirements.",
         ],
       },
       {
@@ -107,7 +107,7 @@ export const legalDocs: LegalDoc[] = [
       {
         heading: "Grievance resolution & collection conduct",
         body: [
-          "Disputes are resolved within 30 days of receiving complete details, with escalation available to the RBI's Department of Non-Banking Supervision. Collection is conducted without undue harassment — no odd-hour calls or muscle tactics — and staff are trained on appropriate customer interaction.",
+          "Disputes are resolved within 30 days of receiving complete details, with escalation available to the RBI's Department of Non-Banking Supervision. Collection is conducted without undue harassment, no odd-hour calls or muscle tactics, and staff are trained on appropriate customer interaction.",
         ],
       },
     ],
@@ -122,21 +122,21 @@ export const legalDocs: LegalDoc[] = [
         heading: "Interest rates by product",
         body: ["All loans currently carry fixed interest rates."],
         bullets: [
-          "Pay Day Loan — 0.10% to 1.00% per day",
-          "Business Loan — 8% to 25% per annum",
-          "Loan Against Property — 12% to 15% per annum",
-          "EMI Loan — 24% to 365% per annum (tenure up to 6 months)",
+          "Pay Day Loan: 0.10% to 1.00% per day",
+          "Business Loan: 8% to 25% per annum",
+          "Loan Against Property: 12% to 15% per annum",
+          "EMI Loan: 24% to 365% per annum (tenure up to 6 months)",
         ],
       },
       {
         heading: "Penal & other charges",
         body: [],
         bullets: [
-          "Late payment penalty — 0.1% per day of outstanding principal",
-          "EMI bounce / unregistered NACH — up to ₹590",
-          "Processing fees — 2% to 10%",
-          "Foreclosure (EMI loans after 3 months) — 3% of outstanding principal",
-          "No-Dues Certificate (digital) — Nil",
+          "Late payment penalty: 0.1% per day of outstanding principal",
+          "EMI bounce / unregistered NACH: up to ₹590",
+          "Processing fees: 2% to 10%",
+          "Foreclosure (EMI loans after 3 months): 3% of outstanding principal",
+          "No-Dues Certificate (digital): Nil",
         ],
       },
       {
@@ -187,18 +187,18 @@ export const legalDocs: LegalDoc[] = [
         heading: "How to file a complaint",
         body: ["You can reach us through any of the following channels:"],
         bullets: [
-          "Phone — +91 98999 85495 (10 AM–6 PM, Mon–Sat)",
-          "Email — info@ramfincorp.com",
-          "Mail — Customer Care Department, 8/9 2nd Floor, WEA, Karol Bagh, New Delhi – 110005",
-          "In person — visits accepted at the above address",
+          "Phone: +91 98999 85495 (10 AM–6 PM, Mon–Sat)",
+          "Email: info@ramfincorp.com",
+          "Mail: Customer Care Department, 8/9 2nd Floor, WEA, Karol Bagh, New Delhi – 110005",
+          "In person: visits accepted at the above address",
         ],
       },
       {
         heading: "Escalation matrix",
         body: [
-          "Level 1 — Customer Relationship Manager (10 AM–6 PM weekdays), response within 3 working days.",
-          "Level 2 — Customer Service Help Desk: +91 87969 24488 / +91 99101 93884, response within 3 working days.",
-          "Level 3 — Grievance Redressal Officer: Mr. Samir Sethi, +91 93114 17272, samir@ramfincorp.com — response within 5 working days.",
+          "Level 1: Customer Relationship Manager (10 AM–6 PM weekdays), response within 3 working days.",
+          "Level 2: Customer Service Help Desk: +91 87969 24488 / +91 99101 93884, response within 3 working days.",
+          "Level 3: Grievance Redressal Officer: Mr. Samir Sethi, +91 93114 17272, samir@ramfincorp.com, response within 5 working days.",
         ],
       },
       {
@@ -217,7 +217,7 @@ export const legalDocs: LegalDoc[] = [
       {
         heading: "Beware of impersonators",
         body: [
-          "Imposters and deceitful individuals are impersonating us and fraudulently demanding upfront fees, which we do not charge. We do not charge any upfront fees against our loans — anyone claiming otherwise is unauthorised.",
+          "Imposters and deceitful individuals are impersonating us and fraudulently demanding upfront fees, which we do not charge. We do not charge any upfront fees against our loans. Anyone claiming otherwise is unauthorised.",
         ],
       },
       {
@@ -250,7 +250,7 @@ export const legalDocs: LegalDoc[] = [
       {
         heading: "Payment information",
         body: [
-          "Payment data is collected through various gateways when customers purchase subscription packages, including your UPI address, credit/debit card details or other bank account details. Payment processors — not the company itself — store this sensitive information.",
+          "Payment data is collected through various gateways when customers purchase subscription packages, including your UPI address, credit/debit card details or other bank account details. Payment processors, not the company itself, store this sensitive information.",
         ],
       },
       {
@@ -332,8 +332,8 @@ export const legalDocs: LegalDoc[] = [
         heading: "Complaint channels",
         body: ["You may use any of the following to escalate an unresolved complaint:"],
         bullets: [
-          "Sachet RBI — sachet.rbi.org.in",
-          "RBI CMS Portal — cms.rbi.org.in",
+          "Sachet RBI: sachet.rbi.org.in",
+          "RBI CMS Portal: cms.rbi.org.in",
           "Internal Grievance Escalation Matrix",
         ],
       },
@@ -359,7 +359,7 @@ export const legalDocs: LegalDoc[] = [
       {
         heading: "Lending & technology partners",
         body: [
-          "Lending partner — R.K. Bansal Finance Pvt. Ltd. (CIN U74110DL1984PTC019355), Karol Bagh, New Delhi. Technology partner — Kundanmal Technology (P) Ltd. (CIN U63999DL2020PTC368108).",
+          "Lending partner: R.K. Bansal Finance Pvt. Ltd. (CIN U74110DL1984PTC019355), Karol Bagh, New Delhi. Technology partner: Kundanmal Technology (P) Ltd. (CIN U63999DL2020PTC368108).",
         ],
       },
     ],
@@ -373,10 +373,10 @@ export const legalDocs: LegalDoc[] = [
         heading: "Levels of escalation",
         body: [],
         bullets: [
-          "Level 1 — Customer Relationship Manager (10 AM–6 PM weekdays)",
-          "Level 2 — Customer Service Helpdesk: +91 87969 24488 / +91 99101 93884 (9 AM–6 PM weekdays)",
-          "Level 3 — Grievance Redressal Officer: Mr. Samir Sethi, +91 93114 17272, samir@ramfincorp.com (within 5 working days)",
-          "Level 4 — RBI Department of Non-Banking Supervision, via Sachet RBI / RBI CMS Portal",
+          "Level 1: Customer Relationship Manager (10 AM–6 PM weekdays)",
+          "Level 2: Customer Service Helpdesk: +91 87969 24488 / +91 99101 93884 (9 AM–6 PM weekdays)",
+          "Level 3: Grievance Redressal Officer: Mr. Samir Sethi, +91 93114 17272, samir@ramfincorp.com (within 5 working days)",
+          "Level 4: RBI Department of Non-Banking Supervision, via Sachet RBI / RBI CMS Portal",
         ],
       },
     ],

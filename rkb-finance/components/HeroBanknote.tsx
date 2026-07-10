@@ -52,7 +52,7 @@ export default function HeroBanknote() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-[1] hidden text-accent/40 sm:block"
+      className="pointer-events-none absolute inset-0 z-[3] hidden text-gold-bright/45 sm:block"
     >
       <div
         className="absolute left-1/2 top-[5.25rem] flex -translate-x-1/2 justify-between"

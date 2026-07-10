@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 /* ============================================================
-   R.K. BANSAL FINANCE — Heritage Institutional design system
-   Warm ivory · R.K. Bansal brand blue (from the logo)
-   Serif display (Fraunces) over grotesk body (Geist)
+   R.K. BANSAL FINANCE — Gold Standard cinematic design system
+   Deep vault navy · R.K. Bansal brand blue · minted gold
+   One sharp grotesque family across display and body
    ============================================================ */
 
 @theme inline {
@@ -15,17 +15,21 @@
   --color-ink-faint: #5f6d8a;    /* captions / meta — WCAG AA 4.9:1 on ivory */
   --color-deep: #0b2447;         /* inverted brand-blue surface */
   --color-deep-2: #0f2c54;       /* inverted panel raise       */
+  --color-vault: #081c38;        /* darkest cinematic navy — hero / vignette edges */
   --color-accent: #205aa8;       /* R.K. Bansal brand blue     */
   --color-accent-2: #4f86cf;     /* lit brand blue             */
+  --color-gold: #b88624;         /* minted gold — decoration on light  */
+  --color-gold-bright: #d9a53f;  /* lit gold — text/icons on navy (AA ≈6.6:1 on deep) */
+  --color-gold-soft: #f6dfaa;    /* warm gold paper wash       */
   --color-on-dark: #e8eef7;      /* text on deep blue          */
   --color-on-dark-soft: #9fb2cd; /* muted text on deep blue    */
   --color-line: rgba(17, 47, 91, 0.14);
   --color-line-strong: rgba(17, 47, 91, 0.26);
   --color-line-dark: rgba(221, 231, 245, 0.16);
+  --color-line-gold: rgba(217, 165, 63, 0.32);
 
-  --font-display: var(--font-caslon-display); /* large headlines */
-  --font-serif: var(--font-caslon-text);      /* smaller serif set — sturdier cut */
-  --font-sans: var(--font-manrope);
+  --font-display: var(--font-jakarta);   /* heavy display headlines */
+  --font-sans: var(--font-jakarta);
   --font-mono: var(--font-geist-mono);
 
   --ease-rkb: cubic-bezier(0.22, 1, 0.36, 1);
@@ -68,7 +72,7 @@ body {
   overscroll-behavior-y: none;
   -webkit-tap-highlight-color: transparent;
   font-family: var(--font-sans), system-ui, sans-serif;
-  letter-spacing: -0.014em;
+  letter-spacing: -0.008em;
 }
 
 ::selection {
@@ -122,48 +126,59 @@ body {
 }
 
 /* ---------- Typography helpers ----------
-   Libre Caslon — a classical foundational serif. Unlike Fraunces it isn't a
-   variable font, so weights are fixed (400) and it wants far LESS negative
-   tracking and a touch more leading than a grotesque-ish display serif. The
-   large display sizes use the high-contrast Display cut; smaller serif set uses
-   the sturdier Text cut so hairlines never get fragile. */
+   One variable grotesque (Plus Jakarta Sans) for everything. Display sizes
+   run heavy with tight tracking; body stays 400/500. */
 .font-display {
-  font-family: var(--font-serif), Georgia, serif;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* Classy serif accent (EB Garamond) — used sparingly, e.g. the engraved term
+   text on the metal loan card. Old-style figures give numbers a refined feel. */
+.font-serif {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-feature-settings: "onum" 1, "liga" 1;
 }
 
 .display-xl {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(2.7rem, 6.4vw, 5.6rem);
-  line-height: 1.02;
-  letter-spacing: -0.012em;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 760;
+  font-size: clamp(2.85rem, 6.8vw, 6.3rem);
+  line-height: 0.99;
+  letter-spacing: -0.028em;
 }
 
 .display-lg {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(2.1rem, 4.3vw, 3.55rem);
-  line-height: 1.08;
-  letter-spacing: -0.008em;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 730;
+  font-size: clamp(2.15rem, 4.4vw, 3.8rem);
+  line-height: 1.03;
+  letter-spacing: -0.022em;
 }
 
 .display-md {
-  font-family: var(--font-serif), Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(1.55rem, 2.6vw, 2.25rem);
-  line-height: 1.16;
-  letter-spacing: -0.005em;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 680;
+  font-size: clamp(1.55rem, 2.6vw, 2.3rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
 }
 
-/* Section kicker — a small-caps engraved label, no number, no mono. Set in the
-   grotesk with wide tracking and a lifted baseline so it reads as a refined
-   overline, not the templated "01 —— LABEL" eyebrow. */
+/* Homepage-hero cut of display-xl — capped for the split stage so the
+   headline holds 2–3 lines beside the medallion at every desktop width. */
+.display-hero {
+  font-size: clamp(2.7rem, 4.35vw, 4.4rem);
+  line-height: 1.02;
+}
+
+/* Section kicker — engraved-metal small caps: heavy, wide-tracked, sharp. */
 .eyebrow {
   font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
 
@@ -174,6 +189,63 @@ body {
 .measure-wide {
   max-width: 58ch;
   text-wrap: pretty;
+}
+
+/* ---------- Gold utilities ---------- */
+
+/* Brushed-gold text — a single quiet light pass, no specular ping-pong.
+   For the accent phrase / hero figures on navy. */
+.gold-text {
+  background: linear-gradient(100deg, #dfb763 0%, #cfa452 52%, #b88624 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Minted bead — the brand's coin, shrunk to a marker. Replaces the flat diamond
+   bullets with a small glossy gold disc: a specular top, a shaded base and a
+   struck hairline edge, echoing the concentric-ring ₹ medallion in the logo.
+   Paints the surface only (rounding included); size it with width/height
+   utilities. Reads on both ivory and navy. */
+.mint-mark {
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 35% 28%,
+    #fdeecb 0%,
+    #edc465 32%,
+    #cf9a30 68%,
+    #9c7420 100%
+  );
+  box-shadow:
+    0 0 0 0.5px rgba(184, 134, 36, 0.5),
+    inset 0 0.5px 0.5px rgba(255, 250, 232, 0.85),
+    inset 0 -0.5px 1px rgba(104, 70, 12, 0.55),
+    0 1px 1.5px rgba(120, 82, 14, 0.3);
+}
+
+/* Specular light sweep — a highlight bar crosses the surface on hover. */
+.sheen {
+  position: relative;
+  overflow: hidden;
+}
+.sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 32%,
+    rgba(255, 255, 255, 0.34) 47%,
+    rgba(255, 255, 255, 0.1) 53%,
+    transparent 66%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.9s var(--ease-rkb);
+}
+.sheen:hover::after,
+.group:hover .sheen::after {
+  transform: translateX(130%);
 }
 
 /* ---------- Layout shell ---------- */
@@ -277,6 +349,126 @@ body {
     var(--color-canvas);
 }
 
+/* ============================================================
+   Loud section surfaces — the alternating page bands.
+   Same banknote grammar as the tx-* family, but SEEN, not felt:
+   saturated washes, visible engraving, grain on every band.
+   Each provides its own base — no bg-* utility needed.
+   ============================================================ */
+.section-vault,
+.section-ivory-loud,
+.section-blue-loud,
+.section-gold-loud {
+  position: relative;
+  isolation: isolate;
+  /* clip, NOT hidden — hidden makes the section a scroll container, which
+     silently kills position:sticky descendants (the pinned process scene). */
+  overflow: clip;
+}
+.section-vault::before,
+.section-ivory-loud::before,
+.section-blue-loud::before,
+.section-gold-loud::before,
+.section-vault::after,
+.section-ivory-loud::after,
+.section-blue-loud::after,
+.section-gold-loud::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Deep cinematic navy — blue glow above, a gold ember below. */
+.section-vault {
+  background:
+    radial-gradient(80% 65% at 50% -4%, rgba(79, 134, 207, 0.22), transparent 62%),
+    radial-gradient(55% 55% at 50% 108%, rgba(184, 134, 36, 0.17), transparent 66%),
+    radial-gradient(140% 115% at 50% 38%, #10386e 0%, var(--color-deep) 52%, var(--color-vault) 100%);
+  color: var(--color-on-dark);
+}
+.section-vault::before {
+  background-image:
+    linear-gradient(to right, rgba(221, 231, 245, 0.075) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(221, 231, 245, 0.075) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+  -webkit-mask-image: radial-gradient(120% 95% at 50% 6%, #000 20%, transparent 84%);
+  mask-image: radial-gradient(120% 95% at 50% 6%, #000 20%, transparent 84%);
+}
+.section-vault::after {
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.section-vault *::selection {
+  background: var(--color-gold-bright);
+  color: var(--color-vault);
+}
+
+/* Warm ivory with a gold wash and visible navy engraving. */
+.section-ivory-loud {
+  background:
+    radial-gradient(70% 58% at 84% -2%, rgba(184, 134, 36, 0.16), transparent 60%),
+    radial-gradient(58% 55% at 4% 102%, rgba(32, 90, 168, 0.12), transparent 62%),
+    var(--color-canvas);
+}
+.section-ivory-loud::before {
+  background-image:
+    linear-gradient(to right, rgba(17, 47, 91, 0.085) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 47, 91, 0.085) 1px, transparent 1px);
+  background-size: 2.8rem 2.8rem;
+  -webkit-mask-image: radial-gradient(118% 90% at 50% 4%, #000 20%, transparent 84%);
+  mask-image: radial-gradient(118% 90% at 50% 4%, #000 20%, transparent 84%);
+}
+.section-ivory-loud::after {
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Pale porcelain-blue band — the brand blue kept quiet and even. A soft,
+   symmetric top glow and a warm gold ember below, no off-centre wash. */
+.section-blue-loud {
+  background:
+    radial-gradient(95% 62% at 50% -12%, rgba(79, 134, 207, 0.12), transparent 60%),
+    radial-gradient(52% 55% at 6% 105%, rgba(184, 134, 36, 0.05), transparent 64%),
+    linear-gradient(180deg, #f4f8fd 0%, #e7eff9 100%);
+}
+.section-blue-loud::before {
+  background-image:
+    linear-gradient(to right, rgba(17, 47, 91, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 47, 91, 0.055) 1px, transparent 1px);
+  background-size: 2.8rem 2.8rem;
+  -webkit-mask-image: radial-gradient(120% 95% at 50% 4%, #000 14%, transparent 82%);
+  mask-image: radial-gradient(120% 95% at 50% 4%, #000 14%, transparent 82%);
+}
+.section-blue-loud::after {
+  opacity: 0.26;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Pale gold-paper band — warm, even and symmetric (no off-centre wash),
+   with the bronze banknote crosshatch kept quiet underneath. */
+.section-gold-loud {
+  background:
+    radial-gradient(95% 60% at 50% -12%, rgba(184, 134, 36, 0.13), transparent 62%),
+    linear-gradient(180deg, #fdf8ec 0%, #f6ead0 100%);
+}
+.section-gold-loud::before {
+  background-image:
+    repeating-linear-gradient(45deg, rgba(138, 97, 24, 0.07) 0, rgba(138, 97, 24, 0.07) 1px, transparent 1px, transparent 9px),
+    repeating-linear-gradient(-45deg, rgba(138, 97, 24, 0.065) 0, rgba(138, 97, 24, 0.065) 1px, transparent 1px, transparent 9px);
+  -webkit-mask-image: radial-gradient(125% 95% at 50% 30%, #000 24%, transparent 88%);
+  mask-image: radial-gradient(125% 95% at 50% 30%, #000 24%, transparent 88%);
+}
+.section-gold-loud::after {
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 /* Inverted navy surface — warmth + a faint ivory engraving */
 .panel-dark {
   position: relative;
@@ -286,8 +478,9 @@ body {
   /* Ambient depth, not a spotlight — soft lights pushed just off two edges so
      the surface reads as evenly-lit engraved navy, never a glowing blob. */
   background-image:
-    radial-gradient(110% 130% at 84% -12%, rgba(32, 90, 168, 0.13), transparent 60%),
-    radial-gradient(80% 105% at 4% 110%, rgba(17, 47, 91, 0.42), transparent 64%);
+    radial-gradient(110% 130% at 84% -12%, rgba(32, 90, 168, 0.16), transparent 60%),
+    radial-gradient(52% 55% at 50% 110%, rgba(184, 134, 36, 0.14), transparent 66%),
+    radial-gradient(80% 105% at 4% 110%, rgba(8, 28, 56, 0.5), transparent 64%);
 }
 .panel-dark::before {
   content: "";
@@ -378,6 +571,183 @@ body {
   pointer-events: none;
 }
 
+/* ---------- Process "How it works" — vertical index + framed art ---------- */
+
+/* Filled navy plate that rests under the active stage in the left index.
+   A minted-gold hairline and soft ink shadow lift it off the paper band. */
+/* ---------- Process scene — the dark vault stage ---------- */
+
+/* Step index row — a quiet, clickable bar; a hairline appears on hover. */
+.step-btn {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  border-radius: 1.25rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    border-color 0.35s var(--ease-rkb),
+    background-color 0.35s var(--ease-rkb);
+}
+.step-btn:hover {
+  border-color: rgba(217, 165, 63, 0.24);
+  background-color: rgba(232, 238, 247, 0.03);
+}
+.step-btn:focus-visible {
+  outline: 2px solid var(--color-gold-bright);
+  outline-offset: 2px;
+  border-radius: 1.25rem;
+}
+
+/* The active stage's plate — lifted navy glass with a glossy gold stroke:
+   a lit top edge, a clear gold hairline, and the faintest gold aura. */
+.step-plate {
+  background: linear-gradient(
+    158deg,
+    rgba(30, 84, 143, 0.38) 0%,
+    rgba(15, 44, 84, 0.55) 55%,
+    rgba(8, 28, 56, 0.6) 100%
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(217, 165, 63, 0.45),
+    inset 0 1px 0 rgba(232, 238, 247, 0.16),
+    0 18px 40px -22px rgba(3, 10, 22, 0.7),
+    0 0 26px -10px rgba(217, 165, 63, 0.22);
+}
+
+/* The single stage pane — illustration and copy live together in one glossy
+   navy-glass panel: gold hairline edge, lit top sheen, inner hairline. */
+.pane-vault {
+  position: relative;
+  isolation: isolate;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(217, 165, 63, 0.32);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 32%),
+    linear-gradient(157deg, rgba(30, 84, 143, 0.22) 0%, rgba(11, 36, 71, 0.42) 55%, rgba(8, 28, 56, 0.52) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(232, 238, 247, 0.15),
+    0 34px 70px -40px rgba(3, 10, 22, 0.85);
+}
+.pane-vault::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border-radius: calc(1.75rem - 7px);
+  border: 1px solid rgba(232, 238, 247, 0.07);
+  pointer-events: none;
+}
+
+/* Crisp card — porcelain-white plate for light bands. Two premium strokes:
+   a navy hairline on the edge and an inset gold hairline echoing the loan
+   card's frame. Hover: a genuine lift, the gold frame warms, and a gold
+   accent bar draws across the top. */
+.card-crisp {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid rgba(17, 47, 91, 0.14);
+  background: linear-gradient(180deg, #ffffff 0%, #fdfaf2 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(11, 36, 71, 0.05),
+    0 24px 50px -34px rgba(11, 36, 71, 0.3);
+  transition:
+    transform 0.4s var(--ease-rkb),
+    box-shadow 0.4s var(--ease-rkb),
+    border-color 0.4s var(--ease-rkb);
+}
+.card-crisp::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: calc(1rem - 4px);
+  border: 1px solid rgba(184, 134, 36, 0.22);
+  pointer-events: none;
+  transition: border-color 0.4s var(--ease-rkb);
+}
+.card-crisp::after {
+  content: "";
+  position: absolute;
+  inset-inline: 1.25rem;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #cfa452, #b88624);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-rkb);
+}
+.card-crisp:hover {
+  transform: translateY(-4px);
+  border-color: rgba(17, 47, 91, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 2px 4px rgba(11, 36, 71, 0.05),
+    0 32px 60px -32px rgba(11, 36, 71, 0.38);
+}
+.card-crisp:hover::before {
+  border-color: rgba(184, 134, 36, 0.45);
+}
+.card-crisp:hover::after {
+  transform: scaleX(1);
+}
+
+/* Gold icon plate — a small minted seat for line icons on crisp cards. */
+.icon-plate {
+  display: flex;
+  height: 2.9rem;
+  width: 2.9rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(184, 134, 36, 0.32);
+  background: linear-gradient(180deg, #fdf4dd 0%, #f7e8c3 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Inset tile — a warm ivory plate recessed INTO a vault surface: gold
+   hairline stroke, a soft inner shadow pooling from the top edge, and a
+   faint lit lip along the bottom so the navy reads as raised around it.
+   Embedded things don't lift — hover only warms the stroke and the paper. */
+.tile-inset {
+  position: relative;
+  border: 1px solid rgba(217, 165, 63, 0.3);
+  background: linear-gradient(180deg, #f6f0e2 0%, #efe7d6 100%);
+  box-shadow:
+    inset 0 2px 10px rgba(8, 28, 56, 0.16),
+    inset 0 1px 2px rgba(8, 28, 56, 0.1),
+    0 1px 0 rgba(232, 238, 247, 0.09);
+  transition:
+    background 0.4s var(--ease-rkb),
+    border-color 0.4s var(--ease-rkb);
+}
+.tile-inset:hover {
+  border-color: rgba(217, 165, 63, 0.5);
+  background: linear-gradient(180deg, #faf5ea 0%, #f2ebdb 100%);
+}
+
+/* Proof tile — translucent plate on vault surfaces; a gold light sweep
+   crosses it on hover. */
+.proof-tile {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(217, 165, 63, 0.24);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.03);
+}
+.proof-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(217, 165, 63, 0.17), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.7s var(--ease-rkb);
+}
+.proof-tile:hover::before {
+  transform: translateX(100%);
+}
+
 .card-raised {
   transition:
     transform 0.4s var(--ease-rkb),
@@ -430,6 +800,19 @@ body {
   border: 0;
 }
 
+/* Accent rule — a single gold hairline that fades at both edges. Replaces the
+   old centred diamond; premium and quiet, no decorative motif. */
+.rule-accent {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-line-gold) 50%,
+    transparent
+  );
+}
+
 /* Engraved double rule for heritage feel */
 .rule-engraved {
   height: 3px;
@@ -440,41 +823,144 @@ body {
 }
 
 /* ============================================================
-   Hero surface — layered, editorial, classy
-   warm vignette + faint ledger rules + paper grain + bronze rails
+   Hero surface — the vault
+   Deep cinematic navy · gold-lit medallion · engraved grid ·
+   volumetric rays · drifting gold motes. The video slot (HeroVault)
+   sits between this surface and the medallion when enabled.
    ============================================================ */
-.hero-rkb {
+.hero-vault {
   position: relative;
   isolation: isolate;
   background:
-    radial-gradient(125% 90% at 50% -12%, rgba(32, 90, 168, 0.09), transparent 55%),
-    var(--color-canvas);
+    radial-gradient(58% 46% at 50% 30%, rgba(79, 134, 207, 0.22), transparent 70%),
+    radial-gradient(42% 36% at 50% 28%, rgba(184, 134, 36, 0.1), transparent 72%),
+    radial-gradient(130% 105% at 50% -8%, #123d78 0%, var(--color-deep) 46%, var(--color-vault) 100%);
+  color: var(--color-on-dark);
 }
-.hero-rkb::before {
+.hero-vault::before {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 2.4rem,
-    rgba(17, 47, 91, 0.06) 2.4rem,
-    rgba(17, 47, 91, 0.06) calc(2.4rem + 1px)
-  );
-  -webkit-mask-image: radial-gradient(120% 95% at 50% 12%, #000 28%, transparent 86%);
-  mask-image: radial-gradient(120% 95% at 50% 12%, #000 28%, transparent 86%);
+  background-image:
+    linear-gradient(to right, rgba(221, 231, 245, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(221, 231, 245, 0.07) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+  -webkit-mask-image: radial-gradient(115% 90% at 50% 8%, #000 22%, transparent 82%);
+  mask-image: radial-gradient(115% 90% at 50% 8%, #000 22%, transparent 82%);
 }
-.hero-rkb::after {
+.hero-vault::after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
-  opacity: 0.55;
-  mix-blend-mode: multiply;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Readability scrim — a soft navy pool behind the text column so the
+   headline never fights the gold medallion lines. Follows the copy: centred
+   on mobile, pooled over the left column on desktop. */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(52% 46% at 50% 44%, rgba(8, 28, 56, 0.58), transparent 74%);
+}
+@media (min-width: 1024px) {
+  .hero-scrim {
+    background: radial-gradient(42% 58% at 27% 46%, rgba(8, 28, 56, 0.55), transparent 72%);
+  }
+}
+
+/* ---------- Hero melt — the curtain seam ----------
+   Everything after the hero rides in this wrapper: it overlaps the hero's
+   base and rounds its top corners, so on scroll the ivory page reads as a
+   paper sheet rising out of the vault. overflow:clip (NOT hidden — hidden
+   makes this a scroll container and would kill the pinned process scene's
+   position:sticky) clips the section fills to the curve while the wrapper's
+   own upward shadow still paints over the vault. */
+.hero-curtain {
+  position: relative;
+  z-index: 10;
+  margin-top: -3.5rem;
+  border-radius: 2.25rem 2.25rem 0 0;
+  overflow: clip;
+  box-shadow: 0 -28px 70px -24px rgba(8, 28, 56, 0.55);
+}
+@media (min-width: 1024px) {
+  .hero-curtain {
+    margin-top: -4.5rem;
+    border-radius: 3rem 3rem 0 0;
+  }
+}
+
+/* Volumetric light rays — two soft shafts falling from above, kept faint. */
+.vault-ray {
+  position: absolute;
+  top: -22%;
+  height: 130%;
+  width: clamp(10rem, 24vw, 22rem);
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(234, 198, 104, 0.07), rgba(234, 198, 104, 0.02) 55%, transparent 78%);
+  filter: blur(26px);
+  transform: rotate(13deg);
+}
+.vault-ray-2 {
+  transform: rotate(-11deg);
+  background: linear-gradient(180deg, rgba(79, 134, 207, 0.1), rgba(79, 134, 207, 0.02) 60%, transparent 80%);
+}
+
+/* Drifting gold motes — embers of minted metal rising through the vault.
+   Position/size/duration/opacity come from inline custom properties. */
+.vault-mote {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 32% 28%, #dfb763, #a97e28 72%);
+  box-shadow: 0 0 5px rgba(217, 165, 63, 0.25);
+  opacity: 0;
+  animation: mote-rise var(--mote-dur, 16s) linear var(--mote-delay, 0s) infinite;
+}
+@keyframes mote-rise {
+  0% {
+    transform: translate3d(0, 2.5rem, 0) scale(0.7);
+    opacity: 0;
+  }
+  12% {
+    opacity: var(--mote-op, 0.5);
+  }
+  82% {
+    opacity: var(--mote-op, 0.5);
+  }
+  100% {
+    transform: translate3d(var(--mote-sway, 1.5rem), -46vh, 0) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Hero video slot — sits under the medallion, over the vault surface. */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-video video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  opacity: 0.34;
+}
+.hero-video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 100% at 50% 30%, transparent 30%, rgba(8, 28, 56, 0.72) 100%);
 }
 
 /* Brand-blue framing rails bounding the content column — a single fixed
@@ -503,20 +989,30 @@ body {
    Faint bronze watermark behind the centered hero content.
    ============================================================ */
 .hero-seal {
+  /* Mobile: a quiet watermark behind the left-set copy. Desktop (lg+): the
+     medallion holds the right half — sized against BOTH axes so the full
+     coin always sits clear of the nav above and the trust strip below,
+     never running under or off anything. */
+  --seal-opacity: 0.38;
   position: absolute;
   left: 50%;
-  top: 50%;
-  z-index: 0;
-  width: clamp(400px, 66vw, 820px);
+  top: 46%;
+  z-index: 1;
+  width: min(92vw, 56svh, 620px);
   aspect-ratio: 1;
-  translate: -50% -45%;
+  translate: -50% -50%;
   pointer-events: none;
-  color: var(--color-accent);
+  color: var(--color-gold-bright);
   opacity: 0;
-  /* keep the outer ring + lettering readable, dissolve just past it */
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 82%, transparent 97%);
-  mask-image: radial-gradient(circle at 50% 50%, #000 82%, transparent 97%);
   animation: seal-emerge 1.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+@media (min-width: 1024px) {
+  .hero-seal {
+    --seal-opacity: 0.8;
+    left: 73%;
+    top: 41%;
+    width: min(38vw, 52svh, 620px);
+  }
 }
 .hero-seal svg {
   display: block;
@@ -529,7 +1025,7 @@ body {
     transform: scale(0.92);
   }
   to {
-    opacity: 0.4;
+    opacity: var(--seal-opacity, 0.75);
     transform: scale(1);
   }
 }
@@ -638,6 +1134,87 @@ body {
   }
 }
 
+/* Glass plate under the animated money scenes on light bands. Framed with
+   the house double stroke: a navy hairline on the edge and an inset gold
+   hairline just inside it — subtle, layered, consistent with the cards. */
+.money-scene-frame {
+  position: relative;
+  isolation: isolate;
+  border-radius: 2rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.3)),
+    rgba(251, 248, 242, 0.55);
+  border: 1px solid rgba(17, 47, 91, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 34px 70px -42px rgba(11, 36, 71, 0.42);
+  padding: 1.25rem;
+}
+.money-scene-frame::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: calc(2rem - 6px);
+  border: 1px solid rgba(184, 134, 36, 0.28);
+  pointer-events: none;
+}
+
+/* ---------- Money conveyor (product/process flow) ----------
+   Engraved rupee tokens ride an offset-path from application to bank. */
+.flow-token {
+  offset-rotate: 0deg;
+  animation: flow-token 3.6s var(--ease-rkb) infinite;
+  filter: drop-shadow(0 10px 14px rgba(11, 36, 71, 0.2));
+}
+@keyframes flow-token {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+    transform: scale(0.75);
+  }
+  14% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  84% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+    transform: scale(0.75);
+  }
+}
+.flow-dash {
+  animation: flow-dash 2.6s linear infinite;
+}
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -44;
+  }
+}
+
+/* ---------- Partner marquee ---------- */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 3.5rem;
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* ---------- Hero scroll cue ---------- */
 .scroll-cue {
   position: relative;
@@ -645,6 +1222,12 @@ body {
   height: 2.75rem;
   background: var(--color-line-strong);
   overflow: hidden;
+}
+.hero-vault .scroll-cue {
+  background: rgba(221, 231, 245, 0.3);
+}
+.hero-vault .scroll-cue::after {
+  background: var(--color-gold-bright);
 }
 .scroll-cue::after {
   content: "";
