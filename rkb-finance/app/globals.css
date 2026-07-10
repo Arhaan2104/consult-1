@@ -1027,27 +1027,6 @@ body {
   background: radial-gradient(120% 100% at 50% 30%, transparent 30%, rgba(8, 28, 56, 0.72) 100%);
 }
 
-/* Brand-blue framing rails bounding the content column — a single fixed
-   overlay so the two vertical lines run unbroken down the whole page,
-   through every section (paired with the horizontal section dividers, which
-   span the same column, to frame the content top-to-bottom). Sits above
-   section fills but below the header pill / site-frame; never eats clicks. */
-.page-rails {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 30;
-}
-.page-rails::before {
-  content: "";
-  position: absolute;
-  inset-block: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(100% - 2 * var(--gutter) + 2px, var(--shell));
-  border-inline: 1px solid rgba(32, 90, 168, 0.22);
-}
-
 /* ============================================================
    Hero seal — engraved guilloché medallion (banknote line-art)
    Faint bronze watermark behind the centered hero content.
@@ -1447,7 +1426,6 @@ body {
   header,
   footer,
   .hero-seal,
-  .page-rails,
   [aria-hidden="true"] {
     display: none !important;
   }

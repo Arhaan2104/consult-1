@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { buttonClasses } from "@/components/Button";
-import { nav, site } from "@/content/site";
+import { nav } from "@/content/site";
 
 export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,8 +34,8 @@ export default function SiteHeader() {
         <nav
           className={`relative z-50 flex h-[4.2rem] items-center justify-between gap-3 rounded-[1.4rem] border pl-6 pr-3 backdrop-blur-xl transition-[background-color,box-shadow,border-color] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[2.5px] before:rounded-[1.2rem] before:border before:border-[rgba(217,165,63,0.18)] before:content-[''] ${
             scrolled
-              ? "border-gold-bright/30 bg-deep/90 shadow-[0_14px_36px_-14px_rgba(8,28,56,0.6)]"
-              : "border-gold-bright/20 bg-deep/70 shadow-[0_8px_26px_-16px_rgba(8,28,56,0.45)]"
+              ? "border-gold-bright/30 bg-deep/[0.93] shadow-[0_14px_36px_-14px_rgba(8,28,56,0.6)]"
+              : "border-gold-bright/20 bg-deep/[0.86] shadow-[0_8px_26px_-16px_rgba(8,28,56,0.45)]"
           }`}
         >
           <Link
@@ -44,15 +44,19 @@ export default function SiteHeader() {
             className="group relative z-50 -ml-2 flex items-center self-stretch pl-2 pr-5"
             onClick={() => setOpen(false)}
           >
-            {/* The exact logo, re-struck in ivory for the dark glass. */}
+            {/* The logo pre-struck in ivory (logo-ivory.png) — the source PNG
+                carries a haze of near-transparent JPEG artifacts that the old
+                brightness/invert CSS filter lit up as grey smudge boxes around
+                the mark. The cleaned asset has that haze stripped from the
+                alpha channel, so the glass behind the logo stays spotless. */}
             <Image
-              src="/R.K.-BANSAL.png"
+              src="/logo-ivory.png"
               alt="R.K. Bansal Finance Pvt. Ltd."
               width={152}
               height={36}
               priority
               style={{ width: "auto" }}
-              className="h-[2.4rem] [filter:brightness(0)_invert(0.97)] opacity-95 transition-opacity duration-300 group-hover:opacity-75"
+              className="h-[2.4rem] opacity-95 transition-opacity duration-300 group-hover:opacity-75"
             />
           </Link>
 
@@ -119,7 +123,10 @@ export default function SiteHeader() {
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <div className="shell flex h-full flex-col justify-center gap-1 pt-16">
+        {/* Mirrors the desktop nav exactly: the same three items with the
+            same quiet active treatment (soft white pill), and Apply now as
+            the one gold button — never a second highlighted text item. */}
+        <div className="shell flex h-full flex-col justify-center gap-2 pt-16">
           {nav.map((item) => {
             const active =
               pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -129,16 +136,12 @@ export default function SiteHeader() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 onClick={() => setOpen(false)}
-                className={`flex items-center gap-3 py-1.5 font-display text-4xl transition-colors ${
-                  active ? "text-gold-bright" : "text-on-dark"
+                className={`rounded-2xl px-5 py-3.5 font-display text-3xl tracking-tight transition-colors duration-300 ${
+                  active
+                    ? "bg-white/[0.1] text-on-dark"
+                    : "text-on-dark-soft hover:bg-white/[0.07] hover:text-on-dark"
                 }`}
               >
-                <span
-                  className={`mint-mark h-2 w-2 transition-opacity ${
-                    active ? "opacity-100" : "opacity-0"
-                  }`}
-                  aria-hidden
-                />
                 {item.label}
               </Link>
             );
@@ -146,14 +149,11 @@ export default function SiteHeader() {
           <Link
             href="/contact"
             onClick={() => setOpen(false)}
-            className="flex items-center gap-3 py-1.5 font-display text-4xl text-gold-bright"
+            className={buttonClasses("gold", "mt-6 w-full justify-center", "px-8 py-4")}
           >
-            <span className="mint-mark h-2 w-2" aria-hidden />
             Apply now
+            <span aria-hidden>→</span>
           </Link>
-          <p className="eyebrow mt-10 text-on-dark-soft">
-            {site.contact.phones[0]}
-          </p>
         </div>
       </div>
     </header>

@@ -46,8 +46,8 @@ function CornerMark({ className = "" }: { className?: string }) {
 }
 
 export default function HeroBanknote() {
-  // Match the .page-rails width exactly so the corners land on the vertical
-  // rails (the note's sides), not inside the shell's gutter padding.
+  // Match the content-column width (the shell minus its gutter padding) so
+  // the corners frame the hero like the corner marks of a security note.
   const railWidth = "min(100% - 2 * var(--gutter) + 2px, var(--shell))";
   return (
     <div

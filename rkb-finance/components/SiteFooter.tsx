@@ -27,13 +27,15 @@ export default function SiteFooter() {
           {/* Brand */}
           <div className="flex flex-col gap-5">
             <Link href="/" aria-label="R.K. Bansal Finance, home" className="w-fit">
+              {/* Pre-struck ivory logo — see SiteHeader: the CSS-filter version
+                  exposed JPEG-artifact smudges from the source PNG's alpha. */}
               <Image
-                src="/R.K.-BANSAL.png"
+                src="/logo-ivory.png"
                 alt="R.K. Bansal Finance Pvt. Ltd."
                 width={190}
                 height={45}
                 style={{ width: "auto" }}
-                className="h-10 [filter:brightness(0)_invert(0.97)] opacity-95 transition-opacity duration-300 hover:opacity-75"
+                className="h-10 opacity-95 transition-opacity duration-300 hover:opacity-75"
               />
             </Link>
             <p className="measure text-base leading-relaxed text-on-dark-soft">
