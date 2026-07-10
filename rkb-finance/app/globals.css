@@ -80,25 +80,6 @@ body {
   color: var(--color-canvas);
 }
 
-/* ---------- Site frame ----------
-   A sleek brand-blue border hugging all four viewport edges — a fixed matte
-   that frames every page consistently. Sits above page content but below the
-   header pill and scroll-progress bar, and never intercepts pointer events.
-   Over the deep-blue closing section/footer the same accent reads as a lit
-   inset line, so the frame stays consistent top-to-bottom without a seam. */
-.site-frame {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  pointer-events: none;
-  border: 3px solid var(--color-accent);
-}
-@media (min-width: 1024px) {
-  .site-frame {
-    border-width: 4px;
-  }
-}
-
 /* Site-wide keyboard focus ring (nav, footer, accordion, links, inputs). */
 :focus-visible {
   outline: 2px solid var(--color-accent);
@@ -638,6 +619,42 @@ body {
   pointer-events: none;
 }
 
+/* The stage pane, in paper — a lit ivory document laid on the vault table:
+   warm paper gradient, the house double stroke (navy edge + inset gold
+   hairline), and a deep navy drop so it floats off the dark band. */
+.pane-paper {
+  position: relative;
+  isolation: isolate;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(17, 47, 91, 0.3);
+  background: linear-gradient(180deg, #fefcf6 0%, #f6efe0 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 3px 10px -2px rgba(3, 10, 22, 0.4),
+    0 40px 80px -40px rgba(3, 10, 22, 0.9),
+    0 14px 32px -18px rgba(3, 10, 22, 0.55);
+}
+.pane-paper::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border-radius: calc(1.75rem - 7px);
+  border: 1px solid rgba(184, 134, 36, 0.4);
+  pointer-events: none;
+}
+
+/* Felt underline — a short engraved gold rule under a card title: a warm
+   gold bar with a paper-white pressline beneath, so it reads debossed. */
+.title-rule {
+  display: block;
+  height: 2px;
+  width: 3.25rem;
+  margin-top: 0.85rem;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #cfa452 0%, #b88624 62%, rgba(184, 134, 36, 0.2) 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
 /* Crisp card — porcelain-white plate for light bands. Two premium strokes:
    a navy hairline on the edge and an inset gold hairline echoing the loan
    card's frame. Hover: a genuine lift, the gold frame warms, and a gold
@@ -1010,8 +1027,11 @@ body {
   .hero-seal {
     --seal-opacity: 0.8;
     left: 73%;
-    top: 41%;
-    width: min(38vw, 52svh, 620px);
+    /* Lifted a touch and capped slightly smaller so the coin's lower edge
+       clears the trust strip with intentional breathing room — never crowding
+       the hairline below. */
+    top: 39%;
+    width: min(37vw, 50svh, 600px);
   }
 }
 .hero-seal svg {
@@ -1157,6 +1177,51 @@ body {
   border-radius: calc(2rem - 6px);
   border: 1px solid rgba(184, 134, 36, 0.28);
   pointer-events: none;
+}
+
+/* Porcelain-blue cut of the scene plate — a cool pool for the diagram to
+   pop against warm bands (e.g. the gold "why borrowers" section). */
+.money-scene-frame.scene-blue {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.2)),
+    linear-gradient(180deg, #eff5fd 0%, #ddebfa 100%);
+  border-color: rgba(17, 47, 91, 0.22);
+}
+
+/* Dark glass variant — for engraved scenes placed on the deep navy (vault)
+   surfaces, matching the translucent proof-tile plates and the process pane. */
+.money-scene-frame.is-dark {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.03);
+  border-color: rgba(217, 165, 63, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 34px 70px -42px rgba(0, 0, 0, 0.5);
+}
+.money-scene-frame.is-dark::before {
+  border-color: rgba(217, 165, 63, 0.22);
+}
+
+/* Vault showcase plate — an opaque, glossy deep-navy stage for the balance
+   scene when it sits on a LIGHT band ("why borrowers choose us"). No white
+   panel: a lit top edge, a soft blue crown above and a gold ember below, inside
+   a gold hairline frame. The gold motion is the whole focus. Trimmed padding
+   lets the diagram render larger. */
+.money-scene-frame.scene-vault {
+  padding: 0.9rem;
+  background:
+    radial-gradient(88% 68% at 50% -8%, rgba(96, 150, 220, 0.24), transparent 60%),
+    radial-gradient(72% 62% at 50% 114%, rgba(217, 165, 63, 0.16), transparent 66%),
+    linear-gradient(180deg, #13396a 0%, #0c2a51 46%, #071c38 100%);
+  border-color: rgba(217, 165, 63, 0.34);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 244, 214, 0.16),
+    inset 0 -34px 64px rgba(6, 20, 42, 0.5),
+    0 46px 92px -44px rgba(6, 20, 42, 0.78);
+}
+.money-scene-frame.scene-vault::before {
+  border-color: rgba(217, 165, 63, 0.3);
 }
 
 /* ---------- Money conveyor (product/process flow) ----------

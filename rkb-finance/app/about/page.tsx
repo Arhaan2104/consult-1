@@ -3,7 +3,7 @@ import { Button } from "@/components/Button";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import PageHero from "@/components/PageHero";
 import { InstitutionMark } from "@/components/SectionArt";
-import { Section, SectionDivider, SectionHeader } from "@/components/Section";
+import { Section, SectionHeader } from "@/components/Section";
 import { site, timeline } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -56,10 +56,8 @@ export default function AboutPage() {
         intro="R.K. Bansal Finance has digitised the personal-loan process to remove extensive physical interactions and the long waiting periods traditionally associated with banking, while keeping the trust of a four-decade-old institution."
       />
 
-      <SectionDivider />
-
-      {/* Mission */}
-      <Section texture="weave">
+      {/* Mission — warm ivory band */}
+      <Section texture="ivory-loud">
         <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div className="flex flex-col gap-10">
             <SectionHeader index="01" kicker="Our mission" title={<>Why we exist.</>} />
@@ -94,39 +92,42 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <SectionDivider variant="accent" />
-
-      {/* Values */}
-      <Section texture="engrave">
+      {/* Values — warm gold band, crisp plates */}
+      <Section texture="gold-loud">
         <SectionHeader
           index="02"
           kicker="What guides us"
           title={<>Four principles, applied consistently.</>}
         />
-        <Stagger className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-[var(--color-line)] sm:mt-16 sm:grid-cols-2">
+        <Stagger className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-2">
           {values.map((v) => (
-            <StaggerItem key={v.title} className="card-cell flex flex-col gap-3 bg-canvas p-6 sm:p-10">
+            <StaggerItem
+              key={v.title}
+              className="card-crisp flex flex-col gap-3 rounded-2xl p-6 sm:p-10"
+            >
               <span className="font-display text-2xl text-ink">{v.title}</span>
-              <span className="h-px w-8 bg-accent/50" />
+              <span className="h-px w-8 bg-[var(--color-line-gold)]" />
               <p className="text-base leading-relaxed text-ink-soft">{v.body}</p>
             </StaggerItem>
           ))}
         </Stagger>
       </Section>
 
-      <SectionDivider />
-
-      {/* Timeline */}
-      <Section texture="ledger">
+      {/* Timeline — warm ivory band, crisp chapters */}
+      <Section texture="ivory-loud">
         <SectionHeader
           index="03"
           kicker="Our story"
           title={<>Forty years, in three chapters.</>}
         />
-        <Stagger className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-3">
+        <Stagger className="mt-12 grid gap-5 sm:mt-16 md:grid-cols-3">
           {timeline.map((t) => (
-            <StaggerItem key={t.title} className="flex flex-col gap-4 border-t border-line-strong pt-6">
-              <span className="font-display text-3xl text-accent">{t.year}</span>
+            <StaggerItem
+              key={t.title}
+              className="card-crisp flex flex-col gap-4 rounded-2xl p-6 sm:p-8"
+            >
+              <span className="font-display text-3xl text-gold">{t.year}</span>
+              <span className="h-px w-8 bg-[var(--color-line-gold)]" aria-hidden />
               <h3 className="font-display text-xl text-ink">{t.title}</h3>
               <p className="text-base leading-relaxed text-ink-soft">{t.body}</p>
             </StaggerItem>
@@ -154,12 +155,18 @@ export default function AboutPage() {
         </Reveal>
       </Section>
 
-      {/* CTA */}
-      <Section texture="laid">
+      {/* CTA — warm gold band */}
+      <Section texture="gold-loud">
         <Reveal className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
-          <h2 className="display-md max-w-[18ch] text-balance text-ink">
-            Have a question for our team?
-          </h2>
+          <div className="flex flex-col gap-4">
+            <p className="eyebrow flex items-center gap-3 text-gold">
+              <span className="h-px w-8 bg-current opacity-50" aria-hidden />
+              Get in touch
+            </p>
+            <h2 className="display-md max-w-[18ch] text-balance text-ink">
+              Have a question for our team?
+            </h2>
+          </div>
           <Button href="/contact">Contact us</Button>
         </Reveal>
       </Section>

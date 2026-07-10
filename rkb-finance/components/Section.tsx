@@ -52,7 +52,7 @@ export function Section({
       id={id}
       className={`relative ${textureClass[texture]} ${className}`}
     >
-      <div className={`shell ${flush ? "" : "py-20 sm:py-28 lg:py-32"}`}>
+      <div className={`shell ${flush ? "" : "py-16 sm:py-24 lg:py-32"}`}>
         {children}
       </div>
     </section>

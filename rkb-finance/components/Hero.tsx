@@ -131,7 +131,7 @@ export default function Hero() {
             {heroTrust.map((s, i) => (
               <StaggerItem
                 key={s.label}
-                className="flex flex-col items-start gap-2 px-1 py-5 sm:px-8 sm:py-2 sm:first:pl-1"
+                className="flex flex-col items-center gap-2 px-1 py-5 text-center sm:px-8 sm:py-2"
               >
                 <span className="eyebrow text-gold-bright">{s.prefix}</span>
                 <CountUp

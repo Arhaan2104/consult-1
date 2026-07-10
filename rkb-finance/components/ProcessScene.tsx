@@ -54,10 +54,15 @@ export default function ProcessScene(props: Props) {
 /* ---------- Illustration on the rosette — no extra frame, it lives
    directly inside the shared pane ---------- */
 function StageArt({ index }: { index: number }) {
+  // Banknote inking on the paper pane: brand-blue line work, gold rosette,
+  // paper-tone solids (--art-panel overrides the dark-pane navy fills).
   return (
-    <div className="relative mx-auto grid aspect-[6/5] w-full max-w-[13rem] place-items-center sm:max-w-none">
-      <GuillocheRosette className="pointer-events-none absolute inset-0 m-auto h-[112%] w-[112%] text-gold-bright/70" />
-      <ProcessArt index={index} className="relative w-[56%] text-gold-bright" />
+    <div
+      className="relative mx-auto grid aspect-square w-full max-w-[15rem] place-items-center sm:max-w-none"
+      style={{ "--art-panel": "#f9f3e5" } as React.CSSProperties}
+    >
+      <GuillocheRosette className="pointer-events-none absolute inset-0 m-auto h-full w-full text-gold/70" />
+      <ProcessArt index={index} className="relative w-[88%] text-accent" />
     </div>
   );
 }
@@ -80,23 +85,24 @@ function StepPanel({
     <div>
       {withLabel && (
         <div className="mb-3 flex items-center gap-3">
-          <span className="font-mono text-[0.7rem] leading-none tracking-widest text-gold-bright">
+          <span className="font-mono text-[0.7rem] leading-none tracking-widest text-gold">
             {step.step}
           </span>
-          <span className="h-px w-6 bg-[rgba(217,165,63,0.4)]" aria-hidden />
-          <span className="eyebrow text-gold-bright">{step.label}</span>
+          <span className="h-px w-6 bg-[rgba(184,134,36,0.45)]" aria-hidden />
+          <span className="eyebrow text-accent">{step.label}</span>
         </div>
       )}
-      <h3 className="display-md text-on-dark">{step.title}</h3>
-      <div className="mt-5 grid gap-5 sm:grid-cols-[0.4fr_0.6fr] sm:items-center sm:gap-8">
+      <h3 className="display-md text-ink">{step.title}</h3>
+      <span className="title-rule" aria-hidden />
+      <div className="mt-5 grid gap-5 sm:grid-cols-[0.46fr_0.54fr] sm:items-center sm:gap-7">
         <StageArt index={index} />
         <div className="flex flex-col gap-3.5">
-          <p className="text-[1.02rem] leading-relaxed text-on-dark-soft">{step.body}</p>
+          <p className="text-[1.02rem] leading-relaxed text-ink-soft">{step.body}</p>
           <ul className="flex flex-col gap-2.5">
             {step.details.map((d) => (
               <li
                 key={d}
-                className="flex items-start gap-3 text-[0.98rem] leading-snug text-on-dark-soft"
+                className="flex items-start gap-3 text-[0.98rem] leading-snug text-ink-soft"
               >
                 <span className="mint-mark mt-[0.45rem] h-1.5 w-1.5 shrink-0" aria-hidden />
                 <span>{d}</span>
@@ -215,7 +221,7 @@ function PinnedProcess({ steps, index, kicker, title }: Props) {
           </div>
 
           {/* Right — ONE pane: the whole stage block cross-fades as a unit */}
-          <div className="pane-vault p-6 sm:p-7 lg:px-9 lg:py-8">
+          <div className="pane-paper p-6 sm:p-7 lg:px-9 lg:py-8">
             <div className="grid">
               {steps.map((s, i) => (
                 <FadeBlock key={s.step} index={i} total={steps.length} progress={scrollYProgress} rise>
@@ -261,7 +267,7 @@ function StaticProcess({ steps, index, kicker, title }: Props) {
       <div className="mt-10 flex flex-col gap-5 sm:mt-12">
         {steps.map((s, i) => (
           <Reveal key={s.step}>
-            <div className="pane-vault p-6 sm:p-7">
+            <div className="pane-paper p-6 sm:p-7">
               <StepPanel step={s} index={i} withLabel />
             </div>
           </Reveal>

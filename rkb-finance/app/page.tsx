@@ -1,3 +1,4 @@
+import Accordion from "@/components/Accordion";
 import BalanceScale from "@/components/BalanceScale";
 import { Button } from "@/components/Button";
 import Hero from "@/components/Hero";
@@ -9,16 +10,18 @@ import { Parallax, TextReveal } from "@/components/ScrollFX";
 import ProcessScene from "@/components/ProcessScene";
 import { Section, SectionHeader } from "@/components/Section";
 import {
-  advantages,
+  faqGroups,
   process,
   product,
   trustSignals,
+  whyChooseUs,
 } from "@/content/site";
 
 /**
  * Homepage — alternating cinematic bands:
- * vault (hero) → ivory (product) → blue (process) → vault (advantages)
- * → ivory (fair practice) → vault (closing).
+ * vault (hero) → ivory (product) → vault (process, with a lit paper pane)
+ * → gold (why borrowers choose us, with the balance in motion)
+ * → ivory (closing) → the dark footer as epilogue.
  * The colour change IS the section divider.
  */
 export default function Home() {
@@ -60,7 +63,10 @@ export default function Home() {
           </Parallax>
         </div>
 
-        <Reveal delay={0.12} className="mt-14 lg:mt-20">
+        {/* The conveyor is an illegibly small 3-stop wire at phone width and the
+            dedicated "How it works" scene already carries this story — so it's
+            shown from sm up, hidden on phones to keep mobile clean. */}
+        <Reveal delay={0.12} className="mt-14 hidden sm:block lg:mt-20">
           <MoneyConveyor />
         </Reveal>
       </Section>
@@ -75,7 +81,7 @@ export default function Home() {
         />
       </Section>
 
-      {/* ─────────────────────── Advantages — 03 ─────────────────────── */}
+      {/* ────────────── Why borrowers choose us — 03 ────────────── */}
       <Section texture="gold-loud">
         <SectionHeader
           index="03"
@@ -87,84 +93,36 @@ export default function Home() {
             </>
           }
         />
-        <Stagger className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
-          {advantages.map((a) => (
-            <StaggerItem
-              key={a.title}
-              className="card-crisp group flex flex-col gap-4 rounded-2xl p-6 sm:p-8"
-            >
-              <span className="icon-plate transition-transform duration-300 ease-[var(--ease-rkb)] group-hover:-translate-y-0.5">
-                <LineIcon name={a.icon} className="w-6 text-gold" />
-              </span>
-              <span className="font-display text-xl leading-tight text-ink">
-                {a.title}
-              </span>
-              <p className="text-base leading-relaxed text-ink-soft">{a.body}</p>
-            </StaggerItem>
-          ))}
-        </Stagger>
-      </Section>
-
-      {/* ─────────────────────── Compliance / trust ─────────────────────── */}
-      <Section texture="ivory-loud">
-        <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
-          <div className="flex flex-col gap-10">
-            <SectionHeader
-              index="04"
-              kicker="Fair practice"
-              title={
-                <>
-                  Transparent by <span className="text-gold">policy,</span>{" "}
-                  not just by promise.
-                </>
-              }
-              intro="We treat every customer consistently and fairly. Loan terms, interest rates and penal charges are disclosed in writing, upfront. Grievances are resolved within 30 days."
-            />
-            <Reveal delay={0.16}>
-              <BalanceScale />
-            </Reveal>
-          </div>
-          <Stagger className="flex flex-col gap-3">
-            {[
-              [
-                "coin-slash",
-                "No upfront fees",
-                "We never charge a fee before disbursing a loan. Anyone claiming otherwise is unauthorised.",
-              ],
-              [
-                "document",
-                "Written terms",
-                "Rates, fees and the repayment schedule are shared in writing before you commit.",
-              ],
-              [
-                "clock",
-                "30-day grievance redressal",
-                "A defined escalation matrix with a dedicated Grievance Redressal Officer.",
-              ],
-              [
-                "shield",
-                "RBI oversight",
-                "A registered NBFC, covered by the Reserve Bank Integrated Ombudsman Scheme.",
-              ],
-            ].map(([icon, t, d]) => (
+        <div className="mt-12 grid items-center gap-10 sm:mt-14 xl:grid-cols-[1.16fr_0.84fr] xl:gap-12">
+          {/* Four benefits — a 2×2 of crisp porcelain cards, wide enough
+              that every card title holds a single line */}
+          <Stagger className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+            {whyChooseUs.map((a) => (
               <StaggerItem
-                key={t}
-                className="card-gloss group flex items-start gap-4 rounded-2xl p-6 sm:p-7"
+                key={a.title}
+                className="card-crisp group flex flex-col gap-3.5 rounded-2xl p-6"
               >
-                <span className="icon-plate shrink-0 transition-transform duration-300 ease-[var(--ease-rkb)] group-hover:-translate-y-0.5">
-                  <LineIcon name={icon} className="w-6 text-gold" />
+                <span className="icon-plate transition-transform duration-300 ease-[var(--ease-rkb)] group-hover:-translate-y-0.5">
+                  <LineIcon name={a.icon} className="w-6 text-gold" />
                 </span>
-                <span className="flex flex-col gap-1.5">
-                  <span className="font-display text-lg text-ink">{t}</span>
-                  <p className="text-base leading-relaxed text-ink-soft">{d}</p>
+                <span className="font-display text-[1.05rem] leading-tight whitespace-nowrap text-ink">
+                  {a.title}
                 </span>
+                <p className="text-[0.95rem] leading-relaxed text-ink-soft">{a.body}</p>
               </StaggerItem>
             ))}
           </Stagger>
+
+          {/* The balance in motion — a dark, glossy vault plate, no captions:
+              capital lands, the beam dips, written terms level it. Gold on navy
+              so the motion is the whole focus. */}
+          <Reveal delay={0.1} className="w-full max-w-xl mx-auto xl:max-w-none">
+            <BalanceScale className="scene-vault" dark />
+          </Reveal>
         </div>
       </Section>
 
-      {/* ─────────────── Closing — proof band + final CTA ─────────────── */}
+      {/* ─────────────── Proof band — a lender you can rely on ─────────────── */}
       <Section texture="vault" className="overflow-hidden">
         <Reveal className="text-center">
           <p className="eyebrow flex items-center justify-center gap-3 text-gold-bright">
@@ -172,14 +130,14 @@ export default function Home() {
             A lender you can rely on
           </p>
         </Reveal>
-        <Stagger className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Stagger className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {trustSignals.map((s) => (
             <StaggerItem
               key={s.value}
-              className="tile-inset flex flex-col items-center gap-3 rounded-2xl px-6 py-9 text-center"
+              className="card-crisp flex flex-col items-center gap-3 rounded-2xl px-4 py-7 text-center sm:px-6 sm:py-9"
             >
-              <LineIcon name={s.icon} className="w-9 text-gold" />
-              <span className="font-display text-2xl leading-none text-ink sm:text-3xl">
+              <LineIcon name={s.icon} className="w-8 text-gold sm:w-9" />
+              <span className="font-display text-xl leading-none text-ink sm:text-3xl">
                 {s.value}
               </span>
               <span className="eyebrow text-accent">{s.label}</span>
@@ -187,24 +145,34 @@ export default function Home() {
             </StaggerItem>
           ))}
         </Stagger>
+      </Section>
 
-        <div className="pt-24 pb-4 text-center lg:pt-32">
+      {/* ─────────────── FAQ — good to know (woven-paper band) ─────────────── */}
+      <Section texture="weave">
+        <SectionHeader kicker="Questions" title={<>Good to know.</>} />
+        <div className="mt-12 grid gap-12 sm:mt-14 lg:grid-cols-2">
+          {faqGroups.map((group) => (
+            <Reveal key={group.heading}>
+              <p className="eyebrow mb-5 text-ink-faint">{group.heading}</p>
+              <Accordion items={[...group.items]} />
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      {/* ─────────────── Final CTA ─────────────── */}
+      <Section texture="ivory-loud" className="overflow-hidden">
+        <div className="text-center">
           <TextReveal
             text="Let’s find the right loan for your needs."
-            className="display-lg mx-auto max-w-[20ch] text-balance text-on-dark"
+            className="display-lg mx-auto max-w-[20ch] text-balance text-ink"
           />
           <Reveal delay={0.16}>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Button href="/contact" variant="gold" magnetic size="px-8 py-4">
                 Apply now
               </Button>
-              <Button
-                href="/products"
-                variant="ghost"
-                arrow={false}
-                size="px-8 py-4"
-                className="border-[rgba(221,231,245,0.35)] text-on-dark hover:border-on-dark hover:bg-on-dark hover:text-deep"
-              >
+              <Button href="/products" variant="ghost" arrow={false} size="px-8 py-4">
                 See the product
               </Button>
             </div>

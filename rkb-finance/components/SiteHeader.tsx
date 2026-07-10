@@ -41,7 +41,7 @@ export default function SiteHeader() {
           <Link
             href="/"
             aria-label="R.K. Bansal Finance, home"
-            className="group relative z-50 flex items-center"
+            className="group relative z-50 -ml-2 flex items-center self-stretch pl-2 pr-5"
             onClick={() => setOpen(false)}
           >
             {/* The exact logo, re-struck in ivory for the dark glass. */}

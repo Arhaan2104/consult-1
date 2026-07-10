@@ -72,8 +72,6 @@ export default function RootLayout({
       className={`${jakarta.variable} ${geistMono.variable} ${ebGaramond.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-canvas">
-        {/* Brand-blue frame hugging all four viewport edges (see .site-frame). */}
-        <div className="site-frame" aria-hidden />
         {/* Vertical framing rails bounding the content column, run full-page. */}
         <div className="page-rails" aria-hidden />
         <a

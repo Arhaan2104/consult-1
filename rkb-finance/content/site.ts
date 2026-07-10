@@ -110,6 +110,36 @@ export const product = {
   ],
 } as const;
 
+/**
+ * "Why borrowers choose us" — the four homepage benefit cards.
+ * Copy supplied verbatim by the client (feedback round, 10 Jul 2026).
+ * NOTE: the "10 minutes" disbursal claim is the client's own wording and
+ * differs from the "within 24 hours" figure used elsewhere — flag for
+ * reconciliation before launch.
+ */
+export const whyChooseUs = [
+  {
+    icon: "bolt",
+    title: "Fast Processing and Disbursal",
+    body: "Apply online, check your eligibility and get money directly in your bank in 10 minutes.",
+  },
+  {
+    icon: "calendar",
+    title: "Easy Repayment Options",
+    body: "Repay the loan amount in easy EMI with flexible tenure options.",
+  },
+  {
+    icon: "network",
+    title: "100% Paperless",
+    body: "No paperwork or physical documentation is required — apply and get a personal loan completely online.",
+  },
+  {
+    icon: "shield",
+    title: "Safe, Secure and Transparent",
+    body: "Our loan application process is fully secured and safe, and there are no hidden charges.",
+  },
+] as const;
+
 /** Why borrowers choose RKB — from the homepage feature list. */
 export const advantages = [
   { icon: "coin-slash", title: "No service fees", body: "We do not charge service fees on our loans." },
@@ -221,7 +251,7 @@ export const documents = [
  * No invented people or quotes. Reuses figures already published elsewhere on the site.
  */
 export const trustSignals = [
-  { icon: "shield", value: "RBI-Registered", label: "NBFC", sub: `Registration ${site.rbiReg}` },
+  { icon: "shield", value: "RBI-Regd.", label: "NBFC", sub: `Registration ${site.rbiReg}` },
   { icon: "heritage", value: "Since 1984", label: "Four decades", sub: "Incorporated 21 November 1984" },
   { icon: "network", value: "61 Partners", label: "Sourcing network", sub: "A fully digital sourcing network" },
   { icon: "ledger", value: "Fair Practice", label: "Code-bound", sub: "Written terms · 30-day grievance redressal" },

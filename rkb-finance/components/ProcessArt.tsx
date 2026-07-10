@@ -1,20 +1,27 @@
 /**
  * Engraved plate illustrations for the three "How it works" stages —
- * bank-note line-art in the same guilloché vocabulary as the hero seal and the
- * lender-network diagram. Each composition is centred in a 300×300 field and
- * sits over a faint guilloché rosette (rendered by the caller) for depth.
- *   0 — Application : a filled loan form (stacked pages) + fountain pen
- *   1 — Underwriting: a precision decision gauge, needle swung to APPROVED
- *   2 — Disbursal   : funds arcing into a bank account, credited
+ * bank-note line-art in the same guilloché vocabulary as the hero seal and
+ * the lender-network diagram, cut for the DARK vault pane (gold strokes,
+ * deep-navy solids — never ivory fills that would glow on navy).
  *
- * Pure SVG (no hooks) so it can render on the server. Sized by the caller.
+ *   0 — Application : the online form mid-fill — secure browser window,
+ *                     amount field, KYC fingerprint, consent tick, submit.
+ *   1 — Underwriting: the decision engine — data streams feed a precision
+ *                     gauge ringed by machine teeth; the needle rests in the
+ *                     approved arc and a sealed verdict leaves on the right.
+ *   2 — Disbursal   : funds crossing to the bank — a coin arcs from the
+ *                     stack into an engraved bank portico; a 24-hour dial
+ *                     and a credited seal ground the promise.
+ *
+ * Pure SVG (no hooks) so it renders on the server. Sized by the caller.
+ * Compositions are centred in a 300×300 field over the caller's rosette.
  */
 
 const P = {
   viewBox: "0 0 300 300",
   fill: "none",
   stroke: "currentColor",
-  strokeWidth: 1.7,
+  strokeWidth: 1.6,
   strokeLinecap: "round" as const,
   strokeLinejoin: "round" as const,
 };
@@ -26,161 +33,257 @@ const RUPEE = {
   fill: "currentColor",
 };
 
+/** Solid panel fill — deep navy by default (dark panes); overridable via
+    --art-panel so the same plates re-ink for paper grounds. */
+const PANEL = "var(--art-panel, rgba(10, 32, 62, 0.9))";
+
+const TAU = Math.PI * 2;
+
+/** Arc path of radius r around (cx,cy) from angle a1 to a2 (radians). */
+function arc(cx: number, cy: number, r: number, a1: number, a2: number) {
+  const x1 = cx + r * Math.cos(a1);
+  const y1 = cy + r * Math.sin(a1);
+  const x2 = cx + r * Math.cos(a2);
+  const y2 = cy + r * Math.sin(a2);
+  const large = Math.abs(a2 - a1) > Math.PI ? 1 : 0;
+  return `M${x1.toFixed(1)} ${y1.toFixed(1)} A${r} ${r} 0 ${large} 1 ${x2.toFixed(1)} ${y2.toFixed(1)}`;
+}
+
+/* ────────────────────────── 0 · Application ────────────────────────── */
+
 function ApplicationArt() {
+  // KYC fingerprint — nested arcs, organically clipped like a real print.
+  const FX = 208;
+  const FY = 176;
+  const prints = [
+    { r: 8, a1: -2.6, a2: 0.5 },
+    { r: 14, a1: -2.9, a2: 0.9 },
+    { r: 20, a1: -2.5, a2: 1.15 },
+    { r: 26, a1: -2.8, a2: 0.7 },
+    { r: 32, a1: -2.35, a2: 0.35 },
+  ];
+
   return (
     <svg {...P} aria-hidden>
-      {/* Back page (depth) */}
-      <rect x="101" y="46" width="112" height="196" rx="11" fill="var(--color-canvas)" stroke="none" />
-      <rect x="101" y="46" width="112" height="196" rx="11" opacity="0.38" />
+      {/* Browser window */}
+      <rect x="34" y="46" width="232" height="208" rx="16" fill={PANEL} stroke="none" />
+      <rect x="34" y="46" width="232" height="208" rx="16" fill="currentColor" opacity="0.04" stroke="none" />
+      <rect x="34" y="46" width="232" height="208" rx="16" />
+      {/* Hatch shadow under the sill */}
+      <path d="M48 262 H240 M62 269 H222" opacity="0.16" />
 
-      {/* Front page */}
-      <rect x="88" y="54" width="118" height="196" rx="12" fill="var(--color-canvas)" stroke="none" />
-      <rect x="88" y="54" width="118" height="196" rx="12" fill="currentColor" opacity="0.04" stroke="none" />
-      <rect x="88" y="54" width="118" height="196" rx="12" />
+      {/* Chrome bar: dots + secure address pill */}
+      <path d="M34 76 H266" opacity="0.35" />
+      <circle cx="52" cy="61" r="3" opacity="0.55" />
+      <circle cx="64" cy="61" r="3" opacity="0.38" />
+      <circle cx="76" cy="61" r="3" opacity="0.25" />
+      <rect x="94" y="52.5" width="150" height="17" rx="8.5" opacity="0.5" />
+      {/* padlock */}
+      <rect x="103" y="59" width="7.6" height="6" rx="1.4" opacity="0.85" />
+      <path d="M104.6 59 v-2.2 a2.2 2.2 0 0 1 4.4 0 V59" opacity="0.85" />
+      <path d="M118 61 H196" opacity="0.4" />
 
-      {/* Header: ₹ seal + title lines */}
-      <circle cx="111" cy="76" r="10.5" fill="currentColor" opacity="0.09" stroke="none" />
-      <circle cx="111" cy="76" r="10.5" />
-      <text x="111" y="77" fontSize="12.5" textAnchor="middle" {...RUPEE}>&#8377;</text>
-      <path d="M130 71 H190" opacity="0.55" />
-      <path d="M130 81 H172" opacity="0.32" />
-      <path d="M100 98 H194" opacity="0.4" />
+      {/* Form rows */}
+      <path d="M52 98 H120" opacity="0.38" />
+      <rect x="52" y="106" width="144" height="17" rx="5" opacity="0.55" />
+      <path d="M60 114.5 H128" opacity="0.3" />
+      <path d="M52 138 H104" opacity="0.38" />
+      <rect x="52" y="146" width="144" height="17" rx="5" opacity="0.55" />
+      <path d="M60 154.5 H112" opacity="0.3" />
 
-      {/* Field rows */}
-      <path d="M104 116 H136" opacity="0.4" />
-      <path d="M104 126 H190" opacity="0.7" />
-      <path d="M104 148 H146" opacity="0.4" />
-      <path d="M104 158 H180" opacity="0.7" />
+      {/* Amount field — the one that matters, drawn brightest */}
+      <path d="M52 178 H96" opacity="0.38" />
+      <rect x="52" y="186" width="144" height="20" rx="5" strokeWidth="1.9" opacity="0.95" />
+      <text x="64" y="196.5" fontSize="12.5" textAnchor="middle" {...RUPEE}>&#8377;</text>
+      <path d="M74 196.5 H150" strokeWidth="2.2" opacity="0.85" />
+      <path d="M156 191 v11" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0;0.6" dur="1.6s" repeatCount="indefinite" />
+      </path>
 
-      {/* Amount field */}
-      <path d="M104 180 H148" opacity="0.4" />
-      <text x="104" y="197" fontSize="13.5" textAnchor="start" {...RUPEE}>&#8377;</text>
-      <path d="M120 197 H182" opacity="0.85" strokeWidth="2.2" />
+      {/* Consent tick */}
+      <rect x="52" y="218" width="13" height="13" rx="3" />
+      <path d="M55.2 224.4 l3 3 l5.6 -6.2" />
+      <path d="M73 224.5 H150" opacity="0.4" />
 
-      {/* Consent checkbox */}
-      <rect x="104" y="212" width="14" height="14" rx="3" />
-      <path d="M107.5 219 l3 3 l6 -6.5" />
-      <path d="M126 219 H190" opacity="0.5" />
+      {/* KYC fingerprint — nested engraved whorl */}
+      {prints.map((p, i) => (
+        <path key={i} d={arc(FX, FY, p.r, p.a1, p.a2)} opacity={0.75 - i * 0.09} />
+      ))}
+      <circle cx={FX} cy={FY} r="2" fill="currentColor" stroke="none" opacity="0.8" />
+      <path d={arc(FX, FY, 40, -2.15, 0.15)} opacity="0.22" />
+      <path d="M182 128 H234" opacity="0.35" />
 
-      {/* Signature line + flourish */}
-      <path d="M104 242 H190" opacity="0.45" />
-      <path d="M110 238 c 9 -12, 17 10, 27 -1 c 7 -8, 13 6, 21 1" opacity="0.9" />
-
-      {/* Fountain pen, nib toward the signature */}
-      <g transform="rotate(52 196 156)">
-        <rect x="188" y="66" width="15" height="128" rx="7.5" fill="currentColor" opacity="0.05" stroke="none" />
-        <rect x="188" y="66" width="15" height="128" rx="7.5" />
-        <path d="M188 76 H203" opacity="0.4" />
-        <path d="M188 170 H203" opacity="0.5" />
-        <path d="M188 194 L195.5 222 L203 194 Z" fill="currentColor" opacity="0.1" stroke="none" />
-        <path d="M188 194 L195.5 222 L203 194 Z" />
-        <path d="M195.5 201 V215" opacity="0.7" />
-        <circle cx="195.5" cy="199" r="1.6" />
-      </g>
+      {/* Submit pill + cursor */}
+      <rect x="176" y="216" width="66" height="24" rx="12" fill="currentColor" opacity="0.13" stroke="none" />
+      <rect x="176" y="216" width="66" height="24" rx="12" strokeWidth="1.9" />
+      <path d="M192 228 H216 M212 223 l6 5 l-6 5" opacity="0.9" />
+      <path d="M236 240 l4.5 13 l3.2 -5 l5.8 1.6 Z" fill="currentColor" stroke="none" opacity="0.9" />
     </svg>
   );
 }
 
+/* ───────────────────────── 1 · Underwriting ───────────────────────── */
+
 function UnderwritingArt() {
-  const CX = 150;
-  const CY = 162;
-  const R = 84;
-  const ticks = Array.from({ length: 11 }, (_, k) => {
-    const a = Math.PI - (k / 10) * Math.PI; // 180° → 0° across the top
-    const inner = k % 5 === 0 ? R - 16 : R - 9;
+  const CX = 158;
+  const CY = 158;
+  const R = 62; // dial radius
+
+  // Machine ring — radial teeth around the whole engine.
+  const teeth = Array.from({ length: 30 }, (_, k) => {
+    const a = (k / 30) * TAU;
+    const r0 = 84;
+    const r1 = k % 5 === 0 ? 94 : 90;
     return {
-      x1: (CX + R * Math.cos(a)).toFixed(1),
-      y1: (CY - R * Math.sin(a)).toFixed(1),
-      x2: (CX + inner * Math.cos(a)).toFixed(1),
-      y2: (CY - inner * Math.sin(a)).toFixed(1),
-      major: k % 5 === 0,
+      x1: (CX + r0 * Math.cos(a)).toFixed(1),
+      y1: (CY + r0 * Math.sin(a)).toFixed(1),
+      x2: (CX + r1 * Math.cos(a)).toFixed(1),
+      y2: (CY + r1 * Math.sin(a)).toFixed(1),
+      deep: k % 5 === 0,
     };
   });
-  const na = (54 * Math.PI) / 180; // needle → upper-right (approved)
-  const nx = CX + (R - 24) * Math.cos(na);
-  const ny = CY - (R - 24) * Math.sin(na);
+
+  // Dial ticks across the top 180°.
+  const ticks = Array.from({ length: 13 }, (_, k) => {
+    const a = Math.PI + (k / 12) * Math.PI;
+    const inner = k % 3 === 0 ? R - 13 : R - 7;
+    return {
+      x1: (CX + R * Math.cos(a)).toFixed(1),
+      y1: (CY + R * Math.sin(a)).toFixed(1),
+      x2: (CX + inner * Math.cos(a)).toFixed(1),
+      y2: (CY + inner * Math.sin(a)).toFixed(1),
+      major: k % 3 === 0,
+    };
+  });
+
+  const na = -0.62; // needle angle — inside the approved arc
+  const nx = CX + (R - 16) * Math.cos(na);
+  const ny = CY + (R - 16) * Math.sin(na);
 
   return (
     <svg {...P} aria-hidden>
-      {/* Guilloché rings, centred */}
-      <circle cx={CX} cy="150" r="96" fill="currentColor" opacity="0.03" stroke="none" />
-      <circle cx={CX} cy="150" r="96" opacity="0.4" />
-      <circle cx={CX} cy="150" r="82" opacity="0.22" />
-
-      {/* Approved zone — a brighter arc on the right of the dial */}
-      <path
-        d={`M${CX} ${CY} m0 0 A ${R} ${R} 0 0 0 ${CX + R} ${CY}`}
-        opacity="0"
-      />
-      <path
-        d={`M${(CX + R * Math.cos(Math.PI / 4)).toFixed(1)} ${(CY - R * Math.sin(Math.PI / 4)).toFixed(1)} A ${R} ${R} 0 0 1 ${CX + R} ${CY}`}
-        strokeWidth="3"
-        opacity="0.9"
-      />
-
-      {/* Dial arc + baseline */}
-      <path d={`M${CX - R} ${CY} A ${R} ${R} 0 0 1 ${CX + R} ${CY}`} />
-      <path d={`M${CX - R + 4} ${CY} H ${CX + R - 4}`} opacity="0.45" />
-
-      {/* Ticks */}
-      {ticks.map((t, i) => (
-        <path key={i} d={`M${t.x1} ${t.y1} L${t.x2} ${t.y2}`} opacity={t.major ? 0.85 : 0.4} />
+      {/* Machine housing */}
+      <circle cx={CX} cy={CY} r="84" fill={PANEL} stroke="none" />
+      <circle cx={CX} cy={CY} r="84" opacity="0.7" />
+      <circle cx={CX} cy={CY} r="76" opacity="0.25" />
+      {teeth.map((t, i) => (
+        <path
+          key={i}
+          d={`M${t.x1} ${t.y1} L${t.x2} ${t.y2}`}
+          opacity={t.deep ? 0.7 : 0.32}
+          strokeWidth={t.deep ? 1.6 : 1.1}
+        />
       ))}
 
-      {/* Instant rays */}
-      <path d={`M${CX} ${CY - R - 28} v10`} opacity="0.4" />
-      <path d={`M${CX - 36} ${CY - R - 18} l6.5 8.5`} opacity="0.4" />
-      <path d={`M${CX + 36} ${CY - R - 18} l-6.5 8.5`} opacity="0.4" />
+      {/* Data streams in (the application's fields feeding the engine) */}
+      <path d="M18 120 H64" strokeDasharray="3 7" opacity="0.55" />
+      <path d="M10 158 H60" strokeDasharray="3 7" opacity="0.7" />
+      <path d="M18 196 H64" strokeDasharray="3 7" opacity="0.55" />
+      <rect x="30" y="113.5" width="13" height="13" rx="3" opacity="0.8" />
+      <path d="M33 118 h7 M33 121.5 h4.5" opacity="0.5" />
+      <rect x="24" y="151.5" width="13" height="13" rx="3" opacity="0.9" />
+      <path d="M27 156 h7 M27 159.5 h4.5" opacity="0.55" />
+      <rect x="30" y="189.5" width="13" height="13" rx="3" opacity="0.8" />
+      <path d="M33 194 h7 M33 197.5 h4.5" opacity="0.5" />
+
+      {/* Dial */}
+      <path d={arc(CX, CY, R, Math.PI, TAU)} strokeWidth="1.8" />
+      <path d={`M${CX - R + 6} ${CY} H${CX + R - 6}`} opacity="0.4" />
+      {/* Approved arc — brightest stretch of the dial */}
+      <path d={arc(CX, CY, R, -0.86, -0.18)} strokeWidth="3.4" opacity="0.95" />
+      {ticks.map((t, i) => (
+        <path key={i} d={`M${t.x1} ${t.y1} L${t.x2} ${t.y2}`} opacity={t.major ? 0.8 : 0.38} />
+      ))}
 
       {/* Needle + hub */}
       <path d={`M${CX} ${CY} L${nx.toFixed(1)} ${ny.toFixed(1)}`} strokeWidth="2.6" />
-      <circle cx={CX} cy={CY} r="8.5" fill="var(--color-canvas)" />
-      <circle cx={CX} cy={CY} r="8.5" />
-      <circle cx={CX} cy={CY} r="2.4" fill="currentColor" stroke="none" />
+      <circle cx={CX} cy={CY} r="8" fill={PANEL} />
+      <circle cx={CX} cy={CY} r="8" />
+      <circle cx={CX} cy={CY} r="2.2" fill="currentColor" stroke="none" />
 
-      {/* Approved badge at the needle tip */}
-      <circle cx={nx.toFixed(1)} cy={ny.toFixed(1)} r="15.5" fill="currentColor" opacity="0.1" stroke="none" />
-      <circle cx={nx.toFixed(1)} cy={ny.toFixed(1)} r="15.5" />
-      <path d={`M${(nx - 6.4).toFixed(1)} ${ny.toFixed(1)} l4.7 4.7 l8.4 -9.3`} />
+      {/* Instant rays above the engine */}
+      <path d={`M${CX} 52 v11`} opacity="0.5" />
+      <path d={`M${CX - 34} 62 l6 9`} opacity="0.4" />
+      <path d={`M${CX + 34} 62 l-6 9`} opacity="0.4" />
+
+      {/* Sealed verdict leaving on the right */}
+      <path d="M246 158 H272" strokeDasharray="3 7" opacity="0.6" />
+      <circle cx="257" cy="158" r="17" fill={PANEL} stroke="none" />
+      <circle cx="257" cy="158" r="17" strokeWidth="1.9" />
+      <circle cx="257" cy="158" r="12.5" opacity="0.4" />
+      <path d="M250.5 158 l4.4 4.4 l8 -8.8" strokeWidth="2" />
+      {/* ribbon tails */}
+      <path d="M251 173 l-4 10 l7 -3.5 M263 173 l4 10 l-7 -3.5" opacity="0.7" />
     </svg>
   );
 }
+
+/* ────────────────────────── 2 · Disbursal ────────────────────────── */
 
 function DisbursalArt() {
   return (
     <svg {...P} aria-hidden>
-      {/* Coin stack, top-centre */}
-      <ellipse cx="150" cy="86" rx="33" ry="12" fill="currentColor" opacity="0.05" stroke="none" />
-      <ellipse cx="150" cy="86" rx="33" ry="12" />
-      <ellipse cx="150" cy="72" rx="33" ry="12" fill="var(--color-canvas)" stroke="none" />
-      <ellipse cx="150" cy="72" rx="33" ry="12" />
-      <text x="150" y="72" fontSize="14.5" textAnchor="middle" {...RUPEE}>&#8377;</text>
+      {/* Coin stack (the sanctioned amount) */}
+      <ellipse cx="74" cy="206" rx="30" ry="10.5" fill={PANEL} stroke="none" />
+      <ellipse cx="74" cy="206" rx="30" ry="10.5" opacity="0.55" />
+      <ellipse cx="74" cy="194" rx="30" ry="10.5" fill={PANEL} stroke="none" />
+      <ellipse cx="74" cy="194" rx="30" ry="10.5" opacity="0.75" />
+      <ellipse cx="74" cy="182" rx="30" ry="10.5" fill={PANEL} stroke="none" />
+      <ellipse cx="74" cy="182" rx="30" ry="10.5" />
+      <ellipse cx="74" cy="182" rx="21" ry="7" opacity="0.35" />
+      <text x="74" y="182.5" fontSize="12.5" textAnchor="middle" {...RUPEE}>&#8377;</text>
+      {/* base hatch */}
+      <path d="M48 222 H100 M56 228 H92" opacity="0.18" />
 
-      {/* Transfer arc from the coins into the account card */}
-      <path d="M180 72 C 236 88, 240 116, 208 142" opacity="0.85" />
-      <path d="M208 142 l-1 -13 M208 142 l12 -5" opacity="0.85" />
+      {/* Transfer arc with a coin mid-flight */}
+      <path d="M92 168 C 122 108, 176 96, 216 118" strokeDasharray="4 9" opacity="0.7" />
+      <path d="M216 118 l-12.5 -1.5 M216 118 l-4 -12" opacity="0.85" />
+      <circle cx="152" cy="110" r="10.5" fill={PANEL} stroke="none" />
+      <circle cx="152" cy="110" r="10.5" />
+      <circle cx="152" cy="110" r="7" opacity="0.4" />
+      <text x="152" y="110.5" fontSize="9.5" textAnchor="middle" {...RUPEE}>&#8377;</text>
 
-      {/* Account card, centred */}
-      <rect x="66" y="140" width="168" height="106" rx="15" fill="currentColor" opacity="0.05" stroke="none" />
-      <rect x="66" y="140" width="168" height="106" rx="15" />
-      <path d="M66 168 H234" opacity="0.28" />
+      {/* Bank portico — pediment, columns, plinth */}
+      <path d="M162 138 L222 112 L282 138 Z" fill={PANEL} stroke="none" />
+      <path d="M162 138 L222 112 L282 138 Z" />
+      <path d="M174 133 L222 122 L270 133" opacity="0.3" />
+      <circle cx="222" cy="130" r="4.5" opacity="0.7" />
+      <path d="M168 138 H276 V146 H168 Z" fill={PANEL} stroke="none" />
+      <path d="M168 138 H276 V146 H168 Z" />
+      {/* columns with capitals */}
+      {[180, 208, 236, 264].map((x) => (
+        <g key={x}>
+          <path d={`M${x - 5} 146 h10 M${x - 5} 150 h10`} opacity="0.6" />
+          <path d={`M${x - 3.5} 150 V196`} opacity="0.85" />
+          <path d={`M${x + 3.5} 150 V196`} opacity="0.85" />
+          <path d={`M${x - 5} 196 h10 M${x - 5} 200 h10`} opacity="0.6" />
+        </g>
+      ))}
+      <path d="M164 204 H280" strokeWidth="1.9" />
+      <path d="M158 212 H286" opacity="0.7" />
+      <path d="M170 220 H274" opacity="0.35" />
 
-      {/* Chip */}
-      <rect x="84" y="182" width="28" height="21" rx="4" fill="currentColor" opacity="0.07" stroke="none" />
-      <rect x="84" y="182" width="28" height="21" rx="4" />
-      <path d="M84 192.5 H112 M98 182 V203" opacity="0.5" />
+      {/* 24-hour promise — a small clock chip beside the bank */}
+      <circle cx="126" cy="222" r="17" fill={PANEL} stroke="none" />
+      <circle cx="126" cy="222" r="17" strokeWidth="1.8" />
+      {Array.from({ length: 8 }, (_, k) => {
+        const a = (k / 8) * TAU;
+        return (
+          <path
+            key={k}
+            d={`M${(126 + 13.4 * Math.cos(a)).toFixed(1)} ${(222 + 13.4 * Math.sin(a)).toFixed(1)} L${(126 + 15.6 * Math.cos(a)).toFixed(1)} ${(222 + 15.6 * Math.sin(a)).toFixed(1)}`}
+            opacity="0.5"
+          />
+        );
+      })}
+      <path d="M126 222 V212.5 M126 222 l6.5 3.8" strokeWidth="1.9" />
+      <circle cx="126" cy="222" r="1.8" fill="currentColor" stroke="none" />
 
-      {/* Amount */}
-      <text x="128" y="196" fontSize="19" textAnchor="start" {...RUPEE}>&#8377;</text>
-      <path d="M146 192 H214" opacity="0.85" strokeWidth="2.2" />
-
-      {/* Ledger line */}
-      <path d="M84 224 H178" opacity="0.4" />
-
-      {/* Credited check */}
-      <circle cx="212" cy="224" r="12.5" fill="currentColor" opacity="0.1" stroke="none" />
-      <circle cx="212" cy="224" r="12.5" />
-      <path d="M205.8 224 l4.1 4.1 l7.1 -7.8" />
+      {/* Credited seal at the bank's base */}
+      <circle cx="256" cy="236" r="13.5" fill={PANEL} stroke="none" />
+      <circle cx="256" cy="236" r="13.5" strokeWidth="1.9" />
+      <circle cx="256" cy="236" r="9.5" opacity="0.4" />
+      <path d="M250.5 236 l3.8 3.8 l7 -7.6" strokeWidth="2" />
     </svg>
   );
 }
@@ -223,9 +326,9 @@ export function GuillocheRosette({ className = "" }: { className?: string }) {
   };
   return (
     <svg viewBox="0 0 300 300" className={className} fill="none" aria-hidden>
-      <circle cx={CX} cy={CY} r="137" stroke="var(--color-line)" strokeWidth="1" />
-      <path className="net-spin" d={path(rings[0])} stroke="var(--color-accent)" strokeWidth="1" opacity={rings[0].opacity} />
-      <path d={path(rings[1])} stroke="var(--color-accent)" strokeWidth="1" opacity={rings[1].opacity} />
+      <circle cx={CX} cy={CY} r="137" stroke="currentColor" opacity="0.14" strokeWidth="1" />
+      <path className="net-spin" d={path(rings[0])} stroke="currentColor" strokeWidth="1" opacity={rings[0].opacity} />
+      <path d={path(rings[1])} stroke="currentColor" strokeWidth="1" opacity={rings[1].opacity} />
     </svg>
   );
 }

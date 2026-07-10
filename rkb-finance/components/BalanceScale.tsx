@@ -46,8 +46,18 @@ function GoldCoin({ x, y, r = 11 }: { x: number; y: number; r?: number }) {
   );
 }
 
-export default function BalanceScale({ className = "" }: { className?: string }) {
+export default function BalanceScale({
+  className = "",
+  dark = false,
+}: {
+  className?: string;
+  /** Render as gold line-art with light labels, for placement on the deep
+      navy (vault) surfaces — matching the ProcessArt engravings. */
+  dark?: boolean;
+}) {
   const reduce = useReducedMotion();
+
+  const strokeCls = dark ? "text-gold-bright" : "text-accent";
 
   // Beam dips as each coin lands (t≈0.22 of the cycle), then written terms
   // bring it back level. Pans hang inside the beam group; the tilt is kept
@@ -80,13 +90,15 @@ export default function BalanceScale({ className = "" }: { className?: string })
 
   return (
     <div className={`money-scene-frame ${className}`}>
+      {/* viewBox cropped to the rig itself (no label margins), so the scale
+          renders large in its column — the motion IS the message. */}
       <svg
-        viewBox="0 0 680 330"
-        className="h-auto w-full text-accent"
+        viewBox="146 52 388 254"
+        className={`h-auto w-full ${strokeCls}`}
         fill="none"
         stroke="currentColor"
         role="img"
-        aria-label="A balance scale: capital on one side, written terms on the other, held level."
+        aria-label="A balance scale in motion: capital lands on one pan, the written terms hold it level."
       >
         <defs>
           <linearGradient id="scale-gold" x1="0" y1="0" x2="1" y2="1">
@@ -97,40 +109,40 @@ export default function BalanceScale({ className = "" }: { className?: string })
         </defs>
 
         {/* Guilloché backdrop */}
-        <circle cx={CX} cy="168" r="128" strokeWidth="1" opacity="0.1" />
-        <circle cx={CX} cy="168" r="98" strokeWidth="0.75" opacity="0.07" strokeDasharray="2 8" />
+        <circle cx={CX} cy="168" r="126" strokeWidth="1" opacity="0.16" />
+        <circle cx={CX} cy="168" r="96" strokeWidth="0.75" opacity="0.11" strokeDasharray="2 8" />
 
         {/* Plinth + post + fulcrum */}
-        <path d={`M${CX - 46} 292 H${CX + 46}`} strokeWidth="2.4" opacity="0.8" />
-        <path d={`M${CX - 32} 292 L${CX - 20} 268 H${CX + 20} L${CX + 32} 292`} opacity="0.65" />
-        <path d={`M${CX} 268 V${PIVOT_Y - 8}`} strokeWidth="2.2" opacity="0.9" />
-        <path d={`M${CX - 11} ${PIVOT_Y + 6} L${CX} ${PIVOT_Y - 8} L${CX + 11} ${PIVOT_Y + 6}`} opacity="0.7" />
-        <circle cx={CX} cy={PIVOT_Y - 12} r="4.2" fill="currentColor" stroke="none" />
+        <path d={`M${CX - 48} 292 H${CX + 48}`} strokeWidth="2.8" opacity="0.85" />
+        <path d={`M${CX - 34} 292 L${CX - 21} 268 H${CX + 21} L${CX + 34} 292`} opacity="0.7" />
+        <path d={`M${CX} 268 V${PIVOT_Y - 8}`} strokeWidth="2.6" opacity="0.95" />
+        <path d={`M${CX - 11} ${PIVOT_Y + 6} L${CX} ${PIVOT_Y - 8} L${CX + 11} ${PIVOT_Y + 6}`} opacity="0.75" />
+        <circle cx={CX} cy={PIVOT_Y - 12} r="4.6" fill="currentColor" stroke="none" />
 
         {/* Beam + pans — one rigid group tipping about the fulcrum */}
         <motion.g
           style={{ transformOrigin: `${CX}px ${PIVOT_Y}px` }}
           animate={beamAnim}
         >
-          <path d={`M${LX} ${PIVOT_Y} H${RX}`} strokeWidth="2.6" opacity="0.9" />
-          <circle cx={LX} cy={PIVOT_Y} r="3.4" fill="currentColor" stroke="none" />
-          <circle cx={RX} cy={PIVOT_Y} r="3.4" fill="currentColor" stroke="none" />
+          <path d={`M${LX} ${PIVOT_Y} H${RX}`} strokeWidth="3" opacity="0.95" />
+          <circle cx={LX} cy={PIVOT_Y} r="3.8" fill="currentColor" stroke="none" />
+          <circle cx={RX} cy={PIVOT_Y} r="3.8" fill="currentColor" stroke="none" />
 
           {/* Left pan — capital: a settled stack of struck gold */}
-          <path d={strings(LX)} strokeWidth="1.1" opacity="0.4" />
-          <path d={pan(LX)} strokeWidth="2" opacity="0.9" />
-          <GoldCoin x={LX - 10} y={PAN_Y - 7} />
-          <GoldCoin x={LX + 11} y={PAN_Y - 7} />
-          <GoldCoin x={LX + 1} y={PAN_Y - 21} />
+          <path d={strings(LX)} strokeWidth="1.2" opacity="0.45" />
+          <path d={pan(LX)} strokeWidth="2.4" opacity="0.95" />
+          <GoldCoin x={LX - 11} y={PAN_Y - 8} r={12} />
+          <GoldCoin x={LX + 12} y={PAN_Y - 8} r={12} />
+          <GoldCoin x={LX + 1} y={PAN_Y - 23} r={12} />
 
           {/* Right pan — the written terms */}
-          <path d={strings(RX)} strokeWidth="1.1" opacity="0.4" />
-          <path d={pan(RX)} strokeWidth="2" opacity="0.9" />
-          <g opacity="0.9">
-            <rect x={RX - 15} y={PAN_Y - 44} width="30" height="38" rx="3.5" strokeWidth="1.8" fill="var(--color-canvas)" />
+          <path d={strings(RX)} strokeWidth="1.2" opacity="0.45" />
+          <path d={pan(RX)} strokeWidth="2.4" opacity="0.95" />
+          <g opacity="0.95">
+            <rect x={RX - 16} y={PAN_Y - 46} width="32" height="40" rx="3.5" strokeWidth="2" fill="var(--color-canvas)" />
             <path
-              d={`M${RX - 8} ${PAN_Y - 33} H${RX + 8} M${RX - 8} ${PAN_Y - 26} H${RX + 8} M${RX - 8} ${PAN_Y - 19} H${RX + 2}`}
-              strokeWidth="1.2"
+              d={`M${RX - 8.5} ${PAN_Y - 34} H${RX + 8.5} M${RX - 8.5} ${PAN_Y - 26.5} H${RX + 8.5} M${RX - 8.5} ${PAN_Y - 19} H${RX + 2}`}
+              strokeWidth="1.3"
               opacity="0.7"
             />
           </g>
@@ -140,24 +152,13 @@ export default function BalanceScale({ className = "" }: { className?: string })
         {!reduce && (
           <>
             <motion.g animate={coinAnim(0)} style={{ opacity: 0 }}>
-              <GoldCoin x={LX} y={PAN_Y - 34} r={10} />
+              <GoldCoin x={LX} y={PAN_Y - 36} r={11} />
             </motion.g>
             <motion.g animate={coinAnim(0.05)} style={{ opacity: 0 }}>
-              <GoldCoin x={LX + 14} y={PAN_Y - 30} r={8} />
+              <GoldCoin x={LX + 15} y={PAN_Y - 31} r={9} />
             </motion.g>
           </>
         )}
-
-        {/* Labels */}
-        <text x={LX} y="312" textAnchor="middle" className="font-display" fontSize="19" fill="var(--color-ink)" stroke="none">
-          Capital
-        </text>
-        <text x={RX} y="312" textAnchor="middle" className="font-display" fontSize="19" fill="var(--color-ink)" stroke="none">
-          Written terms
-        </text>
-        <text x={CX} y="42" textAnchor="middle" className="font-mono" fontSize="10" letterSpacing="3" fill="var(--color-ink-faint)" stroke="none">
-          FAIR PRACTICE IN BALANCE
-        </text>
       </svg>
     </div>
   );

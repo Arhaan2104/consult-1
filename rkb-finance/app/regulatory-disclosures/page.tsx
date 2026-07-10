@@ -28,9 +28,15 @@ export default function RegulatoryDisclosuresPage() {
           {disclosureGroups.map((group, gi) => (
             <Reveal key={group.heading} delay={gi * 0.04}>
               <div className="grid gap-8 lg:grid-cols-[0.32fr_0.68fr] lg:items-start">
-                <h2 className="font-display text-2xl text-ink sm:text-3xl">
-                  {group.heading}
-                </h2>
+                <div>
+                  <h2 className="font-display text-2xl text-ink sm:text-3xl">
+                    {group.heading}
+                  </h2>
+                  <span
+                    className="mt-4 block h-px w-10 bg-[var(--color-line-gold)]"
+                    aria-hidden
+                  />
+                </div>
                 <Stagger className="grid gap-px overflow-hidden rounded-2xl border border-line-strong bg-[var(--color-line)] sm:grid-cols-2">
                   {group.items.map((item) => (
                     <StaggerItem key={item.label}>
@@ -67,9 +73,15 @@ export default function RegulatoryDisclosuresPage() {
           {/* Disclosures available on request — listed honestly, not fabricated */}
           <Reveal>
             <div className="grid gap-8 lg:grid-cols-[0.32fr_0.68fr] lg:items-start">
-              <h2 className="font-display text-2xl text-ink sm:text-3xl">
-                Available on request
-              </h2>
+              <div>
+                <h2 className="font-display text-2xl text-ink sm:text-3xl">
+                  Available on request
+                </h2>
+                <span
+                  className="mt-4 block h-px w-10 bg-[var(--color-line-gold)]"
+                  aria-hidden
+                />
+              </div>
               <div className="flex flex-col gap-5">
                 <p className="measure-wide leading-relaxed text-ink-soft">
                   The following statutory disclosures are not currently published

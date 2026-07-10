@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
 import { Reveal } from "@/components/Motion";
 import PageHero from "@/components/PageHero";
-import { Section, SectionDivider } from "@/components/Section";
+import { Section } from "@/components/Section";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -20,14 +20,15 @@ export default function ContactPage() {
         intro="Reach our team during business hours, or send a message and we'll get back to you."
       />
 
-      <SectionDivider />
-
-      <Section texture="weave">
+      <Section texture="ivory-loud">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr]">
           {/* Details */}
           <div className="flex flex-col gap-10">
             <Reveal className="flex flex-col gap-3">
-              <span className="eyebrow text-accent">Office</span>
+              <span className="eyebrow flex items-center gap-3 text-accent">
+                <span className="h-px w-6 bg-current opacity-50" aria-hidden />
+                Office
+              </span>
               <p className="font-display text-xl leading-snug text-ink">
                 {site.contact.address}
               </p>
@@ -35,7 +36,10 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={0.06} className="flex flex-col gap-3">
-              <span className="eyebrow text-accent">Phone</span>
+              <span className="eyebrow flex items-center gap-3 text-accent">
+                <span className="h-px w-6 bg-current opacity-50" aria-hidden />
+                Phone
+              </span>
               <div className="flex flex-col gap-1.5">
                 {site.contact.phones.map((p) => (
                   <a
@@ -50,7 +54,10 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={0.12} className="flex flex-col gap-3">
-              <span className="eyebrow text-accent">Email</span>
+              <span className="eyebrow flex items-center gap-3 text-accent">
+                <span className="h-px w-6 bg-current opacity-50" aria-hidden />
+                Email
+              </span>
               <a
                 href={`mailto:${site.contact.email}`}
                 className="text-lg text-ink transition-colors hover:text-accent"
@@ -60,7 +67,10 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={0.18} className="flex flex-col gap-3">
-              <span className="eyebrow text-accent">Follow</span>
+              <span className="eyebrow flex items-center gap-3 text-accent">
+                <span className="h-px w-6 bg-current opacity-50" aria-hidden />
+                Follow
+              </span>
               <div className="flex flex-wrap gap-x-6 gap-y-2">
                 {site.social.map((s) => (
                   <a
@@ -77,19 +87,23 @@ export default function ContactPage() {
             </Reveal>
           </div>
 
-          {/* Form */}
+          {/* Form — premium porcelain frame with a gold inner hairline */}
           <Reveal delay={0.1}>
-            <div className="rounded-2xl border border-line-strong bg-canvas p-6 sm:p-10">
-              <ContactForm />
+            <div className="relative rounded-2xl border border-line-strong bg-[linear-gradient(180deg,#ffffff,#fdfaf2)] p-6 shadow-[0_24px_50px_-34px_rgba(11,36,71,0.3)] sm:p-10">
+              <span
+                className="pointer-events-none absolute inset-1.5 rounded-[calc(1rem-4px)] border border-[var(--color-line-gold)]"
+                aria-hidden
+              />
+              <div className="relative">
+                <ContactForm />
+              </div>
             </div>
           </Reveal>
         </div>
       </Section>
 
-      <SectionDivider variant="accent" />
-
-      {/* Grievance */}
-      <Section texture="engrave">
+      {/* Grievance — warm gold band */}
+      <Section texture="gold-loud">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <Reveal className="flex flex-col gap-4">
             <span className="eyebrow text-accent">Grievance redressal</span>
@@ -102,7 +116,7 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="rounded-2xl border border-line bg-canvas-3 p-6 sm:p-8">
+            <div className="card-crisp rounded-2xl p-6 sm:p-8">
               <p className="eyebrow text-ink-faint">{site.grievance.title}</p>
               <p className="mt-3 font-display text-2xl text-ink">
                 {site.grievance.officer}

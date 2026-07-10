@@ -99,12 +99,22 @@ export function TextReveal({
           key={`${word}-${i}`}
           aria-hidden
           className="mr-[0.26em] inline-block overflow-hidden align-bottom"
-          style={{ clipPath: "inset(-15% 0 -15% 0)" }}
+          // Head/foot room so the tight display line-height + overflow mask
+          // never shaves ascenders or descenders (e.g. the g in "right", the y
+          // in "your"). Negative margins cancel the padding so layout and word
+          // spacing are unchanged; the reveal fades in as it rises, so the extra
+          // foot room never lets a masked word peek.
+          style={{
+            paddingTop: "0.18em",
+            paddingBottom: "0.36em",
+            marginTop: "-0.18em",
+            marginBottom: "-0.36em",
+          }}
         >
           <motion.span
             className="inline-block"
             variants={{
-              hidden: { y: "110%", opacity: 0 },
+              hidden: { y: "120%", opacity: 0 },
               show: {
                 y: "0%",
                 opacity: 1,

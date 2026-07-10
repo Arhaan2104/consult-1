@@ -49,7 +49,7 @@ export default function LoanCard3D({ className = "" }: { className?: string }) {
     >
       <motion.div
         style={reduce ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative aspect-[8/5] w-full overflow-hidden rounded-[1.4rem] bg-[radial-gradient(125%_135%_at_20%_-12%,#1e548f_0%,#123561_50%,#0c294c_100%)] shadow-[0_44px_90px_-38px_rgba(8,28,56,0.7),0_0_0_1px_rgba(217,165,63,0.55),0_0_0_5px_rgba(217,165,63,0.09),inset_0_1px_0_rgba(255,244,214,0.12)]"
+        className="relative w-full overflow-hidden rounded-[1.4rem] bg-[radial-gradient(125%_135%_at_20%_-12%,#1e548f_0%,#123561_50%,#0c294c_100%)] shadow-[0_44px_90px_-38px_rgba(8,28,56,0.7),0_0_0_1px_rgba(217,165,63,0.55),0_0_0_5px_rgba(217,165,63,0.09),inset_0_1px_0_rgba(255,244,214,0.12)] sm:aspect-[8/5]"
       >
         {/* Engraved grid + inner gold hairline frame */}
         <div
@@ -68,8 +68,9 @@ export default function LoanCard3D({ className = "" }: { className?: string }) {
           className="absolute inset-[9px] rounded-[calc(1.4rem-9px)] border border-[rgba(217,165,63,0.38)]"
         />
 
-        {/* Face */}
-        <div className="relative flex h-full flex-col justify-between p-7 sm:p-9">
+        {/* Face — natural height on phones (gap-driven) so nothing clips; on
+            sm+ the fixed 8/5 card height distributes the groups via justify. */}
+        <div className="relative flex h-full flex-col justify-between gap-7 p-7 sm:gap-0 sm:p-9">
           {/* Masthead */}
           <div className="flex items-start justify-between gap-4">
             {/* The coin mark from the logo, engraved in gold */}
