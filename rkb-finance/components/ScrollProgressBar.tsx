@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring, useReducedMotion } from "motion/react";
+import { m, useScroll, useSpring, useReducedMotion } from "motion/react";
 import { SPRING } from "./motion/tokens";
 
 /**
@@ -15,7 +15,7 @@ export default function ScrollProgressBar() {
   const scaleX = reduce ? scrollYProgress : smooth;
 
   return (
-    <motion.div
+    <m.div
       aria-hidden
       style={{ scaleX }}
       className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-[linear-gradient(90deg,#eac668,#d9a53f,#b88624)] pointer-events-none"

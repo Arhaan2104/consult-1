@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  motion,
+  m,
   useTransform,
   useSpring,
   useReducedMotion,
@@ -58,17 +58,17 @@ export default function HeroSealMotion({
   }
 
   return (
-    <motion.div
+    <m.div
       aria-hidden
       className="absolute inset-0 z-0 [will-change:transform]"
       style={{ scale, rotate, opacity }}
     >
-      <motion.div
+      <m.div
         className="h-full w-full [will-change:transform]"
         style={{ x, y, rotate: tilt }}
       >
         {children}
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 }

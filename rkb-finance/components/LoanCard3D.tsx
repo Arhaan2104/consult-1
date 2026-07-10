@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  motion,
+  m,
   useMotionValue,
   useSpring,
   useTransform,
@@ -47,7 +47,7 @@ export default function LoanCard3D({ className = "" }: { className?: string }) {
       onPointerMove={handleMove}
       onPointerLeave={reset}
     >
-      <motion.div
+      <m.div
         style={reduce ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d" }}
         className="relative w-full overflow-hidden rounded-[1.4rem] bg-[radial-gradient(125%_135%_at_20%_-12%,#1e548f_0%,#123561_50%,#0c294c_100%)] shadow-[0_44px_90px_-38px_rgba(8,28,56,0.7),0_0_0_1px_rgba(217,165,63,0.55),0_0_0_5px_rgba(217,165,63,0.09),inset_0_1px_0_rgba(255,244,214,0.12)] sm:aspect-[8/5]"
       >
@@ -123,9 +123,9 @@ export default function LoanCard3D({ className = "" }: { className?: string }) {
 
         {/* Pointer-tracked glare */}
         {!reduce && (
-          <motion.div aria-hidden className="absolute inset-0" style={{ background: glare }} />
+          <m.div aria-hidden className="absolute inset-0" style={{ background: glare }} />
         )}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

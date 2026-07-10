@@ -55,10 +55,10 @@ function Cartouche() {
  * imperceptibly slowly — the "whisper of motion" shared across every plate. Uses
  * the site-wide .net-spin (220s, frozen under reduced motion).
  */
-function SpinRosette({ r = 88, amp = 4, lobes = 44, opacity = 0.06 }) {
+function SpinRosette({ r = 88, amp = 4, lobes = 44, opacity = 0.06, spin = true }) {
   return (
     <path
-      className="net-spin"
+      className={spin ? "net-spin" : undefined}
       d={lobed(170, 120, r, amp, lobes)}
       strokeWidth="1"
       opacity={opacity}
@@ -312,10 +312,20 @@ export function RepaymentRing({ className = "" }: { className?: string }) {
 export function InstitutionMark({ className = "" }: { className?: string }) {
   const cols = [108, 139, 170, 201, 232];
 
+  // The turning rosette rides its own stacked <svg> underlay so the 220s
+  // rotation composites on the GPU instead of repainting the whole plate
+  // every frame. It never crosses the cartouche or building strokes
+  // (rosette y-extent 20–220 vs frame lines at y≤11 / y≥229), so under- vs
+  // over-painting is visually identical.
   return (
-    <svg viewBox="0 0 340 240" className={`block ${className}`} {...SVG} aria-hidden>
-      <Cartouche />
-      <SpinRosette r={96} opacity={0.045} />
+    <span className={`relative block ${className}`} aria-hidden>
+      <span className="net-spin absolute inset-0 block">
+        <svg viewBox="0 0 340 240" className="h-full w-full" {...SVG} aria-hidden>
+          <SpinRosette r={96} opacity={0.045} spin={false} />
+        </svg>
+      </span>
+      <svg viewBox="0 0 340 240" className="relative block h-auto w-full" {...SVG}>
+        <Cartouche />
 
       {/* Pediment */}
       <path d="M170 52 L96 90 H244 Z" strokeWidth="1.6" opacity="0.85" />
@@ -356,6 +366,7 @@ export function InstitutionMark({ className = "" }: { className?: string }) {
       >
         A LENDING INSTITUTION · EST. 1984
       </text>
-    </svg>
+      </svg>
+    </span>
   );
 }

@@ -241,6 +241,22 @@ body {
   transform: translateX(130%);
 }
 
+/* ---------- Rendering economy ----------
+   cv-auto: below-fold section bands skip style/layout/paint entirely until
+   they approach the viewport (and again once scrolled past) — the single
+   biggest mobile win, with zero visual change. `auto` in the intrinsic size
+   remembers the real rendered height, so scroll geometry stays honest after
+   first paint. anim-layer: promotes a continuously-animating SVG overlay to
+   its own compositor layer, so its repaints never re-rasterise the static
+   engraving beneath it. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
+}
+.anim-layer {
+  will-change: transform;
+}
+
 /* ---------- Layout shell ---------- */
 .shell {
   width: 100%;
@@ -1081,11 +1097,15 @@ body {
   }
 }
 
-/* Inner mechanism turns within the fixed bezel — opposite directions */
+/* Inner mechanism turns within the fixed bezel — opposite directions.
+   Applied to stacked <svg> layer elements (HTML replaced elements), so the
+   rotation runs as a pure compositor transform in every engine — Safari
+   never composites transforms on inner SVG <g> nodes, which made the old
+   single-SVG version re-rasterise the whole guilloché every frame. */
 .seal-spin,
 .seal-spin-rev {
-  transform-box: view-box;
-  transform-origin: 0px 0px;
+  transform-origin: center;
+  will-change: transform;
 }
 .seal-spin {
   animation: seal-rotate 210s linear infinite;
@@ -1132,6 +1152,7 @@ body {
 .net-spin {
   transform-box: view-box;
   transform-origin: center;
+  will-change: transform;
   animation: net-spin 220s linear infinite;
 }
 @keyframes net-spin {
@@ -1308,6 +1329,21 @@ body {
 @keyframes marquee {
   to {
     transform: translateX(-50%);
+  }
+}
+
+/* Form-caret blink (ProcessArt) — replaces a SMIL <animate>, which ticked
+   the document timeline every frame even offscreen. Same waveform. */
+.caret-blink {
+  animation: caret-blink 1.6s linear infinite;
+}
+@keyframes caret-blink {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0;
   }
 }
 

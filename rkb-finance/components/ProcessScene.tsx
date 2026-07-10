@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect, type ReactNode } from "react";
 import {
-  motion,
+  m,
   useScroll,
   useTransform,
   useReducedMotion,
@@ -144,21 +144,21 @@ function StepRow({
       className="step-btn"
       aria-label={`Go to step ${step.step} — ${step.label}`}
     >
-      <motion.span
+      <m.span
         aria-hidden
         style={{ opacity: on }}
         className="step-plate absolute inset-0 rounded-[1.25rem]"
       />
       <span className="relative flex items-baseline gap-4 px-5 py-4 sm:gap-5 sm:px-6 sm:py-[1.05rem]">
-        <motion.span
+        <m.span
           style={{ color: numColor }}
           className="shrink-0 font-mono text-[0.72rem] leading-none tracking-widest"
         >
           {step.step}
-        </motion.span>
-        <motion.span style={{ color: labelColor }} className="display-md">
+        </m.span>
+        <m.span style={{ color: labelColor }} className="display-md">
           {step.label}
-        </motion.span>
+        </m.span>
       </span>
     </button>
   );
@@ -204,7 +204,7 @@ function PinnedProcess({ steps, index, kicker, title }: Props) {
               aria-hidden
               className="absolute inset-y-3 left-0 w-px bg-[rgba(232,238,247,0.14)]"
             >
-              <motion.span
+              <m.span
                 className="absolute inset-0 origin-top bg-[linear-gradient(180deg,#dfb763,#b88624)]"
                 style={{ scaleY: railFill }}
               />
@@ -256,9 +256,9 @@ function FadeBlock({
   const y = useTransform(opacity, [0, 1], [rise ? 20 : 0, 0]);
   const scale = useTransform(opacity, [0, 1], [rise ? 1 : 0.975, 1]);
   return (
-    <motion.div style={{ opacity, y, scale }} className="[grid-area:1/1]">
+    <m.div style={{ opacity, y, scale }} className="[grid-area:1/1]">
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 

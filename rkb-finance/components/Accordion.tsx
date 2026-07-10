@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, m, useReducedMotion } from "motion/react";
 import { useId, useState } from "react";
 
 export type QA = { q: string; a: string };
@@ -53,7 +53,7 @@ export default function Accordion({ items }: { items: QA[] }) {
             </h3>
             <AnimatePresence initial={false}>
               {isOpen && (
-                <motion.div
+                <m.div
                   key="panel"
                   id={panelId}
                   role="region"
@@ -70,7 +70,7 @@ export default function Accordion({ items }: { items: QA[] }) {
                   <p className="measure-wide pb-6 text-base leading-relaxed text-ink-soft">
                     {item.a}
                   </p>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
           </div>

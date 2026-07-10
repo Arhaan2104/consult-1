@@ -21,7 +21,7 @@ export default function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="panel-dark text-on-dark">
+    <footer className="panel-dark cv-auto text-on-dark">
       <div className="shell pt-20 pb-10">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-14">
           {/* Brand */}

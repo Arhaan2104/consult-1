@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { m, useReducedMotion } from "motion/react";
 import { useLenis } from "@/components/LenisProvider";
 import { EASE } from "@/components/motion/tokens";
 
@@ -23,12 +23,12 @@ export default function Template({ children }: { children: ReactNode }) {
   if (reduce) return <>{children}</>;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: EASE }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

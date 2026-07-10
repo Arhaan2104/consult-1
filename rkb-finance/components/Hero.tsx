@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  motion,
+  m,
   useScroll,
   useTransform,
   useSpring,
@@ -82,7 +82,7 @@ export default function Hero() {
       <div className="hero-scrim" aria-hidden />
       <HeroBanknote />
 
-      <motion.div
+      <m.div
         style={contentStyle}
         className="relative z-10 shell flex flex-col pt-32 pb-24 sm:pt-36 lg:h-full lg:pt-20 lg:pb-32"
       >
@@ -146,11 +146,11 @@ export default function Hero() {
             ))}
           </Stagger>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Melt veil — the vault dims as the paper sheet rises over it. */}
       {!reduce && (
-        <motion.div
+        <m.div
           style={{ opacity: veil }}
           className="pointer-events-none absolute inset-0 z-30 bg-vault"
           aria-hidden

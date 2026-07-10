@@ -15,36 +15,67 @@ const STOPS = [
 
 const WIRE = "M110 74 C 220 30, 340 30, 450 74 S 680 118, 790 74";
 
+function GoldDefs({ id }: { id: string }) {
+  return (
+    <defs>
+      <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stopColor="#eac668" />
+        <stop offset="0.5" stopColor="#d9a53f" />
+        <stop offset="1" stopColor="#b88624" />
+      </linearGradient>
+    </defs>
+  );
+}
+
+/**
+ * The scene is stacked as four svg layers in the original paint order (wire
+ * bed → animated dash stream → stops + labels → riding tokens). The two
+ * animated layers are promoted to their own compositor layers (.anim-layer),
+ * so the per-frame dash/offset repaints never re-rasterise the engraved
+ * stops, labels and microtype beneath them.
+ */
 export default function MoneyConveyor({ className = "" }: { className?: string }) {
   return (
     <div className={`money-scene-frame ${className}`}>
-      <svg
-        viewBox="0 0 900 190"
-        className="h-auto w-full text-accent"
-        fill="none"
-        role="img"
-        aria-label="Money flows from your application, through R.K. Bansal Finance as the funding lender, into your bank account."
-      >
-        <defs>
-          <linearGradient id="conveyor-gold" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#eac668" />
-            <stop offset="0.5" stopColor="#d9a53f" />
-            <stop offset="1" stopColor="#b88624" />
-          </linearGradient>
-        </defs>
+      <div className="relative">
+        {/* Layer 1 — the wire bed (in flow: sizes the box) */}
+        <svg
+          viewBox="0 0 900 190"
+          className="h-auto w-full text-accent"
+          fill="none"
+          role="img"
+          aria-label="Money flows from your application, through R.K. Bansal Finance as the funding lender, into your bank account."
+        >
+          <path d={WIRE} stroke="currentColor" strokeWidth="1" opacity="0.18" />
+        </svg>
 
-        {/* The wire — a faint bed + an animated dashed stream */}
-        <path d={WIRE} stroke="currentColor" strokeWidth="1" opacity="0.18" />
-        <path
-          d={WIRE}
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeDasharray="7 13"
-          opacity="0.55"
-          className="flow-dash"
-        />
+        {/* Layer 2 — the animated dashed stream */}
+        <svg
+          viewBox="0 0 900 190"
+          className="anim-layer pointer-events-none absolute inset-0 h-full w-full text-accent"
+          fill="none"
+          aria-hidden
+        >
+          <path
+            d={WIRE}
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeDasharray="7 13"
+            opacity="0.55"
+            className="flow-dash"
+          />
+        </svg>
 
-        {/* Stops */}
+        {/* Layer 3 — stops + labels */}
+        <svg
+          viewBox="0 0 900 190"
+          className="pointer-events-none absolute inset-0 h-full w-full text-accent"
+          fill="none"
+          aria-hidden
+        >
+          <GoldDefs id="conveyor-gold" />
+
+          {/* Stops */}
         {STOPS.map((s, i) => (
           <g key={s.label}>
             <circle cx={s.x} cy="74" r={i === 1 ? 30 : 22} fill="var(--color-canvas)" stroke="currentColor" strokeWidth={i === 1 ? 2 : 1.3} />
@@ -83,27 +114,36 @@ export default function MoneyConveyor({ className = "" }: { className?: string }
             </text>
           </g>
         ))}
+        </svg>
 
-        {/* Gold tokens riding the wire */}
-        {["0s", "1.2s", "2.4s"].map((delay) => (
-          <g key={delay} className="flow-token" style={{ offsetPath: `path("${WIRE}")`, animationDelay: delay }}>
-            <circle r="12" fill="url(#conveyor-gold)" />
-            <circle r="12" stroke="#8a6118" strokeWidth="0.9" />
-            <circle r="8.6" stroke="#8a6118" strokeWidth="0.6" opacity="0.6" />
-            <text
-              y="0.5"
-              fontSize="12"
-              textAnchor="middle"
-              dominantBaseline="central"
-              fontFamily="Georgia, 'Times New Roman', serif"
-              fill="#6f4e13"
-              stroke="none"
-            >
-              &#8377;
-            </text>
-          </g>
-        ))}
-      </svg>
+        {/* Layer 4 — gold tokens riding the wire */}
+        <svg
+          viewBox="0 0 900 190"
+          className="anim-layer pointer-events-none absolute inset-0 h-full w-full text-accent"
+          fill="none"
+          aria-hidden
+        >
+          <GoldDefs id="conveyor-gold-t" />
+          {["0s", "1.2s", "2.4s"].map((delay) => (
+            <g key={delay} className="flow-token" style={{ offsetPath: `path("${WIRE}")`, animationDelay: delay }}>
+              <circle r="12" fill="url(#conveyor-gold-t)" />
+              <circle r="12" stroke="#8a6118" strokeWidth="0.9" />
+              <circle r="8.6" stroke="#8a6118" strokeWidth="0.6" opacity="0.6" />
+              <text
+                y="0.5"
+                fontSize="12"
+                textAnchor="middle"
+                dominantBaseline="central"
+                fontFamily="Georgia, 'Times New Roman', serif"
+                fill="#6f4e13"
+                stroke="none"
+              >
+                &#8377;
+              </text>
+            </g>
+          ))}
+        </svg>
+      </div>
     </div>
   );
 }

@@ -95,8 +95,8 @@ export default function RootLayout({
           Skip to content
         </a>
         <LenisProvider>
-          <ScrollProgressBar />
           <MotionProvider>
+            <ScrollProgressBar />
             <SiteHeader />
             <main id="main">{children}</main>
             <SiteFooter />

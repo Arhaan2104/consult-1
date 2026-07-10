@@ -37,7 +37,11 @@ export default function LenisProvider({ children }: { children: ReactNode }) {
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (prefersReduced) return;
+    // Lenis only smooths WHEEL input — touch scrolling is native either way.
+    // On touch-only devices (no fine pointer anywhere) skip it entirely, so
+    // phones never pay for its permanent rAF loop.
+    const finePointer = window.matchMedia("(any-pointer: fine)").matches;
+    if (prefersReduced || !finePointer) return;
 
     const instance = new Lenis({
       duration: 1.15,

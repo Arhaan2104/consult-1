@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useRef } from "react";
+import { m, useInView, useReducedMotion } from "motion/react";
 
 /**
  * BalanceScale — fair practice, physically enacted. Gold capital drops onto
@@ -57,12 +58,20 @@ export default function BalanceScale({
 }) {
   const reduce = useReducedMotion();
 
+  // The loop is JS-driven (per-frame style writes on SVG, which cost layout
+  // in Blink), so it runs only while the scene can be seen. The margin keeps
+  // the start/stop fully offscreen, so a cycle restart is never visible —
+  // motion is identical whenever the rig is actually in view.
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(sceneRef, { margin: "25% 0px 25% 0px" });
+  const idle = reduce || !inView;
+
   const strokeCls = dark ? "text-gold-bright" : "text-accent";
 
   // Beam dips as each coin lands (t≈0.22 of the cycle), then written terms
   // bring it back level. Pans hang inside the beam group; the tilt is kept
   // shallow so the stylised rig reads true.
-  const beamAnim = reduce
+  const beamAnim = idle
     ? undefined
     : {
         rotate: [0, 0, -3.4, -3.4, 0, 0],
@@ -75,7 +84,7 @@ export default function BalanceScale({
       };
 
   const coinAnim = (delayFrac: number) =>
-    reduce
+    idle
       ? undefined
       : {
           y: [-110, 0, 0, 0],
@@ -89,7 +98,7 @@ export default function BalanceScale({
         };
 
   return (
-    <div className={`money-scene-frame ${className}`}>
+    <div ref={sceneRef} className={`money-scene-frame ${className}`}>
       {/* viewBox cropped to the rig itself (no label margins), so the scale
           renders large in its column — the motion IS the message. */}
       <svg
@@ -120,7 +129,7 @@ export default function BalanceScale({
         <circle cx={CX} cy={PIVOT_Y - 12} r="4.6" fill="currentColor" stroke="none" />
 
         {/* Beam + pans — one rigid group tipping about the fulcrum */}
-        <motion.g
+        <m.g
           style={{ transformOrigin: `${CX}px ${PIVOT_Y}px` }}
           animate={beamAnim}
         >
@@ -146,17 +155,17 @@ export default function BalanceScale({
               opacity="0.7"
             />
           </g>
-        </motion.g>
+        </m.g>
 
         {/* Falling capital — lands on the left pan, tips the beam */}
         {!reduce && (
           <>
-            <motion.g animate={coinAnim(0)} style={{ opacity: 0 }}>
+            <m.g animate={coinAnim(0)} style={{ opacity: 0 }}>
               <GoldCoin x={LX} y={PAN_Y - 36} r={11} />
-            </motion.g>
-            <motion.g animate={coinAnim(0.05)} style={{ opacity: 0 }}>
+            </m.g>
+            <m.g animate={coinAnim(0.05)} style={{ opacity: 0 }}>
               <GoldCoin x={LX + 15} y={PAN_Y - 31} r={9} />
-            </motion.g>
+            </m.g>
           </>
         )}
       </svg>

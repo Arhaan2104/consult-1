@@ -2,7 +2,7 @@
 
 import { useRef, type ReactNode } from "react";
 import {
-  motion,
+  m,
   useScroll,
   useTransform,
   useSpring,
@@ -43,7 +43,7 @@ export function Parallax({
   const smooth = useSpring(raw, SPRING.soft);
   const value = spring ? smooth : raw;
 
-  const M = motion[as];
+  const M = m[as];
   if (reduce) {
     const Plain = as;
     return <Plain className={className}>{children}</Plain>;
@@ -83,7 +83,7 @@ export function TextReveal({
   }
 
   const words = text.split(" ");
-  const MotionTag = motion[as];
+  const MotionTag = m[as];
 
   return (
     <MotionTag
@@ -111,7 +111,7 @@ export function TextReveal({
             marginBottom: "-0.36em",
           }}
         >
-          <motion.span
+          <m.span
             className="inline-block"
             variants={{
               hidden: { y: "120%", opacity: 0 },
@@ -123,7 +123,7 @@ export function TextReveal({
             }}
           >
             {word}
-          </motion.span>
+          </m.span>
         </span>
       ))}
     </MotionTag>

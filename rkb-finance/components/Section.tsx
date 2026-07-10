@@ -50,7 +50,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`relative ${textureClass[texture]} ${className}`}
+      className={`relative cv-auto ${textureClass[texture]} ${className}`}
     >
       <div className={`shell ${flush ? "" : "py-16 sm:py-24 lg:py-32"}`}>
         {children}

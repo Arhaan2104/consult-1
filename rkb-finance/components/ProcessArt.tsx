@@ -97,9 +97,12 @@ function ApplicationArt() {
       <rect x="52" y="186" width="144" height="20" rx="5" strokeWidth="1.9" opacity="0.95" />
       <text x="64" y="196.5" fontSize="12.5" textAnchor="middle" {...RUPEE}>&#8377;</text>
       <path d="M74 196.5 H150" strokeWidth="2.2" opacity="0.85" />
-      <path d="M156 191 v11" opacity="0.6">
-        <animate attributeName="opacity" values="0.6;0;0.6" dur="1.6s" repeatCount="indefinite" />
-      </path>
+      {/* Text caret — CSS blink, NOT SMIL: a single SMIL <animate> ticks the
+          whole document timeline every frame on the main thread (measured at
+          ~120 style recalcs/s page-wide), keeps running offscreen, and
+          ignores prefers-reduced-motion. The CSS version is identical
+          (0.6 → 0 → 0.6 over 1.6s) and costs nothing when out of view. */}
+      <path className="caret-blink" d="M156 191 v11" opacity="0.6" />
 
       {/* Consent tick */}
       <rect x="52" y="218" width="13" height="13" rx="3" />
@@ -342,24 +345,38 @@ export function GuillocheRosette({
     return d + "Z";
   };
   const gid = `rosette-disc-${uid}`;
+  // The turning strand lives in its OWN stacked <svg> so its 220s rotation is
+  // a composited transform on an HTML element — the static disc, frame and
+  // inner strand are rasterised once and never repainted. The two strands
+  // occupy separate radii (130±4 vs 112±3), so paint order between them is
+  // visually irrelevant; everything else stacks exactly as before.
   return (
-    <svg viewBox="0 0 300 300" className={className} fill="none" aria-hidden>
-      <defs>
-        {/* Embossed disc — a warm wash, brightest just above centre, fading to
-            nothing at the rim. This is the part that's felt. */}
-        <radialGradient id={gid} cx="50%" cy="46%" r="52%">
-          <stop offset="0%" stopColor="currentColor" stopOpacity="0.14" />
-          <stop offset="55%" stopColor="currentColor" stopOpacity="0.07" />
-          <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <circle cx={CX} cy={CY} r="139" fill={`url(#${gid})`} stroke="none" />
-      {/* Coin-edge frame + a finer inner echo. */}
-      <circle cx={CX} cy={CY} r="137" stroke="currentColor" opacity="0.3" strokeWidth="1" />
-      <circle cx={CX} cy={CY} r="132" stroke="currentColor" opacity="0.12" strokeWidth="0.75" />
-      {/* Two guilloché strands — the outer turns slowly. */}
-      <path className="net-spin" d={path(rings[0])} stroke="currentColor" strokeWidth="1" opacity={rings[0].opacity} />
-      <path d={path(rings[1])} stroke="currentColor" strokeWidth="0.9" opacity={rings[1].opacity} />
-    </svg>
+    <span className={`block ${className}`} aria-hidden>
+      <svg viewBox="0 0 300 300" className="absolute inset-0 h-full w-full" fill="none">
+        <defs>
+          {/* Embossed disc — a warm wash, brightest just above centre, fading to
+              nothing at the rim. This is the part that's felt. */}
+          <radialGradient id={gid} cx="50%" cy="46%" r="52%">
+            <stop offset="0%" stopColor="currentColor" stopOpacity="0.14" />
+            <stop offset="55%" stopColor="currentColor" stopOpacity="0.07" />
+            <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <circle cx={CX} cy={CY} r="139" fill={`url(#${gid})`} stroke="none" />
+        {/* Coin-edge frame + a finer inner echo. */}
+        <circle cx={CX} cy={CY} r="137" stroke="currentColor" opacity="0.3" strokeWidth="1" />
+        <circle cx={CX} cy={CY} r="132" stroke="currentColor" opacity="0.12" strokeWidth="0.75" />
+        <path d={path(rings[1])} stroke="currentColor" strokeWidth="0.9" opacity={rings[1].opacity} />
+      </svg>
+      {/* The outer guilloché strand — turns slowly on its own layer. The spin
+          class sits on a plain wrapper (not the svg): transform animations on
+          svg elements still tick main-thread style every frame in Blink,
+          while a plain box composites for free. */}
+      <span className="net-spin absolute inset-0 block">
+        <svg viewBox="0 0 300 300" className="h-full w-full" fill="none">
+          <path d={path(rings[0])} stroke="currentColor" strokeWidth="1" opacity={rings[0].opacity} />
+        </svg>
+      </span>
+    </span>
   );
 }

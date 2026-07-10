@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "motion/react";
+import { m, type Variants } from "motion/react";
 import type { ReactNode } from "react";
 import { EASE, DUR } from "./motion/tokens";
 
@@ -43,7 +43,7 @@ export function Reveal({
   blur = 0,
   distance = 18,
 }: RevealProps) {
-  const M = motion[as];
+  const M = m[as];
   return (
     <M
       id={id}
@@ -67,7 +67,7 @@ export function Reveal({
 }
 
 export function Stagger({ children, className, as = "div" }: RevealProps) {
-  const M = motion[as];
+  const M = m[as];
   return (
     <M
       className={className}
@@ -82,7 +82,7 @@ export function Stagger({ children, className, as = "div" }: RevealProps) {
 }
 
 export function StaggerItem({ children, className, as = "div" }: RevealProps) {
-  const M = motion[as];
+  const M = m[as];
   return (
     <M className={className} variants={fadeUp}>
       {children}

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef, type ReactNode } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { m, useMotionValue, useSpring } from "motion/react";
 import { SPRING } from "./motion/tokens";
 
 /**
@@ -54,7 +54,7 @@ export default function MagneticButton({
   };
 
   return (
-    <motion.span
+    <m.span
       ref={ref}
       style={{ x: sx, y: sy }}
       onPointerMove={onMove}
@@ -70,6 +70,6 @@ export default function MagneticButton({
           {children}
         </Link>
       )}
-    </motion.span>
+    </m.span>
   );
 }

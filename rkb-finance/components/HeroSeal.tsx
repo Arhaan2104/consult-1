@@ -76,38 +76,59 @@ const TICKS = Array.from({ length: 96 }, (_, i) => {
   };
 });
 
+/** Minted-gold light — top-left catches the light, lower-right falls into
+    shadow, so the line-art reads as struck metal. Each stacked layer carries
+    its own copy under a unique id (SVG ids are document-global). Because the
+    gradient is userSpaceOnUse, it turns with its layer — exactly as it did
+    when the gradient lived inside the rotated <g>. */
+function GoldDefs({ id }: { id: string }) {
+  return (
+    <defs>
+      <linearGradient
+        id={id}
+        x1="-180"
+        y1="-180"
+        x2="180"
+        y2="180"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0" stopColor="#dfb763" />
+        <stop offset="0.45" stopColor="#c99e46" />
+        <stop offset="1" stopColor="#97711f" />
+      </linearGradient>
+    </defs>
+  );
+}
+
+const VIEW = "-210 -210 420 420";
+const LAYER = "absolute inset-0";
+
+/**
+ * The seal is stacked as FOUR svg layers (static bezel+lettering, braids,
+ * rosettes, core mark) rather than one svg with rotating <g> groups. CSS
+ * rotation on an inner SVG group is repainted every frame (Safari never
+ * composites it), and even on an <svg> element Blink still ticks style each
+ * frame — so the spin classes sit on plain <div> wrappers, the canonical
+ * compositor-accelerated case: zero main-thread work per frame. Paint order
+ * and geometry are byte-identical to the single-svg version — layers stack
+ * in the same order the groups were drawn.
+ */
 export default function HeroSeal() {
   return (
     <div className="hero-seal" aria-hidden>
-      <svg viewBox="-210 -210 420 420" fill="none" stroke="currentColor">
+      {/* Layer 1 — fixed bezel, minute-track, coin-edge lettering */}
+      <svg viewBox={VIEW} className={LAYER} fill="none" stroke="currentColor">
+        <GoldDefs id="seal-gold-a" />
         <defs>
-          {/* Minted-gold light — top-left catches the light, lower-right
-              falls into shadow, so the line-art reads as struck metal. */}
-          <linearGradient
-            id="seal-gold"
-            x1="-180"
-            y1="-180"
-            x2="180"
-            y2="180"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0" stopColor="#dfb763" />
-            <stop offset="0.45" stopColor="#c99e46" />
-            <stop offset="1" stopColor="#97711f" />
-          </linearGradient>
           <path id="seal-edge" d={EDGE_PATH} />
         </defs>
-
-        {/* Fixed bezel — outer rings */}
-        <g opacity="0.75" stroke="url(#seal-gold)">
+        <g opacity="0.75" stroke="url(#seal-gold-a)">
           <circle r="201" strokeWidth="0.75" vectorEffect="non-scaling-stroke" />
           <circle r="197" strokeWidth="1.25" vectorEffect="non-scaling-stroke" />
           <circle r="178" strokeWidth="1.25" vectorEffect="non-scaling-stroke" />
           <circle r="156" strokeWidth="0.75" vectorEffect="non-scaling-stroke" />
         </g>
-
-        {/* Machined minute-track in the outer groove (197 → 201) */}
-        <g stroke="url(#seal-gold)">
+        <g stroke="url(#seal-gold-a)">
           {TICKS.map((t, i) => (
             <line
               key={i}
@@ -121,7 +142,6 @@ export default function HeroSeal() {
             />
           ))}
         </g>
-
         {/* Coin-edge lettering — alphabetic baseline dropped below the channel
             midline (see EDGE_R) so the caps sit centred between the rings in
             every browser. */}
@@ -140,9 +160,13 @@ export default function HeroSeal() {
             {EDGE_TEXT}
           </textPath>
         </text>
+      </svg>
 
-        {/* Guilloché braid — slow turn one way */}
-        <g className="seal-spin-rev" opacity="0.75" stroke="url(#seal-gold)">
+      {/* Layer 2 — guilloché braid, slow turn one way (composited) */}
+      <div className={`seal-spin-rev ${LAYER}`}>
+        <svg viewBox={VIEW} className="h-full w-full" fill="none" stroke="currentColor">
+        <GoldDefs id="seal-gold-b" />
+        <g opacity="0.75" stroke="url(#seal-gold-b)">
           <path
             className="seal-draw"
             d={braid(167, 8, 48, 0)}
@@ -158,9 +182,14 @@ export default function HeroSeal() {
             style={{ animationDelay: "0.45s" }}
           />
         </g>
+        </svg>
+      </div>
 
-        {/* Rosette cluster — slow turn the other way */}
-        <g className="seal-spin" stroke="url(#seal-gold)">
+      {/* Layer 3 — rosette cluster, slow turn the other way (composited) */}
+      <div className={`seal-spin ${LAYER}`}>
+        <svg viewBox={VIEW} className="h-full w-full" fill="none" stroke="currentColor">
+        <GoldDefs id="seal-gold-c" />
+        <g stroke="url(#seal-gold-c)">
           <path
             className="seal-draw"
             d={rosette(7, 106, 44, 0)}
@@ -186,10 +215,14 @@ export default function HeroSeal() {
             style={{ animationDelay: "0.85s" }}
           />
         </g>
+        </svg>
+      </div>
 
-        {/* Center — the R.K. Bansal coin mark, re-struck in engraved gold:
-            the rupee glyph inside a double ring, straight from the logo. */}
-        <g opacity="0.9" stroke="url(#seal-gold)">
+      {/* Layer 4 — the R.K. Bansal coin mark, re-struck in engraved gold:
+          the rupee glyph inside a double ring, straight from the logo. */}
+      <svg viewBox={VIEW} className={LAYER} fill="none" stroke="currentColor">
+        <GoldDefs id="seal-gold-d" />
+        <g opacity="0.9" stroke="url(#seal-gold-d)">
           <circle r="36" strokeWidth="1.4" vectorEffect="non-scaling-stroke" />
           <circle r="30" strokeWidth="0.75" opacity="0.75" vectorEffect="non-scaling-stroke" />
           <text
@@ -198,7 +231,7 @@ export default function HeroSeal() {
             textAnchor="middle"
             dominantBaseline="central"
             fontFamily="Georgia, 'Times New Roman', serif"
-            fill="url(#seal-gold)"
+            fill="url(#seal-gold-d)"
             stroke="none"
           >
             &#8377;
