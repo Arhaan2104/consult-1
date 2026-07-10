@@ -46,12 +46,26 @@ export const metadata: Metadata = {
     "RBI registered",
     "instant loan India",
   ],
+  applicationName: site.name,
   openGraph: {
     type: "website",
     title: "R.K. Bansal Finance: Personal lending since 1984",
     description:
       "An RBI-registered NBFC. Transparent, fully digital personal lending since 1984.",
     siteName: site.legalName,
+    locale: "en_IN",
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "R.K. Bansal Finance: Personal lending since 1984",
+    description:
+      "An RBI-registered NBFC. Transparent, fully digital personal lending since 1984.",
+  },
+  appleWebApp: {
+    capable: true,
+    title: site.short,
+    statusBarStyle: "black-translucent",
   },
   robots: { index: true, follow: true },
 };

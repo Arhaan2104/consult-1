@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .gstack/
+
+# brand asset generator — fonts are fetched on demand by scripts/generate-brand-assets.mjs
+/scripts/fonts/

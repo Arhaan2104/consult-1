@@ -1,8 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="14" fill="#112f5b"/>
-  <circle cx="32" cy="32" r="22" fill="none" stroke="#e8eef7" stroke-width="1.4" opacity="0.55"/>
-  <circle cx="32" cy="32" r="25.5" fill="none" stroke="#4f86cf" stroke-width="1" opacity="0.5"/>
-  <text x="32" y="33" text-anchor="middle" dominant-baseline="central"
-        font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="500"
-        fill="#e8eef7">&#8377;</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="32" height="32">
+  <defs>
+    <radialGradient id="bg" cx="0.32" cy="0.24" r="1.15">
+      <stop offset="0" stop-color="#17396d"/>
+      <stop offset="0.55" stop-color="#0b2447"/>
+      <stop offset="1" stop-color="#081c38"/>
+    </radialGradient>
+    
+  <linearGradient id="au" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#e9c368"/>
+    <stop offset="0.45" stop-color="#d9a53f"/>
+    <stop offset="1" stop-color="#b88624"/>
+  </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0.55" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.13"/>
+      <stop offset="0.45" stop-color="#ffffff" stop-opacity="0.03"/>
+      <stop offset="0.78" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#e9c368" stop-opacity="0.9"/>
+      <stop offset="0.5" stop-color="#b88624" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#d9a53f" stop-opacity="0.75"/>
+    </linearGradient></defs>
+  <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+  <g transform="translate(256 256) scale(1)">
+    <circle r="194" fill="none" stroke="url(#au)" stroke-width="18"/><g transform="translate(-90.52 90.89) scale(0.244 -0.244)"><path d="M400 0L66 270L66 405L353 405Q386 405 410 418Q434 431 447.5 454Q461 477 461 507Q461 538 447.5 561Q434 584 410 597Q386 610 353 610L66 610L66 745L676 745L676 655L503 655L542 685Q577 654 596.5 610Q616 566 616 507Q616 431 581.5 378Q547 325 487.5 297.5Q428 270 352 270L227 270L242 313L626 0ZM66 463L66 553L676 553L676 463Z" fill="url(#au)"/></g>
+  </g>
+  <rect x="24" y="24" width="464" height="464" rx="92" fill="none" stroke="url(#edge)" stroke-width="24" opacity="0.8"/>
+  <rect width="512" height="512" rx="116" fill="url(#sheen)"/>
 </svg>

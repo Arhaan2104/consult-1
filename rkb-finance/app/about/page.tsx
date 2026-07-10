@@ -66,11 +66,13 @@ export default function AboutPage() {
             </Reveal>
           </div>
           <Reveal delay={0.1} className="flex flex-col gap-8">
-            <p
-              className="font-display text-2xl leading-snug text-ink sm:text-3xl"
-              style={{ hangingPunctuation: "first last", textIndent: "-0.45em" }}
-            >
-              &ldquo;{site.mission}&rdquo;
+            {/* Opening quote hangs in the margin (zero layout width) so the
+                first line stays flush with the wrapped lines below it. */}
+            <p className="relative font-display text-2xl leading-snug text-ink sm:text-3xl">
+              <span aria-hidden className="absolute -translate-x-full select-none">
+                &ldquo;
+              </span>
+              {site.mission}&rdquo;
             </p>
             <p className="measure-wide leading-relaxed text-ink-soft">
               We offer a single, transparent short-term loan, kept affordable by
