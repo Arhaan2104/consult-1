@@ -1053,14 +1053,17 @@ body {
    Faint bronze watermark behind the centered hero content.
    ============================================================ */
 .hero-seal {
-  /* Mobile: a quiet watermark behind the left-set copy. Desktop (lg+): the
-     medallion holds the right half — sized against BOTH axes so the full
-     coin always sits clear of the nav above and the trust strip below,
-     never running under or off anything. */
+  /* Mobile: a quiet watermark centred behind the headline + CTA block —
+     anchored in rem from the hero's top (the copy is top-anchored too, so
+     the full circle stays enclosing the text on any phone height, instead
+     of drifting with the hero's variable height and leaving stray arcs).
+     Desktop (lg+): the medallion holds the right half — sized against BOTH
+     axes so the full coin always sits clear of the nav above and the trust
+     strip below, never running under or off anything. */
   --seal-opacity: 0.38;
   position: absolute;
   left: 50%;
-  top: 46%;
+  top: min(21rem, 46%);
   z-index: 1;
   width: min(92vw, 56svh, 620px);
   aspect-ratio: 1;
@@ -1135,6 +1138,23 @@ body {
   font-size: 12.5px;
   font-weight: 500;
   letter-spacing: 0.04em;
+}
+
+/* Below the pin (lg) the seal is a STILL watermark: the imperceptible
+   210s/260s spins would otherwise hold two full-size GPU layers alive for
+   the whole visit (will-change on phones = real memory + battery), and the
+   2.8s engrave sweep repaints three 900-point paths during hydration — the
+   busiest moment of a mobile load. Lines land drawn; the emerge fade stays. */
+@media (max-width: 1023.98px) {
+  .seal-spin,
+  .seal-spin-rev {
+    animation: none;
+    will-change: auto;
+  }
+  .seal-draw {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 /* ---------- Lender network diagram ---------- */

@@ -24,14 +24,20 @@ import { SPRING } from "./motion/tokens";
  * `progress` is the hero's scrollYProgress (0 at top → 1 scrolled past).
  * `pointer` is the hero's normalised cursor position (−0.5…0.5 on each axis);
  * omitted / on touch it simply stays centred.
+ * `active` gates the whole choreography — the exit is written for the PINNED
+ * hero (lg+), where the vault holds still while the sheet rises. Below lg the
+ * hero scrolls normally, so scaling/fading the seal against that scroll reads
+ * as glitch, not craft — the caller passes false and the seal stays put.
  */
 export default function HeroSealMotion({
   progress,
   pointer,
+  active = true,
   children,
 }: {
   progress: MotionValue<number>;
   pointer?: { x: MotionValue<number>; y: MotionValue<number> };
+  active?: boolean;
   children: ReactNode;
 }) {
   const reduce = useReducedMotion();
@@ -49,7 +55,7 @@ export default function HeroSealMotion({
   const y = useTransform(pySrc, (v) => v * 24);
   const tilt = useTransform(pxSrc, (v) => v * 2.6);
 
-  if (reduce) {
+  if (reduce || !active) {
     return (
       <div className="absolute inset-0 z-0" aria-hidden>
         {children}

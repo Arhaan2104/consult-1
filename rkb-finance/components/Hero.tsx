@@ -28,10 +28,24 @@ import { heroTrust, site } from "@/content/site";
  * Scroll progress is measured in window pixels against the hero's height —
  * a sticky target's own bounding rect never moves, so the usual
  * target-based useScroll would sit at 0 forever once pinned.
+ *
+ * The whole exit choreography (content drift + fade, melt veil, seal
+ * scale/rotate) belongs to that PIN. Below lg the hero scrolls off normally,
+ * so the same motion doubles up against real scroll — content dims while
+ * still on screen and the seal swims. `pinned` gates all of it to lg+.
  */
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+
+  const [pinned, setPinned] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setPinned(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   const { scrollY } = useScroll();
   const [range, setRange] = useState(900);
@@ -49,7 +63,8 @@ export default function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
   const veil = useTransform(scrollYProgress, [0.12, 0.9], [0, 0.6]);
 
-  const contentStyle = reduce ? undefined : { y: contentY, opacity: contentOpacity };
+  const contentStyle =
+    reduce || !pinned ? undefined : { y: contentY, opacity: contentOpacity };
 
   // Cursor parallax for the medallion — normalised −0.5…0.5, spring-smoothed.
   const mvx = useMotionValue(0);
@@ -76,7 +91,11 @@ export default function Hero() {
       className="relative hero-vault overflow-hidden lg:sticky lg:top-0 lg:h-svh lg:min-h-[620px]"
     >
       <HeroVault />
-      <HeroSealMotion progress={scrollYProgress} pointer={{ x: pointerX, y: pointerY }}>
+      <HeroSealMotion
+        progress={scrollYProgress}
+        pointer={{ x: pointerX, y: pointerY }}
+        active={pinned}
+      >
         <HeroSeal />
       </HeroSealMotion>
       <div className="hero-scrim" aria-hidden />
@@ -148,8 +167,8 @@ export default function Hero() {
         </div>
       </m.div>
 
-      {/* Melt veil — the vault dims as the paper sheet rises over it. */}
-      {!reduce && (
+      {/* Melt veil — the vault dims as the paper sheet rises over it (pinned only). */}
+      {!reduce && pinned && (
         <m.div
           style={{ opacity: veil }}
           className="pointer-events-none absolute inset-0 z-30 bg-vault"
