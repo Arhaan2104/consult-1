@@ -61,7 +61,10 @@ function StageArt({ index }: { index: number }) {
       className="relative mx-auto grid aspect-square w-full max-w-[15rem] place-items-center sm:max-w-none"
       style={{ "--art-panel": "#f9f3e5" } as React.CSSProperties}
     >
-      <GuillocheRosette className="pointer-events-none absolute inset-0 m-auto h-full w-full text-gold/70" />
+      <GuillocheRosette
+        uid={index}
+        className="pointer-events-none absolute inset-0 m-auto h-full w-full text-gold"
+      />
       <ProcessArt index={index} className="relative w-[88%] text-accent" />
     </div>
   );

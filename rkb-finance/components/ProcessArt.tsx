@@ -64,7 +64,8 @@ function ApplicationArt() {
   ];
 
   return (
-    <svg {...P} aria-hidden>
+    // viewBox shifted so the drawn ink centres on the rosette (bbox was low)
+    <svg {...P} viewBox="0 7.5 300 300" aria-hidden>
       {/* Browser window */}
       <rect x="34" y="46" width="232" height="208" rx="16" fill={PANEL} stroke="none" />
       <rect x="34" y="46" width="232" height="208" rx="16" fill="currentColor" opacity="0.04" stroke="none" />
@@ -161,7 +162,8 @@ function UnderwritingArt() {
   const ny = CY + (R - 16) * Math.sin(na);
 
   return (
-    <svg {...P} aria-hidden>
+    // viewBox shifted so the drawn ink centres on the rosette (bbox was left)
+    <svg {...P} viewBox="-8 0 300 300" aria-hidden>
       {/* Machine housing */}
       <circle cx={CX} cy={CY} r="84" fill={PANEL} stroke="none" />
       <circle cx={CX} cy={CY} r="84" opacity="0.7" />
@@ -222,7 +224,8 @@ function UnderwritingArt() {
 
 function DisbursalArt() {
   return (
-    <svg {...P} aria-hidden>
+    // viewBox shifted so the drawn ink centres on the rosette (bbox was low-right)
+    <svg {...P} viewBox="15 24.5 300 300" aria-hidden>
       {/* Coin stack (the sanctioned amount) */}
       <ellipse cx="74" cy="206" rx="30" ry="10.5" fill={PANEL} stroke="none" />
       <ellipse cx="74" cy="206" rx="30" ry="10.5" opacity="0.55" />
@@ -306,13 +309,27 @@ export function ProcessArt({
   );
 }
 
-/** Faint, slowly-turning guilloché rosette — a centred backdrop for the art. */
-export function GuillocheRosette({ className = "" }: { className?: string }) {
+/**
+ * Guilloché rosette — the coin backdrop behind each stage illustration.
+ * Built to be FELT more than seen: a soft embossed disc (warm radial wash)
+ * gives the circle real presence, a quiet coin-edge frame + inner echo give it
+ * structure, and two slowly-turning guilloché strands supply engraving texture.
+ * Colour comes from the caller (currentColor); every weight is tuned here so it
+ * reads as an intentional medallion without ever crowding the line-art on top.
+ */
+export function GuillocheRosette({
+  className = "",
+  uid = "r",
+}: {
+  className?: string;
+  /** Unique suffix for the gradient id so multiple rosettes never collide. */
+  uid?: string | number;
+}) {
   const CX = 150;
   const CY = 150;
   const rings = [
-    { R: 130, amp: 4, lobes: 60, opacity: 0.13 },
-    { R: 112, amp: 3, lobes: 40, opacity: 0.08 },
+    { R: 130, amp: 4, lobes: 60, opacity: 0.2 },
+    { R: 112, amp: 3, lobes: 40, opacity: 0.13 },
   ];
   const path = ({ R, amp, lobes }: { R: number; amp: number; lobes: number }) => {
     const steps = 360;
@@ -324,11 +341,25 @@ export function GuillocheRosette({ className = "" }: { className?: string }) {
     }
     return d + "Z";
   };
+  const gid = `rosette-disc-${uid}`;
   return (
     <svg viewBox="0 0 300 300" className={className} fill="none" aria-hidden>
-      <circle cx={CX} cy={CY} r="137" stroke="currentColor" opacity="0.14" strokeWidth="1" />
+      <defs>
+        {/* Embossed disc — a warm wash, brightest just above centre, fading to
+            nothing at the rim. This is the part that's felt. */}
+        <radialGradient id={gid} cx="50%" cy="46%" r="52%">
+          <stop offset="0%" stopColor="currentColor" stopOpacity="0.14" />
+          <stop offset="55%" stopColor="currentColor" stopOpacity="0.07" />
+          <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <circle cx={CX} cy={CY} r="139" fill={`url(#${gid})`} stroke="none" />
+      {/* Coin-edge frame + a finer inner echo. */}
+      <circle cx={CX} cy={CY} r="137" stroke="currentColor" opacity="0.3" strokeWidth="1" />
+      <circle cx={CX} cy={CY} r="132" stroke="currentColor" opacity="0.12" strokeWidth="0.75" />
+      {/* Two guilloché strands — the outer turns slowly. */}
       <path className="net-spin" d={path(rings[0])} stroke="currentColor" strokeWidth="1" opacity={rings[0].opacity} />
-      <path d={path(rings[1])} stroke="currentColor" strokeWidth="1" opacity={rings[1].opacity} />
+      <path d={path(rings[1])} stroke="currentColor" strokeWidth="0.9" opacity={rings[1].opacity} />
     </svg>
   );
 }
