@@ -38,7 +38,7 @@ export default async function LegalPage({
           <Reveal>
             <Link
               href="/"
-              className="eyebrow text-on-dark-soft transition-colors hover:text-gold-bright"
+              className="eyebrow inline-flex w-fit -my-2 py-2 pr-3 text-on-dark-soft transition-colors hover:text-gold-bright"
             >
               ← Home
             </Link>
