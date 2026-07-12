@@ -13,7 +13,7 @@ export default function SiteHeader() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -27,15 +27,25 @@ export default function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-2.5 z-50 sm:top-4">
-      <div className="shell">
-        {/* Floating dark-glass pill — navy glass with a gold hairline, so it
-            sits confidently over both vault and ivory bands. */}
+    <header className="fixed inset-x-0 top-0 z-50">
+      {/* One <nav>, two geometries. Over the hero it sits full-bleed and flush
+          to the top edge — a fixed, edge-to-edge bar with a single gold
+          hairline underline. Past the fold it glides inward: narrowing to the
+          shell width, lifting off the edge, rounding its corners and lighting
+          its full gold frame + drop shadow into the floating navy-glass pill.
+          The outer wrapper animates the top offset and side insets; the <nav>
+          animates its own width, height, radius, frame, fill and shadow — all
+          on one shared ease so the two states melt into each other. */}
+      <div
+        className={`transition-[padding] duration-500 ease-[var(--ease-rkb)] ${
+          scrolled ? "px-[var(--gutter)] pt-2.5 sm:pt-4" : "px-0 pt-0"
+        }`}
+      >
         <nav
-          className={`relative z-50 flex h-[4.2rem] items-center justify-between gap-3 rounded-[1.4rem] border pl-6 pr-3 backdrop-blur-xl transition-[background-color,box-shadow,border-color] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[2.5px] before:rounded-[1.2rem] before:border before:border-[rgba(217,165,63,0.18)] before:content-[''] ${
+          className={`relative z-50 mx-auto flex w-full items-center justify-between gap-3 border backdrop-blur-xl transition-[max-width,height,border-radius,border-color,background-color,box-shadow,padding] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[2.5px] before:rounded-[1.2rem] before:border before:border-[rgba(217,165,63,0.18)] before:transition-opacity before:duration-500 before:content-[''] ${
             scrolled
-              ? "border-gold-bright/30 bg-deep/[0.93] shadow-[0_14px_36px_-14px_rgba(8,28,56,0.6)]"
-              : "border-gold-bright/20 bg-deep/[0.86] shadow-[0_8px_26px_-16px_rgba(8,28,56,0.45)]"
+              ? "h-[4.05rem] max-w-[var(--shell)] rounded-[1.4rem] border-gold-bright/30 bg-deep/[0.93] pl-6 pr-3 shadow-[0_14px_36px_-14px_rgba(8,28,56,0.6)] before:opacity-100"
+              : "h-[4.75rem] max-w-[100vw] rounded-none border-x-transparent border-t-transparent border-b-gold-bright/20 bg-deep/80 pl-[var(--gutter)] pr-[var(--gutter)] shadow-none before:opacity-0"
           }`}
         >
           <Link
@@ -56,7 +66,9 @@ export default function SiteHeader() {
               height={36}
               priority
               style={{ width: "auto" }}
-              className="h-[2.4rem] opacity-95 transition-opacity duration-300 group-hover:opacity-75"
+              className={`opacity-95 transition-[height,opacity] duration-500 ease-[var(--ease-rkb)] group-hover:opacity-75 ${
+                scrolled ? "h-[2.3rem]" : "h-[2.55rem]"
+              }`}
             />
           </Link>
 

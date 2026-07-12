@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Button } from "@/components/Button";
+import FeatureCard from "@/components/FeatureCard";
+import { EngraveRule } from "@/components/Kicker";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import PageHero from "@/components/PageHero";
 import { InstitutionMark } from "@/components/SectionArt";
@@ -60,7 +62,11 @@ export default function AboutPage() {
       <Section texture="ivory-loud">
         <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div className="flex flex-col gap-10">
-            <SectionHeader index="01" kicker="Our mission" title={<>Why we exist.</>} />
+            <SectionHeader
+              index="01"
+              kicker="Our mission"
+              title={<>Making access to credit simple.</>}
+            />
             <Reveal delay={0.2} className="hidden lg:block">
               <InstitutionMark className="w-full max-w-md text-accent" />
             </Reveal>
@@ -75,10 +81,11 @@ export default function AboutPage() {
               {site.mission}&rdquo;
             </p>
             <p className="measure-wide leading-relaxed text-ink-soft">
-              We offer a single, transparent short-term loan, kept affordable by
-              a minimal-risk profile, and open to applicants with no minimum
-              income threshold. Streamlining access to funds through digital
-              innovation is at the heart of everything we do.
+              We believe borrowing should be quick, transparent and
+              hassle-free. Our fully digital application process, minimal
+              documentation and streamlined verification help eligible customers
+              apply with ease and receive quick lending decisions through a
+              secure and seamless experience.
             </p>
             <dl className="mt-1 grid grid-cols-3 gap-6 border-t border-line pt-8">
               {missionFacts.map((f) => (
@@ -102,14 +109,15 @@ export default function AboutPage() {
           title={<>Four principles, applied consistently.</>}
         />
         <Stagger className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-2">
-          {values.map((v) => (
-            <StaggerItem
-              key={v.title}
-              className="card-crisp flex flex-col gap-3 rounded-2xl p-6 sm:p-10"
-            >
-              <span className="font-display text-2xl text-ink">{v.title}</span>
-              <span className="h-px w-8 bg-[var(--color-line-gold)]" />
-              <p className="text-base leading-relaxed text-ink-soft">{v.body}</p>
+          {values.map((v, i) => (
+            <StaggerItem key={v.title} className="h-full">
+              <FeatureCard
+                index={String(i + 1).padStart(2, "0")}
+                title={v.title}
+                body={v.body}
+                titleClassName="text-2xl"
+                className="sm:p-9"
+              />
             </StaggerItem>
           ))}
         </Stagger>
@@ -124,14 +132,8 @@ export default function AboutPage() {
         />
         <Stagger className="mt-12 grid gap-5 sm:mt-16 md:grid-cols-3">
           {timeline.map((t) => (
-            <StaggerItem
-              key={t.title}
-              className="card-crisp flex flex-col gap-4 rounded-2xl p-6 sm:p-8"
-            >
-              <span className="font-display text-3xl text-gold">{t.year}</span>
-              <span className="h-px w-8 bg-[var(--color-line-gold)]" aria-hidden />
-              <h3 className="font-display text-xl text-ink">{t.title}</h3>
-              <p className="text-base leading-relaxed text-ink-soft">{t.body}</p>
+            <StaggerItem key={t.title} className="h-full">
+              <FeatureCard index={t.year} title={t.title} body={t.body} />
             </StaggerItem>
           ))}
         </Stagger>
@@ -164,9 +166,9 @@ export default function AboutPage() {
         <div className="text-center">
           <Reveal>
             <p className="eyebrow flex items-center justify-center gap-3 text-gold">
-              <span className="h-px w-8 bg-current opacity-50" aria-hidden />
+              <EngraveRule origin="right" />
               Get in touch
-              <span className="h-px w-8 bg-current opacity-50" aria-hidden />
+              <EngraveRule origin="left" />
             </p>
           </Reveal>
           <Reveal delay={0.08}>

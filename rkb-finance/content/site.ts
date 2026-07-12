@@ -18,7 +18,7 @@ export const site = {
   legalName: "R.K. Bansal Finance Private Limited",
   tagline: "Empowering borrowers to meet all their financial needs",
   mission:
-    "Build a one-of-a-kind, effortless loan platform that allows customers to get a loan easily and affordably.",
+    "Our technology-driven lending platform delivers a smooth, paper-light borrowing experience—from application to disbursal—through a secure, fully digital process with minimal documentation.",
   since: 1984,
   rbiReg: "B-14.00700",
   cin: "U74110DL1984PTC019355",
@@ -61,15 +61,15 @@ export const nav = [
  * client verification. (India has ~19,100 pin codes — confirm RKB's actual reach.)
  */
 export const heroTrust = [
-  { prefix: "Over", value: "₹6.1 Crore", label: "Loan Disbursed" },
-  { prefix: "Over", value: "1.8 Crore", label: "Loan Customers" },
-  { prefix: "Over", value: "19,000", label: "Pin Codes Serviced" },
+  { prefix: "Over", value: "₹xxx Crore", label: "Loan Disbursed" },
+  { prefix: "Over", value: "xxx Crore", label: "Loan Customers" },
+  { prefix: "Over", value: "xxx", label: "Pin Codes Serviced" },
 ] as const;
 
 export const product = {
   name: "Short Term Loan",
   blurb:
-    "Quick access to funds for unexpected expenses, applied for online through our website.",
+    "Quick access to funds for unexpected expenses, applied for, online through our website.",
   // `min`/`max` strings are grounded (rkbfinance.in); `minVal`/`maxVal` mirror them
   // numerically for the loan calculator.
   amount: { min: "₹4,000", max: "₹1,00,000", minVal: 4000, maxVal: 100000 },
@@ -77,7 +77,7 @@ export const product = {
   rateNote: "Fixed interest rate. No compounding.",
   // Numeric daily-rate band (per cent) for the calculator — mirrors `rate` above.
   dailyRatePct: { min: 0.2, max: 1 },
-  disbursal: "Within 24 hours of approval",
+  disbursal: "Within x hours of approval",
   // PLACEHOLDER — tenure is NOT published on rkbfinance.in's product page. Figures
   // below are illustrative (competitor short-term loans run ~7–90 days); the calculator
   // and headline grid depend on `minDays`/`maxDays`. Confirm exact terms with consultant.
@@ -112,16 +112,16 @@ export const product = {
 
 /**
  * "Why borrowers choose us" — the four homepage benefit cards.
- * Copy supplied verbatim by the client (feedback round, 10 Jul 2026).
- * NOTE: the "10 minutes" disbursal claim is the client's own wording and
- * differs from the "within 24 hours" figure used elsewhere — flag for
- * reconciliation before launch.
+ * Copy supplied verbatim by the client (feedback round, 10 Jul 2026), except
+ * the disbursal timing on the first card: the client's original "10 minutes"
+ * was aligned to the site-wide "within x hours" placeholder for consistency.
+ * Swap "x" for the confirmed SLA before launch.
  */
 export const whyChooseUs = [
   {
     icon: "bolt",
     title: "Fast Processing and Disbursal",
-    body: "Apply online, check your eligibility and get money directly in your bank in 10 minutes.",
+    body: "Apply online, check your eligibility and get money directly in your bank within x hours.",
   },
   {
     icon: "calendar",
@@ -146,7 +146,7 @@ export const advantages = [
   { icon: "trend-down", title: "Among the lowest rates", body: "Competitive interest rates, kept low by a minimal-risk profile." },
   { icon: "tag", title: "No pre-approval penalties", body: "No charge to apply and no penalty before approval." },
   { icon: "unlock", title: "No closure penalties", body: "Close your loan early without a foreclosure penalty." },
-  { icon: "people", title: "No income threshold", body: "Eligibility is not gated behind a minimum income requirement." },
+  { icon: "people", title: "Open to limited credit", body: "Applicants with a limited credit history may also be considered." },
   { icon: "bolt", title: "Fast approvals & payouts", body: "Digital, end-to-end processing removes the traditional wait." },
 ] as const;
 
@@ -177,9 +177,9 @@ export const process = [
     step: "03",
     label: "Disbursal",
     title: "Funds in your account",
-    body: "On approval, the amount is disbursed directly to your bank account within 24 hours.",
+    body: "On approval, the amount is disbursed directly to your bank account within x hours.",
     details: [
-      "Disbursed within 24 hours",
+      "Disbursed within x hours",
       "Direct to your bank account",
       "For loans of ₹4,000 – ₹1,00,000",
     ],
@@ -223,16 +223,19 @@ export const timeline = [
 ] as const;
 
 /**
- * Eligibility — `placeholder: true` rows (age, residency) await client confirmation;
- * the rest restate existing verbatim copy (advantages / product.features / process).
+ * Eligibility — income / credit / documentation copy revised by the client
+ * (feedback round, 12 Jul 2026). `placeholder: true` rows (age, pincodes) still
+ * await confirmed figures. The "stable source of income" stance is now carried
+ * consistently across the site (advantages + eligibility FAQ) — the earlier
+ * "No income threshold" claims were untrue and have been removed.
  */
 export const eligibility = [
-  { label: "Age", value: "21 – 58 years", placeholder: true }, // PLACEHOLDER
-  { label: "Residency", value: "Resident of India", placeholder: true }, // PLACEHOLDER
-  { label: "Income", value: "No minimum income threshold", placeholder: false }, // grounded: advantages
-  { label: "Credit history", value: "Limited or poor credit accepted", placeholder: false }, // grounded: product.features
+  { label: "Age", value: "xxx years", placeholder: true }, // PLACEHOLDER
+  { label: "Residency", value: "xxx pincodes serviced", placeholder: true }, // PLACEHOLDER
+  { label: "Income", value: "Stable source of income / repayment capacity", placeholder: false }, // client feedback 12 Jul 2026
+  { label: "Credit history", value: "Applicants with limited credit history may also be considered", placeholder: false }, // client feedback 12 Jul 2026
   { label: "Bank account", value: "Active account required", placeholder: false }, // grounded: documents / privacy policy — needed for disbursal & repayment
-  { label: "Documentation", value: "Minimal: KYC only", placeholder: false }, // grounded: process
+  { label: "Documentation", value: "KYC and income proof, case-to-case basis", placeholder: false }, // client feedback 12 Jul 2026
 ] as const;
 
 /**
@@ -265,15 +268,15 @@ export const trustSignals = [
  */
 export const faqGroups = [
   {
-    heading: "Eligibility & applying",
+    heading: "Eligibility & application",
     items: [
       {
         q: "Who is eligible for the Short Term Loan?",
-        a: "Eligibility is open and inclusive. There is no minimum income threshold, and applicants with limited or poor credit history can apply. Typical applicants are resident individuals aged 21–58. (Age and residency criteria are indicative and subject to confirmation.)", // PLACEHOLDER (age/residency)
+        a: "Eligibility is designed to be simple and accessible. We look for a stable source of income and the capacity to repay, and applicants with a limited credit history may also be considered. Typical applicants are resident individuals aged xxx. (Age and residency criteria are indicative and subject to confirmation.)", // PLACEHOLDER (age/residency)
       },
       {
         q: "Can I apply with a limited credit history?",
-        a: "Yes. The Short Term Loan has no income threshold and is accessible to applicants with limited or poor credit history.",
+        a: "Yes. Applicants with a limited credit history may also be considered, subject to a stable source of income and our internal credit assessment.",
       },
       {
         q: "What documents do I need?",
@@ -285,7 +288,7 @@ export const faqGroups = [
       },
       {
         q: "How quickly are funds disbursed?",
-        a: "Once your application is approved by our automated system, funds are disbursed directly to your bank account within 24 hours.",
+        a: "Once your application is approved by our automated system, funds are disbursed directly to your bank account within x hours.",
       },
     ],
   },

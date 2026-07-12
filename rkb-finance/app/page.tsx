@@ -1,7 +1,9 @@
-import Accordion from "@/components/Accordion";
 import BalanceScale from "@/components/BalanceScale";
 import { Button } from "@/components/Button";
+import FaqColumns from "@/components/FaqColumns";
+import FeatureCard from "@/components/FeatureCard";
 import Hero from "@/components/Hero";
+import { EngraveRule } from "@/components/Kicker";
 import LineIcon from "@/components/LineIcon";
 import LoanCard3D from "@/components/LoanCard3D";
 import MoneyConveyor from "@/components/MoneyConveyor";
@@ -98,17 +100,13 @@ export default function Home() {
               that every card title holds a single line */}
           <Stagger className="grid gap-4 sm:grid-cols-2 sm:gap-5">
             {whyChooseUs.map((a) => (
-              <StaggerItem
-                key={a.title}
-                className="card-crisp group flex flex-col gap-3.5 rounded-2xl p-6"
-              >
-                <span className="icon-plate transition-transform duration-300 ease-[var(--ease-rkb)] group-hover:-translate-y-0.5">
-                  <LineIcon name={a.icon} className="w-6 text-gold" />
-                </span>
-                <span className="font-display text-[1.05rem] leading-tight whitespace-nowrap text-ink">
-                  {a.title}
-                </span>
-                <p className="text-[0.95rem] leading-relaxed text-ink-soft">{a.body}</p>
+              <StaggerItem key={a.title} className="h-full">
+                <FeatureCard
+                  icon={a.icon}
+                  title={a.title}
+                  body={a.body}
+                  titleClassName="text-lg"
+                />
               </StaggerItem>
             ))}
           </Stagger>
@@ -126,7 +124,7 @@ export default function Home() {
       <Section texture="vault" className="overflow-hidden">
         <Reveal className="text-center">
           <p className="eyebrow flex items-center justify-center gap-3 text-gold-bright">
-            <span className="h-px w-8 bg-current opacity-60" aria-hidden />
+            <EngraveRule opacity="opacity-60" />
             A lender you can rely on
           </p>
         </Reveal>
@@ -153,14 +151,7 @@ export default function Home() {
           title={<>Frequently Asked Questions</>}
           titleClassName="display-faq"
         />
-        <div className="mt-12 grid gap-12 sm:mt-14 lg:grid-cols-2">
-          {faqGroups.map((group) => (
-            <Reveal key={group.heading}>
-              <p className="eyebrow mb-5 text-ink-faint">{group.heading}</p>
-              <Accordion items={[...group.items]} />
-            </Reveal>
-          ))}
-        </div>
+        <FaqColumns groups={faqGroups} className="mt-12 sm:mt-14" />
       </Section>
 
       {/* ─────────────── Final CTA ─────────────── */}

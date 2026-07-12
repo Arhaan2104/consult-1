@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
+import { EngraveRule } from "@/components/Kicker";
 import { Reveal } from "@/components/Motion";
 import PageHero from "@/components/PageHero";
 import { Section } from "@/components/Section";
@@ -26,7 +27,7 @@ export default function ContactPage() {
           <div className="flex flex-col gap-10">
             <Reveal className="flex flex-col gap-3">
               <span className="eyebrow flex items-center gap-3 text-accent">
-                <span className="h-px w-6 bg-current opacity-50" aria-hidden />
+                <EngraveRule width="w-6" />
                 Office
               </span>
               <p className="font-display text-xl leading-snug text-ink">
@@ -37,7 +38,7 @@ export default function ContactPage() {
 
             <Reveal delay={0.06} className="flex flex-col gap-3">
               <span className="eyebrow flex items-center gap-3 text-accent">
-                <span className="h-px w-6 bg-current opacity-50" aria-hidden />
+                <EngraveRule width="w-6" />
                 Phone
               </span>
               <div className="flex flex-col gap-1.5">
@@ -55,7 +56,7 @@ export default function ContactPage() {
 
             <Reveal delay={0.12} className="flex flex-col gap-3">
               <span className="eyebrow flex items-center gap-3 text-accent">
-                <span className="h-px w-6 bg-current opacity-50" aria-hidden />
+                <EngraveRule width="w-6" />
                 Email
               </span>
               <a
@@ -68,7 +69,7 @@ export default function ContactPage() {
 
             <Reveal delay={0.18} className="flex flex-col gap-3">
               <span className="eyebrow flex items-center gap-3 text-accent">
-                <span className="h-px w-6 bg-current opacity-50" aria-hidden />
+                <EngraveRule width="w-6" />
                 Follow
               </span>
               <div className="flex flex-wrap gap-x-6 gap-y-2">

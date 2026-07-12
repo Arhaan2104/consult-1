@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Accordion from "@/components/Accordion";
-import LineIcon from "@/components/LineIcon";
+import FaqColumns from "@/components/FaqColumns";
+import FeatureCard from "@/components/FeatureCard";
 import { Button } from "@/components/Button";
 import LoanCalculator from "@/components/LoanCalculator";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
@@ -17,7 +17,7 @@ import {
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "The R.K. Bansal Finance Short Term Loan: ₹4,000 to ₹1,00,000, instant approval, funds within 24 hours, transparent fixed rates and no service fees.",
+    "The R.K. Bansal Finance Short Term Loan: ₹4,000 to ₹1,00,000, instant approval, funds within x hours, transparent fixed rates and no service fees.",
 };
 
 export default function ProductsPage() {
@@ -58,15 +58,8 @@ export default function ProductsPage() {
         />
         <Stagger className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4">
           {product.features.map((f) => (
-            <StaggerItem
-              key={f.title}
-              className="card-crisp group flex flex-col gap-4 rounded-2xl p-6 sm:p-8"
-            >
-              <span className="icon-plate transition-transform duration-300 ease-[var(--ease-rkb)] group-hover:-translate-y-0.5">
-                <LineIcon name={f.icon} className="w-6 text-gold" />
-              </span>
-              <span className="font-display text-xl text-ink">{f.title}</span>
-              <p className="text-base leading-relaxed text-ink-soft">{f.body}</p>
+            <StaggerItem key={f.title} className="h-full">
+              <FeatureCard icon={f.icon} title={f.title} body={f.body} />
             </StaggerItem>
           ))}
         </Stagger>
@@ -92,8 +85,8 @@ export default function ProductsPage() {
         <SectionHeader
           index="03"
           kicker="Eligibility"
-          title={<>Open to more borrowers, by design.</>}
-          intro="No minimum income, and limited or poor credit history is welcome. A few basic criteria apply."
+          title={<>Simple eligibility. Straightforward borrowing.</>}
+          intro="Our eligibility criteria are designed to keep the application process simple and accessible. If you meet the basic requirements, you can apply online in just a few steps.*"
         />
         <Stagger className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
           {eligibility.map((e) => (
@@ -113,6 +106,12 @@ export default function ProductsPage() {
             </StaggerItem>
           ))}
         </Stagger>
+        <Reveal>
+          <p className="mt-8 max-w-2xl text-sm leading-relaxed text-ink-faint sm:mt-10">
+            <span aria-hidden>*</span> All applications are subject to
+            verification and our internal credit assessment.
+          </p>
+        </Reveal>
       </Section>
 
       {/* Documents — warm ivory band */}
@@ -170,14 +169,7 @@ export default function ProductsPage() {
           title={<>Frequently Asked Questions</>}
           titleClassName="display-faq"
         />
-        <div className="mt-14 grid gap-12 lg:grid-cols-2">
-          {faqGroups.map((group) => (
-            <Reveal key={group.heading}>
-              <p className="eyebrow mb-5 text-ink-faint">{group.heading}</p>
-              <Accordion items={[...group.items]} />
-            </Reveal>
-          ))}
-        </div>
+        <FaqColumns groups={faqGroups} className="mt-14" />
       </Section>
 
       {/* CTA */}

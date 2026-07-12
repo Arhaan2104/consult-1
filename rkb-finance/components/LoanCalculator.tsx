@@ -106,14 +106,13 @@ export default function LoanCalculator() {
                   type="button"
                   onClick={() => setRatePct(r.pct)}
                   aria-pressed={active}
-                  className={`rounded-full border py-3 text-sm font-medium transition-[colors,transform] sm:text-base duration-200 ease-[var(--ease-rkb)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
+                  className={`rounded-full border px-2 py-3 text-center text-sm font-medium tabular-nums transition-[colors,transform] sm:text-base duration-200 ease-[var(--ease-rkb)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
                     active
                       ? "border-accent bg-accent text-canvas"
                       : "border-line-strong text-ink-soft hover:border-accent hover:text-ink"
                   }`}
                 >
                   {r.label}
-                  <span className="ml-1 text-xs opacity-70">/day</span>
                 </button>
               );
             })}

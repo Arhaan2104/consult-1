@@ -15,9 +15,10 @@ import HeroSeal from "@/components/HeroSeal";
 import HeroSealMotion from "@/components/HeroSealMotion";
 import HeroBanknote from "@/components/HeroBanknote";
 import HeroVault from "@/components/HeroVault";
+import { EngraveRule } from "@/components/Kicker";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { SPRING } from "@/components/motion/tokens";
-import { heroTrust, site } from "@/content/site";
+import { heroTrust } from "@/content/site";
 
 /**
  * Homepage hero — the vault, split-stage. Copy sits left; the gold-lit
@@ -103,14 +104,14 @@ export default function Hero() {
 
       <m.div
         style={contentStyle}
-        className="relative z-10 shell flex flex-col pt-32 pb-24 sm:pt-36 lg:h-full lg:pt-20 lg:pb-32"
+        className="relative z-10 shell flex flex-col pt-36 pb-24 sm:pt-44 lg:h-full lg:pt-20 lg:pb-32"
       >
         {/* Copy column — left stage */}
         <div className="max-w-[38rem] lg:my-auto lg:max-w-[48%]">
           <Reveal>
             <p className="eyebrow flex items-center gap-3 text-gold-bright">
-              <span className="h-px w-8 bg-current opacity-60" aria-hidden />
-              RBI-Registered NBFC · Direct lender since {site.since}
+              <EngraveRule opacity="opacity-60" />
+              RBI-Registered NBFC
             </p>
           </Reveal>
           <Reveal delay={0.08}>

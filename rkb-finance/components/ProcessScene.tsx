@@ -41,7 +41,12 @@ export default function ProcessScene(props: Props) {
   const [pinned, setPinned] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
+    // Pin only when there is genuinely room: desktop width AND enough viewport
+    // height to hold the whole scene without cropping the paper card. Short
+    // laptop windows (a Windows taskbar plus Edge/Chrome toolbars can eat
+    // ~180px of a 768px panel) fall back to the calm stacked layout, which
+    // flows in normal document order and can never clip.
+    const mq = window.matchMedia("(min-width: 768px) and (min-height: 680px)");
     const update = () => setPinned(mq.matches && !reduce);
     update();
     mq.addEventListener("change", update);
@@ -53,12 +58,18 @@ export default function ProcessScene(props: Props) {
 
 /* ---------- Illustration on the rosette — no extra frame, it lives
    directly inside the shared pane ---------- */
-function StageArt({ index }: { index: number }) {
+function StageArt({ index, compact = false }: { index: number; compact?: boolean }) {
   // Banknote inking on the paper pane: brand-blue line work, gold rosette,
   // paper-tone solids (--art-panel overrides the dark-pane navy fills).
+  // `compact` (the pinned scene) caps the square tighter so the whole stage
+  // clears shorter viewports; the static cards keep a fuller, prominent plate.
   return (
     <div
-      className="relative mx-auto grid aspect-square w-full max-w-[15rem] place-items-center sm:max-w-none"
+      className={`relative mx-auto grid aspect-square w-full place-items-center ${
+        compact
+          ? "max-w-[10.5rem] sm:max-w-[11.5rem]"
+          : "max-w-[13rem] sm:max-w-[14.5rem]"
+      }`}
       style={{ "--art-panel": "#f9f3e5" } as React.CSSProperties}
     >
       <GuillocheRosette
@@ -77,12 +88,16 @@ function StepPanel({
   step,
   index,
   withLabel = false,
+  compact = false,
 }: {
   step: Step;
   index: number;
   /** Show the "02 —— UNDERWRITING" micro-label (static cards only — in the
       pinned scene the left index already carries it). */
   withLabel?: boolean;
+  /** Pinned scene: tighter art + vertical rhythm so the stage clears short
+      viewports. Static cards leave it off for a more generous layout. */
+  compact?: boolean;
 }) {
   return (
     <div>
@@ -97,8 +112,12 @@ function StepPanel({
       )}
       <h3 className="display-md text-ink">{step.title}</h3>
       <span className="title-rule" aria-hidden />
-      <div className="mt-5 grid gap-5 sm:grid-cols-[0.46fr_0.54fr] sm:items-center sm:gap-7">
-        <StageArt index={index} />
+      <div
+        className={`grid sm:grid-cols-[0.46fr_0.54fr] sm:items-center ${
+          compact ? "mt-4 gap-4 sm:gap-6" : "mt-5 gap-5 sm:gap-7"
+        }`}
+      >
+        <StageArt index={index} compact={compact} />
         <div className="flex flex-col gap-3.5">
           <p className="text-[1.02rem] leading-relaxed text-ink-soft">{step.body}</p>
           <ul className="flex flex-col gap-2.5">
@@ -194,10 +213,10 @@ function PinnedProcess({ steps, index, kicker, title }: Props) {
 
   return (
     <div ref={trackRef} className="relative h-[240svh]">
-      <div className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden pt-20 pb-8 lg:pt-24">
+      <div className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden pb-6 pt-[5.5rem] sm:pb-8 lg:pt-24 [@media(max-height:780px)]:pt-[5.25rem] [@media(max-height:780px)]:pb-5">
         <SectionHeader index={index} kicker={kicker} title={title} align="center" dark />
 
-        <div className="mt-9 grid items-center gap-8 lg:mt-12 lg:grid-cols-[0.74fr_1.26fr] lg:gap-12">
+        <div className="mt-6 grid items-center gap-7 sm:mt-8 lg:mt-11 lg:grid-cols-[0.74fr_1.26fr] lg:gap-12 [@media(max-height:780px)]:mt-5 [@media(max-height:780px)]:lg:mt-6">
           {/* Left — clickable index beside the gold progress rail */}
           <div className="relative pl-5">
             <span
@@ -224,11 +243,11 @@ function PinnedProcess({ steps, index, kicker, title }: Props) {
           </div>
 
           {/* Right — ONE pane: the whole stage block cross-fades as a unit */}
-          <div className="pane-paper p-6 sm:p-7 lg:px-9 lg:py-8">
+          <div className="pane-paper p-6 sm:p-7 lg:px-9 lg:py-8 [@media(max-height:780px)]:p-5 [@media(max-height:780px)]:lg:px-7 [@media(max-height:780px)]:lg:py-6">
             <div className="grid">
               {steps.map((s, i) => (
                 <FadeBlock key={s.step} index={i} total={steps.length} progress={scrollYProgress} rise>
-                  <StepPanel step={s} index={i} />
+                  <StepPanel step={s} index={i} compact />
                 </FadeBlock>
               ))}
             </div>

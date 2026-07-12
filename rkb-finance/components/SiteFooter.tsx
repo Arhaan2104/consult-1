@@ -126,9 +126,6 @@ export default function SiteFooter() {
         <div className="flex flex-col gap-6 text-sm leading-relaxed text-on-dark-soft lg:flex-row lg:items-start lg:justify-between">
           <p className="max-w-3xl">
             {site.legalName} · RBI Registration {site.rbiReg} · CIN {site.cin}.
-            {" "}We do not charge any upfront fees against our loans. Beware of
-            impersonators: only legitimate correspondence comes through{" "}
-            {site.contact.email}.
           </p>
           <p className="shrink-0">© {year} {site.legalName}</p>
         </div>

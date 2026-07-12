@@ -10,7 +10,7 @@
 const STOPS = [
   { x: 110, label: "Your application", note: "100% ONLINE" },
   { x: 450, label: "R.K. Bansal funds it", note: "RBI-REGISTERED LENDER" },
-  { x: 790, label: "Your bank account", note: "WITHIN 24 HOURS" },
+  { x: 790, label: "Your bank account", note: "WITHIN X HOURS" },
 ] as const;
 
 const WIRE = "M110 74 C 220 30, 340 30, 450 74 S 680 118, 790 74";

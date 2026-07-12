@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import LegalTOC from "@/components/LegalTOC";
 import { Reveal } from "@/components/Motion";
 import { SectionDivider } from "@/components/Section";
 import { getLegalDoc, legalDocs } from "@/content/legal";
@@ -68,19 +69,13 @@ export default async function LegalPage({
           {/* TOC */}
           <aside className="hidden lg:block lg:sticky lg:top-28 lg:self-start">
             <p className="eyebrow mb-4 text-ink-faint">On this page</p>
-            <nav className="flex flex-col gap-2.5 border-l border-line pl-4">
-              {doc.sections.map((s, i) =>
-                s.heading ? (
-                  <a
-                    key={i}
-                    href={`#s-${i}`}
-                    className="text-sm text-ink-soft transition-colors hover:text-accent"
-                  >
-                    {s.heading}
-                  </a>
-                ) : null
-              )}
-            </nav>
+            <LegalTOC
+              items={doc.sections
+                .map((s, i) => ({ id: `s-${i}`, heading: s.heading }))
+                .filter(
+                  (x): x is { id: string; heading: string } => Boolean(x.heading),
+                )}
+            />
           </aside>
 
           {/* Sections */}

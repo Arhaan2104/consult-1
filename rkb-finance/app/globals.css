@@ -73,6 +73,14 @@ body {
   -webkit-tap-highlight-color: transparent;
   font-family: var(--font-sans), system-ui, sans-serif;
   letter-spacing: -0.008em;
+  /* Typographic craft: proper kerning, common + contextual ligatures, and
+     optical sizing so the variable grotesque reads clean at every scale.
+     Numerals stay proportional here; tabular figures are opted in locally
+     (eyebrows, count-ups) where columns must align. */
+  font-kerning: normal;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  font-variant-ligatures: common-ligatures contextual;
+  font-optical-sizing: auto;
 }
 
 ::selection {

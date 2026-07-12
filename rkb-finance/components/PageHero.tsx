@@ -17,7 +17,7 @@ export default function PageHero({
     <section className="relative section-vault overflow-hidden">
       <Parallax
         speed={0.08}
-        className="relative z-10 shell pt-32 pb-16 sm:pt-44 lg:pt-48 lg:pb-20"
+        className="relative z-10 shell pt-36 pb-16 sm:pt-44 lg:pt-48 lg:pb-20"
       >
         <Reveal>
           <p className="eyebrow flex items-center gap-3 text-gold-bright">

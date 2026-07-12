@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Reveal } from "./Motion";
+import { EngraveRule } from "./Kicker";
 
 type Texture =
   | "plain"
@@ -94,7 +95,7 @@ export function SectionHeader({
             align === "center" ? "justify-center" : ""
           }`}
         >
-          <span className="h-px w-8 bg-current opacity-50" aria-hidden />
+          <EngraveRule />
           <span>{kicker}</span>
         </div>
       )}
