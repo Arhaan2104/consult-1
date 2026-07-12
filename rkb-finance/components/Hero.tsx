@@ -13,7 +13,6 @@ import { Button } from "@/components/Button";
 import CountUp from "@/components/CountUp";
 import HeroSeal from "@/components/HeroSeal";
 import HeroSealMotion from "@/components/HeroSealMotion";
-import HeroBanknote from "@/components/HeroBanknote";
 import HeroVault from "@/components/HeroVault";
 import { EngraveRule } from "@/components/Kicker";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
@@ -100,7 +99,6 @@ export default function Hero() {
         <HeroSeal />
       </HeroSealMotion>
       <div className="hero-scrim" aria-hidden />
-      <HeroBanknote />
 
       <m.div
         style={contentStyle}

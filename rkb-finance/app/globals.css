@@ -163,10 +163,11 @@ body {
   letter-spacing: -0.015em;
 }
 
-/* Fitted display heading for long, single-line section titles ("Frequently
-   Asked Questions") that would wrap at display-lg inside the header column.
-   Sized so the 26-glyph phrase holds ONE line from ~360px up to desktop; blue
-   bold like the other section headers, just tuned to the line length. */
+/* Fitted display heading for section titles whose lines must each hold their
+   length inside the max-w-3xl header column, where display-lg would over-wrap.
+   Sized so a ~26-glyph line holds ONE line from ~360px up to desktop; blue bold
+   like the other section headers, just tuned to the line length. Shared by the
+   FAQ header and the Eligibility header ("Straightforward borrowing."). */
 .display-faq {
   font-family: var(--font-display), system-ui, sans-serif;
   font-weight: 730;

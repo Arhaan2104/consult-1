@@ -44,10 +44,10 @@ export default function SiteHeader() {
         }`}
       >
         <nav
-          className={`relative z-50 mx-auto flex w-full items-center justify-between gap-3 border backdrop-blur-xl transition-[max-width,height,border-radius,border-color,background-color,box-shadow,padding] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[2.5px] before:rounded-[1.2rem] before:border before:border-[rgba(217,165,63,0.18)] before:transition-opacity before:duration-500 before:content-[''] ${
+          className={`relative z-50 mx-auto flex w-full items-center justify-between gap-3 border backdrop-blur-xl transition-[max-width,height,border-radius,border-color,background-color,box-shadow,padding] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[2.5px] before:rounded-[1.2rem] before:border before:border-[rgba(217,165,63,0.18)] before:transition-opacity before:duration-500 before:content-[''] after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[linear-gradient(90deg,transparent_0%,rgba(217,165,63,0.42)_14%,rgba(217,165,63,0.6)_50%,rgba(217,165,63,0.42)_86%,transparent_100%)] after:transition-opacity after:duration-500 after:content-[''] ${
             scrolled
-              ? "h-[4.05rem] max-w-[var(--shell)] rounded-[1.4rem] border-gold-bright/30 bg-deep/[0.93] pl-6 pr-3 shadow-[0_14px_36px_-14px_rgba(8,28,56,0.6)] before:opacity-100"
-              : "h-[4.75rem] max-w-[100vw] rounded-none border-x-transparent border-t-transparent border-b-gold-bright/20 bg-deep/80 pl-[var(--gutter)] pr-[var(--gutter)] shadow-none before:opacity-0"
+              ? "h-[4.05rem] max-w-[var(--shell)] rounded-[1.4rem] border-gold-bright/30 bg-deep/[0.93] pl-6 pr-3 shadow-[0_14px_36px_-14px_rgba(8,28,56,0.6)] before:opacity-100 after:opacity-0"
+              : "h-[4.75rem] max-w-[100vw] rounded-none border-transparent bg-deep/80 pl-[var(--gutter)] pr-[var(--gutter)] shadow-none before:opacity-0 after:opacity-100"
           }`}
         >
           <Link

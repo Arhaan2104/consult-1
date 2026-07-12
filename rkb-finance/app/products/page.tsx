@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import FaqColumns from "@/components/FaqColumns";
 import FeatureCard from "@/components/FeatureCard";
 import { Button } from "@/components/Button";
+import LineIcon from "@/components/LineIcon";
 import LoanCalculator from "@/components/LoanCalculator";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import PageHero from "@/components/PageHero";
@@ -85,24 +86,38 @@ export default function ProductsPage() {
         <SectionHeader
           index="03"
           kicker="Eligibility"
-          title={<>Simple eligibility. Straightforward borrowing.</>}
+          // Fitted display cut holds "Straightforward borrowing." on one line
+          // from mobile up; the explicit break pins it to exactly two lines.
+          titleClassName="display-faq"
+          title={
+            <>
+              Simple eligibility.
+              <br />
+              Straightforward borrowing.
+            </>
+          }
           intro="Our eligibility criteria are designed to keep the application process simple and accessible. If you meet the basic requirements, you can apply online in just a few steps.*"
         />
         <Stagger className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
           {eligibility.map((e) => (
             <StaggerItem
               key={e.label}
-              className="card-crisp flex flex-col gap-2 rounded-2xl p-6 sm:p-8"
+              className="card-crisp group flex h-full flex-col gap-6 rounded-2xl p-6 sm:p-8"
             >
-              <span className="eyebrow text-ink-faint">{e.label}</span>
-              <span className="font-display text-xl leading-snug text-ink">
-                {e.value}
+              <span className="icon-plate transition-transform duration-300 ease-[var(--ease-rkb)] group-hover:-translate-y-0.5">
+                <LineIcon name={e.icon} className="w-6 text-gold" />
               </span>
-              {e.placeholder && (
-                <span className="text-xs italic text-ink-faint">
-                  Indicative, to be confirmed
+              <div className="flex flex-col gap-2">
+                <span className="eyebrow text-ink-faint">{e.label}</span>
+                <span className="font-display text-xl leading-snug text-ink">
+                  {e.value}
                 </span>
-              )}
+                {e.placeholder && (
+                  <span className="text-xs italic text-ink-faint">
+                    Indicative, to be confirmed
+                  </span>
+                )}
+              </div>
             </StaggerItem>
           ))}
         </Stagger>

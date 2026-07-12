@@ -44,7 +44,9 @@ export default function FeatureCard({
       )}
 
       <div>
-        <span className={`block font-display leading-snug text-ink ${titleClassName}`}>
+        <span
+          className={`flex min-h-[2.75em] flex-col justify-end font-display leading-snug text-ink ${titleClassName}`}
+        >
           {title}
         </span>
         <span className="title-rule" aria-hidden />

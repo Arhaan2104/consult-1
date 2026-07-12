@@ -230,12 +230,12 @@ export const timeline = [
  * "No income threshold" claims were untrue and have been removed.
  */
 export const eligibility = [
-  { label: "Age", value: "xxx years", placeholder: true }, // PLACEHOLDER
-  { label: "Residency", value: "xxx pincodes serviced", placeholder: true }, // PLACEHOLDER
-  { label: "Income", value: "Stable source of income / repayment capacity", placeholder: false }, // client feedback 12 Jul 2026
-  { label: "Credit history", value: "Applicants with limited credit history may also be considered", placeholder: false }, // client feedback 12 Jul 2026
-  { label: "Bank account", value: "Active account required", placeholder: false }, // grounded: documents / privacy policy — needed for disbursal & repayment
-  { label: "Documentation", value: "KYC and income proof, case-to-case basis", placeholder: false }, // client feedback 12 Jul 2026
+  { label: "Age", value: "xxx years", icon: "calendar", placeholder: true }, // PLACEHOLDER
+  { label: "Residency", value: "xxx pincodes serviced", icon: "map-pin", placeholder: true }, // PLACEHOLDER
+  { label: "Income", value: "Stable source of income / repayment capacity", icon: "wallet", placeholder: false }, // client feedback 12 Jul 2026
+  { label: "Credit history", value: "Applicants with limited credit history may be considered", icon: "ledger", placeholder: false }, // client feedback 12 Jul 2026
+  { label: "Bank account", value: "Active account required", icon: "bank", placeholder: false }, // grounded: documents / privacy policy — needed for disbursal & repayment
+  { label: "Documentation", value: "KYC and income proof, case-to-case basis", icon: "document", placeholder: false }, // client feedback 12 Jul 2026
 ] as const;
 
 /**

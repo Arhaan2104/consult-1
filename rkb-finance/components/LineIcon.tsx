@@ -130,6 +130,32 @@ const GLYPHS: Record<string, ReactElement> = {
       <path d="M8 8h8M8 12h8M8 16h5" opacity="0.85" />
     </svg>
   ),
+  // ── eligibility ──────────────────────────────────────────
+  "map-pin": (
+    <svg {...S}>
+      <path d="M12 20.5c3.6-3.9 5.5-7 5.5-9.7a5.5 5.5 0 1 0-11 0c0 2.7 1.9 5.8 5.5 9.7z" fill="currentColor" opacity="0.06" stroke="none" />
+      <path d="M12 20.5c3.6-3.9 5.5-7 5.5-9.7a5.5 5.5 0 1 0-11 0c0 2.7 1.9 5.8 5.5 9.7z" />
+      <circle cx="12" cy="10.8" r="2.1" />
+    </svg>
+  ),
+  wallet: (
+    <svg {...S}>
+      <rect x="3.5" y="5.5" width="17" height="13" rx="2.4" fill="currentColor" opacity="0.06" stroke="none" />
+      <rect x="3.5" y="5.5" width="17" height="13" rx="2.4" />
+      <path d="M14.5 10.5h6v4.5h-6a2.25 2.25 0 0 1 0-4.5z" fill="currentColor" opacity="0.08" stroke="none" />
+      <path d="M14.5 10.5h6v4.5h-6a2.25 2.25 0 0 1 0-4.5z" />
+      <circle cx="16.1" cy="12.75" r="0.75" fill="currentColor" stroke="none" />
+    </svg>
+  ),
+  bank: (
+    <svg {...S}>
+      <path d="M12 3.2 20.5 8H3.5z" fill="currentColor" opacity="0.07" stroke="none" />
+      <path d="M12 3.2 20.5 8H3.5z" />
+      <path d="M6 8.5v8M9.5 8.5v8M14.5 8.5v8M18 8.5v8" />
+      <path d="M10 16.5v-3a2 2 0 0 1 4 0v3" opacity="0.85" />
+      <path d="M4 16.5h16M3 20h18" />
+    </svg>
+  ),
 };
 
 export default function LineIcon({
