@@ -38,7 +38,9 @@ export default function SiteHeader() {
           on one shared ease so the two states melt into each other. */}
       <div
         className={`transition-[padding] duration-500 ease-[var(--ease-rkb)] ${
-          scrolled ? "px-[var(--gutter)] pt-2.5 sm:pt-4" : "px-0 pt-0"
+          scrolled
+            ? "px-[var(--gutter)] pt-[calc(env(safe-area-inset-top,0px)+0.625rem)] sm:pt-[calc(env(safe-area-inset-top,0px)+1rem)]"
+            : "px-0 pt-[env(safe-area-inset-top,0px)]"
         }`}
       >
         <nav

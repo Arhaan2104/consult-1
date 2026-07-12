@@ -47,7 +47,16 @@
 
 :root {
   --shell: 76rem;            /* max content width */
-  --gutter: clamp(1.25rem, 5vw, 4rem);
+  /* Side gutter for the shell AND the fixed header. max() folds in the
+     notch's safe-area insets so, on a notched phone in landscape (viewport-fit
+     cover), content and the nav stay clear of the notch. env() is 0 on every
+     non-notch device / in portrait, so the gutter is the plain clamp there —
+     no visual change. Symmetric (max of both sides) so padding reads intentional. */
+  --gutter: max(
+    clamp(1.25rem, 5vw, 4rem),
+    env(safe-area-inset-left, 0px),
+    env(safe-area-inset-right, 0px)
+  );
 }
 
 * {

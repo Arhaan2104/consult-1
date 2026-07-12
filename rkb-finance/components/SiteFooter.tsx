@@ -22,7 +22,7 @@ export default function SiteFooter() {
 
   return (
     <footer className="panel-dark cv-auto text-on-dark">
-      <div className="shell pt-20 pb-10">
+      <div className="shell pt-20 pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-14">
           {/* Brand */}
           <div className="flex flex-col gap-5">

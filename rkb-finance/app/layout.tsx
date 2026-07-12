@@ -75,6 +75,11 @@ export const viewport: Viewport = {
   colorScheme: "light",
   width: "device-width",
   initialScale: 1,
+  // Edge-to-edge: let the cinematic navy bleed under the notch / rounded
+  // corners. The `--gutter` (shell + header) folds in env(safe-area-inset-*)
+  // so content stays clear of the notch in landscape; insets are 0 on every
+  // non-notch device, so nothing changes there.
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
