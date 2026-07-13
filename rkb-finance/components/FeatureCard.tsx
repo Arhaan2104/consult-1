@@ -7,11 +7,10 @@ import LineIcon from "@/components/LineIcon";
  * short engraved-gold rule and the body stack directly beneath it. Everything
  * is TOP-anchored on purpose: within a row the grid stretches all cards to one
  * height, so a bottom-anchored composition would let cards with shorter body
- * copy float their titles to a different line than their neighbours — the exact
- * misalignment that reads as sloppy. Top-anchoring keeps the icon, the
- * two-line-reserved title, the rule and the first body line all on a shared
- * baseline across the row, no matter how the (still-placeholder) copy wraps.
- * Any surplus height the grid hands a shorter card falls quietly to its base.
+ * copy float their titles to a different line than their neighbours. Top-
+ * anchoring keeps the icon → title → rule → body stack on a shared start line
+ * across the row; any surplus height the grid hands a shorter card falls to
+ * its base instead of opening a hole between the title and the rule.
  *
  * Pure presentation, no motion — it's dropped inside a <StaggerItem> so the
  * reveal lives on the wrapper and the card's own hover (card-crisp) stays clean.
@@ -46,9 +45,7 @@ export default function FeatureCard({
       )}
 
       <div>
-        <span
-          className={`flex flex-col justify-end font-display leading-snug text-ink sm:min-h-[2.75em] ${titleClassName}`}
-        >
+        <span className={`font-display leading-snug text-ink ${titleClassName}`}>
           {title}
         </span>
         <span className="title-rule" aria-hidden />

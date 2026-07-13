@@ -54,7 +54,18 @@ export default function LenisProvider({ children }: { children: ReactNode }) {
     const update = (data: { timestamp: number }) => instance.raf(data.timestamp);
     frame.update(update, true);
 
+    // Lenis's built-in ResizeObserver watches <html>, whose border-box is the
+    // viewport — it does NOT fire when document scrollHeight changes. Sections
+    // using content-visibility:auto unlock from a 640px placeholder to their
+    // real height (FAQ is ~3× that), and accordion panels grow on open; without
+    // a body observer Lenis keeps a stale scroll limit and wheel input dies
+    // mid-section. Recompute whenever <body> layout height actually changes.
+    const onBodyResize = () => instance.resize();
+    const bodyResizeObserver = new ResizeObserver(onBodyResize);
+    bodyResizeObserver.observe(document.body);
+
     return () => {
+      bodyResizeObserver.disconnect();
       cancelFrame(update);
       instance.destroy();
       lenisRef.current = null;

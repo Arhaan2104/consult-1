@@ -264,9 +264,12 @@ body {
    they approach the viewport (and again once scrolled past) — the single
    biggest mobile win, with zero visual change. `auto` in the intrinsic size
    remembers the real rendered height, so scroll geometry stays honest after
-   first paint. anim-layer: promotes a continuously-animating SVG overlay to
-   its own compositor layer, so its repaints never re-rasterise the static
-   engraving beneath it. */
+   first paint. When a band unlocks, document scrollHeight jumps; LenisProvider
+   watches <body> and calls lenis.resize() so the smooth-scroll limit keeps up
+   (its own observer watches <html>'s border-box = the viewport, which misses
+   content-height changes). anim-layer: promotes a continuously-animating SVG
+   overlay to its own compositor layer, so its repaints never re-rasterise the
+   static engraving beneath it. */
 .cv-auto {
   content-visibility: auto;
   contain-intrinsic-size: auto 640px;

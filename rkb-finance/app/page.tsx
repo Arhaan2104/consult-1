@@ -96,9 +96,9 @@ export default function Home() {
           }
         />
         <div className="mt-12 grid items-center gap-10 sm:mt-14 xl:grid-cols-[1.16fr_0.84fr] xl:gap-12">
-          {/* Four benefits — a 2×2 of crisp porcelain cards. Titles may run
-              one or two lines; FeatureCard reserves two title lines at sm+ so
-              the gold rules and body copy stay aligned across each row. */}
+          {/* Four benefits — a 2×2 of crisp porcelain cards. Top-anchored so
+              icon → title → rule share a start line across each row; surplus
+              height from unequal body copy falls to the card base. */}
           <Stagger className="grid gap-4 sm:grid-cols-2 sm:gap-5">
             {whyChooseUs.map((a) => (
               <StaggerItem key={a.title} className="h-full">
