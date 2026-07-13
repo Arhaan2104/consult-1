@@ -44,9 +44,9 @@ export default function SiteHeader() {
         }`}
       >
         <nav
-          className={`relative z-50 mx-auto flex w-full items-center justify-between gap-3 border backdrop-blur-xl transition-[max-width,height,border-radius,border-color,background-color,box-shadow,padding] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[2.5px] before:rounded-[1.2rem] before:border before:border-[rgba(184,134,36,0.22)] before:transition-opacity before:duration-500 before:content-[''] after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[linear-gradient(90deg,transparent_0%,rgba(184,134,36,0.32)_14%,rgba(184,134,36,0.5)_50%,rgba(184,134,36,0.32)_86%,transparent_100%)] after:transition-opacity after:duration-500 after:content-[''] ${
+          className={`relative z-50 mx-auto flex w-full items-center justify-between gap-3 backdrop-blur-xl transition-[max-width,height,border-radius,background-color,box-shadow,padding] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[3px] before:rounded-[1.2rem] before:border before:border-[rgba(184,134,36,0.42)] before:transition-opacity before:duration-500 before:content-[''] after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[linear-gradient(90deg,transparent_0%,rgba(184,134,36,0.42)_12%,rgba(184,134,36,0.66)_50%,rgba(184,134,36,0.42)_88%,transparent_100%)] after:transition-opacity after:duration-500 after:content-[''] ${
             scrolled
-              ? "h-[4.05rem] max-w-[var(--shell)] rounded-[1.4rem] bg-[#fdfbf6]/95 pl-6 pr-3 shadow-[0_16px_40px_-18px_rgba(11,36,71,0.24)] before:opacity-100 after:opacity-0"
+              ? "h-[4.05rem] max-w-[var(--shell)] rounded-[1.4rem] bg-[#fdfbf6]/95 pl-6 pr-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),inset_0_0_0_1px_rgba(17,47,91,0.24),0_18px_44px_-20px_rgba(11,36,71,0.34),0_5px_14px_-8px_rgba(11,36,71,0.16)] before:opacity-100 after:opacity-0"
               : "h-[4.75rem] max-w-[100vw] rounded-none bg-[#fdfbf6] pl-[var(--gutter)] pr-[var(--gutter)] shadow-none before:opacity-0 after:opacity-100"
           }`}
         >
