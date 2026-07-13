@@ -44,10 +44,10 @@ export default function SiteHeader() {
         }`}
       >
         <nav
-          className={`relative z-50 mx-auto flex w-full items-center justify-between gap-3 border backdrop-blur-xl transition-[max-width,height,border-radius,border-color,background-color,box-shadow,padding] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[2.5px] before:rounded-[1.2rem] before:border before:border-[rgba(217,165,63,0.18)] before:transition-opacity before:duration-500 before:content-[''] after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[linear-gradient(90deg,transparent_0%,rgba(217,165,63,0.42)_14%,rgba(217,165,63,0.6)_50%,rgba(217,165,63,0.42)_86%,transparent_100%)] after:transition-opacity after:duration-500 after:content-[''] ${
+          className={`relative z-50 mx-auto flex w-full items-center justify-between gap-3 border backdrop-blur-xl transition-[max-width,height,border-radius,border-color,background-color,box-shadow,padding] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[2.5px] before:rounded-[1.2rem] before:border before:border-[rgba(184,134,36,0.22)] before:transition-opacity before:duration-500 before:content-[''] after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[linear-gradient(90deg,transparent_0%,rgba(184,134,36,0.32)_14%,rgba(184,134,36,0.5)_50%,rgba(184,134,36,0.32)_86%,transparent_100%)] after:transition-opacity after:duration-500 after:content-[''] ${
             scrolled
-              ? "h-[4.05rem] max-w-[var(--shell)] rounded-[1.4rem] border-gold-bright/30 bg-deep/[0.93] pl-6 pr-3 shadow-[0_14px_36px_-14px_rgba(8,28,56,0.6)] before:opacity-100 after:opacity-0"
-              : "h-[4.75rem] max-w-[100vw] rounded-none border-transparent bg-deep/80 pl-[var(--gutter)] pr-[var(--gutter)] shadow-none before:opacity-0 after:opacity-100"
+              ? "h-[4.05rem] max-w-[var(--shell)] rounded-[1.4rem] bg-[#fdfbf6]/95 pl-6 pr-3 shadow-[0_16px_40px_-18px_rgba(11,36,71,0.24)] before:opacity-100 after:opacity-0"
+              : "h-[4.75rem] max-w-[100vw] rounded-none bg-[#fdfbf6] pl-[var(--gutter)] pr-[var(--gutter)] shadow-none before:opacity-0 after:opacity-100"
           }`}
         >
           <Link
@@ -56,20 +56,21 @@ export default function SiteHeader() {
             className="group relative z-50 -ml-2 flex items-center self-stretch pl-2 pr-5"
             onClick={() => setOpen(false)}
           >
-            {/* The logo pre-struck in ivory (logo-ivory.png) — the source PNG
-                carries a haze of near-transparent JPEG artifacts that the old
-                brightness/invert CSS filter lit up as grey smudge boxes around
-                the mark. The cleaned asset has that haze stripped from the
-                alpha channel, so the glass behind the logo stays spotless. */}
+            {/* The logo in its original brand blue (R.K.-BANSAL.png) — a
+                transparent PNG (corners are fully alpha-0), so it sits clean on
+                the white nav plate with no baked-in box to colour-match. The
+                blue mark needs a light backing to read, which is exactly why
+                the nav plate is white in BOTH states (never transparent over
+                the dark hero). */}
             <Image
-              src="/logo-ivory.png"
+              src="/R.K.-BANSAL.png"
               alt="R.K. Bansal Finance Pvt. Ltd."
               width={152}
               height={36}
               priority
               style={{ width: "auto" }}
-              className={`opacity-95 transition-[height,opacity] duration-500 ease-[var(--ease-rkb)] group-hover:opacity-75 ${
-                scrolled ? "h-[2.3rem]" : "h-[2.55rem]"
+              className={`opacity-100 transition-[height,opacity] duration-500 ease-[var(--ease-rkb)] group-hover:opacity-80 ${
+                scrolled ? "h-[2.15rem]" : "h-[2.4rem]"
               }`}
             />
           </Link>
@@ -86,8 +87,8 @@ export default function SiteHeader() {
                   aria-current={active ? "page" : undefined}
                   className={`rounded-xl px-4 py-2.5 text-[0.95rem] tracking-tight transition-colors duration-300 ${
                     active
-                      ? "bg-white/[0.1] text-on-dark"
-                      : "text-on-dark-soft hover:bg-white/[0.07] hover:text-on-dark"
+                      ? "bg-ink/[0.06] text-ink"
+                      : "text-ink-soft hover:bg-ink/[0.045] hover:text-ink"
                   }`}
                 >
                   {item.label}
@@ -95,7 +96,7 @@ export default function SiteHeader() {
               );
             })}
 
-            <span className="mx-1.5 h-6 w-px bg-line-dark" aria-hidden />
+            <span className="mx-1.5 h-6 w-px bg-line-strong" aria-hidden />
 
             <Link href="/contact" className={buttonClasses("gold", "", "px-6 py-3")}>
               Apply now
@@ -116,12 +117,12 @@ export default function SiteHeader() {
             className="relative z-50 -mr-1 flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
           >
             <span
-              className={`h-px w-6 bg-on-dark transition-all duration-300 ${
+              className={`h-px w-6 bg-ink transition-all duration-300 ${
                 open ? "translate-y-[3.5px] rotate-45" : ""
               }`}
             />
             <span
-              className={`h-px w-6 bg-on-dark transition-all duration-300 ${
+              className={`h-px w-6 bg-ink transition-all duration-300 ${
                 open ? "-translate-y-[3.5px] -rotate-45" : ""
               }`}
             />
@@ -129,11 +130,13 @@ export default function SiteHeader() {
         </nav>
       </div>
 
-      {/* Mobile sheet — vault navy. Note: do NOT add a texture class (tx- or
-          section-) here; those set position:relative and would override
-          `fixed`, breaking the overlay. */}
+      {/* Mobile sheet — the same warm white as the nav plate, so the fixed
+          white bar (with its blue logo) reads as one continuous light surface
+          over the open menu, never a white-bar-over-navy inversion. Note: do
+          NOT add a texture class (tx- or section-) here; those set
+          position:relative and would override `fixed`, breaking the overlay. */}
       <div
-        className={`fixed inset-0 top-0 z-40 bg-deep transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 top-0 z-40 bg-[#fdfbf6] transition-opacity duration-300 md:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
@@ -152,8 +155,8 @@ export default function SiteHeader() {
                 onClick={() => setOpen(false)}
                 className={`rounded-2xl px-5 py-3.5 font-display text-3xl tracking-tight transition-colors duration-300 ${
                   active
-                    ? "bg-white/[0.1] text-on-dark"
-                    : "text-on-dark-soft hover:bg-white/[0.07] hover:text-on-dark"
+                    ? "bg-ink/[0.06] text-ink"
+                    : "text-ink-soft hover:bg-ink/[0.045] hover:text-ink"
                 }`}
               >
                 {item.label}
