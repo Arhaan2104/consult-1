@@ -28,26 +28,18 @@ export default function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      {/* One <nav>, two geometries. Over the hero it sits full-bleed and flush
-          to the top edge — a fixed, edge-to-edge bar with a single gold
-          hairline underline. Past the fold it glides inward: narrowing to the
-          shell width, lifting off the edge, rounding its corners and lighting
-          its full gold frame + drop shadow into the floating navy-glass pill.
-          The outer wrapper animates the top offset and side insets; the <nav>
-          animates its own width, height, radius, frame, fill and shadow — all
-          on one shared ease so the two states melt into each other. */}
-      <div
-        className={`transition-[padding] duration-500 ease-[var(--ease-rkb)] ${
-          scrolled
-            ? "px-[var(--gutter)] pt-[calc(env(safe-area-inset-top,0px)+0.625rem)] sm:pt-[calc(env(safe-area-inset-top,0px)+1rem)]"
-            : "px-0 pt-[env(safe-area-inset-top,0px)]"
-        }`}
-      >
+      {/* A single floating glass pill — the same shape from first load to the
+          footer, inset from the top edge and the side gutters, never an
+          edge-to-edge bar. It wears the house double stroke (a navy hairline
+          ring, an inset gold frame and a lit top edge) over warm-white glass.
+          Scroll only deepens the drop shadow a touch, so the plate lifts a
+          little further as the page slides beneath it — no geometry morph. */}
+      <div className="px-[var(--gutter)] pt-[calc(env(safe-area-inset-top,0px)+0.625rem)] sm:pt-[calc(env(safe-area-inset-top,0px)+1rem)]">
         <nav
-          className={`relative z-50 mx-auto flex w-full items-center justify-between gap-3 backdrop-blur-xl transition-[max-width,height,border-radius,background-color,box-shadow,padding] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[3px] before:rounded-[1.2rem] before:border before:border-[rgba(184,134,36,0.42)] before:transition-opacity before:duration-500 before:content-[''] after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[linear-gradient(90deg,transparent_0%,rgba(184,134,36,0.42)_12%,rgba(184,134,36,0.66)_50%,rgba(184,134,36,0.42)_88%,transparent_100%)] after:transition-opacity after:duration-500 after:content-[''] ${
+          className={`relative z-50 mx-auto flex h-[4.05rem] w-full max-w-[var(--shell)] items-center justify-between gap-3 rounded-[1.4rem] bg-[#fdfbf6]/95 pl-6 pr-3 backdrop-blur-xl transition-[box-shadow] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[3px] before:rounded-[1.2rem] before:border before:border-[rgba(184,134,36,0.42)] before:content-[''] ${
             scrolled
-              ? "h-[4.05rem] max-w-[var(--shell)] rounded-[1.4rem] bg-[#fdfbf6]/95 pl-6 pr-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),inset_0_0_0_1px_rgba(17,47,91,0.24),0_18px_44px_-20px_rgba(11,36,71,0.34),0_5px_14px_-8px_rgba(11,36,71,0.16)] before:opacity-100 after:opacity-0"
-              : "h-[4.75rem] max-w-[100vw] rounded-none bg-[#fdfbf6] pl-[var(--gutter)] pr-[var(--gutter)] shadow-none before:opacity-0 after:opacity-100"
+              ? "shadow-[inset_0_1px_0_rgba(255,255,255,0.9),inset_0_0_0_1px_rgba(17,47,91,0.26),0_22px_50px_-20px_rgba(11,36,71,0.42),0_6px_16px_-8px_rgba(11,36,71,0.18)]"
+              : "shadow-[inset_0_1px_0_rgba(255,255,255,0.9),inset_0_0_0_1px_rgba(17,47,91,0.24),0_18px_44px_-20px_rgba(11,36,71,0.34),0_5px_14px_-8px_rgba(11,36,71,0.16)]"
           }`}
         >
           <Link
@@ -60,8 +52,8 @@ export default function SiteHeader() {
                 transparent PNG (corners are fully alpha-0), so it sits clean on
                 the white nav plate with no baked-in box to colour-match. The
                 blue mark needs a light backing to read, which is exactly why
-                the nav plate is white in BOTH states (never transparent over
-                the dark hero). */}
+                the pill is warm-white glass (never transparent over the dark
+                hero). */}
             <Image
               src="/R.K.-BANSAL.png"
               alt="R.K. Bansal Finance Pvt. Ltd."
@@ -69,9 +61,7 @@ export default function SiteHeader() {
               height={36}
               priority
               style={{ width: "auto" }}
-              className={`opacity-100 transition-[height,opacity] duration-500 ease-[var(--ease-rkb)] group-hover:opacity-80 ${
-                scrolled ? "h-[2.15rem]" : "h-[2.4rem]"
-              }`}
+              className="h-[2.15rem] opacity-100 transition-opacity duration-500 ease-[var(--ease-rkb)] group-hover:opacity-80"
             />
           </Link>
 
