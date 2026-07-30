@@ -10,7 +10,7 @@ import { product } from "@/content/site";
  * `product.rateNote` ("Fixed interest rate. No compounding."). The implied APR is a
  * straight, non-compounded annualisation (daily rate × 365) shown explicitly so the
  * true cost is never hidden. Bounds come from `product.amount` / `product.tenure`
- * (tenure is a PLACEHOLDER — see content/site.ts).
+ * (tenure max is grounded at 45 days; the minimum is still a PLACEHOLDER — see content/site.ts).
  */
 
 const inr = (n: number) =>
@@ -18,7 +18,7 @@ const inr = (n: number) =>
 
 const RATES = [
   { pct: product.dailyRatePct.min, label: `${product.dailyRatePct.min}%` },
-  { pct: 0.5, label: "0.5%" },
+  { pct: 0.7, label: "0.7%" },
   { pct: product.dailyRatePct.max, label: `${product.dailyRatePct.max}%` },
 ] as const;
 
@@ -28,7 +28,7 @@ const { minDays, maxDays } = product.tenure;
 export default function LoanCalculator() {
   const [amount, setAmount] = useState(25000);
   const [days, setDays] = useState(30);
-  const [ratePct, setRatePct] = useState(0.5);
+  const [ratePct, setRatePct] = useState(0.7);
 
   const dailyRate = ratePct / 100;
   const dailyInterest = amount * dailyRate;

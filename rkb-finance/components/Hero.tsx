@@ -10,14 +10,12 @@ import {
   useReducedMotion,
 } from "motion/react";
 import { Button } from "@/components/Button";
-import CountUp from "@/components/CountUp";
 import HeroSeal from "@/components/HeroSeal";
 import HeroSealMotion from "@/components/HeroSealMotion";
 import HeroVault from "@/components/HeroVault";
 import { EngraveRule } from "@/components/Kicker";
-import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
+import { Reveal } from "@/components/Motion";
 import { SPRING } from "@/components/motion/tokens";
-import { heroTrust } from "@/content/site";
 
 /**
  * Homepage hero — the vault, split-stage. Copy sits left; the gold-lit
@@ -140,29 +138,6 @@ export default function Hero() {
               </Button>
             </div>
           </Reveal>
-        </div>
-
-        {/* Trust strip — boxless proof figures along the hero base */}
-        <div className="mt-14 w-full lg:mt-0">
-          <hr className="h-px border-0 bg-[rgba(217,165,63,0.35)]" />
-          <Stagger className="grid grid-cols-1 divide-y divide-[rgba(217,165,63,0.25)] pt-8 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-            {heroTrust.map((s, i) => (
-              <StaggerItem
-                key={s.label}
-                className="flex flex-col items-center gap-2 px-1 py-5 text-center sm:px-8 sm:py-2"
-              >
-                <span className="eyebrow text-gold-bright">{s.prefix}</span>
-                <CountUp
-                  value={s.value}
-                  delay={0.15 * i}
-                  className="font-display leading-[0.95] text-on-dark tabular-nums whitespace-nowrap text-4xl md:text-5xl"
-                />
-                <span className="text-[0.95rem] font-medium tracking-wide text-on-dark-soft">
-                  {s.label}
-                </span>
-              </StaggerItem>
-            ))}
-          </Stagger>
         </div>
       </m.div>
 

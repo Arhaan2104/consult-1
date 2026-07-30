@@ -9,7 +9,7 @@
  * PLACEHOLDER convention: where a value is invented (not yet confirmed by the
  * client/consultant), flag it with a header comment naming PLACEHOLDER vs grounded
  * fields, plus inline `// PLACEHOLDER` / `// grounded: <source>` annotations. See
- * `heroTrust` below for the pattern.
+ * `product.tenure` below for the pattern (min tenure is still a PLACEHOLDER).
  */
 
 export const site = {
@@ -55,33 +55,23 @@ export const nav = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
-/**
- * Hero trust band — prominent proof figures.
- * NOTE: disbursal, customer, and pin-code figures are PLACEHOLDERS pending
- * client verification. (India has ~19,100 pin codes — confirm RKB's actual reach.)
- */
-export const heroTrust = [
-  { prefix: "Over", value: "₹xxx Crore", label: "Loan Disbursed" },
-  { prefix: "Over", value: "xxx Crore", label: "Loan Customers" },
-  { prefix: "Over", value: "xxx", label: "Pin Codes Serviced" },
-] as const;
-
 export const product = {
   name: "Short Term Loan",
   blurb:
     "Quick access to funds for unexpected expenses, applied for, online through our website.",
-  // `min`/`max` strings are grounded (rkbfinance.in); `minVal`/`maxVal` mirror them
-  // numerically for the loan calculator.
-  amount: { min: "₹4,000", max: "₹1,00,000", minVal: 4000, maxVal: 100000 },
-  rate: "0.2% – 1% per day",
+  // Grounded: client "Pay Day" product note (₹1,000–₹1,00,000). `minVal`/`maxVal`
+  // mirror the strings numerically for the loan calculator.
+  amount: { min: "₹1,000", max: "₹1,00,000", minVal: 1000, maxVal: 100000 },
+  rate: "0.4% – 1% per day",
   rateNote: "Fixed interest rate. No compounding.",
   // Numeric daily-rate band (per cent) for the calculator — mirrors `rate` above.
-  dailyRatePct: { min: 0.2, max: 1 },
-  disbursal: "Within x hours of approval",
-  // PLACEHOLDER — tenure is NOT published on rkbfinance.in's product page. Figures
-  // below are illustrative (competitor short-term loans run ~7–90 days); the calculator
-  // and headline grid depend on `minDays`/`maxDays`. Confirm exact terms with consultant.
-  tenure: { min: "15 days", max: "90 days", minDays: 15, maxDays: 90 },
+  // Floor grounded: Pay Day note ("from 0.4% daily"). Ceiling grounded: on-site
+  // Interest Rate Policy ("Pay Day Loan: 0.10% to 1.00% per day").
+  dailyRatePct: { min: 0.4, max: 1 },
+  disbursal: "Within 5 minutes of approval", // grounded: Pay Day note ("within 5 min post agreement")
+  // `max`/`maxDays` grounded: Pay Day note ("up to 45 days"). `min`/`minDays` remain
+  // an illustrative PLACEHOLDER — the note gives no minimum tenure. Confirm with client.
+  tenure: { min: "15 days", max: "45 days", minDays: 15, maxDays: 45 },
   tenureNote:
     "Repaid as a single payment on the due date, or in partial repayments beforehand.", // PLACEHOLDER
   // Curated to what the dedicated sections (facts / eligibility / process) do
@@ -112,16 +102,15 @@ export const product = {
 
 /**
  * "Why borrowers choose us" — the four homepage benefit cards.
- * Copy supplied verbatim by the client (feedback round, 10 Jul 2026), except
- * the disbursal timing on the first card: the client's original "10 minutes"
- * was aligned to the site-wide "within x hours" placeholder for consistency.
- * Swap "x" for the confirmed SLA before launch.
+ * Copy supplied verbatim by the client (feedback round, 10 Jul 2026). Disbursal
+ * timing on the first card is grounded in the Pay Day product note ("within 5 min
+ * post agreement"). Confirm the exact SLA wording with the client before launch.
  */
 export const whyChooseUs = [
   {
     icon: "bolt",
     title: "Fast Processing and Disbursal",
-    body: "Apply online, check your eligibility and get money directly in your bank within x hours.",
+    body: "Apply online, check your eligibility and get money directly in your bank within 5 minutes.",
   },
   {
     icon: "calendar",
@@ -177,11 +166,11 @@ export const process = [
     step: "03",
     label: "Disbursal",
     title: "Funds in your account",
-    body: "On approval, the amount is disbursed directly to your bank account within x hours.",
+    body: "On approval, the amount is disbursed directly to your bank account within 5 minutes.",
     details: [
-      "Disbursed within x hours",
+      "Disbursed within 5 minutes",
       "Direct to your bank account",
-      "For loans of ₹4,000 – ₹1,00,000",
+      "For loans of ₹1,000 – ₹1,00,000",
     ],
   },
 ] as const;
@@ -230,8 +219,8 @@ export const timeline = [
  * "No income threshold" claims were untrue and have been removed.
  */
 export const eligibility = [
-  { label: "Age", value: "xxx years", icon: "calendar", placeholder: true }, // PLACEHOLDER
-  { label: "Residency", value: "xxx pincodes serviced", icon: "map-pin", placeholder: true }, // PLACEHOLDER
+  { label: "Age", value: "18 – 58 years", icon: "calendar", placeholder: false }, // grounded: Pay Day note (18 at loan creation – 58 at maturity)
+  { label: "Residency", value: "Pan-India (excl. Jammu & Kashmir)", icon: "map-pin", placeholder: false }, // grounded: Pay Day note
   { label: "Income", value: "Stable source of income / repayment capacity", icon: "wallet", placeholder: false }, // client feedback 12 Jul 2026
   { label: "Credit history", value: "Applicants with limited credit history may be considered", icon: "ledger", placeholder: false }, // client feedback 12 Jul 2026
   { label: "Bank account", value: "Active account required", icon: "bank", placeholder: false }, // grounded: documents / privacy policy — needed for disbursal & repayment
@@ -272,7 +261,7 @@ export const faqGroups = [
     items: [
       {
         q: "Who is eligible for the Short Term Loan?",
-        a: "Eligibility is designed to be simple and accessible. We look for a stable source of income and the capacity to repay, and applicants with a limited credit history may also be considered. Typical applicants are resident individuals aged xxx. (Age and residency criteria are indicative and subject to confirmation.)", // PLACEHOLDER (age/residency)
+        a: "Eligibility is designed to be simple and accessible. We look for a stable source of income and the capacity to repay, and applicants with a limited credit history may also be considered. Typical applicants are salaried resident individuals aged 18 to 58, living anywhere in India except Jammu & Kashmir.", // grounded: Pay Day note (age/residency/employment); income & credit framing per client feedback
       },
       {
         q: "Can I apply with a limited credit history?",
@@ -288,7 +277,7 @@ export const faqGroups = [
       },
       {
         q: "How quickly are funds disbursed?",
-        a: "Once your application is approved by our automated system, funds are disbursed directly to your bank account within x hours.",
+        a: "Once your application is approved by our automated system, funds are disbursed directly to your bank account within 5 minutes.",
       },
     ],
   },
@@ -297,15 +286,15 @@ export const faqGroups = [
     items: [
       {
         q: "How much can I borrow?",
-        a: "The Short Term Loan ranges from ₹4,000 to ₹1,00,000, determined by your individual needs and approval.",
+        a: "The Short Term Loan ranges from ₹1,000 to ₹1,00,000, determined by your individual needs and approval.",
       },
       {
         q: "What is the loan tenure?",
-        a: "The Short Term Loan is a fixed, short-duration product, typically repaid within a few weeks to a few months. The exact tenure is confirmed in your sanction letter and Key Fact Statement.", // PLACEHOLDER (tenure)
+        a: "The Short Term Loan is a fixed, short-duration product with a tenure of up to 45 days, based on your eligibility. The exact tenure is confirmed in your sanction letter and Key Fact Statement.", // grounded: Pay Day note ("up to 45 days")
       },
       {
         q: "How is interest calculated?",
-        a: "Interest is charged as simple daily interest on the outstanding principal, at a fixed rate of 0.2%–1% per day. There is no compounding.",
+        a: "Interest is charged as simple daily interest on the outstanding principal, at a fixed rate of 0.4%–1% per day. There is no compounding.",
       },
       {
         q: "Can I repay in parts?",
