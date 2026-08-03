@@ -1057,31 +1057,60 @@ body {
      anchored in rem from the hero's top (the copy is top-anchored too, so
      the full circle stays enclosing the text on any phone height, instead
      of drifting with the hero's variable height and leaving stray arcs).
-     Desktop (lg+): the medallion holds the right half — sized against BOTH
-     axes so the full coin always sits clear of the nav above and the trust
-     strip below, never running under or off anything. */
+     Desktop (lg+): right-anchored in the stage so the coin scales up to
+     fill the right half without clipping the viewport edge. */
   --seal-opacity: 0.38;
   position: absolute;
   left: 50%;
-  top: min(21rem, 46%);
+  top: min(20rem, 50%);
   z-index: 1;
-  width: min(92vw, 56svh, 620px);
+  width: min(94vw, 64svh, 680px);
   aspect-ratio: 1;
   translate: -50% -50%;
   pointer-events: none;
   color: var(--color-gold-bright);
   opacity: 0;
   animation: seal-emerge 1.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+  transition: filter 0.55s ease;
+}
+/* Soft radial halo — gives the medallion presence without motion. */
+.hero-seal::before {
+  content: "";
+  position: absolute;
+  inset: -14%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(217, 165, 63, 0.14) 0%,
+    rgba(217, 165, 63, 0.05) 42%,
+    transparent 68%
+  );
+  opacity: 0.48;
+  z-index: -1;
+  transition: opacity 0.55s ease;
 }
 @media (min-width: 1024px) {
   .hero-seal {
-    --seal-opacity: 0.8;
-    left: 73%;
-    /* Lifted a touch and capped slightly smaller so the coin's lower edge
-       clears the trust strip with intentional breathing room — never crowding
-       the hairline below. */
-    top: 39%;
-    width: min(37vw, 50svh, 600px);
+    --seal-opacity: 0.82;
+    left: auto;
+    right: clamp(1rem, 4.5vw, 3.5rem);
+    top: 50%;
+    translate: 0 -50%;
+    width: min(44vw, 64svh, 720px);
+  }
+  /* Bloom inward — avoids clipping the soft edge against the viewport rim. */
+  .hero-seal::before {
+    inset: -10% -5% -10% -14%;
+    opacity: 0.68;
+  }
+}
+@media (min-width: 1024px) and (hover: hover) {
+  .hero-vault:hover .hero-seal {
+    filter: drop-shadow(0 0 28px rgba(217, 165, 63, 0.16))
+      drop-shadow(0 0 72px rgba(217, 165, 63, 0.08));
+  }
+  .hero-vault:hover .hero-seal::before {
+    opacity: 0.95;
   }
 }
 .hero-seal svg {

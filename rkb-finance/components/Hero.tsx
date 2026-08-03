@@ -6,7 +6,6 @@ import {
   useScroll,
   useTransform,
   useSpring,
-  useMotionValue,
   useReducedMotion,
 } from "motion/react";
 import { Button } from "@/components/Button";
@@ -27,10 +26,10 @@ import { SPRING } from "@/components/motion/tokens";
  * a sticky target's own bounding rect never moves, so the usual
  * target-based useScroll would sit at 0 forever once pinned.
  *
- * The whole exit choreography (content drift + fade, melt veil, seal
- * scale/rotate) belongs to that PIN. Below lg the hero scrolls off normally,
+ * The scroll exit choreography (content drift + fade, melt veil, seal
+ * scale/rotate) belongs to that PIN. Below lg the hero scrolls normally,
  * so the same motion doubles up against real scroll — content dims while
- * still on screen and the seal swims. `pinned` gates all of it to lg+.
+ * still on screen. `pinned` gates all of it to lg+.
  */
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
@@ -64,36 +63,13 @@ export default function Hero() {
   const contentStyle =
     reduce || !pinned ? undefined : { y: contentY, opacity: contentOpacity };
 
-  // Cursor parallax for the medallion — normalised −0.5…0.5, spring-smoothed.
-  const mvx = useMotionValue(0);
-  const mvy = useMotionValue(0);
-  const pointerX = useSpring(mvx, { stiffness: 90, damping: 20, mass: 0.6 });
-  const pointerY = useSpring(mvy, { stiffness: 90, damping: 20, mass: 0.6 });
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLElement>) => {
-    if (reduce || e.pointerType !== "mouse") return;
-    const r = e.currentTarget.getBoundingClientRect();
-    mvx.set((e.clientX - r.left) / r.width - 0.5);
-    mvy.set((e.clientY - r.top) / r.height - 0.5);
-  };
-  const resetPointer = () => {
-    mvx.set(0);
-    mvy.set(0);
-  };
-
   return (
     <section
       ref={heroRef}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={resetPointer}
       className="relative hero-vault overflow-hidden lg:sticky lg:top-0 lg:h-svh lg:min-h-[620px]"
     >
       <HeroVault />
-      <HeroSealMotion
-        progress={scrollYProgress}
-        pointer={{ x: pointerX, y: pointerY }}
-        active={pinned}
-      >
+      <HeroSealMotion progress={scrollYProgress} active={pinned}>
         <HeroSeal />
       </HeroSealMotion>
       <div className="hero-scrim" aria-hidden />
