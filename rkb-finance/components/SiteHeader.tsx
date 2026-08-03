@@ -36,6 +36,7 @@ export default function SiteHeader() {
           little further as the page slides beneath it — no geometry morph. */}
       <div className="px-[var(--gutter)] pt-[calc(env(safe-area-inset-top,0px)+0.625rem)] sm:pt-[calc(env(safe-area-inset-top,0px)+1rem)]">
         <nav
+          aria-label="Primary"
           className={`relative z-50 mx-auto flex h-[4.05rem] w-full max-w-[var(--shell)] items-center justify-between gap-3 rounded-[1.4rem] bg-[#fdfbf6]/95 pl-6 pr-3 backdrop-blur-xl transition-[box-shadow] duration-500 ease-[var(--ease-rkb)] before:pointer-events-none before:absolute before:inset-[3px] before:rounded-[1.2rem] before:border before:border-[rgba(184,134,36,0.42)] before:content-[''] ${
             scrolled
               ? "shadow-[inset_0_1px_0_rgba(255,255,255,0.9),inset_0_0_0_1px_rgba(17,47,91,0.26),0_22px_50px_-20px_rgba(11,36,71,0.42),0_6px_16px_-8px_rgba(11,36,71,0.18)]"
@@ -126,6 +127,8 @@ export default function SiteHeader() {
           NOT add a texture class (tx- or section-) here; those set
           position:relative and would override `fixed`, breaking the overlay. */}
       <div
+        aria-hidden={open ? undefined : true}
+        inert={open ? undefined : true}
         className={`fixed inset-0 top-0 z-40 bg-[#fdfbf6] transition-opacity duration-300 md:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}

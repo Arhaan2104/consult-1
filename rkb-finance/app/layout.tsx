@@ -91,17 +91,14 @@ export default function RootLayout({
       className={`${jakarta.variable} ${geistMono.variable} ${ebGaramond.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-canvas">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-canvas"
-        >
+        <a href="#main" className="skip-link">
           Skip to content
         </a>
         <LenisProvider>
           <MotionProvider>
             <ScrollProgressBar />
             <SiteHeader />
-            <main id="main">{children}</main>
+            <main id="main" tabIndex={-1}>{children}</main>
             <SiteFooter />
           </MotionProvider>
         </LenisProvider>
