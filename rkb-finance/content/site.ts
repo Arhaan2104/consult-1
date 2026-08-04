@@ -70,9 +70,9 @@ export const product = {
   rateNote: "Fixed interest rate. No compounding.",
   // Numeric daily-rate band (per cent) for the calculator — mirrors `rate` above.
   dailyRatePct: { min: 0.5, max: 1 },
-  // Processing fee band for the estimator. grounded: on-site Interest Rate &
-  // Charges Policy ("Processing fees: 2% to 10%"). Deducted from disbursal.
-  processingFeePct: { min: 2, mid: 5, max: 10 },
+  // Processing fee band for the estimator. grounded: client confirmation
+  // 4 Aug 2026 ("PF starts at 4%") + policy ceiling 10%. Deducted from disbursal.
+  processingFeePct: { min: 4, mid: 7, max: 10 },
   disbursal: "Within 5 minutes of approval", // grounded: client feedback 3 Aug 2026 ("disbursement claims of 5 mins") + Pay Day note ("within 5 min post agreement"); client's message overrides rkbfinance.in's older "24 hours"
   // `max`/`maxDays` grounded: Pay Day note ("up to 45 days"). `min`/`minDays` remain
   // an illustrative PLACEHOLDER — the note gives no minimum tenure. Confirm with client.

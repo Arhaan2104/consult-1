@@ -122,7 +122,7 @@ export const legalDocs: LegalDoc[] = [
         heading: "Interest rates by product",
         body: ["All loans currently carry fixed interest rates."],
         bullets: [
-          "Pay Day Loan: 0.10% to 1.00% per day",
+          "Pay Day Loan: 0.5% to 1.00% per day",
           "Business Loan: 8% to 25% per annum",
           "Loan Against Property: 12% to 15% per annum",
           "EMI Loan: 24% to 365% per annum (tenure up to 6 months)",
@@ -134,7 +134,7 @@ export const legalDocs: LegalDoc[] = [
         bullets: [
           "Late payment penalty: 0.1% per day of outstanding principal",
           "EMI bounce / unregistered NACH: up to ₹590",
-          "Processing fees: 2% to 10%",
+          "Processing fees: 4% to 10%",
           "Foreclosure (EMI loans after 3 months): 3% of outstanding principal",
           "No-Dues Certificate (digital): Nil",
         ],
