@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="RKB bleed mark">
+<defs><style>@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&amp;family=EB+Garamond:wght@500;600&amp;display=swap');</style><linearGradient id="g5" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#dfb763"/><stop offset=".45" stop-color="#c99e46"/><stop offset="1" stop-color="#97711f"/></linearGradient><clipPath id="g5c"><rect x="14" y="14" width="92" height="92" rx="24"/></clipPath></defs>
+<rect x="14" y="14" width="92" height="92" rx="24" fill="#112f5b"/>
+
+<g clip-path="url(#g5c)">
+<text x="66" y="112" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="92" fill="url(#g5)">&#8377;</text>
+</g>
+<rect x="19.5" y="19.5" width="81" height="81" rx="19.5" fill="none" stroke="url(#g5)" stroke-width=".8" opacity=".85"/>
+<text x="28" y="39" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="10" letter-spacing=".3em" fill="#e8eef7" opacity=".9">RKB</text>
+</svg>

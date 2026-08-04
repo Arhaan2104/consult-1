@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120" role="img" aria-label="RKB wordmark">
+<defs><style>@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&amp;family=EB+Garamond:wght@500;600&amp;display=swap');</style><radialGradient id="g7" cx=".35" cy=".28" r=".95"><stop offset="0" stop-color="#fdeecb"/><stop offset=".45" stop-color="#edc465"/><stop offset=".8" stop-color="#cf9a30"/><stop offset="1" stop-color="#9c7420"/></radialGradient></defs>
+<text x="16" y="80" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="64" letter-spacing="-0.015em" fill="#112f5b">RKB</text>
+<circle cx="153.5" cy="74" r="5.5" fill="url(#g7)"/>
+<text x="17" y="103" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="650" font-size="10" letter-spacing=".24em" fill="#b88624">R.K. BANSAL FINANCE &#183; 1984</text>
+</svg>
