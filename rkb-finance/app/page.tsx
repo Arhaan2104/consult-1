@@ -15,6 +15,7 @@ import {
   faqGroups,
   process,
   product,
+  site,
   trustSignals,
   whyChooseUs,
 } from "@/content/site";
@@ -165,7 +166,7 @@ export default function Home() {
           <Reveal delay={0.16}>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Button
-                href="/contact"
+                href={site.applyUrl}
                 variant="gold"
                 magnetic
                 size="px-8 py-4"

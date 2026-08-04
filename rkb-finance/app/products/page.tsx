@@ -18,7 +18,7 @@ import {
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "The R.K. Bansal Finance Short Term Loan: ₹1,000 to ₹1,00,000, instant approval, funds within 5 minutes, transparent fixed rates and no service fees.",
+    "The R.K. Bansal Finance Short Term Loan: ₹1,000 to ₹2,00,000, instant approval, funds within 5 minutes, transparent fixed rates and no service fees.",
 };
 
 export default function ProductsPage() {

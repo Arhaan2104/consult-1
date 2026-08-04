@@ -15,6 +15,7 @@ import HeroVault from "@/components/HeroVault";
 import { EngraveRule } from "@/components/Kicker";
 import { Reveal } from "@/components/Motion";
 import { SPRING } from "@/components/motion/tokens";
+import { site } from "@/content/site";
 
 /**
  * Homepage hero — the vault, split-stage. Copy sits left; the gold-lit
@@ -95,7 +96,7 @@ export default function Hero() {
           <Reveal delay={0.24}>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
               <Button
-                href="/contact"
+                href={site.applyUrl}
                 variant="gold"
                 magnetic
                 size="px-8 py-4"

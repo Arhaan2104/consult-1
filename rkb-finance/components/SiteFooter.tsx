@@ -2,19 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { nav, site } from "@/content/site";
 
-/** Key policies surfaced in the footer — full set lives on /regulatory-disclosures.
-    Includes the official RBI complaint channels (external links open in a new tab). */
+/** Key policies surfaced in the footer — the full organised set (codes, grievance
+    channels, RBI complaint portals) lives on /regulatory-disclosures, linked first. */
 const footerPolicies = [
   { title: "Regulatory Disclosures", href: "/regulatory-disclosures" },
   { title: "Privacy Policy", href: "/legal/privacy-policy" },
   { title: "Terms & Conditions", href: "/legal/terms-conditions" },
-  { title: "Fair Practice Code", href: "/legal/fair-practice-code" },
-  { title: "Interest Rate & Charges Policy", href: "/legal/interest-rate-policy" },
   { title: "Grievance Redressal", href: "/legal/grievance-redressal" },
-  { title: "Grievance Escalation Matrix", href: "/legal/grievance-escalation-matrix" },
-  { title: "RBI Integrated Ombudsman Scheme", href: "/legal/rbi-ombudsman-scheme" },
-  { title: "Sachet Portal (RBI)", href: "https://sachet.rbi.org.in/" },
-  { title: "RBI CMS Portal", href: "https://cms.rbi.org.in/" },
 ];
 
 export default function SiteFooter() {

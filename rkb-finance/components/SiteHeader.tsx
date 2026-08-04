@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { buttonClasses } from "@/components/Button";
-import { nav } from "@/content/site";
+import { nav, site } from "@/content/site";
 
 export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -89,7 +89,12 @@ export default function SiteHeader() {
 
             <span className="mx-1.5 h-6 w-px bg-line-strong" aria-hidden />
 
-            <Link href="/contact" className={buttonClasses("gold", "", "px-6 py-3")}>
+            <a
+              href={site.applyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonClasses("gold", "", "px-6 py-3")}
+            >
               Apply now
               <span
                 aria-hidden
@@ -97,7 +102,7 @@ export default function SiteHeader() {
               >
                 →
               </span>
-            </Link>
+            </a>
           </div>
 
           <button
@@ -156,14 +161,16 @@ export default function SiteHeader() {
               </Link>
             );
           })}
-          <Link
-            href="/contact"
+          <a
+            href={site.applyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setOpen(false)}
             className={buttonClasses("gold", "mt-6 w-full justify-center", "px-8 py-4")}
           >
             Apply now
             <span aria-hidden>→</span>
-          </Link>
+          </a>
         </div>
       </div>
     </header>

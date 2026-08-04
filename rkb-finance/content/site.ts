@@ -25,6 +25,10 @@ export const site = {
   established: "Incorporated 21 November 1984 under the Companies Act, 1956",
   registeredAs: "Non-Banking Financial Company (NBFC) registered with the Reserve Bank of India",
 
+  // Digital loan journey — Ram Fincorp is the Lending Service Provider; loans are
+  // approved and disbursed by R.K. Bansal Finance. grounded: ramfincorp.com "Apply now".
+  applyUrl: "https://applyonline.ramfincorp.com/",
+
   contact: {
     address: "8/9, Pusa Rd, Block 8, WEA, Karol Bagh, New Delhi, Delhi 110005",
     phones: ["+91 87969 24488", "+91 99101 93884", "+91 98999 85495"],
@@ -59,16 +63,17 @@ export const product = {
   name: "Short Term Loan",
   blurb:
     "Quick access to funds for unexpected expenses, applied for, online through our website.",
-  // Grounded: client "Pay Day" product note (₹1,000–₹1,00,000). `minVal`/`maxVal`
-  // mirror the strings numerically for the loan calculator.
-  amount: { min: "₹1,000", max: "₹1,00,000", minVal: 1000, maxVal: 100000 },
-  rate: "0.4% – 1% per day",
+  // Max grounded: client feedback 3 Aug 2026 ("digital journey shows till 2 lakh",
+  // matches applyonline.ramfincorp.com "upto ₹2 Lakhs"). Min per Pay Day note.
+  amount: { min: "₹1,000", max: "₹2,00,000", minVal: 1000, maxVal: 200000 },
+  rate: "0.5% – 1% per day", // grounded: client feedback 3 Aug 2026
   rateNote: "Fixed interest rate. No compounding.",
   // Numeric daily-rate band (per cent) for the calculator — mirrors `rate` above.
-  // Floor grounded: Pay Day note ("from 0.4% daily"). Ceiling grounded: on-site
-  // Interest Rate Policy ("Pay Day Loan: 0.10% to 1.00% per day").
-  dailyRatePct: { min: 0.4, max: 1 },
-  disbursal: "Within 5 minutes of approval", // grounded: Pay Day note ("within 5 min post agreement")
+  dailyRatePct: { min: 0.5, max: 1 },
+  // Processing fee band for the estimator. grounded: on-site Interest Rate &
+  // Charges Policy ("Processing fees: 2% to 10%"). Deducted from disbursal.
+  processingFeePct: { min: 2, mid: 5, max: 10 },
+  disbursal: "Within 5 minutes of approval", // grounded: client feedback 3 Aug 2026 ("disbursement claims of 5 mins") + Pay Day note ("within 5 min post agreement"); client's message overrides rkbfinance.in's older "24 hours"
   // `max`/`maxDays` grounded: Pay Day note ("up to 45 days"). `min`/`minDays` remain
   // an illustrative PLACEHOLDER — the note gives no minimum tenure. Confirm with client.
   tenure: { min: "15 days", max: "45 days", minDays: 15, maxDays: 45 },
@@ -170,7 +175,7 @@ export const process = [
     details: [
       "Disbursed within 5 minutes",
       "Direct to your bank account",
-      "For loans of ₹1,000 – ₹1,00,000",
+      "For loans of ₹1,000 – ₹2,00,000",
     ],
   },
 ] as const;
@@ -286,7 +291,7 @@ export const faqGroups = [
     items: [
       {
         q: "How much can I borrow?",
-        a: "The Short Term Loan ranges from ₹1,000 to ₹1,00,000, determined by your individual needs and approval.",
+        a: "The Short Term Loan ranges from ₹1,000 to ₹2,00,000, determined by your individual needs and approval.",
       },
       {
         q: "What is the loan tenure?",
@@ -294,7 +299,7 @@ export const faqGroups = [
       },
       {
         q: "How is interest calculated?",
-        a: "Interest is charged as simple daily interest on the outstanding principal, at a fixed rate of 0.4%–1% per day. There is no compounding.",
+        a: "Interest is charged as simple daily interest on the outstanding principal, at a fixed rate of 0.5%–1% per day. There is no compounding.",
       },
       {
         q: "Can I repay in parts?",
