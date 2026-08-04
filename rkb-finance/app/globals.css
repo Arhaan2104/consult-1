@@ -1117,7 +1117,9 @@ body {
   .hero-seal {
     --seal-opacity: 0.82;
     left: auto;
-    right: clamp(1rem, 4.5vw, 3.5rem);
+    /* Pulled inward so the centre gap ≈ the right margin — the coin and the
+       copy read as one balanced composition instead of a hollow middle. */
+    right: clamp(1.5rem, 6.5vw, 6.5rem);
     top: 50%;
     translate: 0 -50%;
     width: min(44vw, 64svh, 720px);
